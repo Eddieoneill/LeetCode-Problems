@@ -19,3 +19,25 @@ class Solution {
     }
 }
 ```
+
+## 206. Reverse Linked List
+
+```swift
+
+//  iterative solution
+class Solution {
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        var current = head
+        var next: ListNode? = nil
+        var previous: ListNode? = nil
+        
+        while current != nil {
+            next = current?.next
+            current?.next = previous
+            previous = current
+            current = next
+        }
+        return previous
+    }
+}
+```
