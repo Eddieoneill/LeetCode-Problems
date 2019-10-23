@@ -40,4 +40,19 @@ class Solution {
         return previous
     }
 }
+
+recursive solution
+class Solution {
+    func reverse(_ node: Node<Int>) -> Node<Int>? {
+        guard node.next != nil else { return node }
+
+        let head = reverse(node.next ?? Node(0))
+
+        node.next?.next = node
+        node.next = nil
+
+        print(head ?? Node(0))
+        return head
+    }
+}
 ```
