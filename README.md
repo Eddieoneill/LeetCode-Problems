@@ -56,7 +56,7 @@ class Solution {
     }
 }
 ```
-##21. Merge Two Sorted Lists
+## 21. Merge Two Sorted Lists
 
 ```swift
 class Solution {
