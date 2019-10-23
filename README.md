@@ -41,7 +41,7 @@ class Solution {
     }
 }
 
-recursive solution
+// recursive solution
 class Solution {
     func reverse(_ node: Node<Int>) -> Node<Int>? {
         guard node.next != nil else { return node }
