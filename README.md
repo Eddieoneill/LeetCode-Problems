@@ -91,3 +91,19 @@ class Solution {
 }
 
 ```
+## 	217	Contains Duplicate    
+
+```swift
+    func containsDuplicate(_ nums: [Int]) -> Bool {
+        guard nums.count != nil else { return false }
+        guard nums.count > 1 else { return false }
+        
+        var uniqueNum = Set(nums)
+        
+        if uniqueNum.count == nums.count {
+            return false
+        } else {
+            return true
+        }
+    }
+```
