@@ -108,3 +108,32 @@ class Solution {
         }
     }
 ```
+
+## 832	Flipping an Image
+
+```swift
+    func flipAndInvertImage(_ A: [[Int]]) -> [[Int]] {
+        var flippedImage = [[Int]]()
+        var reverseCounter = A.count - 1
+        
+        for (index, a) in A.enumerated() {
+            flippedImage.append([])
+            for _ in 0..<a.count {
+                flippedImage[index].append(a[reverseCounter])
+                reverseCounter -= 1
+            }
+            reverseCounter = A.count - 1
+        }
+        
+        for (index, arr) in flippedImage.enumerated() {
+            for (index2, num) in arr.enumerated() {
+                if num == 1 {
+                    flippedImage[index][index2] = 0
+                } else if num == 0 {
+                    flippedImage[index][index2] = 1
+                }
+            }
+        }
+        return flippedImage
+    }
+```
