@@ -97,6 +97,7 @@ class Solution {
     func containsDuplicate(_ nums: [Int]) -> Bool {
         guard nums.count != nil else { return false }
         guard nums.count > 1 else { return false }
+        guard nums.count > 2 else { return nums[0] == nums[1] }
         
         var uniqueNum = Set(nums)
         
