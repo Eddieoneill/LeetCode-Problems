@@ -213,3 +213,15 @@ func minTimeToVisitAllPoints(_ points: [[Int]]) -> Int {
         return counter
     }
 ```
+better solution
+
+```swift
+    func minTimeToVisitAllPoints(_ points: [[Int]]) -> Int {
+        var time = 0
+        for count in 0..<points.count - 1 {
+            let num = max(abs(points[count][0] - points[count + 1][0]), abs(points[count][1] - points[count + 1][1]))
+            time += num
+        }
+        return time
+    }
+```
