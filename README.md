@@ -225,3 +225,51 @@ better solution
         return time
     }
 ```
+
+## 1252. Cells with Odd Values in a Matrix
+
+```swift
+func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
+        var matrix = createMatrix(n, m)
+        var result = 0
+        
+        for num in 0..<indices.count {
+            matrix = incrementArr(matrix, indices[num])
+        }
+
+        for arr in matrix {
+            for num in arr where num % 2 == 1 {
+                result += 1
+            }
+        }
+        return result
+    }
+
+    func createMatrix(_ column: Int, _ row: Int) -> [[Int]] {
+        var result =  [[Int]]()
+        var numOfRow = [Int]()
+
+        for _ in 0..<row {
+            numOfRow.append(0)
+        }
+
+        for _ in 0..<column {
+            result.append(numOfRow)
+        }
+
+        return result
+    }
+
+    func incrementArr(_ mtx: [[Int]], _ arr: [Int]) -> [[Int]] {
+        var result = mtx
+
+        for num1 in 0..<mtx[0].count {
+            result[arr[0]][num1] += 1
+            for num2 in 0..<mtx.count where num1 == arr[1] {
+                result[num2][num1] += 1
+            }
+        }
+
+        return result
+    }
+```
