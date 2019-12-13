@@ -169,47 +169,47 @@ class Solution {
 
 ```swift
 func minTimeToVisitAllPoints(_ points: [[Int]]) -> Int {
-    var counter = 0
-    var currentLocation = points[0]
-    var vP = 0
-    
-    while currentLocation != points[points.count - 1] {
+        var counter = 0
+        var currentLocation = points[0]
+        var vP = 0
 
-        guard currentLocation != points[vP + 1]  else { vP += 1; continue }
-        
-        if currentLocation[0] != points[vP + 1][0] && currentLocation[1] != points[vP + 1][1] {
-            if currentLocation[0] < points[vP + 1][0] {
-                currentLocation[0] += 1
-            } else {
-                currentLocation[0] -= 1
-            }
-            
-            if currentLocation[1] < points[vP + 1][1] {
-                currentLocation[1] += 1
-            } else {
-                currentLocation[1] -= 1
-            }
-            
-            counter += 1
-            
-        } else if currentLocation[1] == points[vP + 1][1] && currentLocation[0] != points[vP + 1][0] {
-            if currentLocation[0] < points[vP + 1][0] {
-                currentLocation[0] += 1
+        while currentLocation != points[points.count - 1] {
+
+            if currentLocation == points[vP + 1] {vP += 1 }
+
+            if currentLocation[0] != points[vP + 1][0] && currentLocation[1] != points[vP + 1][1] {
+                if currentLocation[0] < points[vP + 1][0] {
+                    currentLocation[0] += 1
+                } else {
+                    currentLocation[0] -= 1
+                }
+
+                if currentLocation[1] < points[vP + 1][1] {
+                    currentLocation[1] += 1
+                } else {
+                    currentLocation[1] -= 1
+                }
+
                 counter += 1
-            } else {
-                currentLocation[0] -= 1
-                counter += 1
-            }
-        } else if currentLocation[0] == points[vP + 1][0] && currentLocation[1] != points[vP + 1][1] {
-            if currentLocation[1] < points[vP + 1][1] {
-                currentLocation[1] += 1
-                counter += 1
-            } else {
-                currentLocation[1] -= 1
-                counter += 1
+
+            } else if currentLocation[1] == points[vP + 1][1] && currentLocation[0] != points[vP + 1][0] {
+                if currentLocation[0] < points[vP + 1][0] {
+                    currentLocation[0] += 1
+                    counter += 1
+                } else {
+                    currentLocation[0] -= 1
+                    counter += 1
+                }
+            } else if currentLocation[0] == points[vP + 1][0] && currentLocation[1] != points[vP + 1][1] {
+                if currentLocation[1] < points[vP + 1][1] {
+                    currentLocation[1] += 1
+                    counter += 1
+                } else {
+                    currentLocation[1] -= 1
+                    counter += 1
+                }
             }
         }
+        return counter
     }
-    return counter
-}
 ```
