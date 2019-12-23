@@ -286,3 +286,19 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
 ```
+## 1108. Defanging an IP Address
+
+```swift
+    func defangIPaddr(_ address: String) -> String {
+        var result = ""
+        
+        for char in address {
+            if char == "." {
+                result += "[.]"
+            } else {
+                result += String(char)
+            }
+        }
+        return result
+    }
+ ```
