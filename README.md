@@ -273,3 +273,16 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
 ```
+## 1295. Find Numbers with Even Number of Digits
+
+```swift
+    func findNumbers(_ nums: [Int]) -> Int {
+        var result: Int = 0
+
+        for num in nums where String(num).count % 2 == 0 {
+            result += 1
+        }
+
+        return result
+    }
+```
