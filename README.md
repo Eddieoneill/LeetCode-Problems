@@ -364,3 +364,26 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
 ```
+## 1221. Split a String in Balanced Strings
+
+```swift
+    func balancedStringSplit(_ s: String) -> Int {
+        var r = 0
+        var l = 0
+        var result = 0
+        
+        for char in s {               
+            if char == "R" {
+                r += 1
+            } else {
+                l += 1
+            }       
+            if r == l {
+                r = 0
+                l = 0
+                result += 1
+            }  
+        }
+        return result
+    }
+```
