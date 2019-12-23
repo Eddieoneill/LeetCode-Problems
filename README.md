@@ -332,3 +332,35 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return product - sum
     }
 ```
+## 1290. Convert Binary Number in a Linked List to Integer
+
+```swift
+    func getDecimalValue(_ head: ListNode?) -> Int {
+        var current = head
+        var strNum = ""
+        var result = 0
+        var count = -1
+        
+        while current != nil {
+            count += 1
+            strNum += "\(current!.val)"
+            current = current?.next
+        }
+        
+        for num in strNum {
+            var number = 2
+            if count == 2 {
+                number = 2 * 2
+            } else if count <= 0 {
+                number = 1
+            } else {
+                for _ in 1..<count {
+                    number *= 2
+                }
+            }
+            result += (number * Int(String(num))!)
+            count -= 1
+        }
+        return result
+    }
+```
