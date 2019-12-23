@@ -302,3 +302,18 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
  ```
+## 771. Jewels and Stones
+
+```swift
+    func numJewelsInStones(_ J: String, _ S: String) -> Int {
+        var checker: Set<Character> = []
+        var result = 0
+        J.forEach { checker.insert($0) }
+        
+        for stone in S where checker.contains(stone) {
+            result += 1
+        }
+        
+        return result
+    }
+```
