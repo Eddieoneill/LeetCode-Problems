@@ -394,3 +394,24 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return str.lowercased
     }
 ```
+## 1021. Remove Outermost Parentheses
+
+```swift
+    func removeOuterParentheses(_ S: String) -> String {
+        var openCount = 0
+        var result = ""
+        
+        for char in S {
+            if char == ")"{
+                openCount -= 1   
+            }
+            if openCount >= 1 {
+                result += String(char)
+            }
+            if char == "(" {
+                openCount += 1   
+            } 
+        }
+        return result
+    }
+```
