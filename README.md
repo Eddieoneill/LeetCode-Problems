@@ -387,3 +387,10 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
 ```
+## 709. To Lower Case
+
+```swift
+    func toLowerCase(_ str: String) -> String {
+        return str.lowercased
+    }
+```
