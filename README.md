@@ -317,3 +317,18 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
 ```
+## 1281. Subtract the Product and Sum of Digits of an Integer
+
+```swift
+    func subtractProductAndSum(_ n: Int) -> Int {
+        var product = 1
+        var sum = 0
+        
+        for num in String(n) {
+            product *= Int(String(num))!
+            sum += Int(String(num))!
+        }
+        
+        return product - sum
+    }
+```
