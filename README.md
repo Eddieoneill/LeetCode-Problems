@@ -415,3 +415,22 @@ func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
         return result
     }
 ```
+
+## 804. Unique Morse Code Words
+
+```swift
+func uniqueMorseRepresentations(_ words: [String]) -> Int {
+        let alphToMorse: [Character: String] = ["a": ".-", "b":"-...", "c":"-.-.", "d":"-..", "e":".", "f":"..-.", "g":"--.", "h":"....", "i":"..", "j":".---", "k":"-.-", "l":".-..", "m":"--", "n":"-.", "o":"---", "p":".--.", "q":"--.-", "r":".-.", "s":"...", "t":"-", "u":"..-", "v":"...-", "w":".--", "x":"-..-", "y":"-.--", "z":"--.."]
+        var currentWord = ""
+        var result: Set<String> = []
+        
+        for word in words {
+            for char in word {
+                currentWord += alphToMorse[char] ?? "a"
+            }
+            result.insert(currentWord)
+            currentWord = ""
+        }
+        return result.count
+    }
+```
