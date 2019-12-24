@@ -434,3 +434,15 @@ func uniqueMorseRepresentations(_ words: [String]) -> Int {
         return result.count
     }
 ```
+## 136. Single Number
+
+```swift
+    func singleNumber(_ nums: [Int]) -> Int {
+        var result = nums[0]
+        
+        for num in 1..<nums.count {
+            result ^= nums[num]
+        }
+        return result
+    }
+```
