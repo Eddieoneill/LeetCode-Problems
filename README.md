@@ -446,3 +446,21 @@ func uniqueMorseRepresentations(_ words: [String]) -> Int {
         return result
     }
 ```
+## 1. Two Sum
+
+```swift
+func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var dict: [Int: Int] = [:]
+        
+        for (index, num) in nums.enumerated() {
+            let complete = target - num
+            
+            if dict[complete] != nil {
+                return [dict[complete]!, index]
+            } else {
+                dict[num] = index
+            }
+        }
+        return []
+    }
+```
