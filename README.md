@@ -464,3 +464,17 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return []
     }
 ```
+## 1046. Last Stone Weight
+
+```swift
+    func lastStoneWeight(_ stones: [Int]) -> Int {
+        var arr = stones
+        while arr.count > 1 {
+            arr = arr.sorted()
+            let x = arr.popLast()!
+            let y = arr.popLast()!
+            arr.append(x - y)
+        }
+        return arr[0]
+    }
+```
