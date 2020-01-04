@@ -478,3 +478,11 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return arr[0]
     }
 ```
+
+## 292. Nim Game
+
+```swift
+    func canWinNim(_ n: Int) -> Bool {
+        return n % 4 != 0
+    }
+```
