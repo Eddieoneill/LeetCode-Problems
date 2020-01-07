@@ -511,5 +511,24 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
     
     }
 ```
+## 153. Find Minimum in Rotated Sorted Array
 
-
+```swift
+    func findMin(_ nums: [Int]) -> Int {
+        guard !nums.isEmpty else { return 0 }
+        
+        var low = 0, high = nums.count-1
+        while low < high {
+            let mid = low + (high - low)/2
+            if nums[low] < nums[high] {
+                return nums[low]
+            } else if nums[low] <= nums[mid] {
+                low = mid + 1
+            } else {
+                high = mid
+            }
+        }
+        
+        return nums[low]
+    }
+```
