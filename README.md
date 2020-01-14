@@ -592,3 +592,18 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return result.isEmpty
     }
 ```
+## 53. Maximum Subarray
+
+```swift
+    func maxSubArray(_ n: [Int]) -> Int {
+        var best = n[0];
+        var current = n[0];
+        
+        for i in 1..<n.count {
+            current = max(current + n[i], n[i]);
+            best = max(current, best);
+        }
+    
+        return best;
+    }
+```
