@@ -532,3 +532,21 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return nums[low]
     }
 ```
+## 1313. Decompress Run-Length Encoded List
+
+```swift
+    func decompressRLElist(_ nums: [Int]) -> [Int] {
+        var result = [Int]()
+        
+        for index in stride(from: 0, to: nums.count, by: 2) {
+            let count = nums[index]
+            let number = nums[index+1]
+            
+            guard count > 0 else { continue }
+            
+            result += Array(repeating: number, count: count)
+        }
+        
+        return result
+    }
+```
