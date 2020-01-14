@@ -550,3 +550,24 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return result
     }
 ```
+
+
+```swift
+    func rangeSumBST(_ root: TreeNode?, _ L: Int, _ R: Int) -> Int {
+        guard let current = root else { return 0 }
+        var sum = 0
+    
+        if current.val >= L && current.val <= R {
+             sum = current.val
+        }
+        if current.val > L {
+         sum += rangeSumBST(current.left, L, R)
+        }
+    
+        if current.val < R {
+            sum += rangeSumBST(current.right, L, R)
+        }
+        
+        return sum
+    }
+```
