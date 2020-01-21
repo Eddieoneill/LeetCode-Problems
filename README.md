@@ -607,3 +607,49 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return best;
     }
 ```
+
+```swift
+    func isHappy(_ n: Int) -> Bool {
+        guard n > 1 else { return true }
+        var seen: Set<Int> = []
+        var digitList = [Int]()
+        let strNum = String(n)
+        seen.insert(n)
+        
+        
+        for num in strNum {
+            digitList.append(Int(String(num))!)
+        }
+        
+        return square(digitList, seen)
+    }
+    
+    func square(_ list: [Int], _ seen: Set<Int>) -> Bool {
+        var sum = 0
+        
+        for num in list {
+            let power = num * num
+            sum += power
+        }
+        
+        if seen.contains(sum) {
+            return false
+        } else {
+            return happy(sum, seen)
+        }
+    }
+    
+    func happy(_ n: Int, _ seen: Set<Int>) -> Bool {
+        guard n > 1 else { return true }
+        var list = seen
+        var digitList = [Int]()
+        let strNum = String(n)
+        list.insert(n)
+        
+        for num in strNum {
+            digitList.append(Int(String(num))!)
+        }
+        
+        return square(digitList, list)
+    }
+```
