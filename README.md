@@ -722,3 +722,16 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         }
     }
 ```
+## 1207. Unique Number of Occurrences
+
+```swift
+    func uniqueOccurrences(_ arr: [Int]) -> Bool {
+        var dict = [Int: Int]()
+        
+        for num in arr {
+            dict[num, default: 0] += 1
+        }
+        
+        return Set(Array(dict.values)).count == dict.keys.count
+    }
+```
