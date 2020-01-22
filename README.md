@@ -697,3 +697,28 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return true
     }
 ```
+## 7. Reverse Integer
+
+```swift
+    func reverse(_ x: Int) -> Int {
+        var x = String(x)
+        var negative = false
+        var result = ""
+        
+        for num in x {
+            if num == "-" {
+                negative = true
+            } else {
+                result = String(num) + result
+            }
+        }
+        
+        if Int(result)! > Int32.max || Int(result)! < Int32.min {
+            return 0
+        } else if negative {
+            return -Int(result)!
+        } else {
+          return Int(result)!
+        }
+    }
+```
