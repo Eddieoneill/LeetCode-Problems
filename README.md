@@ -756,3 +756,32 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         }
     }    
 ```
+## 506. Relative Ranks
+
+```swift
+    func findRelativeRanks(_ nums: [Int]) -> [String] {
+        var sortedNums = nums.sorted { $0 > $1 }
+        var dict: [Int: String] = [:]
+        var count = 4
+        var result = [String]()
+        
+        for (index, num) in sortedNums.enumerated() {
+            switch index {
+            case 0:
+                dict[num] = "Gold Medal"
+            case 1: 
+                dict[num] = "Silver Medal"
+            case 2: 
+                dict[num] = "Bronze Medal"
+            default:
+                dict[num] = "\(count)"
+                count += 1
+            }
+        }
+        
+        for num in nums {
+            result.append(dict[num]!)
+        }
+        return result
+    }
+```
