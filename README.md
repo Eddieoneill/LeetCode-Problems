@@ -735,3 +735,24 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return Set(Array(dict.values)).count == dict.keys.count
     }
 ```
+## 859. Buddy Strings
+
+```swift
+    func buddyStrings(_ A: String, _ B: String) -> Bool {
+        guard A.count == B.count else { return false }
+        if A == B {
+            return Set(A).count < A.count
+        } else {
+            var diffs = [Int]()
+            let A = Array(A), B = Array(B)
+            for i in 0..<A.count {
+                if A[i] != B[i] {
+                    diffs.append(i)
+                }
+            }
+            guard diffs.count == 2 else { return false }
+            let i = diffs[0], j = diffs[1]
+            return A[i] == B[j] && A[j] == B[i]
+        }
+    }    
+```
