@@ -785,3 +785,18 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return result
     }
 ```
+## 1137. N-th Tribonacci Number
+
+```swift
+    func tribonacci(_ n: Int) -> Int {
+        guard n != 0 else { return 0 }
+        guard n > 2 else { return 1 }
+
+        return nTribonacci(0, 1, 1, n, 3)
+    }
+
+    func nTribonacci(_ t1: Int, _ t2: Int, _ t3: Int, _ target: Int, _ current: Int) -> Int {
+        guard current != target else { return t1 + t2 + t3 }
+        return nTribonacci(t2, t3, t1 + t2 + t3, target, current + 1)
+    }
+```
