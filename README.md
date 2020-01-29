@@ -800,3 +800,35 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
         return nTribonacci(t2, t3, t1 + t2 + t3, target, current + 1)
     }
 ```
+## 2. Add Two Numbers
+
+```swift
+func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var carry = 0
+        var cur1 = l1
+        var cur2 = l2
+        var result: ListNode?
+        var curRes: ListNode?
+        while cur1 != nil || cur2 != nil {
+            var newVal = (cur1?.val ?? 0) + (cur2?.val ?? 0) + carry
+            carry = newVal / 10
+            newVal = newVal % 10
+            let newNode = ListNode(newVal)
+            if result == nil {
+                result = newNode
+                curRes = result
+            } else {
+                curRes!.next = newNode
+                curRes = curRes?.next
+            }
+            cur1 = cur1?.next
+            cur2 = cur2?.next
+        }
+        
+        if carry != 0 {
+            curRes?.next = ListNode(carry)
+        }
+        
+        return result ?? ListNode(0)
+    }
+```
