@@ -881,3 +881,17 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
 		return answer
     }
 ```
+## 1119. Remove Vowels from a String
+
+```swift
+    func removeVowels(_ S: String) -> String {
+        var vowels: Set<Character> = ["a", "e", "i", "o", "u"]
+        var result = ""
+        
+        for char in S where !vowels.contains(char) {
+            result += String(char)
+        }
+        
+        return result
+    }
+```
