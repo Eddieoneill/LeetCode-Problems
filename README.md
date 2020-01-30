@@ -851,3 +851,33 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         }
     }
 ```
+## 347. Top K Frequent Elements
+
+```swift
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+      var dict: [Int: Int] = [:]
+	
+		// O(n)
+		for element in nums {
+			dict[element, default: 0] += 1
+		}
+		
+		var countArray: [(element: Int, count: Int)] = []
+		// O(n)
+		dict.forEach { (element, count) in
+			countArray.append((element, count))
+		}
+		
+		countArray.sort { (e1, e2) -> Bool in
+			return e1.count > e2.count
+		}
+		
+		var answer: [Int] = []
+		
+		for i in 0..<k {
+			answer.append(countArray[i].element)
+		}
+		
+		return answer
+    }
+```
