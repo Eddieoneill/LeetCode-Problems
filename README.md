@@ -895,3 +895,26 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         return result
     }
 ```
+## 1165. Single-Row Keyboard
+
+```swift
+    func calculateTime(_ keyboard: String, _ word: String) -> Int {
+        var dict: [Character: Int] = [:]
+        var count = 0
+        var result = 0
+        var currentKey: Character = "a"
+        
+        for (index, char) in keyboard.enumerated() {
+            if index == 0 { currentKey = char }
+            dict[char] = count
+            count += 1
+        }
+        
+        for char in word {
+            result += abs(dict[char]! - dict[currentKey]!)
+            currentKey = char
+        }
+        
+        return result
+    }
+```
