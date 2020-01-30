@@ -918,3 +918,52 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         return result
     }
 ```
+## 905. Sort Array By Parity
+
+```swift
+    func sortArrayByParity(_ A: [Int]) -> [Int] {
+        var counting = [Int]()
+        var even = [Int]()
+        var odd = [Int]()
+        
+        if A.count < 500 {
+            counting = A.sorted { $0 < $1 }
+            for num in counting {
+                if num % 2 == 0 {
+                    even.append(num)
+                } else {
+                    odd.append(num)
+                }
+            }
+        } else {
+            var point = 0
+            counting = Array(repeating: 0, count: 5001)
+            
+            for num in A {
+                counting[num] += 1
+            }
+        
+            while point <= 5000 {
+                if counting[point] > 1 && point % 2 == 0 {
+                    counting[point] -= 1
+                    even.append(point)
+                } else if counting[point] == 1 && point % 2 == 0 {
+                    counting[point] -= 1
+                    even.append(point)
+                    point += 1
+                } else if counting[point] > 1 && point % 2 == 1 {
+                    counting[point] -= 1
+                    odd.append(point)
+                } else if counting[point] == 1 && point % 2 == 1 {
+                    counting[point] -= 1
+                    odd.append(point)
+                    point += 1
+                } else {
+                    point += 1
+                }
+            }
+        }
+        
+        return even + odd
+    }
+```
