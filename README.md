@@ -967,3 +967,29 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         return even + odd
     }
 ```
+## 1302. Deepest Leaves Sum
+
+```swift
+    func deepestLeavesSum(_ root: TreeNode?) -> Int {
+        var sum = 0
+        var maxLevel = 0
+        checkSum(root, sum: &sum, level: 0, maxLevel: &maxLevel)
+        return sum
+    }
+
+
+    func checkSum(_ root: TreeNode?, sum: inout Int, level: Int, maxLevel: inout Int) {
+        guard let root = root else { return }
+        guard root.left != nil || root.right != nil else {
+            if level > maxLevel {
+                maxLevel = level
+                sum = root.val
+            } else if maxLevel == level {
+                sum += root.val
+            }
+            return
+        }
+        checkSum(root.left, sum: &sum, level: level + 1, maxLevel: &maxLevel)
+        checkSum(root.right, sum: &sum, level: level + 1, maxLevel: &maxLevel)
+    }
+```
