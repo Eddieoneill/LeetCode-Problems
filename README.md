@@ -993,3 +993,42 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         checkSum(root.right, sum: &sum, level: level + 1, maxLevel: &maxLevel)
     }
 ```
+## 1086. High Five
+
+```swift
+    func highFive(_ items: [[Int]]) -> [[Int]] {
+        var idToAllScores: [Int: [Int]] = [:]
+        var finalArray: [[Int]] = []
+        
+        for item in items {
+            let id = item[0]
+            let score = item[1]
+            
+            if let currentArray = idToAllScores[id] {
+                idToAllScores[id] = currentArray + [score]
+            } else {
+                idToAllScores[id] = [score]
+            }
+        }
+        
+        for (id, scores) in idToAllScores {
+            finalArray.append([id, getAverageOfTopFiveScores(scores)])
+        }
+        
+        return finalArray.sorted { $0[0] < $1[0] }
+    }
+    
+    func getAverageOfTopFiveScores(_ allScores: [Int]) -> Int {
+        var newScores = allScores
+        var total = 0
+        newScores.sort { $0 > $1 }
+        let indexAmount = min(5, newScores.count)
+        for index in 0..<indexAmount {
+            total += newScores[index]
+        }
+        
+        total = total / indexAmount
+        
+        return total
+    }
+```
