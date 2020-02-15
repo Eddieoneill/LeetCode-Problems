@@ -1032,3 +1032,34 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         return total
     }
 ```
+## 128. Longest Consecutive Sequence
+
+```swift
+    func longestConsecutive(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0 }
+        var seenNum: Set<Int> = []
+        var setNums = Set(nums)
+        var maxCount = 0
+        
+        for num in nums {
+            guard !seenNum.contains(num) else { continue }
+            var count = 0
+            
+            checkNums(&seenNum, &setNums, num, &count)      
+            maxCount = max(count, maxCount)
+        }
+        
+        return maxCount
+    }
+    
+    func checkNums(_ seen: inout Set<Int>, _ setNums: inout Set<Int>, _ num: Int, _ count: inout Int) {
+        seen.insert(num)
+        count += 1
+        if setNums.contains(num + 1) && !seen.contains(num + 1) {
+            checkNums(&seen, &setNums, num + 1, &count) 
+        }
+        if setNums.contains(num - 1) && !seen.contains(num - 1) {
+            checkNums(&seen, &setNums, num - 1, &count) 
+        }
+    }
+```
