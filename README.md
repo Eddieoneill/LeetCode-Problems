@@ -1063,3 +1063,22 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         }
     }
 ```
+## 973. K Closest Points to Origin
+
+```swift
+    func kClosest(_ points: [[Int]], _ K: Int) -> [[Int]] {
+        var p = points
+        var result = [[Int]]()
+        p.sort(by: sort)
+
+        for num in 0..<K {
+            result.append(p[num])
+        }
+
+        return result
+    }
+
+    func sort(_ p1: [Int], p2: [Int]) -> Bool {
+        return ((p1[0] * p1[0]) + (p1[1] * p1[1])) < (p2[0] * p2[0]) + (p2[1] * p2[1])
+    }
+```
