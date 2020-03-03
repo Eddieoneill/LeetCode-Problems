@@ -1082,3 +1082,26 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         return ((p1[0] * p1[0]) + (p1[1] * p1[1])) < (p2[0] * p2[0]) + (p2[1] * p2[1])
     }
 ```
+## 1365. How Many Numbers Are Smaller Than the Current Number
+
+```swift
+    func smallerNumbersThanCurrent(_ nums: [Int]) -> [Int] {
+        var count = [Int](repeating: 0, count: 101)
+        var result = [Int](repeating: 0, count: nums.count)
+        
+        for i in 0..<nums.count {
+            count[nums[i]] += 1
+        }
+        
+        print(count)
+        for i in 1...100 {
+            count[i] += count[i-1]
+        }
+        print(count)
+        
+        for i in 0..<nums.count {
+            result[i] = (nums[i] == 0) ? 0 : count[nums[i] - 1]
+        }
+        return result
+    }
+```
