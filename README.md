@@ -1105,3 +1105,30 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         return result
     }
 ```
+
+## 581. Shortest Unsorted Continuous Subarray
+
+```swift
+    func findUnsortedSubarray(_ nums: [Int]) -> Int {
+        var sortedNums = nums.sorted(by: < )
+        var start = 0
+        var end = 0
+        for i in 0 ..< nums.count {
+            if nums[i] != sortedNums[i]  {
+                start = i
+                break
+            }
+        }
+        for j in stride(from: nums.count-1, to: 0, by: -1) {
+            if nums[j] != sortedNums[j] {
+                end = j
+                break
+            }
+        }
+        if start == end {
+            return 0
+        } else {
+            return end - start + 1
+        }
+    }
+```
