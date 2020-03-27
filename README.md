@@ -1132,3 +1132,56 @@ func addTwoNumbers(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
         }
     }
 ```
+## 581. Shortest Unsorted Continuous Subarray
+
+```swift
+class Solution {
+    func sortArray(_ nums: [Int]) -> [Int] {
+        guard nums.count > 1 else { return nums } 
+        var array = nums
+        
+        QuickSort.sort(array: &array)
+        
+        return array
+    }
+}
+
+class QuickSort {
+    
+    static func sort(array: inout [Int]) {
+        quickSort(array: &array, l: 0, h: array.count - 1)
+    }
+    
+    static func quickSort(array: inout [Int], l: Int, h: Int) {
+        guard l < h else { return }
+        
+        let pivot =  partition(array: &array, l: l, h: h)
+        
+        quickSort(array: &array, l: l, h: pivot - 1)
+        quickSort(array: &array, l: pivot + 1, h: h)
+        
+    }
+    
+    static func partition(array: inout [Int], l: Int, h: Int) -> Int {
+        let pivot = array[h]  
+        var i = l-1
+        
+        for index in l..<h {
+            if array[index] < pivot {
+                i += 1
+                swap(array: &array, f: index, s: i)
+            }
+        }
+        swap(array: &array, f: h, s: i + 1)
+        return i+1; 
+    }
+    
+    static func swap(array: inout [Int], f: Int, s: Int) {
+        let tmp = array[f]
+        
+        array[f] = array[s]
+        array[s] = tmp
+    }
+    
+}
+```
