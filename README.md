@@ -1185,3 +1185,26 @@ class QuickSort {
     
 }
 ```
+## 704. Binary Search
+
+```swift
+    func search(_ nums: [Int], _ target: Int) -> Int {
+        var left = 0
+        var right = nums.count - 1
+
+        while left <= right {
+
+            let middle = Int(floor(Double(left + right) / 2.0))
+
+            if nums[middle] < target {
+                left = middle + 1
+            } else if nums[middle] > target {
+                right = middle - 1
+            } else {
+                return middle
+            }
+        }
+
+        return -1
+    }
+```
