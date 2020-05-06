@@ -1208,3 +1208,31 @@ class QuickSort {
         return -1
     }
 ```
+
+## 104. Maximum Depth of Binary Tree
+
+```swift
+class Solution {
+    func maxDepth(_ root: TreeNode?) -> Int {
+        guard root != nil else { return 0 }
+        var maxHeight = 0
+        height(max: &maxHeight, currentNode: root, currentHeight: 1)
+        return maxHeight
+    }
+
+    func height(max: inout Int, currentNode: TreeNode?, currentHeight: Int) {
+        guard currentNode?.left != nil || currentNode?.right != nil else {
+            if currentHeight > max {
+                max = currentHeight
+            }
+            return 
+        }
+        if currentNode?.left != nil {
+            height(max: &max, currentNode: currentNode?.left, currentHeight: currentHeight + 1)
+        }
+        if currentNode?.right != nil {
+            height(max: &max, currentNode: currentNode?.right, currentHeight: currentHeight + 1)
+        }
+    }
+}
+```
