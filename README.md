@@ -1360,3 +1360,32 @@ func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
         return Int(arrNum.reduce("", { String($0) + String($1) })) ?? 0
     }
 ```
+## 1351. Count Negative Numbers in a Sorted Matrix
+
+```swift
+    func countNegatives(_ grid: [[Int]]) -> Int {
+        var count = 0
+        
+        for nums in grid {
+            count += checkNegatives(nums)
+        }
+        
+        return count
+    }
+    
+    func checkNegatives(_ row: [Int]) -> Int {
+        var right = row.count - 1 
+        var result = 0
+        
+        for _ in 0..<row.count {
+            if row[right] < 0 {
+                result += 1
+                right -= 1
+            } else {
+                break
+            }
+        }
+        
+        return result
+    }
+```
