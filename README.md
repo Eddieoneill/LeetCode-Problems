@@ -1263,3 +1263,24 @@ class Solution {
         return true
     }
 ```
+## 1436. Destination City
+
+```swift
+    func destCity(_ paths: [[String]]) -> String {
+        var seenCity: Set<String> = []
+        var result = paths[0][1]
+        
+        for path in paths {
+            seenCity.insert(path[0])
+        }
+        
+        for path in paths {
+            if !seenCity.contains(path[1]) {
+                result = path[1]
+                print(path[1])
+            }
+        }
+        
+        return result
+    }
+```
