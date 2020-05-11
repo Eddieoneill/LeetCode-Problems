@@ -1308,3 +1308,22 @@ func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
         return result
     }
 ```
+## 1342. Number of Steps to Reduce a Number to Zero
+
+```swift
+    func numberOfSteps (_ num: Int) -> Int {
+        var num = num
+        var count = 0
+        
+        while num > 0 {
+            if num % 2 == 0 {
+                num = num / 2
+            } else {
+                num = num - 1
+            }
+            count += 1
+        }
+        
+        return count
+    }
+```
