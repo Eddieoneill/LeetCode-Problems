@@ -1284,3 +1284,27 @@ class Solution {
         return result
     }
 ```
+## 1431. Kids With the Greatest Number of Candies
+
+```swift
+func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
+        var max = 0
+        var result: [Bool] = []
+        
+        for candy in candies {
+            if candy > max {
+                max = candy
+            }
+        }
+        
+        for candy in candies {
+            if candy + extraCandies >= max {
+                result.append(true)
+            } else {
+                result.append(false)
+            }
+        }
+        
+        return result
+    }
+```
