@@ -1327,3 +1327,20 @@ func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
         return count
     }
 ```
+## 1389. Create Target Array in the Given Order
+
+```swift
+    func createTargetArray(_ nums: [Int], _ index: [Int]) -> [Int] {
+        var result: [Int] = []
+        
+        for (i, num) in nums.enumerated() {
+            if index[i] <= i {
+                result.insert(num, at: index[i])
+            } else {
+                result.append(num)
+            }
+        }
+        
+        return result
+    }
+```
