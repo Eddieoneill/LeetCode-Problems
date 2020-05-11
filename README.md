@@ -1389,3 +1389,18 @@ func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
         return result
     }
 ```
+## 1299. Replace Elements with Greatest Element on Right Side
+
+```swift
+    func replaceElements(_ arr: [Int]) -> [Int] {
+        let n = arr.count
+        var a = Array(repeating: -1, count: n)
+        var last = a[n-1]
+        
+        for i in (0..<arr.count-1).reversed() {
+            last = max(last, arr[i + 1])
+            a[i] = last
+        }
+        return a
+    }
+```
