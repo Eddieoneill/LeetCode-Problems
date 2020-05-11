@@ -1344,3 +1344,19 @@ func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
         return result
     }
 ```
+## 1323. Maximum 69 Number
+
+```swift
+    func maximum69Number (_ num: Int) -> Int {
+        var arrNum = Array(String(num))
+        
+        for (index, num) in arrNum.enumerated() {
+            if num == "6" {
+                arrNum[index] = "9"
+                break
+            }
+        }
+        
+        return Int(arrNum.reduce("", { String($0) + String($1) })) ?? 0
+    }
+```
