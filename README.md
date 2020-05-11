@@ -1240,6 +1240,8 @@ class Solution {
 
 ```swift
     func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+	guard ransomNote.count <= magazine.count else { return false }
+	
         var availableChar: [Character: Int] = [:]
         
         for char in magazine {
