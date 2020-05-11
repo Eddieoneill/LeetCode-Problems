@@ -1236,3 +1236,28 @@ class Solution {
     }
 }
 ```
+## 383. Ransom Note
+
+```swift
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        var availableChar: [Character: Int] = [:]
+        
+        for char in magazine {
+            if let count = availableChar[char] {
+                availableChar[char] = count + 1
+            } else {
+                availableChar[char] = 1
+            }
+        }
+        
+        for char in ransomNote {
+            if let count = availableChar[char], count > 0 {
+                availableChar[char] = count - 1
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+```
