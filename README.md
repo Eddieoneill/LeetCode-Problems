@@ -1404,3 +1404,29 @@ func kidsWithCandies(_ candies: [Int], _ extraCandies: Int) -> [Bool] {
         return a
     }
 ```
+## 383. Ransom Note
+
+```swift
+func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        guard ransomNote.count <= magazine.count else { return false }
+        var availableChar: [Character: Int] = [:]
+        
+        for char in magazine {
+            if let count = availableChar[char] {
+                availableChar[char] = count + 1
+            } else {
+                availableChar[char] = 1
+            }
+        }
+        
+        for char in ransomNote {
+            if let count = availableChar[char], count > 0 {
+                availableChar[char] = count - 1
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+```
