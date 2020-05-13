@@ -1430,3 +1430,37 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
         return true
     }
 ```
+## 1309. Decrypt String from Alphabet to Integer Mapping
+
+```swift
+    func freqAlphabets(_ s: String) -> String {
+        let dict = ["4": "d", "23": "w", "6": "f", "20": "t", "21": "u", "13": "m", "25": "y", "19": "s", "2": "b", "7": "g", "8": "h", "1": "a", "10": "j", "15": "o", "22": "v", "18": "r", "14": "n", "17": "q", "16": "p", "12": "l", "9": "i", "11": "k", "24": "x", "3": "c", "26": "z", "5": "e"]
+        var result = ""
+        let arrStr = Array(s)
+        var holder = ""
+        var isTwoDigit = false
+        
+        for index in (0..<arrStr.count).reversed() {
+            if holder.count == 2 {
+                result = "\(dict[holder] ?? "")\(result)"
+                holder = ""
+                if arrStr[index] != "#" {
+                    result = "\(dict[String(arrStr[index])] ?? "")\(result)"
+                    isTwoDigit = false
+                }
+            } else if isTwoDigit {
+                holder = "\(String(arrStr[index]))\(holder)"
+            } else if arrStr[index] == "#" {
+                isTwoDigit = true
+            } else {
+                result = "\(dict[String(arrStr[index])] ?? "")\(result)"
+            }
+        }
+        
+        if !holder.isEmpty {
+            result = "\(dict[holder] ?? "")\(result)"
+        }
+
+        return result
+    }
+```
