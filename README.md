@@ -1464,3 +1464,24 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
         return result
     }
 ```
+## 1304. Find N Unique Integers Sum up to Zero
+
+```swift
+    func sumZero(_ n: Int) -> [Int] {
+        var result: [Int] = []
+        var used: Set<Int> = []
+        var isEven = n % 2 == 0
+        var loopCount = n/2
+        
+        if !isEven {
+            result.append(0)
+        }
+        
+        for num in 0..<loopCount {
+            result.append(-(num + 1))
+            result.append((num + 1))
+        }
+        
+        return result
+    }
+```
