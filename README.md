@@ -1485,3 +1485,27 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
         return result
     }
 ```
+## 189. Rotate Array
+
+```swift
+    func rotate(_ nums: inout [Int], _ k: Int) {
+        var result: [Int] = []
+        var container: [Int] = []
+        var current = 1
+        var k = k
+        
+        if k > nums.count {
+            k = k - nums.count
+        }
+        
+        for num in nums {
+            if nums.count - current >= k {
+                result.append(num)
+            } else {
+                container.append(num)
+            }
+            current += 1
+        }
+        nums = container + result
+    }
+```
