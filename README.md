@@ -1509,3 +1509,21 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
         nums = container + result
     }
 ```
+## 1374. Generate a String With Characters That Have Odd Counts
+
+```swift
+    func generateTheString(_ n: Int) -> String {
+        var result = ""
+        if n % 2 == 0 {
+            for _ in 1..<n {
+                result += "a"
+            }
+            result += "b"
+        } else {
+            for _ in 0..<n {
+                result += "a"
+            }
+        }
+        return result
+    }
+```
