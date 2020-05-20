@@ -1562,3 +1562,21 @@ func anagramMappings(A: [Int], B: [Int]) -> [Int] {
     return result
 }
 ```
+## 1290. Convert Binary Number in a Linked List to Integer
+
+```swift
+    func getDecimalValue(_ head: ListNode?) -> Int {
+        var current = head
+        var result = 0
+        
+        while current != nil {
+            if let val = current?.val {
+                result *= 2
+                result += val
+                current = current?.next   
+            }
+        }
+        
+        return result
+    }
+```
