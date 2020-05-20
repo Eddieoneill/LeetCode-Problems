@@ -1543,3 +1543,22 @@ func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
         return result
     }
 ```
+## 760
+
+```swift
+func anagramMappings(A: [Int], B: [Int]) -> [Int] {
+    var dict: [Int: Int] = [:]
+    var result = [Int]()
+    
+    for (index, num) in B.enumerated() {
+        dict[num] = index
+    }
+    
+    for num in A {
+        let b = dict[num] ?? 0
+        result.append(b)
+    }
+    
+    return result
+}
+```
