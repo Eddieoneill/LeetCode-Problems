@@ -1580,3 +1580,19 @@ func anagramMappings(A: [Int], B: [Int]) -> [Int] {
         return result
     }
 ```
+## 1266. Minimum Time Visiting All Points
+
+```swift
+    func minTimeToVisitAllPoints(_ points: [[Int]]) -> Int {
+        var time = 0
+        
+        for count in 0..<points.count - 1 {
+            let x  = abs(points[count][0] - points[count + 1][0])
+            let y = abs(points[count][1] - points[count + 1][1])
+            let num = max(x, y)
+            
+            time += num
+        }
+        return time
+    }
+```
