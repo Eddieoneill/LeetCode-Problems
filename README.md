@@ -1596,3 +1596,31 @@ func anagramMappings(A: [Int], B: [Int]) -> [Int] {
         return time
     }
 ```
+## 1252. Cells with Odd Values in a Matrix
+
+```swift
+    func oddCells(_ n: Int, _ m: Int, _ indices: [[Int]]) -> Int {
+        var rows = Array(repeating: 0, count: n)
+        var columns = Array(repeating: 0, count: m)
+        var result = 0
+        
+        for index in indices {
+            rows[index[0]] += 1
+            columns[index[1]] += 1
+        }
+        
+        for row in 0..<n {
+            for column in 0..<m {
+                if isOdd(rows[row], columns[column]) {
+                    result += 1
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func isOdd(_ row: Int, _ column: Int) -> Bool {
+        return (row + column) % 2 != 0 
+    }
+```
