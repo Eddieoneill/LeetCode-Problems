@@ -1624,3 +1624,62 @@ func anagramMappings(A: [Int], B: [Int]) -> [Int] {
         return (row + column) % 2 != 0 
     }
 ```
+## 1370. Increasing Decreasing String
+
+```swift
+    func sortString(_ s: String) -> String {
+        var buckets = Array(repeating: 0, count: 26)
+        var result: [String] = []
+        var count = 0
+        
+        for char in s {
+            let ascii = Int(char.asciiValue!) - Int(Character("a").asciiValue!) 
+            buckets[ascii] += 1
+        }
+        
+        while !bucketIsEmpty(buckets) {
+            if count % 2 == 0 {
+                result = leastToBiggiest(&buckets, result)
+            } else {
+                result = biggestToLeast(&buckets, result)   
+            }
+            count += 1
+        }
+        
+
+        return result.joined(separator: "")
+
+    }
+    
+    func bucketIsEmpty(_ arr: [Int]) -> Bool {
+        return arr.reduce(0, +) == 0
+    }
+    
+    func leastToBiggiest(_ arr:inout [Int], _ result: [String]) -> [String] {
+        var result = result
+        
+        for (index, num) in arr.enumerated() where num != 0 {
+            let a = Int(Character("a").asciiValue!)
+            let char = String(Character(UnicodeScalar(a + index)!))
+            result.append(char)
+            arr[index] -= 1
+        }
+
+        
+        return result
+    } 
+    
+    func biggestToLeast(_ arr:inout [Int], _ result: [String]) -> [String] {
+        var result = result
+        
+        for (index, num) in arr.enumerated().reversed() where num != 0 {
+            let a = Int(Character("a").asciiValue!)
+            let char = String(Character(UnicodeScalar(a + index)!))
+            result.append(char)
+            arr[index] -= 1
+            
+        }
+        
+        return result
+    } 
+```
