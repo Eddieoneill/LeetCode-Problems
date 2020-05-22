@@ -1682,4 +1682,5 @@ func anagramMappings(A: [Int], B: [Int]) -> [Int] {
         
         return result
     } 
+    
 ```
