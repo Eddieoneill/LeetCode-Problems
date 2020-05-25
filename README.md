@@ -1696,3 +1696,33 @@ func anagramMappings(A: [Int], B: [Int]) -> [Int] {
         return result
     }
 ```
+## 905. Sort Array By Parity
+
+```swift
+func sortArrayByParity(_ A: [Int]) -> [Int] {
+        var left = 0
+        var right = A.count - 1
+        var A = A
+        
+        while left < right {
+            print(left)
+            print(right)
+            while left < right && A[left] % 2 == 0 {
+                left += 1
+            }
+            
+            while left < right && A[right] % 2 != 0 {
+                right -= 1
+            }
+            
+            let temp = A[left]
+            A[left] = A[right]
+            A[right] = temp
+            
+            left += 1
+            right -= 1
+        }
+        
+        return A
+    }
+```
