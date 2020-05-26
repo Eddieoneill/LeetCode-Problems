@@ -1830,3 +1830,61 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return position == (0, 0)
     }
 ```
+## 977. Squares of a Sorted Array
+
+```swift
+    func sortedSquares(_ A: [Int]) -> [Int] {
+        var startingPoint = 0
+        var result: [Int] = [] 
+        var left = 0
+        var right = 0
+        
+        for (index, num) in A.enumerated() {
+            if index < A.count - 1, abs(num) < abs(A[index + 1]) {
+                startingPoint = index
+                if result.isEmpty {
+                    result.append(num * num)    
+                } else {
+                    result[0] = num * num
+                }
+                break
+            }
+            startingPoint = index
+            if result.isEmpty {
+                result.append(num * num)    
+            } else {
+                result[0] = num * num
+            }
+        }
+        print(result)
+        
+        left = startingPoint - 1
+        right = startingPoint + 1
+        
+        while result.count < A.count {
+            if left >= 0 && right < A.count {
+                let leftNum = A[left] * A[left]
+                let rightNum = A[right] * A[right]
+            
+                if leftNum < rightNum {
+                    result.append(leftNum)
+                    left -= 1
+                } else {
+                    result.append(rightNum)
+                    right += 1
+                }
+            } else if left >= 0 {
+                let leftNum = A[left] * A[left]
+                result.append(leftNum)
+                left -= 1
+            } else if right < A.count {
+                let rightNum = A[right] * A[right]
+                result.append(rightNum)
+                right += 1
+            }
+
+        }
+        
+        return result
+    }
+```
