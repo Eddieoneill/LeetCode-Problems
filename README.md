@@ -1792,3 +1792,20 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return node
     }
 ```
+## 961. N-Repeated Element in Size 2N Array
+
+```swift
+    func repeatedNTimes(_ A: [Int]) -> Int {
+        var set: Set<Int> = []
+        
+        for num in A {
+            if set.contains(num) {
+                return num
+            } else {
+                set.insert(num)
+            }
+        }
+        
+        return 0
+    }
+```
