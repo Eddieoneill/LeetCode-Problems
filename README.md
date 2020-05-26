@@ -1809,3 +1809,24 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return 0
     }
 ```
+## 657. Robot Return to Origin
+
+```swift
+    func judgeCircle(_ moves: String) -> Bool {
+        var position = (0, 0)
+        
+        for move in moves {
+            if move == "U" {
+                position.0 += 1
+            } else if move == "D" {
+                position.0 -= 1
+            } else if move == "R" {
+                position.1 += 1
+            } else {
+                position.1 -= 1
+            }
+        }
+        
+        return position == (0, 0)
+    }
+```
