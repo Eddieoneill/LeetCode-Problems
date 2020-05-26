@@ -1726,3 +1726,21 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return A
     }
 ```
+## 771. Jewels and Stones
+
+```swift
+    func numJewelsInStones(_ J: String, _ S: String) -> Int {
+        var jewls: Set<String> = []
+        var result = 0
+        
+        for j in J {
+            jewls.insert(String(j))
+        }
+        
+        for stone in S where jewls.contains(String(stone)) {
+            result += 1
+        }
+        
+        return result
+    }
+```
