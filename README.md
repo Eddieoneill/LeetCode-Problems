@@ -1762,3 +1762,33 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return product - sum
     }
 ```
+## 617. Merge Two Binary Trees
+
+```swift
+    func mergeTrees(_ t1: TreeNode?, _ t2: TreeNode?) -> TreeNode? {
+        return dfs(t1, t2)
+    }
+
+    func dfs(_ t1: TreeNode?, _ t2: TreeNode?) -> TreeNode? {
+        guard t1 != nil || t2 != nil else { return nil }
+        
+        var node: TreeNode? = nil
+        
+        if t2 == nil {
+            node = TreeNode(t1!.val)
+            node?.left = dfs(t1?.left, nil)
+            node?.right = dfs(t1?.right, nil)
+        } else if t1 == nil {
+            node = TreeNode(t2!.val)
+            node?.left = dfs(nil, t2?.left)
+            node?.right = dfs(nil, t2?.right)
+        } else {
+            let sum = t1!.val + t2!.val
+            node = TreeNode(sum)
+            node?.left = dfs(t1?.left, t2?.left)
+            node?.right = dfs(t1?.right, t2?.right)
+        }
+        
+        return node
+    }
+```
