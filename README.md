@@ -1744,3 +1744,21 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result
     }
 ```
+## 1281. Subtract the Product and Sum of Digits of an Integer
+
+```swift
+    func subtractProductAndSum(_ n: Int) -> Int {
+        var product = 1
+        var sum = 0
+        var num = n
+        
+        while num > 0 {
+            var digit = num % 10
+            product *= digit
+            sum += digit
+            num = num / 10
+        }
+        
+        return product - sum
+    }
+```
