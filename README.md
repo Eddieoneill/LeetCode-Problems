@@ -1984,3 +1984,35 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return left
     }
 ```
+## 1403. Minimum Subsequence in Non-Increasing Order
+
+```swift
+    func minSubsequence(_ nums: [Int]) -> [Int] {
+        var buckets = Array(repeating: 0, count: 101)
+        var totalSum = 0
+        var sum = 0
+        var result: [Int] = []
+        
+        for num in nums {
+            buckets[num] += 1
+            totalSum += num
+        }
+        
+        for index in (0..<buckets.count).reversed() {
+            var count = buckets[index]
+            
+            while sum <= totalSum && count > 0 {
+                sum += index
+                totalSum -= index
+                result.append(index)
+                count -= 1
+            }
+            
+            if sum > totalSum {
+                return result
+            }
+        }
+        
+        return result
+    }
+```
