@@ -1892,24 +1892,27 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
 
 ```swift
     func diStringMatch(_ S: String) -> [Int] {
-        var result: [Int] = []
+        var result: [Int] = Array(repeating: 0, count: S.count + 1)
         var left = 0
         var right = S.count 
+        var count = 0
         
         for char in S {
             if char == "I" {
-                result.append(left)
+                result[count] = left 
                 left += 1
             } else {
-                result.append(right)
+                result[count] = right
                 right -= 1
             }
+            
+            count += 1
         }
 
         if left < right {
-            result.append(right)
+            result[count] = right
         } else {
-            result.append(left)
+            result[count] = left 
         }
         
         return result
