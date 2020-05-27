@@ -1918,3 +1918,18 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result
     }
 ```
+## 461. Hamming Distance
+
+```swift
+    func hammingDistance(_ x: Int, _ y: Int) -> Int {
+        var mismatch = x ^ y
+        var count = 0
+        
+        while mismatch > 0 {
+            count += 1
+            mismatch &= (mismatch - 1)
+        }
+        
+        return count
+    }
+```
