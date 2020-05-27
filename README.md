@@ -1933,3 +1933,34 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return count
     }
 ```
+## 561. Array Partition I
+
+```swift
+    func arrayPairSum(_ nums: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 20_001) 
+        var sorted: [Int] = []
+        var sum = 0
+        
+        for num in nums {
+            buckets[num + 10_000] += 1
+        }
+        
+        for (index, bucket) in buckets.enumerated() where bucket > 0 {
+            var count = bucket
+            
+            while count > 0 {
+                sorted.append(index - 10_000)
+                count -= 1
+            }
+        }
+        
+        var count = 0
+        
+        while count < sorted.count {
+            sum += min(sorted[count], sorted[count + 1]) 
+            count += 2
+        }
+        
+        return sum
+    }
+```
