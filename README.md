@@ -1964,3 +1964,23 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return sum
     }
 ```
+## 852. Peak Index in a Mountain Array
+
+```swift
+    func peakIndexInMountainArray(_ A: [Int]) -> Int {
+        var left = 0
+        var right = A.count - 1
+        
+        while left < right {
+            let mid = ((right - left) / 2) + left
+            
+            if mid + 1 < A.count, A[mid] > A[mid + 1] {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        return left
+    }
+```
