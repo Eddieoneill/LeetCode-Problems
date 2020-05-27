@@ -1888,3 +1888,30 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result
     }
 ```
+## 942. DI String Match
+
+```swift
+    func diStringMatch(_ S: String) -> [Int] {
+        var result: [Int] = []
+        var left = 0
+        var right = S.count 
+        
+        for char in S {
+            if char == "I" {
+                result.append(left)
+                left += 1
+            } else {
+                result.append(right)
+                right -= 1
+            }
+        }
+
+        if left < right {
+            result.append(right)
+        } else {
+            result.append(left)
+        }
+        
+        return result
+    }
+```
