@@ -2129,3 +2129,20 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return diff
     }
 ```
+## 944. Delete Columns to Make Sorted
+
+```swift
+    func minDeletionSize(_ A: [String]) -> Int {
+        var d = 0
+        for column in 0..<A[0].count {
+            let columnIndex = A[0].utf16.index(A[0].utf16.startIndex, offsetBy: column)
+            for row in 1..<A.count {
+                if A[row][columnIndex] < A[row - 1][columnIndex] {
+                    d += 1
+                    break
+                }
+            }
+        }
+        return d
+    }
+```
