@@ -2016,3 +2016,20 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result
     }
 ```
+## 589. N-ary Tree Preorder Traversal
+
+```swift
+    func preorder(_ root: Node?) -> [Int] {
+        var result: [Int] = []
+        func dfs(_ node: Node?) {
+            guard let node = node else { return }
+            result.append(node.val)
+            
+            for child in node.children {
+                dfs(child)
+            }
+        }
+        dfs(root)
+        return result
+    }
+```
