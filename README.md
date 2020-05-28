@@ -2146,3 +2146,40 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return d
     }
 ```
+## 346. Moving Average from Data Stream
+
+```swift
+class MovingAverage {
+
+    var window: [Int] = []
+    var total: Int = 0
+    var currentLast = 0
+    var max: Int
+    
+    init(_ size: Int) {
+        max = size
+    }
+    
+    func next(_ val: Int) -> Double {
+        if window.isEmpty {
+            window.append(val)
+            total += val 
+            return Double(val)
+        } else if window.count < max {
+            window.append(val)
+            total += val
+            return Double(total) / Double(window.count)
+        } else {
+            total -= window[currentLast]
+            total += val
+            window[currentLast] = val
+            if currentLast == window.count - 1 {
+                currentLast = 0
+            } else {
+                currentLast += 1
+            }
+            return Double(total) / Double(window.count)
+        }
+    }
+}
+```
