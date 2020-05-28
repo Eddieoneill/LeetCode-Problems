@@ -2033,3 +2033,20 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result
     }
 ```
+## 590. N-ary Tree Postorder Traversal
+
+```swift
+    func postorder(_ root: Node?) -> [Int] {
+        var result: [Int] = []
+        func dfs(_ node: Node?) {
+            guard let node = node else { return }
+            
+            for child in node.children {
+                dfs(child)
+            }
+            result.append(node.val)
+        }
+        dfs(root)
+        return result
+    }
+```
