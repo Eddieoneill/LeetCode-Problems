@@ -2069,3 +2069,16 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result.reversed()
     }
 ```
+## 1207. Unique Number of Occurrences
+
+```swift
+    func uniqueOccurrences(_ arr: [Int]) -> Bool {
+        var dict = [Int: Int]()
+        
+        for num in arr {
+            dict[num, default: 0] += 1
+        }
+        
+        return Set(dict.values).count == dict.keys.count
+    }
+```
