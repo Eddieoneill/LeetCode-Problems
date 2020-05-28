@@ -2050,3 +2050,22 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return result
     }
 ```
+
+```swift
+    func postorder(_ root: Node?) -> [Int] {
+        guard let root = root else { return [] }
+        var result: [Int] = []
+        var stack = [root]
+        
+        while !stack.isEmpty {
+            let top = stack.removeLast()
+            result.append(top.val)
+            
+            
+            for child in top.children {
+                stack.append(child)
+            }
+        }
+        return result.reversed()
+    }
+```
