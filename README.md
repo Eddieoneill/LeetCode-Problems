@@ -2082,3 +2082,20 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         return Set(dict.values).count == dict.keys.count
     }
 ```
+## 700. Search in a Binary Search Tree
+
+```swift
+    func searchBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+        guard let node = root else { return nil }
+        
+        if val == node.val {
+            return root
+        }
+        
+        if node.val > val {
+            return searchBST(root?.left, val)
+        } else {
+            return searchBST(root?.right, val)
+        }
+    }
+```
