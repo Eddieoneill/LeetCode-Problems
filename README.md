@@ -2099,3 +2099,33 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
         }
     }
 ```
+## 1051. Height Checker
+
+```swift
+    func heightChecker(_ heights: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 101)
+        var sorted: [Int] = []
+        var diff = 0
+        
+        for height in heights {
+            buckets[height] += 1
+        }
+        
+        for (index, bucket) in buckets.enumerated() where bucket > 0 {
+            var count = bucket
+            
+            while count > 0 {
+                sorted.append(index)
+                count -= 1
+            }
+        }
+        
+        for (index, height) in heights.enumerated() {
+            if height != sorted[index] {
+                diff += 1
+            }
+        }
+        
+        return diff
+    }
+```
