@@ -2151,24 +2151,23 @@ func sortArrayByParity(_ A: [Int]) -> [Int] {
 ```swift
 class MovingAverage {
 
-    var window: [Int] = []
+    var window: [Int]
     var total: Int = 0
     var currentLast = 0
     var max: Int
+    var count = 0
     
     init(_ size: Int) {
         max = size
+        window = Array(repeating: 0, count: size)
     }
     
     func next(_ val: Int) -> Double {
-        if window.isEmpty {
-            window.append(val)
+        if count < max { 
+            window[count] = val
             total += val 
-            return Double(val)
-        } else if window.count < max {
-            window.append(val)
-            total += val
-            return Double(total) / Double(window.count)
+            count += 1
+            return Double(total) / Double(count)
         } else {
             total -= window[currentLast]
             total += val
