@@ -2265,3 +2265,31 @@ func subdomainVisits(_ cpdomains: [String]) -> [String] {
         return result
     }
 ```
+## 897. Increasing Order Search Tree
+
+```swift
+    func increasingBST(_ root: TreeNode?) -> TreeNode? {
+        var newTree: TreeNode? = nil
+        var current: TreeNode? = nil
+        
+        func dfs(_ node: TreeNode?) {
+            guard let curr = node else { return }
+            
+            dfs(node?.left)
+            
+            if newTree == nil {
+                newTree = TreeNode(curr.val)
+                current = newTree
+            } else {
+                current?.right = TreeNode(curr.val)
+                current = current?.right
+            }
+            
+            dfs(node?.right)
+        }
+        
+        dfs(root)
+        
+        return newTree
+    }
+```
