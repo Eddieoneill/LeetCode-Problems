@@ -2205,3 +2205,27 @@ class Logger {
     }
 }
 ```
+## 1441. Build an Array With Stack Operations
+
+```swift
+    func buildArray(_ target: [Int], _ n: Int) -> [String] {
+        var result: [String] = []
+        var current = 0 
+        
+        for num in 1...n {
+            if current < target.count {
+                if num == target[current] {
+                    result.append("Push")
+                    current +=  1
+                } else {
+                    result.append("Push")
+                    result.append("Pop")
+                }
+            } else {
+                break
+            }
+        }
+        
+        return result
+    }
+```
