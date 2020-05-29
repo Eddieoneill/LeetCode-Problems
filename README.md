@@ -2229,3 +2229,39 @@ class Logger {
         return result
     }
 ```
+## 811. Subdomain Visit Count
+
+```swift
+func subdomainVisits(_ cpdomains: [String]) -> [String] {
+        var result = [String]()
+        
+        guard !cpdomains.isEmpty else {
+            return result
+        }
+        
+        var hashMap = [String: Int]()
+        
+        for i in 0..<cpdomains.count {
+            let spaceSplit = cpdomains[i].split(separator: " ")
+            
+            guard spaceSplit.count == 2 else {
+                continue
+            }
+            
+            let visits = Int(String(spaceSplit[0])) ?? 0
+            let domain = spaceSplit[1]
+            
+            let domainSplit = domain.split(separator:".") //Substring
+            var current = ""
+            for j in stride(from: domainSplit.count-1, through: 0, by: -1) {
+                let domainString = String(domainSplit[j])
+                current =  (j == domainSplit.count - 1) ?  "\(domainString)" : "\(domainString).\(current)"                
+                hashMap[current, default: 0] +=  visits
+            }
+        }
+        
+        result = hashMap.map { "\($1) \($0)" }
+        
+        return result
+    }
+```
