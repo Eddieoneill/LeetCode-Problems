@@ -2182,3 +2182,26 @@ class MovingAverage {
     }
 }
 ```
+## 359. Logger Rate Limiter
+
+```swift
+class Logger {
+
+    var dict: [String: Int] = [:]
+    
+    init() {}
+    
+    func shouldPrintMessage(_ timestamp: Int, _ message: String) -> Bool {
+        if let preTime = dict[message] {
+            if timestamp >= preTime + 10 {
+                dict[message] = timestamp
+                return true
+            }
+            return false
+        }
+        
+        dict[message] = timestamp
+        return true
+    }
+}
+```
