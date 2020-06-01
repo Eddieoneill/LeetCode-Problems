@@ -2293,3 +2293,44 @@ func subdomainVisits(_ cpdomains: [String]) -> [String] {
         return newTree
     }
 ```
+## 1356. Sort Integers by The Number of 1 Bits
+
+```swift
+class Solution {
+    
+    var memo: [Int: Int] = [:]
+    
+    func sortByBits(_ arr: [Int]) -> [Int] {
+        var result = arr
+        result.sort { (a, b) -> Bool in
+                     var countA = countOfOnes(a)
+                     var countB = countOfOnes(b) 
+                     if countA == countB {
+                         return a < b
+                     } else {
+                         return countA < countB
+                     }
+                 }
+        return result
+    }
+    
+    func countOfOnes(_ num: Int) -> Int {
+        if let result = memo[num] {
+            return result
+        }
+        
+        var n = num
+        var count = 0            
+        
+        while n > 0 {
+            count += 1      
+            n = n & (n - 1)
+        }
+        
+        memo[num] = count
+        
+        return count
+    }
+                 
+}
+```
