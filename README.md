@@ -2493,3 +2493,37 @@ class Solution {
         return maxDepth
     }
 ```
+## 929. Unique Email Addresses
+
+```swift
+    func numUniqueEmails(_ emails: [String]) -> Int {
+        var uniqueEmail : Set<String> = []
+        
+        for email in emails {
+            
+            var validEmail: String = ""
+            var index = email.startIndex
+            
+            while index < email.endIndex {
+                let letter = email[index]
+                if letter == "+" {
+                    index = email.index(after: index)
+                    while email[index] != "@" {
+                        index = email.index(after: index)
+                    }
+                } else if letter == "." {
+                    index = email.index(after: index)
+                } else if letter == "@" {
+                    validEmail.append(String(email[index...]))
+                    break
+                } else {
+                    validEmail.append(letter)
+                    index = email.index(after: index)
+                }
+            }
+            uniqueEmail.insert(validEmail)
+        }
+        
+        return uniqueEmail.count
+    }
+```
