@@ -2385,3 +2385,69 @@ class Solution {
         return count
     }
 ```
+## 1337. The K Weakest Rows in a Matrix
+
+```swift
+    func kWeakestRows(_ mat: [[Int]], _ k: Int) -> [Int] {
+        let counts = getCounts(mat)   
+        var result: [Int] = []
+        var buckets = Array(repeating: (0, [0]), count: 101)
+        
+        for (index, count) in counts {
+            if buckets[count].0 == 0 {
+                buckets[count].0 += 1
+                buckets[count].1[0] = index
+            } else {
+                buckets[count].0 += 1
+                buckets[count].1.append(index)
+            }
+        }
+        
+        for bucket in buckets where bucket.0 > 0 {
+            var count = bucket.0
+            var index = 0
+            
+            while count > 0 && result.count < k {
+                result.append(bucket.1[index])
+                index += 1
+                count -= 1
+            }
+        }
+        
+        return result
+    }
+    
+    func getCounts(_ mat: [[Int]]) -> [(Int, Int)] {
+        var counts: [(Int, Int)] = []
+        for (index, row) in mat.enumerated() {
+            let count = binarySerch(row)
+            counts.append((index, count) )
+            print(count)
+        }
+        return counts
+    }
+    
+    func binarySerch(_ row: [Int]) -> Int {
+        var left = 0
+        var right = row.count - 1
+        
+        while left < right {
+            let mid = (right - left) / 2 + left
+            
+            if row[mid] == 0 {
+                right = mid - 1
+            } else if row[mid] == 1 && row[mid + 1] == 0 {
+                left = mid
+                break
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        if row[left] == 0 {
+            return 0
+        } else {
+            return left + 1
+        }
+    }
+```
