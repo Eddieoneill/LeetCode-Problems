@@ -2470,3 +2470,26 @@ class Solution {
         return slowNode
     }
 ```
+## 559. Maximum Depth of N-ary Tree
+
+```swift
+    func maxDepth(_ root: Node?) -> Int {
+        var maxDepth = 0
+        
+        func dfs(_ root: Node?, _ depth: Int) {
+            guard let node = root else { return }
+            
+            if depth > maxDepth {
+                maxDepth = depth
+            }
+            
+            for child in node.children {
+                dfs(child, depth + 1)
+            }
+        }  
+        
+        dfs(root, 1)
+        
+        return maxDepth
+    }
+```
