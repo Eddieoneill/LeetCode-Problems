@@ -2527,3 +2527,37 @@ class Solution {
         return uniqueEmail.count
     }
 ```
+## 1122. Relative Sort Array
+
+```swift
+    func relativeSortArray(_ arr1: [Int], _ arr2: [Int]) -> [Int] {
+        var buckets = Array(repeating: 0, count: 1001)
+        var seen: Set<Int> = []
+        var result: [Int] = []
+        
+        for num in arr1 {
+            buckets[num] += 1
+        }
+        
+        for num in arr2 {
+            var count = buckets[num]
+            seen.insert(num)
+            while count > 0 {
+                buckets[num] -= 1
+                result.append(num)
+                count -= 1
+            }
+        }
+        
+        for (index, num) in buckets.enumerated() where num != 0 {
+            var count = num
+            
+            while count > 0 {
+                result.append(index)
+                count -= 1
+            }
+        }
+        
+        return result
+    }
+```
