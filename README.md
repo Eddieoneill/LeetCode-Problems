@@ -2356,3 +2356,32 @@ class Solution {
           return A
     }
 ```
+## 1196. How Many Apples Can You Put into the Basket
+
+```swift
+    func maxNumberOfApples(_ arr: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 1001)
+        var total = 0
+        var count = 0
+        
+        for num in arr {
+            buckets[num] += 1
+        }
+        
+        for (index, bucket) in buckets.enumerated() where bucket > 0 {
+            var bucket = bucket
+            
+            while bucket > 0 {
+                if index + total > 5000 {
+                    return count
+                } else {
+                    bucket -= 1
+                    count += 1
+                    total += index
+                }
+            }
+        }
+        
+        return count
+    }
+```
