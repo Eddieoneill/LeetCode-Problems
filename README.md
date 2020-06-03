@@ -2684,3 +2684,29 @@ func countCharacters(_ words: [String], _ chars: String) -> Int {
         return topArea + sideArea + frontArea
     }
 ```
+## 1002. Find Common Characters
+
+```swift
+    func commonChars(_ A: [String]) -> [String] {
+        var chars = Array(repeating: Int.max, count: 26)
+        var ret: [String] = []
+        
+        for word in A {
+            var _chars = Array(repeating: 0, count: 26)
+            for c in word.unicodeScalars {
+                _chars[Int(c.value) - 97] += 1
+            }
+            for i in 0..<26 {
+                chars[i] = min(chars[i], _chars[i])
+            }
+        }
+        
+        for i in 0..<26 {
+            for _ in 0..<chars[i] {
+                ret.append(String(Character(Unicode.Scalar(i + 97)!)))
+            }
+        }
+        
+        return ret
+    }
+```
