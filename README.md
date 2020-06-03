@@ -2630,3 +2630,35 @@ class Solution {
         }
     }
 ```
+## 1160. Find Words That Can Be Formed by Characters
+
+```swift
+func countCharacters(_ words: [String], _ chars: String) -> Int {
+        var count = Array(chars).reduce(into: [:]) { count, char in             
+            count[char, default: 0] += 1
+        }
+        var res = 0
+        for word in words {
+            var copyCount = count
+            var build = true
+            for char in word {
+                if copyCount[char] == nil {
+                    build = false
+                    break
+                } else {
+                    copyCount[char]! -= 1
+                    if copyCount[char]! < 0 {
+                        build = false
+                        break
+                    }
+                }
+            }
+            
+            if build {
+                res += word.count
+            }
+        }
+        
+        return res
+    }
+```
