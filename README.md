@@ -2561,3 +2561,22 @@ class Solution {
         return result
     }
 ```
+## 1047. Remove All Adjacent Duplicates In String
+
+```swift
+    func removeDuplicates(_ S: String) -> String {
+        var stack: [String] = []
+        
+        for (index, char) in S.enumerated() {
+            if stack.isEmpty {
+                stack.append(String(char))
+            } else if stack.last! == String(char) {
+                stack.removeLast()
+            } else {
+                stack.append(String(char))
+            }
+        }
+        
+        return stack.joined()
+    }
+```
