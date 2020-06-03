@@ -2662,3 +2662,25 @@ func countCharacters(_ words: [String], _ chars: String) -> Int {
         return res
     }
 ```
+## 883. Projection Area of 3D Shapes
+
+```swift
+    func projectionArea(_ grid: [[Int]]) -> Int {
+        var frontArea = 0
+        var sideArea = 0
+        var topArea = 0
+        
+        for i in 0..<grid.count {
+            var rowMax = 0
+            var columnMax = 0
+            for j in 0..<grid[0].count {
+                rowMax = grid[i][j] > rowMax ? grid[i][j] : rowMax
+                columnMax = grid[j][i] > columnMax ? grid[j][i] : columnMax
+                topArea += grid[i][j] > 0 ? 1 : 0
+            }
+            sideArea += rowMax
+            frontArea += columnMax
+        }
+        return topArea + sideArea + frontArea
+    }
+```
