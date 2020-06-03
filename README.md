@@ -2710,3 +2710,22 @@ func countCharacters(_ words: [String], _ chars: String) -> Int {
         return ret
     }
 ```
+## 1133. Largest Unique Number
+
+```swift
+    func largestUniqueNumber(_ A: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 1001)
+        
+        for num in A {
+            buckets[num] += 1
+        }
+        
+        for (index, num) in buckets.enumerated().reversed() {
+            if num == 1 {
+                return index
+            }
+        }
+        
+        return -1
+    }
+```
