@@ -2580,3 +2580,27 @@ class Solution {
         return stack.joined()
     }
 ```
+## 965. Univalued Binary Tree
+
+```swift
+    func isUnivalTree(_ root: TreeNode?) -> Bool {
+        guard let seen = root?.val else { return false }
+        var isSame = true
+        
+        func dfs(_ root: TreeNode?) {
+            guard let val = root?.val else { return }
+            
+            if val != seen {
+                isSame = false
+                return
+            }
+            
+            dfs(root?.left)
+            dfs(root?.right)
+        }
+        
+        dfs(root)
+        return isSame
+        
+    }
+```
