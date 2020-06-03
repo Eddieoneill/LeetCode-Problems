@@ -2604,3 +2604,31 @@ class Solution {
         
     }
 ```
+## 1064. Fixed Point
+
+```swift
+    func fixedPoint(_ A: [Int]) -> Int {
+        var left = 0
+        var right =  A.count - 1
+        
+        while left + 1 < right {
+            var mid = left + (right - left) / 2
+            
+            if mid == A[mid] {
+                right = mid
+            } else if mid < A[mid] {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        if A[left] == left {
+            return left
+        } else if A[right] == right {
+            return right
+        } else {
+            return -1
+        }
+    }
+```
