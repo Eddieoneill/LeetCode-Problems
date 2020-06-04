@@ -2729,3 +2729,25 @@ func countCharacters(_ words: [String], _ chars: String) -> Int {
         return -1
     }
 ```
+## 509. Fibonacci Number
+
+
+```swift
+class Solution {
+    var memo: [Int: Int] = [:]
+    
+    func fib(_ N: Int) -> Int {
+        if let num = memo[N] {
+            return num
+        }
+        if N == 0 { return 0 }
+        if N == 1 { return 1 }
+        
+        var result = fib(N - 1) + fib(N - 2)
+        
+        memo[N] = result
+        
+        return result
+    }
+}
+```
