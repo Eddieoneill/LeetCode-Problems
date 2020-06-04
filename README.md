@@ -2737,9 +2737,7 @@ class Solution {
     var memo: [Int: Int] = [:]
     
     func fib(_ N: Int) -> Int {
-        if let num = memo[N] {
-            return num
-        }
+        if let num = memo[N] { return num }
         if N == 0 { return 0 }
         if N == 1 { return 1 }
         
