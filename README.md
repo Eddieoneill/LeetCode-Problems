@@ -2818,3 +2818,22 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return result
     }
 ```
+## 1394. Find Lucky Integer in an Array
+
+
+```swift
+   func findLucky(_ arr: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 501)
+        
+        for num in arr {
+            buckets[num] += 1
+        }
+        
+        for (num, count) in buckets.enumerated().reversed() where count > 0 {
+            if count == num {
+                return num
+            }
+        }
+        return -1
+    }
+```
