@@ -2786,3 +2786,35 @@ class Solution {
         }
     }
 ```
+## Shortest Distance to a Character
+
+```swift
+func shortestToChar(_ S: String, _ C: Character) -> [Int] {
+        var indices: [Int] = []
+        var result: [Int] = []
+        var first = 0
+        var second = 1
+        
+        for (index, char) in S.enumerated() where char == C {
+            indices.append(index)
+        }
+        
+        for (index, char) in S.enumerated() {
+            let f = abs(indices[first] - index)
+            
+            if second < indices.count {
+                let s = abs(indices[second] - index)
+                
+                if s < f {
+                    result.append(s)
+                    first += 1
+                    second += 1
+                    continue   
+                }
+            } 
+            result.append(f)
+        }
+        
+        return result
+    }
+```
