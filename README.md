@@ -2868,8 +2868,8 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
 
 
 ```swift
-   func numSpecialEquivGroups(_ A: [String]) -> Int {
-        var set:Set<String> = Set()
+    func numSpecialEquivGroups(_ A: [String]) -> Int {
+        var words: Set<String> = Set()
         for item in A{
             let chars = Array(item)
             var arr:[Character] = Array(repeating: "0", count: 52)
@@ -2882,8 +2882,8 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
                     arr[Int(chars[i].asciiValue!) - 97 + 26] = Character(val.description)                
                 }
             }
-            set.insert(String(arr))
+            words.insert(String(arr))
         }
-        return set.count
+        return words.count
     }
 ```
