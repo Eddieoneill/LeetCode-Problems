@@ -2837,3 +2837,30 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return -1
     }
 ```
+## 1022. Sum of Root To Leaf Binary Numbers
+
+```swift
+    func sumRootToLeaf(_ root: TreeNode?) -> Int {
+        var sum = 0
+        func dfs(_ root: TreeNode?, _ num: Int) {
+            guard let node = root else { return }
+            
+            var num = num
+            
+            num *= 2
+            num += node.val
+            
+            if node.left == nil && node.right == nil {
+                sum += num
+                return
+            }
+            
+            dfs(root?.left, num)
+            dfs(root?.right, num)
+        }
+        
+        dfs(root, 0)
+        
+        return sum
+    }
+```
