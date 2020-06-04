@@ -2749,3 +2749,23 @@ class Solution {
     }
 }
 ```
+```swift
+class Solution {
+    
+    func fib(_ N: Int) -> Int {
+        if N == 0 { return 0 }
+        if N == 1 { return 1 }
+        
+        var dp1 = 0
+        var dp2 = 1
+        
+        for num in 0..<N {
+            let result = dp1 + dp2
+            dp1 = dp2
+            dp2 = result
+        }
+        
+        return dp1
+    }
+}
+```
