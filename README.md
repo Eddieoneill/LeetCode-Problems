@@ -2910,3 +2910,21 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return result
     }
 ```
+## 1413. Minimum Value to Get Positive Step by Step Sum
+
+
+```swift
+    func minStartValue(_ nums: [Int]) -> Int {
+        var minVal = 0
+        var curr = 0
+        
+        for num in nums {
+            curr += num
+            if curr < minVal {
+                minVal = curr
+            }
+        }
+        
+        return abs(minVal) + 1
+    }
+```
