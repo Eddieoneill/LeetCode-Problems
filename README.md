@@ -3026,3 +3026,44 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return max(maxDepth(root?.left), maxDepth(root?.right)) + 1
     }
 ```
+## 136. Single Number
+
+
+```swift
+    func singleNumber(_ nums: [Int]) -> Int {
+        var result = 0
+        
+        for num in 0..<nums.count {
+            result ^= nums[num]
+        }
+        return result
+    }
+    
+    // ^= is 
+    
+    // Bit Manipulation
+    // [5,10,6,5,6]
+    // ^
+    // 0101
+    // 1010
+    // 1111
+    // ^
+    // 1111
+    // 0110
+    // 1001
+    // ^
+    // 1001
+    // 0101
+    // 1100
+    // ^
+    // 1100
+    // 0110
+    // 1010 = 10
+    // N ^ N = 0
+    // N ^ 0 = N
+    // ^ XOR
+    // 1 ^ 1 = 0
+    // 1 ^ 0 = 1
+    // 0 ^ 1 = 1
+    // 0 ^ 0 = 0
+```
