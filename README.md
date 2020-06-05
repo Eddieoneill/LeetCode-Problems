@@ -3020,3 +3020,9 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return max
     }
 ```
+```swift
+    func maxDepth(_ root: TreeNode?) -> Int {
+        guard root != nil else { return 0 }
+        return max(maxDepth(root?.left), maxDepth(root?.right)) + 1
+    }
+```
