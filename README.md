@@ -2947,3 +2947,31 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return max(maxMin - minMax, 0)
     }
 ```
+## 1030. Matrix Cells in Distance Order
+
+
+```swift
+    func allCellsDistOrder(_ R: Int, _ C: Int, _ r0: Int, _ c0: Int) -> [[Int]] {
+        var buckets = Array(repeating: [[Int]](), count: R + C + 1)
+        var result: [[Int]] = []
+        
+        for row in 0..<R {
+            for col in 0..<C {
+                let dist = manhattan(r0, c0, row, col)
+                buckets[dist].append([row, col])
+            } 
+        }
+        
+        for bucket in buckets where bucket != [] {
+            for point in bucket {
+                result.append(point)
+            }
+        }
+        
+        return result
+    }
+    
+    func manhattan(_ r1: Int, _ c1: Int, _ r2: Int, _ c2: Int) -> Int  {
+        return abs((r1 - r2) ) + abs(c1 - c2) 
+    }
+```
