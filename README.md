@@ -2975,3 +2975,28 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return abs((r1 - r2) ) + abs(c1 - c2) 
     }
 ```
+```swift
+    func allCellsDistOrder(_ R: Int, _ C: Int, _ r0: Int, _ c0: Int) -> [[Int]] {
+        var result: [[Int]] = []
+        let dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        var queue = [[r0,c0]]
+        var visited: Set<String> = []
+        visited.insert("\(r0)-\(c0)")
+        
+        while !queue.isEmpty {
+            let vertex = queue.removeFirst()
+            result.append(vertex)
+            
+            for dir in dirs {
+                let r1 = vertex[0] + dir[0]
+                let c1 = vertex[1] + dir[1]
+                if r1 < 0 || r1 >= R || c1 < 0 || c1 >= C { continue }
+                if visited.contains("\(r1)-\(c1)") { continue }
+                visited.insert("\(r1)-\(c1)")
+                queue.append([r1, c1])
+            }
+        }
+        
+        return result
+    }
+```
