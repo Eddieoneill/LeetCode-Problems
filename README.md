@@ -2887,3 +2887,26 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return words.count
     }
 ```
+## 1200. Minimum Absolute Difference
+
+```swift
+    func minimumAbsDifference(_ arr: [Int]) -> [[Int]] {
+        var arr = arr.sorted { $0 < $1 }
+        var result: [[Int]] = []
+        var minDiff = Int.max
+        
+        for (index, num) in arr.enumerated() where index < arr.count - 1 {
+            let next = arr[index + 1]
+            
+            if abs(num - next) < minDiff {
+                minDiff = abs(num - arr[index + 1])
+                result = []
+                result.append([num, next])
+            } else if abs(num - next) == minDiff {
+                result.append([num, next])
+            }
+        }
+        
+        return result
+    }
+```
