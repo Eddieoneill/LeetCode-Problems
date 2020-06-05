@@ -2928,3 +2928,22 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return abs(minVal) + 1
     }
 ```
+## 908. Smallest Range I
+
+
+```swift
+    func smallestRangeI(_ A: [Int], _ K: Int) -> Int {
+        var minNum = Int.max
+        var maxNum = Int.min
+        
+        for num in A {
+            minNum = min(num, minNum)
+            maxNum = max(num, maxNum)
+        }
+        
+        let minMax = minNum + K
+        let maxMin = maxNum - K
+        
+        return max(maxMin - minMax, 0)
+    }
+```
