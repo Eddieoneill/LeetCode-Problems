@@ -3000,3 +3000,23 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return result
     }
 ```
+## 104. Maximum Depth of Binary Tree
+
+```swift
+    func maxDepth(_ root: TreeNode?) -> Int {
+        var max = 0
+        func dfs(_ root: TreeNode?, _ height: Int) {
+            guard root != nil else { return }
+            
+            if height > max {
+                max = height
+            }
+            
+            dfs(root?.left, height + 1)
+            dfs(root?.right, height + 1)
+        }
+        dfs(root, 1)
+        
+        return max
+    }
+```
