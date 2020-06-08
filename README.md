@@ -3149,3 +3149,37 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return result
     }
 ```
+## 1185. Day of the Week
+
+
+```swift
+    func dayOfTheWeek(_ day: Int, _ month: Int, _ year: Int) -> String {
+        let daysOfTheWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        var days = day
+
+        func isLeapYear(_ year: Int) -> Bool {
+            return year % 4 == 0 ? (year % 100 == 0 ? (year % 400 == 0 ? true : false) : true) : false
+        }
+
+        func daysInYear(_ year: Int) -> Int {
+            return isLeapYear(year) ? 366 : 365
+        }
+
+        func daysInMonth(_ year: Int, _ month: Int) -> Int {
+            switch month {
+                case 1, 3, 5, 7, 8, 10, 12: return 31
+                case 4, 6, 9, 11: return 30
+                case 2: return isLeapYear(year) ? 29 : 28
+                default: return 0
+            }
+        }
+
+        for i in 1..<month {
+            days += daysInMonth(year, i)
+        }
+        for i in 1971..<year {
+            days += daysInYear(i)
+        }
+        return daysOfTheWeek[(4 + days) % 7]
+    }
+```
