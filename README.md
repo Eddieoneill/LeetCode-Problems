@@ -3067,3 +3067,38 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
     // 0 ^ 1 = 1
     // 0 ^ 0 = 0
 ```
+## 872. Leaf-Similar Trees
+
+```swift
+    func leafSimilar(_ root1: TreeNode?, _ root2: TreeNode?) -> Bool {
+        var list: [Int] = []
+        var firstLoop = true
+        var count = 0
+        var result = true
+        
+        func getLeafs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            guard root?.left != nil || root?.right != nil else {
+                if firstLoop {
+                    list.append(node.val)
+                    return 
+                } else if list.count - 1 >= count, list[count] != node.val {
+                    result = false
+                } else if list.count - 1 < count {
+                    result = false
+                }
+                count += 1
+                return
+            }
+            
+            getLeafs(root?.left)
+            getLeafs(root?.right)
+        }
+        
+        getLeafs(root1)
+        firstLoop = false
+        getLeafs(root2)
+        
+        return result
+    }
+```
