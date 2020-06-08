@@ -3126,3 +3126,26 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return result
     }
 ```
+## 1078. Occurrences After Bigram
+
+
+```swift
+    func findOcurrences(_ text: String, _ first: String, _ second: String) -> [String] {
+        var strArr = text.split(separator: " ")
+        var result: [String] = []
+        var i = 0
+        var j = 1
+        
+        
+        while j < strArr.count - 1 {
+            if strArr[i] == first, strArr[j] == second {
+                result.append(String(strArr[j + 1]))
+            }
+            
+            i += 1
+            j += 1
+        }
+        
+        return result
+    }
+```
