@@ -3102,3 +3102,27 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return result
     }
 ```
+## 476. Number Complement
+
+```swift
+    func findComplement(_ num: Int) -> Int {
+        var result = 0
+        var i = 0
+        var num = num
+        
+        while num > 0 {
+            var bit = num & 1
+            if bit == 1 {
+                bit = 0
+            } else {
+                bit = 1
+            }
+            bit <<= i
+            result |= bit
+            num >>= 1
+            i += 1
+        }
+        
+        return result
+    }
+```
