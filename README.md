@@ -3183,3 +3183,28 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return daysOfTheWeek[(4 + days) % 7]
     }
 ```
+## 806. Number of Lines To Write String
+
+```swift
+    func numberOfLines(_ widths: [Int], _ S: String) -> [Int] {
+        var lines = 1
+        var lastLineWidth = 0
+        var aAscii = Int(Character("a").asciiValue!)
+        
+        for char in S {
+            let ascii = Int(char.asciiValue!)
+            let currIndex = ascii - aAscii
+            let curr = widths[currIndex]
+            
+            if curr + lastLineWidth > 100 {
+                lines += 1
+                lastLineWidth = curr
+            } else {
+                lastLineWidth += curr
+            }
+        }
+        
+        
+        return [lines, lastLineWidth]
+    }
+```
