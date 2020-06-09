@@ -3273,13 +3273,52 @@ class Solution {
         
         return true
     }
-    
+```
+```swift
     func isToeplitzMatrix(_ matrix: [[Int]]) -> Bool {
         for col in 1..<matrix[0].count {
             for row in 0..<matrix.count - 1 {
                 if matrix[row][col - 1] != matrix[row + 1][col] { return false }
             }
         }
+        return true
+    }
+```
+```swift
+    func isToeplitzMatrix(_ matrix: [[Int]]) -> Bool {
+        let m = matrix.count
+        let n = matrix[0].count
+        
+        for col in 0..<n {
+            if !getVal(col, 0, m, n, matrix) {
+                return false
+            }
+        }
+        
+        for row in 0..<m {            
+            if !getVal(0, row, m, n, matrix) {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func getVal(_ currCol: Int, _ currRow: Int, _ m: Int, _ n: Int, _ matrix: [[Int]]) -> Bool {
+        var preVal: Int? = nil
+        var currCol = currCol
+        var currRow = currRow
+        
+        while currRow < m && currCol < n {
+            if preVal == nil {
+                preVal = matrix[currRow][currCol]
+            } else {
+                if let pre = preVal, pre != matrix[currRow][currCol] { return false }
+            }
+            currRow += 1            
+            currCol += 1
+        }
+        
         return true
     }
 ```
