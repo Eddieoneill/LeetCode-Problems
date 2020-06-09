@@ -3208,3 +3208,50 @@ func shortestToChar(_ S: String, _ C: Character) -> [Int] {
         return [lines, lastLineWidth]
     }
 ```
+## 1399. Count Largest Group
+
+```swift
+class Solution {
+    var memo: [Int: Int] = [:]
+    func countLargestGroup(_ n: Int) -> Int {
+        var dict: [Int: [Int]] = [:]
+        var max = 0
+        var count = 0
+        
+        for num in 1...n {
+            let sum = getSum(num)
+            
+            dict[sum, default: []].append(num)
+            guard let val = dict[sum] else { continue }
+            
+            if max < val.count {
+                max = val.count
+                count = 1
+            } else if val.count == max {
+                count += 1
+            }
+        }
+        
+        return count
+    }
+    
+    func getSum(_ num: Int) -> Int {
+        if let result = memo[num] {
+            return result
+        }
+        
+        var sum = 0
+        var num = num
+        
+        while num > 0 {
+            let digit = num % 10
+            sum += digit
+            num = num / 10
+        }
+        
+        memo[num] = sum
+        
+        return sum
+    }
+}
+```
