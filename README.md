@@ -3255,3 +3255,31 @@ class Solution {
     }
 }
 ```
+## 766. Toeplitz Matrix
+
+```swift
+    func isToeplitzMatrix(_ matrix: [[Int]]) -> Bool {
+        let m = matrix.count
+        let n = matrix[0].count
+        var preRow: ArraySlice<Int> = matrix[0][0..<n - 1]  
+        
+        for row in 1..<m {
+            if preRow == matrix[row][1..<n] {
+                preRow = matrix[row][0..<n - 1]
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    func isToeplitzMatrix(_ matrix: [[Int]]) -> Bool {
+        for col in 1..<matrix[0].count {
+            for row in 0..<matrix.count - 1 {
+                if matrix[row][col - 1] != matrix[row + 1][col] { return false }
+            }
+        }
+        return true
+    }
+```
