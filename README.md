@@ -3466,3 +3466,27 @@ class Solution {
         return sum
     }
 ```
+## 496. Next Greater Element I
+
+```swift
+    func nextGreaterElement(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var dict: [Int: Int] = [:]
+        var stack: [Int] = []
+        var result = Array(repeating: 0, count: nums1.count)
+        
+        for num in nums2 {
+            while !stack.isEmpty && stack[stack.count - 1] < num {
+                let els = stack.removeLast()
+                dict[els] = num
+            }
+            
+            stack.append(num)
+        }
+        
+        for (index, num) in nums1.enumerated() {
+            result[index] = dict[num] ?? -1
+        }
+        
+        return result
+    }
+```
