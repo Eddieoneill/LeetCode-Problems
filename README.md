@@ -3426,11 +3426,11 @@ class Solution {
 
 ```swift
     func transpose(_ A: [[Int]]) -> [[Int]] {
-        var result: [[Int]] = Array(repeating: [Int](), count: A[0].count)
+        var result: [[Int]] = Array(repeating: Array(repeating: 0, count: A.count), count: A[0].count)
         
         for (row, rows) in A.enumerated() {
             for (col, num) in rows.enumerated() {
-                result[col].append(num)
+                result[col][row] = num
             }
         }
         
