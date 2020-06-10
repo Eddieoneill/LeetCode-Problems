@@ -3369,3 +3369,23 @@ class Solution {
         return min(even, odd)
     }
 ```
+## 463. Island Perimeter
+
+```swift
+    func islandPerimeter(_ grid: [[Int]]) -> Int {
+        var perimeter = 0
+        for (row, rows) in grid.enumerated() {
+            for (cell, cellVal) in rows.enumerated() where cellVal == 1 {
+                
+                if row == 0 || grid[row - 1][cell] == 0 { perimeter += 1 }
+
+                if row == grid.count - 1 || grid[row + 1][cell] == 0 { perimeter += 1 }
+
+                if cell == 0 || grid[row][cell - 1] == 0 { perimeter += 1 }
+
+                if cell == rows.count - 1 || grid[row][cell + 1] == 0 { perimeter += 1 }
+            }
+        }
+        return perimeter
+    }
+```
