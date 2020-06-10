@@ -3322,3 +3322,32 @@ class Solution {
         return true
     }
 ```
+## 500. Keyboard Row
+
+```swift
+    func findWords(_ words: [String]) -> [String] {
+        var keyboard = [
+            Set(Array("qwertyuiop")),
+            Set(Array("asdfghjkl")),
+            Set(Array("zxcvbnm"))  ]
+        var result: [String] = []
+        
+        for row in keyboard {
+            for word in words where row.contains(String(word).lowercased().first!) {
+                for (index, char) in word.lowercased().enumerated() {
+                    if index == 0 {
+                        if word.count == 1 && row.contains(char) {
+                            result.append(word)    
+                        }
+                    } else if index == word.count - 1 && row.contains(char) {
+                        result.append(word)
+                    } else if !row.contains(char) {
+                        break
+                    }
+                }
+            }
+        }
+        
+        return result
+    }
+```
