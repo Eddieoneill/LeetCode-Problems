@@ -3389,3 +3389,36 @@ class Solution {
         return perimeter
     }
 ```
+## 784. Letter Case Permutation
+
+```swift
+    func letterCasePermutation(_ S: String) -> [String] {
+        var result: [String] = []
+        var arrStr = Array(S)
+        
+        func dfs(_ curr: [String], _ i: Int) {
+            guard i < arrStr.count else {
+                result.append(curr.joined())
+                return
+            }
+            var curr = curr
+            let str = String(arrStr[i])
+            
+            if Int(str) == nil {
+                curr.append(str.lowercased())
+                dfs(curr, i + 1)
+                curr.removeLast()
+                
+                curr.append(str.uppercased())
+                dfs(curr, i + 1)
+                curr.removeLast()
+            } else {
+                curr.append(str)
+                dfs(curr, i + 1)
+                curr.removeLast()
+            }
+        }
+        dfs([], 0)
+        return result
+    }
+```
