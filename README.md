@@ -3422,3 +3422,18 @@ class Solution {
         return result
     }
 ```
+## 867. Transpose Matrix
+
+```swift
+    func transpose(_ A: [[Int]]) -> [[Int]] {
+        var result: [[Int]] = Array(repeating: [Int](), count: A[0].count)
+        
+        for (row, rows) in A.enumerated() {
+            for (col, num) in rows.enumerated() {
+                result[col].append(num)
+            }
+        }
+        
+        return result
+    }
+```
