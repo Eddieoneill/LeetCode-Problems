@@ -3351,3 +3351,21 @@ class Solution {
         return result
     }
 ```
+## 1217. Play with Chips
+
+```swift
+    func minCostToMoveChips(_ chips: [Int]) -> Int {
+        var even = 0
+        var odd = 0
+        
+        for num in chips {
+            if num % 2 == 0 {
+                even += 1
+            } else {
+                odd += 1
+            }
+        } 
+        
+        return min(even, odd)
+    }
+```
