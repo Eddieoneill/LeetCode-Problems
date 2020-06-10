@@ -3437,3 +3437,32 @@ class Solution {
         return result
     }
 ```
+## 682. Baseball Game
+
+```swift
+    func calPoints(_ ops: [String]) -> Int {
+        var stack: [Int] = [0, 0]
+        var sum = 0
+        
+        for action in ops {
+            if action == "C" {
+                let val = stack.removeLast()
+                sum -= val
+            } else if action == "D" {
+                let val = stack[stack.count - 1] * 2
+                stack.append(val)
+                sum += val
+            } else if let val = Int(action) {
+                stack.append(val)
+                sum += val
+            } else if action == "+" {
+                let first = stack[stack.count - 1]
+                let second = stack[stack.count - 2]
+                let val = first + second
+                stack.append(val)
+                sum += val
+            }
+        }
+        return sum
+    }
+```
