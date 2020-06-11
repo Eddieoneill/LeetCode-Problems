@@ -3490,3 +3490,43 @@ class Solution {
         return result
     }
 ```
+## 226. Invert Binary Tree
+
+```swift
+     func invertTree(_ root: TreeNode?) -> TreeNode? {
+        func dfs(_ root: TreeNode?) -> TreeNode? {
+            guard let node = root else { return nil }
+            
+            let leftVal = root?.left
+            root?.left = root?.right
+            root?.right = leftVal
+            
+            dfs(root?.left)
+            dfs(root?.right)
+            
+            return root
+        }
+        
+        return dfs(root)
+    }
+```
+```swift
+    func invertTree(_ root: TreeNode?) -> TreeNode? {
+        var stack = [root]
+        
+        while !stack.isEmpty {
+            let node = stack.removeLast()
+            
+            if node == nil { continue }
+            
+            let temp = node?.left
+            node?.left = node?.right
+            node?.right = temp
+            
+            stack.append(node?.left)
+            stack.append(node?.right)
+        }
+        
+        return root
+    }
+```
