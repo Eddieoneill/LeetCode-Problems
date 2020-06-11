@@ -3554,3 +3554,27 @@ class Solution {
         return result.joined(separator: " ")
     }
 ```
+## 884. Uncommon Words from Two Sentences
+
+```swift
+    func uncommonFromSentences(_ A: String, _ B: String) -> [String] {
+        var arrA = A.split(separator: " ").map { String($0) }
+        var arrB = B.split(separator: " ").map { String($0) }
+        var dict: [String: Int] = [:]
+        var result: [String] = []
+        
+        for word in arrA {
+            dict[word, default: 0] += 1
+        }
+        
+        for word in arrB {
+            dict[word, default: 0] += 1
+        }
+        
+        for (key, val) in dict where val < 2{
+            result.append(key)
+        }
+        
+        return result
+    }
+```
