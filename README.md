@@ -3591,3 +3591,42 @@ class Solution {
         return node
     }
 ```
+## 762. Prime Number of Set Bits in Binary Representation
+
+```swift
+    func countPrimeSetBits(_ L: Int, _ R: Int) -> Int {
+        var count = 0
+        
+        for num in L...R {
+            let countOfSetBits = getCount(num)
+            
+            if isPrime(countOfSetBits) {
+                count += 1
+            }
+        }
+        
+        return count
+    }
+    
+    func getCount(_ num: Int) -> Int {
+        var count = 0
+        var num = num
+        
+        while num > 0 {
+            num &= num - 1
+            count += 1
+        }
+        
+        return count
+    }
+    
+    func isPrime(_ num: Int) -> Bool {
+        if num == 1 { return false }
+        var sq = Int(sqrt(Double(num)))
+        for n in 1...sq where num % n == 0 && n > 1 {
+            return false
+        }
+        
+        return true
+    }
+```
