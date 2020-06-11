@@ -3530,3 +3530,27 @@ class Solution {
         return root
     }
 ```
+## 824. Goat Latin
+
+```swift
+    func toGoatLatin(_ S: String) -> String {
+        var words = S.split(separator: " ")
+        var result: [String] = []
+        var vowel: Set<String> = ["a", "e", "i", "o", "u"]
+        
+        for (index, word) in words.enumerated() {
+            var charArr = word.map { String($0) }
+            
+            if !vowel.contains(charArr[0].lowercased()) {
+                charArr.append(charArr[0])
+                charArr[0] = ""
+            }
+            
+            charArr.append("ma")
+            charArr.append(String(repeating: "a", count: index + 1))
+            result.append(charArr.joined())
+        }
+        
+        return result.joined(separator: " ")
+    }
+```
