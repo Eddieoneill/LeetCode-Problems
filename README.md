@@ -3578,3 +3578,16 @@ class Solution {
         return result
     }
 ```
+## 669. Trim a Binary Search Tree
+
+```swift
+    func trimBST(_ root: TreeNode?, _ L: Int, _ R: Int) -> TreeNode? {
+        guard let node = root else { return nil }
+        if node.val > R { return trimBST(node.left, L, R) }
+        if node.val < L { return trimBST(node.right, L, R) }
+        
+        node.left = trimBST(node.left, L, R)
+        node.right = trimBST(node.right, L, R)
+        return node
+    }
+```
