@@ -3880,3 +3880,31 @@ extension Heap {
         return node
     }
 ```
+## 800. Similar RGB Color
+
+
+```swift
+    func similarRGB(_ color: String) -> String {
+        let options = ["00", "11", "22", "33", "44", "55", "66", "77", "88", "99", "aa", "bb", "cc", "dd", "ee", "ff"];
+        var result = "#"
+        let arr = Array(color)
+        
+        for count in stride(from: 1, to: arr.count, by: 2) { 
+            let hex = String(arr[count..<count + 2])
+            var num = Int.max
+            var rgb = ""
+            
+            for combo in options {
+                let val = abs(Int(hex, radix: 16)! - Int(combo, radix: 16)!)
+                if val < num {
+                    num = val
+                    rgb = combo
+                }
+            }
+            
+            result += rgb
+        }
+        
+        return result
+    }
+```
