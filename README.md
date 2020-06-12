@@ -3851,3 +3851,32 @@ extension Heap {
         return min(candies.count / 2, Set(candies).count)
     }
 ```
+## 206. Reverse Linked List
+
+```swift
+//     func reverseList(_ head: ListNode?) -> ListNode? {
+//         var current = head
+//         var next: ListNode? = nil
+//         var previous: ListNode? = nil
+        
+//         while current != nil {
+//             next = current?.next
+//             current?.next = previous
+//             previous = current
+//             current = next
+//         }
+//         return previous
+//     }
+    
+    func reverseList(_ head: ListNode?) -> ListNode? {
+        guard head != nil else { return nil }
+        guard head?.next != nil else { return head }
+
+        let node = reverseList(head?.next)
+
+        head?.next?.next = head
+        head?.next = nil
+
+        return node
+    }
+```
