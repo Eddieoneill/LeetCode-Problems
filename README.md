@@ -3741,3 +3741,27 @@ extension Heap {
     }
 }
 ```
+## 637. Average of Levels in Binary Tree
+
+```swift
+    func averageOfLevels(_ root: TreeNode?) -> [Double] {
+        var queue = [root]
+        var result: [Double] = []
+        
+        while !queue.isEmpty {
+            let size = Double(queue.count)
+            var sum: Double = 0
+            
+            for num in 0..<Int(size) {
+                let node = queue.removeFirst()
+                sum += Double(node!.val)
+                
+                if node?.left != nil { queue.append(node?.left) }
+                if node?.right != nil { queue.append(node?.right) }
+            }
+            result.append(sum / size)
+        }
+        
+        return result
+    }
+```
