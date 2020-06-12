@@ -3786,3 +3786,37 @@ extension Heap {
         return result
     }
 ```
+## 985. Sum of Even Numbers After Queries
+
+```swift
+    func sumEvenAfterQueries(_ A: [Int], _ queries: [[Int]]) -> [Int] {
+        var A = A
+        var evenSum = 0
+        var result = [Int]()
+        
+        for num in A{
+            if num % 2 == 0 {
+                evenSum += num
+            }
+        }
+        
+        for query in queries {
+            let val = query[0]
+            let index = query[1]
+            
+            if A[index] % 2 == 0 {
+                evenSum -= A[index]
+            }
+            
+            A[index] += val
+            
+            if A[index] % 2 == 0 {
+                evenSum += A[index]
+            }
+            
+            result.append(evenSum)
+        }
+        
+        return result
+    }
+```
