@@ -3820,3 +3820,27 @@ extension Heap {
         return result
     }
 ```
+## 266. Palindrome Permutation
+
+
+```swift
+    func canPermutePalindrome(_ s: String) -> Bool {
+        var dict: [Character: Int] = [:]
+        var diff = 0
+        
+        for char in s {
+            dict[char, default: 0] += 1
+        }
+        
+        for (_, val) in dict {
+            if val % 2 != 0 {
+                diff += 1
+                if diff > 1 {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+```
