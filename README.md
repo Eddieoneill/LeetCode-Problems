@@ -3630,3 +3630,114 @@ class Solution {
         return true
     }
 ```
+## 1046. Last Stone Weight
+
+```swift
+class Solution {
+    func lastStoneWeight(_ stones: [Int]) -> Int {
+        let heap = Heap(stones)
+        
+        while heap.count > 1 {
+            let stone1 = heap.remove()! 
+            let stone2 = heap.remove()!
+            
+            if stone1 != stone2 {
+                heap.insert(stone1 - stone2)
+            }
+        }
+        
+        if let result = heap.remove() {
+            return result
+        } else {
+            return 0
+        }
+    }
+}
+
+class Heap<T: Comparable> {
+    var elements: [T]
+    var count: Int {
+      return self.elements.count
+    }
+    
+    init(_ elements: [T]) {
+        self.elements = elements
+        self.heapify()
+    }
+}
+
+extension Heap {
+    func heapify() {
+        for i in (0...(self.elements.count - 1) / 2 + 1).reversed() {
+            siftDown(i)
+        }
+    }
+    
+    func insert(_ element: T) {
+        self.elements.append(element)
+        siftUp()
+    }
+    
+    func remove() -> T? {
+        if self.elements.isEmpty { return nil }
+        
+        let temp = elements[0]
+        self.elements[0] = self.elements[self.elements.count - 1]
+        self.elements[self.elements.count - 1] = temp
+        let result = elements.removeLast()
+        siftDown(0)
+        
+        return result
+    }
+    
+    func siftUp() {
+        var child = self.elements.count - 1
+        print(child)
+        var parent = parentIndex(child)
+        while child > 0 && self.elements[child] > self.elements[parent] {
+            let temp = self.elements[child]
+            self.elements[child] = self.elements[parent]
+            self.elements[parent] = temp
+            
+            child = parent
+            parent = self.parentIndex(child)
+        }
+    }
+    
+    func siftDown(_ index: Int) {
+        var parent = index
+        
+        while true {
+            let left = leftChildIndex(parent)
+            let right = rightChildIndex(parent)
+            var candidate = parent
+        
+            if self.elements.count > left, self.elements[candidate] < self.elements[left] { candidate = left }
+        
+            if self.elements.count > right, self.elements[candidate] < self.elements[right] { candidate = right }
+            if candidate == parent { return }
+            let temp = self.elements[candidate]
+            self.elements[candidate] = self.elements[parent]
+            self.elements[parent] = temp
+            
+            parent = candidate
+        }
+    }
+    
+    func size() -> Int {
+        return self.elements.count
+    }
+    
+    func leftChildIndex(_ index: Int) -> Int {
+        return index * 2 + 1
+    }
+    
+    func rightChildIndex(_ index: Int) -> Int {
+        return index * 2 + 2
+    }
+    
+    func parentIndex(_ index: Int) -> Int {
+        return (index + 1) / 2
+    }
+}
+```
