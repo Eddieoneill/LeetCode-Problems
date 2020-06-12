@@ -3844,3 +3844,10 @@ extension Heap {
         return true
     }
 ```
+## 575. Distribute Candies
+
+```swift
+    func distributeCandies(_ candies: [Int]) -> Int {
+        return min(candies.count / 2, Set(candies).count)
+    }
+```
