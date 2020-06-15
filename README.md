@@ -3964,3 +3964,41 @@ extension Heap {
         return min
     }
 ```
+## 1099. Two Sum Less Than K
+
+
+```swfit
+    func twoSumLessThanK(_ A: [Int], _ K: Int) -> Int {
+        var buckets = Array(repeating: 0, count: 1001)
+        var sortedA: [Int] = []
+        var maxNum = -1
+        var left = 0
+        var right = A.count - 1
+        
+        for num in A {
+            buckets[num] += 1
+        }
+        
+        for (num, count) in buckets.enumerated() {
+            var count = count
+            
+            while count > 0 {
+                sortedA.append(num)
+                count -= 1
+            }
+        }
+        
+        while left < right {
+            let sum = sortedA[left] + sortedA[right]
+            
+            if sum < K {
+                maxNum = max(maxNum, sum)
+                left += 1
+            } else {
+                right -= 1
+            }
+        }
+        
+        return maxNum
+    }
+```
