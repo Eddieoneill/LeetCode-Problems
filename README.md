@@ -3940,3 +3940,27 @@ extension Heap {
         return result
     }
 ```
+## 1189. Maximum Number of Balloons
+
+```swift
+    func maxNumberOfBalloons(_ text: String) -> Int {
+        var dict: [Character: Int] = [:]
+        var min = Int.max
+        
+        for char in text {
+            dict[char, default: 0] += 1
+        }
+        
+        for char in "balon" {
+            guard let val = dict[char] else { return 0 }
+            
+            if (char == "l" || char == "o") &&  (val / 2) < min {
+                min = val / 2
+            } else if val < min {
+                min = val
+            }
+        }
+        
+        return min
+    }
+```
