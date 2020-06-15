@@ -3919,3 +3919,24 @@ extension Heap {
         return Array(set1.intersection(set2))
     }
 ```
+## 1260. Shift 2D Grid
+
+
+```swift
+    func shiftGrid(_ grid: [[Int]], _ k: Int) -> [[Int]] {
+        var rows = grid.count
+        var cols = grid[0].count
+        var result = Array(repeating: Array(repeating: 0, count: grid[0].count), count: grid.count)
+        
+        for row in 0..<rows {
+            for col in 0..<cols {
+                let shiftRow = (row + ((col + k) / cols)) % rows
+                let shiftCol = (col + k) % cols
+                
+                result[shiftRow][shiftCol] = grid[row][col]
+            }
+        }
+        
+        return result
+    }
+```
