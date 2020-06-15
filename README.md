@@ -3908,3 +3908,14 @@ extension Heap {
         return result
     }
 ```
+## 349. Intersection of Two Arrays
+
+
+```swift
+    func intersection(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var set1 = Set(nums1)
+        var set2 = Set(nums2)
+        
+        return Array(set1.intersection(set2))
+    }
+```
