@@ -4002,3 +4002,26 @@ extension Heap {
         return maxNum
     }
 ```
+## 243. Shortest Word Distance
+
+```swift
+    func shortestDistance(_ words: [String], _ word1: String, _ word2: String) -> Int {
+        var w1Index = -1
+        var w2Index = -1
+        var minNum = Int.max
+        
+        for (index, word) in words.enumerated() {
+            if word == word1 {
+                w1Index = index
+            } else if word == word2 {
+                w2Index = index
+            }
+            
+            if w1Index != -1 && w2Index != -1 {
+                minNum = min(minNum, abs(w1Index - w2Index))
+            }
+        }
+        
+        return minNum
+    }
+```
