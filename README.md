@@ -4114,3 +4114,26 @@ extension Heap {
         return matrix
     }
 ```
+## 868. Binary Gap
+
+```swift
+    func binaryGap(_ N: Int) -> Int {
+        var num = N
+        var lastDist = -1
+        var maxDist = 0
+        var i = 0
+        
+        while num > 0 {
+            if num & 1 == 1 {
+                if lastDist != -1 {
+                    maxDist = max(maxDist, abs(lastDist - i))   
+                }
+                lastDist = i
+            }
+            i += 1
+            num >>= 1
+        }
+        
+        return maxDist
+    }
+```
