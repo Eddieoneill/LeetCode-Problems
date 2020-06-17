@@ -4086,3 +4086,31 @@ extension Heap {
         return Array(output)
     }
 ```
+## 566. Reshape the Matrix
+
+```swift
+    func matrixReshape(_ nums: [[Int]], _ r: Int, _ c: Int) -> [[Int]] {
+        var m = nums.count
+        var n  = nums[0].count
+        
+        if m * n != c * r { return nums }
+        
+        var matrix = Array(repeating: Array(repeating: 0, count: c), count: r)
+        var currRow = 0
+        var currCol = 0
+        
+        for row in 0..<m {
+            for col in 0..<n {
+                matrix[currRow][currCol] = nums[row][col]
+                currCol += 1
+                
+                if currCol == c {
+                    currCol = 0
+                    currRow += 1
+                }
+            }
+        }
+        
+        return matrix
+    }
+```
