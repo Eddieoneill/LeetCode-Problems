@@ -4046,3 +4046,22 @@ extension Heap {
         return result
     }
 ```
+## 1103. Distribute Candies to People
+
+```swift
+    func distributeCandies(_ candies: Int, _ num_people: Int) -> [Int] {
+        var result = Array(repeating: 0, count: num_people)
+        var candies = candies
+        var n = 1
+        var i = 0
+        
+        while candies > 0 {
+            result[i % result.count] += min(n, candies)
+            candies -= n
+            n += 1
+            i += 1
+        }
+        
+        return result
+    }
+```
