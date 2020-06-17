@@ -4025,3 +4025,24 @@ extension Heap {
         return minNum
     }
 ```
+## 293. Flip Game
+
+```swift
+    func generatePossibleNextMoves(_ s: String) -> [String] {
+        guard !s.isEmpty else { return []}
+        var charArr = s.map { String($0) }
+        var result: [String] = [] 
+        
+        for num in 1..<s.count {
+            if charArr[num - 1] == "+" && charArr[num] == "+" {
+                charArr[num - 1] = "-"
+                charArr[num] = "-"
+                result.append(charArr.joined())
+                charArr[num - 1] = "+"
+                charArr[num] = "+"
+            }
+        }
+        
+        return result
+    }
+```
