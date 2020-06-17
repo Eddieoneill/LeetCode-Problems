@@ -4137,3 +4137,36 @@ extension Heap {
         return maxDist
     }
 ```
+## 1150. Check If a Number Is Majority Element in a Sorted Array
+
+
+```swift
+    func isMajorityElement(_ nums: [Int], _ target: Int) -> Bool {
+        var starting = binarySearch(nums, target)
+        
+        if starting == -1 { return false }
+        
+        var ending = starting + nums.count / 2
+        
+        if ending >= nums.count { return false }
+        
+        return nums[starting] == nums[ending]
+    }
+    
+    func binarySearch(_ nums: [Int], _ target: Int) -> Int {
+        var left = 0
+        var right = nums.count - 1
+        
+        while left < right {
+            let mid = ((right - left) / 2) + left
+            
+            if nums[mid] < target {
+                left = mid + 1
+            } else {
+                right = mid
+            }
+        }
+        
+        return nums[left] == target ? left : -1
+    }
+```
