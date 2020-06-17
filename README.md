@@ -4170,3 +4170,24 @@ extension Heap {
         return nums[left] == target ? left : -1
     }
 ```
+## 1287. Element Appearing More Than 25% In Sorted Array
+
+```swift
+    func findSpecialInteger(_ arr: [Int]) -> Int {
+        let offset = arr.count / 4
+        
+        var i = 0
+        
+        while i < arr.count {
+            if arr[i] == arr[i + offset] {
+                return arr[i]
+            }
+            i += 1
+            while arr[i] == arr[i - 1] {
+                i += 1
+            }
+        }
+        
+        return -1
+    }
+```
