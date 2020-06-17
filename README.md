@@ -4065,3 +4065,24 @@ extension Heap {
         return result
     }
 ```
+## 1408. String Matching in an Array
+
+```swift
+    func stringMatching(_ words: [String]) -> [String] {
+        var output = Set<String>()
+        
+        for i in 0 ..< words.count {
+            let word = words[i]
+            for j in i ..< words.count - 1 {
+                let str = words[j + 1]                
+                if word.contains(str) {
+                    output.insert(str)
+                } else if str.contains(word) {
+                    output.insert(word)
+                }
+            }
+        }
+        
+        return Array(output)
+    }
+```
