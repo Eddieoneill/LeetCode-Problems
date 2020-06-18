@@ -4221,3 +4221,41 @@ extension Heap {
         return true
     }
 ```
+## 1170. Compare Strings by Frequency of the Smallest Character
+
+```swift
+    func numSmallerByFrequency(_ queries: [String], _ words: [String]) -> [Int] {
+        var buckets = Array(repeating: 0, count: 11)
+        var pre = 0
+        
+        for word in words {
+            buckets[f(word)] += 1
+        }
+        
+        for i in (0..<buckets.count).reversed() {
+            let temp = buckets[i]
+            buckets[i] = pre
+            pre += temp
+        }
+        
+        return queries.map { buckets[f($0)] }
+    }
+    
+    func f(_ str: String) -> Int {
+        var smallestChar: Character = "z"
+        var smallestCharCount = 0
+        
+        for char in str {
+            if char < smallestChar {
+                smallestChar = char
+                smallestCharCount = 0
+            }
+            if char == smallestChar {
+                smallestCharCount += 1
+            }
+        }
+        
+        
+        return smallestCharCount
+    }
+```
