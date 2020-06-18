@@ -4191,3 +4191,14 @@ extension Heap {
         return -1
     }
 ```
+## 237. Delete Node in a Linked List
+
+```swift
+    func deleteNode(_ node: ListNode?) {
+        guard let node = node else { return }
+        guard let next = node.next else { return }
+        
+        node.val = next.val
+        node.next = next.next
+    }
+```
