@@ -4279,3 +4279,21 @@ extension Heap {
         return count
     }
 ```
+## 1331. Rank Transform of an Array
+
+```swift
+    func arrayRankTransform(_ arr: [Int]) -> [Int] {
+        let sortedArray = arr.sorted { $0 < $1 }
+        var rankMap: [Int: Int] = [:]
+        var rank = 1
+        
+        for a in sortedArray {
+            if let map = rankMap[a] { continue }
+            
+            rankMap[a] = rank
+            rank += 1
+        }
+        
+        return arr.map { rankMap[$0, default: 0] }
+    }
+```
