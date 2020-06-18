@@ -4202,3 +4202,22 @@ extension Heap {
         node.next = next.next
     }
 ```
+## 693. Binary Number with Alternating Bits
+
+```swift
+    func hasAlternatingBits(_ n: Int) -> Bool {
+        var pre: Int? = nil
+        var n = n
+        
+        while n > 0 {
+            if pre == n & 1 {
+                return false
+            }
+            
+            pre = n & 1
+            n >>= 1
+        }
+        
+        return true
+    }
+```
