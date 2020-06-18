@@ -4259,3 +4259,23 @@ extension Heap {
         return smallestCharCount
     }
 ```
+## 1426. Counting Elements
+
+```swift
+    func countElements(_ arr: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 1001) 
+        var count = 0
+        
+        for a in arr {
+            buckets[a] += 1
+        }
+        
+        for i in 0..<buckets.count - 1 {
+            if buckets[i + 1] != 0 {
+                count += buckets[i]
+            }
+        }
+        
+        return count
+    }
+```
