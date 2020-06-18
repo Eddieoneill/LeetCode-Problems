@@ -4297,3 +4297,27 @@ extension Heap {
         return arr.map { rankMap[$0, default: 0] }
     }
 ```
+## 1009. Complement of Base 10 Integer
+
+```swift
+    func bitwiseComplement(_ N: Int) -> Int {
+        guard N != 0 else { return 1 }
+
+        var bits = N 
+        var complement = 0
+        var shiftIndex = 0
+
+        while bits > 0 {
+            let maskedBits = bits & 1
+
+            if maskedBits == 0 { 
+                complement += 1 << shiftIndex
+            }
+            
+            shiftIndex += 1
+            bits = bits >> 1
+        }
+
+        return complement
+    }
+```
