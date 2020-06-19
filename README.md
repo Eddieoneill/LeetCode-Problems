@@ -4400,3 +4400,26 @@ extension Heap {
         return result >= 0 ? result : -result
     }
 ```
+## 169. Majority Element
+
+```swift
+    func majorityElement(_ nums: [Int]) -> Int {
+        var major = nums[0]
+        var count = 1
+        
+        for (index, num) in nums.enumerated() where index != 0 {
+            if num == major {
+                count += 1
+            } else {
+                count -= 1
+            }
+            
+            if count == 0 {
+                major = num
+                count += 1
+            }
+        }
+        
+        return major
+    }
+```
