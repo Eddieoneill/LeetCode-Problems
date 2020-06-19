@@ -4321,3 +4321,30 @@ extension Heap {
         return complement
     }
 ```
+## 892. Surface Area of 3D Shapes
+
+```swift
+    func surfaceArea(_ grid: [[Int]]) -> Int {
+        var area = 0
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == 0 { continue }
+                
+                area += grid[row][col] * 4 + 2
+                
+                if col - 1 >= 0 {
+                    let boarder = min(grid[row][col], grid[row][col - 1])
+                    area -= (boarder * 2)
+                }
+                
+                if row - 1 >= 0 {
+                    let boarder = min(grid[row][col], grid[row - 1][col])
+                    area -= (boarder * 2)
+                }
+            }
+        }
+        
+        return area
+    }
+```
