@@ -4455,3 +4455,24 @@ extension Heap {
         return false
     }
 ```
+## 888. Fair Candy Swap
+
+```swift
+    func fairCandySwap(_ A: [Int], _ B: [Int]) -> [Int] {
+        let sumA = A.reduce(0, +)
+        let sumB = B.reduce(0, +)
+        let setB = Set<Int>(B)
+        let target = (sumA + sumB) / 2
+        let delta = target - sumA
+        var rlt: [Int] = [0,0]
+        for candy in A {
+            let b = candy + delta
+            if setB.contains(b) {
+                rlt[0] = candy
+                rlt[1] = b
+                return rlt
+            }
+        }
+        return rlt
+    }
+```
