@@ -4369,3 +4369,34 @@ extension Heap {
         return true;
     }
 ```
+## 812. Largest Triangle Area
+
+
+```swift
+    func largestTriangleArea(_ points: [[Int]]) -> Double {
+        var maxSize = 0.0
+        for i in 0..<(points.count - 2) {
+            for j in (i+1)..<(points.count - 1) {
+                for k in (j+1)..<(points.count) {
+                    let curSize = getSize(points[i], points[j], points[k])
+                    if maxSize < curSize {
+                        maxSize = curSize
+                    }
+                }
+            }
+        }
+
+        return maxSize
+    }
+
+    func getSize(_ p1: [Int], _ p2: [Int],_ p3: [Int]) -> Double {
+        let a = Double(p1[0])
+        let b = Double(p1[1])
+        let c = Double(p2[0])
+        let d = Double(p2[1])
+        let e = Double(p3[0])
+        let f = Double(p3[1])
+        let result = Double((a * d + c * f + e * b) - (c * b + e * d + a * f)) / 2.0
+        return result >= 0 ? result : -result
+    }
+```
