@@ -4423,3 +4423,35 @@ extension Heap {
         return major
     }
 ```
+## 917. Reverse Only Letters
+
+```swift
+    func reverseOnlyLetters(_ S: String) -> String {
+        var arr = S.map { String($0) }
+        var left = 0
+        var right = arr.count - 1
+        
+        while left < right {
+            if isChar(arr[left]) && isChar(arr[right]) {
+                let temp = arr[left]
+                arr[left] = arr[right]
+                arr[right] = temp
+                left += 1
+                right -= 1
+            } else if !isChar(arr[left]) {
+                left += 1
+            } else {
+                right -= 1
+            }
+        }
+        
+        return arr.joined()
+    }
+    
+    func isChar(_ char: String) -> Bool {
+        if char.lowercased() >= "a" && char.lowercased() <= "z" {
+            return true
+        }
+        return false
+    }
+```
