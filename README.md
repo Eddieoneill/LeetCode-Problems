@@ -4348,3 +4348,24 @@ extension Heap {
         return area
     }
 ```
+## 1332. Remove Palindromic Subsequences
+
+```swift
+    func removePalindromeSub(_ s: String) -> Int {
+        if s.isEmpty { return 0 }
+        return isPalindrome(s) ? 1 : 2
+    }
+    
+    func isPalindrome(_ s:String) ->Bool {
+        var i = 0;
+        var j = s.count-1
+        var arr = Array(s)
+        
+        while (i < j) {
+            if arr[i] != arr[j]{ return false }
+            i += 1;
+            j -= 1;
+        }
+        return true;
+    }
+```
