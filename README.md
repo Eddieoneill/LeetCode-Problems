@@ -4526,3 +4526,28 @@ extension Heap {
         return max(a.count, b.count)
     }
 ```
+
+
+```swift
+    func isMonotonic(_ A: [Int]) -> Bool {
+        guard A.count > 0 else { return false }
+        
+        return increasing(A) || decreasing(A)
+    }
+    
+    private func increasing(_ nums: [Int]) -> Bool {
+        for i in 0..<nums.count - 1 {
+            if nums[i] > nums[i + 1] { return false}
+        }
+        
+        return true
+    }
+    
+    private func decreasing(_ nums: [Int]) -> Bool {
+        for i in 0..<nums.count - 1 {
+            if nums[i] < nums[i + 1] { return false}
+        }
+        
+        return true
+    }
+```
