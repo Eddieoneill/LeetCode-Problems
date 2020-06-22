@@ -4618,3 +4618,35 @@ extension Heap {
         return true
     }
 ```
+## 690. Employee Importance
+
+```swift
+    func getImportance(_ employees: [Employee], _ id: Int) -> Int {
+        var dict = buildGraph(employees)
+        var sum = 0
+        
+        func dfs(_ id: Int) {
+            guard let emp = dict[id] else { return }
+            
+            sum += emp.0
+            
+            for peer in emp.1 {
+                dfs(peer)
+            }
+        }
+        
+        dfs(id)
+        
+        return sum
+    }
+    
+    func buildGraph(_ employees: [Employee]) -> [Int: (Int, [Int])] {
+        var graph: [Int: (Int, [Int])] = [:]
+        
+        for employee in employees {
+            if graph[employee.id] == nil { graph[employee.id] = (employee.importance, employee.subordinates) }
+        }
+        
+        return graph
+    }
+```
