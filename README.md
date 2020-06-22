@@ -4572,3 +4572,23 @@ extension Heap {
         return false
     }
 ```
+## 788. Rotated Digits
+
+```swift
+    func rotatedDigits(_ N: Int) -> Int {
+        var array = [1, 1, 2, 0, 0, 2, 2, 0, 1, 2] // refers to 0 ... 9
+        var result = 0
+        for i in 1 ... N {
+            var p = i
+            var s = 1
+            while p != 0 {
+                s *= array[p % 10]
+                p /= 10
+            }
+            if s >= 2 {
+                result += 1
+            }
+        }
+        return result
+    }
+```
