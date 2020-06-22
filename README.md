@@ -4592,3 +4592,29 @@ extension Heap {
         return result
     }
 ```
+## 1317. Convert Integer to the Sum of Two No-Zero Integers
+
+```swift
+    func getNoZeroIntegers(_ n: Int) -> [Int] {
+        for i in 1 ... 999 {
+            let pairInt = n - i
+            if checkNonZero(pairInt) && checkNonZero(i) {
+                return [i, pairInt]
+            }
+        }
+        
+        return []
+    }
+    
+    func checkNonZero(_ value: Int) -> Bool {
+        var value = value
+        
+        while value != 0 {
+            if value % 10 == 0 {
+                return false
+            }
+            value /= 10
+        }
+        return true
+    }
+```
