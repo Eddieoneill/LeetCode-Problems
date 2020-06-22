@@ -4476,3 +4476,22 @@ extension Heap {
         return rlt
     }
 ```
+## 976. Largest Perimeter Triangle
+
+```swift
+    func largestPerimeter(_ A: [Int]) -> Int {
+    
+        guard A.count > 2 else { return 0 }
+        
+        var sortA = A;
+        sortA.sort(by: >);
+        var triangle = sortA.prefix(3);
+        
+        if (triangle[1] + triangle[2] > triangle[0]) &&  (abs(triangle[1]-triangle[2]) < triangle[0]){
+            return triangle[0] + triangle[1] + triangle[2];
+        }
+        
+        sortA.removeFirst();
+        return largestPerimeter(sortA);
+    }
+```
