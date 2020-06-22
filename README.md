@@ -4495,3 +4495,24 @@ extension Heap {
         return largestPerimeter(sortA);
     }
 ```
+## 283. Move Zeroes
+
+```swift
+    func moveZeroes(_ nums: inout [Int]) {
+        var i = 0
+        
+        
+        for j in 1..<nums.count {
+            if nums[i] == 0 {
+                if nums[j] != 0 {
+                    let temp = nums[i]
+                    nums[i] = nums[j]
+                    nums[j] = temp      
+                    i += 1
+                }
+                continue
+            }
+            i += 1
+        }
+    }
+```
