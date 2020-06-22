@@ -4551,3 +4551,24 @@ extension Heap {
         return true
     }
 ```
+## 1118. Number of Days in a Month
+
+```swift
+    func numberOfDays(_ Y: Int, _ M: Int) -> Int {
+        let daysOfMonth = [31, 28, 31, 30,31, 30, 31, 31, 30,31, 30 ,31]
+        
+        if M == 2 && isLeepYear(Y) {
+            return 29
+        }
+        
+        return daysOfMonth[M - 1]
+    }
+    
+    func isLeepYear(_ year: Int) -> Bool {
+        if year % 400 == 0 { return true }
+        
+        if year % 100 != 0 && year % 4 == 0 { return true }
+        
+        return false
+    }
+```
