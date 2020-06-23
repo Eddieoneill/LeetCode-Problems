@@ -4679,3 +4679,44 @@ extension Heap {
         return sum
     }
 ```
+## 1029. Two City Scheduling
+
+```swift
+    func shortestCompletingWord(_ licensePlate: String, _ words: [String]) -> String {
+        var charMap: [String: Int] = [:]
+        var result: String? = nil
+        
+        for char in licensePlate {
+            if char.lowercased() >= "a" && char.lowercased() <= "z" {
+                charMap[char.lowercased(), default: 0] += 1
+            }
+        }
+        
+        
+        outer: for word in words {
+            var currMap = charMap
+            
+            for char in word {
+                if char.lowercased() >= "a" && char.lowercased() <= "z" {
+                    if let val = currMap[char.lowercased()] {
+                        currMap[char.lowercased()] = val - 1   
+                    }
+                }
+            }
+            
+            for (_ , count) in currMap {
+                if count > 0 {
+                    continue outer
+                }
+            }
+            
+            if result == nil {
+                result = word
+            } else if let preWord = result, word.count < preWord.count {
+                result = word
+            }
+        }
+        
+        return result ?? ""
+    }
+```
