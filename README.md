@@ -4720,3 +4720,10 @@ extension Heap {
         return result ?? ""
     }
 ```
+## 292. Nim Game
+
+```swift
+    func canWinNim(_ n: Int) -> Bool {
+        return n % 4 != 0
+    }
+```
