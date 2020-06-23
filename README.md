@@ -4727,3 +4727,33 @@ extension Heap {
         return n % 4 != 0
     }
 ```
+## 1089. Duplicate Zeros
+
+```swift
+    func duplicateZeros(_ arr: inout [Int]) {
+        
+        var i = -1
+        var j = arr.count - 1
+        
+        for num in arr {
+            if num == 0 { i += 2; continue }
+            i += 1
+        }
+        
+        
+        while i > j {
+            if arr[j] == 0 {
+                if i < arr.count { arr[i] = 0 }
+                i -= 1
+                
+                if i < arr.count { arr[i] = 0 }
+                i -= 1
+                j -= 1
+            } else {
+                if i < arr.count { arr[i] = arr[j] }
+                i -= 1
+                j -= 1
+            }
+        }
+    }
+```
