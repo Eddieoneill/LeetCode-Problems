@@ -4665,3 +4665,17 @@ extension Heap {
         return nTribonacci(t2, t3, t1 + t2 + t3, target, current + 1)
     }
 ```
+## 1029. Two City Scheduling
+
+```swift
+    func twoCitySchedCost(_ costs: [[Int]]) -> Int {
+        let costs = costs.sorted { $0[0] - $0[1] < $1[0] - $1[1] }
+        let count = costs.count
+        var sum = 0
+        
+        for i in 0..<count / 2 {
+            sum += costs[i][0] + costs[i + count / 2][1]
+        }
+        return sum
+    }
+```
