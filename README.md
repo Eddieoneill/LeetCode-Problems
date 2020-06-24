@@ -4764,3 +4764,26 @@ extension Heap {
         return (num - 1) % 9 + 1
     }
 ```
+## 242. Valid Anagram
+
+```swift
+    func isAnagram(_ s: String, _ t: String) -> Bool {
+        var dict: [Character: Int] = [:]
+        
+        for char in s {
+            dict[char, default: 0] += 1
+        }
+        
+        for char in t {
+            dict[char, default: 0] -= 1
+        }
+        
+        for (_, val) in dict {
+            if val != 0 {
+                return false
+            }
+        }
+        
+        return true
+    }
+```
