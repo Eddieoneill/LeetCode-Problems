@@ -4787,3 +4787,20 @@ extension Heap {
         return true
     }
 ```
+## 122. Best Time to Buy and Sell Stock II
+
+
+```swift
+    func maxProfit(_ prices: [Int]) -> Int {
+        guard !prices.isEmpty else { return 0 }
+        
+        var result = 0
+        
+        for i in 1..<prices.count {
+            if prices[i-1] < prices[i] {
+                result += prices[i] - prices[i-1]
+            }
+        }
+        return result
+    }
+```
