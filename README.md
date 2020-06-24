@@ -4757,4 +4757,10 @@ extension Heap {
         }
     }
 ```
+## 258. Add Digits
 
+```swift
+    func addDigits(_ num: Int) -> Int {
+        return (num - 1) % 9 + 1
+    }
+```
