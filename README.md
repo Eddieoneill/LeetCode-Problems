@@ -4804,3 +4804,47 @@ extension Heap {
         return result
     }
 ```
+## 1417. Reformat The String
+
+```swift
+    func reformat(_ s: String) -> String {
+        var numArr: [String] = []
+        var charArr: [String] = []
+        var large: [String] = []
+        var small: [String] = []
+        var result: [String] = []
+        var count1 = 0
+        var count2 = 0
+        
+        for char in s {
+            var str = String(char)
+            if Int(str) != nil {
+                numArr.append(str)
+            } else {
+                charArr.append(str)
+            }
+        }
+        
+        if abs(charArr.count - numArr.count) > 1 {
+            return ""
+        } else if charArr.count > numArr.count {
+            large = charArr
+            small = numArr
+        } else {
+            large = numArr
+            small = charArr
+        }
+        
+        for i in 0..<s.count {
+            if i % 2 == 0 {
+                result.append(large[count1])
+                count1 += 1
+            } else {
+                result.append(small[count2])
+                count2 += 1
+            }
+        }
+        
+        return result.joined()
+    }
+```
