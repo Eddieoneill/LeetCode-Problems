@@ -4848,3 +4848,37 @@ extension Heap {
         return result.joined()
     }
 ```
+## Is binary search tree
+
+```swift
+class Node {
+    var val: Int
+    var left: Node?
+    var right: Node?
+    
+    init(_ val: Int, _ left: Node? = nil, _ right: Node? = nil) {
+        self.val = val
+        self.left = left
+        self.right = right
+    }
+}
+
+
+func isBST(_ root: Node?) -> Bool {
+    var result = true
+    func dfs(_ root: Node?, _ maximum: Int = Int.max, _ minimum: Int = Int.min) {
+        guard let node = root else { return }
+        
+        if !result { return }
+        if let left = node.left, (left.val <= minimum || left.val >= node.val) { result = false }
+        if let right = node.right, (right.val > maximum || right.val < node.val) { print(node.val, maximum); result = false }
+        
+        dfs(root?.left, min(node.val, maximum), minimum)
+        dfs(root?.right, maximum, max(node.val, minimum))
+    }
+    
+    
+    dfs(root)
+    return result
+}
+```
