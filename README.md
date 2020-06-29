@@ -4866,6 +4866,7 @@ class Node {
 
 func isBST(_ root: Node?) -> Bool {
     var result = true
+    
     func dfs(_ root: Node?, _ maximum: Int = Int.max, _ minimum: Int = Int.min) {
         guard let node = root else { return }
         
