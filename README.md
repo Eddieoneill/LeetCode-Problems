@@ -4962,3 +4962,25 @@ func isBST(_ root: Node?) -> Bool {
         return output
     }
 ```
+## 13. Roman to Integer
+
+```swift
+    func romanToInt(_ s: String) -> Int {
+        var dict = ["I": 1, "V": 5, "X": 10, "L": 50, "C": 100, "D": 500, "M": 1000]
+        var arr = s.map { String($0) }
+        var result = 0
+        var i = 0
+        
+        while i < arr.count {
+            if i < arr.count - 1, dict[arr[i], default: 0] < dict[arr[i + 1], default: 0] {
+                result += dict[arr[i + 1], default: 0] - dict[arr[i], default: 0]
+                i += 2
+            } else {
+                result += dict[arr[i], default: 0]
+                i += 1
+            }
+        }
+        
+        return result
+    }
+```
