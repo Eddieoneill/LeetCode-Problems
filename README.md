@@ -5076,3 +5076,25 @@ func isBST(_ root: Node?) -> Bool {
         return dfs(root)
     }
 ```
+## 1184. Distance Between Bus Stops
+
+```swift
+    func distanceBetweenBusStops(_ distance: [Int], _ start: Int, _ destination: Int) -> Int {
+        var dist1 = 0
+        var dist2 = 0
+        
+        let stop1 = min(start, destination)
+        let stop2 = max(start, destination)
+        
+        for i in 0..<distance.count {
+            var val = distance[i] 
+            if i >= stop1 && i < stop2 {
+                dist1 += distance[i]   
+            } else {
+                dist2 += distance[i]    
+            }
+        }
+        
+        return min(dist1, dist2)
+    }
+```
