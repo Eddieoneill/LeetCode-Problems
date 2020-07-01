@@ -4904,3 +4904,23 @@ func isBST(_ root: Node?) -> Bool {
         return maximum
     }
 ```
+## 448. Find All Numbers Disappeared in an Array
+
+```swift
+    func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
+        var nums = nums
+        var result: [Int] = []
+        
+        for num in nums {
+            nums[num - 1] = -1
+        }
+        
+        for i in 0..<nums.count {
+            if nums[i] != -1 {
+                result.append(i + 1)
+            }
+        }
+        
+        return result
+    }
+```
