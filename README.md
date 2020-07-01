@@ -4937,3 +4937,28 @@ func isBST(_ root: Node?) -> Bool {
         return !(uniqueNum.count == nums.count)
     }
 ```
+## 696. Count Binary Substrings
+
+```swift
+    func countBinarySubstrings(_ s: String) -> Int {
+        guard s.count > 1 else { return 0 }
+        
+        let arr = Array(s)
+        var prev = 0
+        var curr = 1
+        var output = 0
+        
+        for i in 1...arr.count {
+            if i < arr.count && arr[i] == arr[i - 1] {
+                curr += 1
+                continue
+            }
+            
+            output += min(prev, curr)
+            prev = curr
+            curr = 1
+        }
+        
+        return output
+    }
+```
