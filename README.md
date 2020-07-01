@@ -5055,3 +5055,24 @@ func isBST(_ root: Node?) -> Bool {
         }
     }
 ```
+## 653. Two Sum IV - Input is a BST
+
+
+```swift
+    func findTarget(_ root: TreeNode?, _ k: Int) -> Bool {
+        var seen: Set<Int> = []
+        
+        func dfs(_ root: TreeNode?) -> Bool {
+            guard let node = root else { return false }
+            
+            if seen.contains(k - node.val) {
+                return true
+            }
+            
+            seen.insert(node.val)
+            return dfs(root?.left) || dfs(root?.right)
+        }
+        
+        return dfs(root)
+    }
+```
