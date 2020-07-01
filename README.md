@@ -4984,3 +4984,37 @@ func isBST(_ root: Node?) -> Bool {
         return result
     }
 ```
+## 953. Verifying an Alien Dictionary
+
+```swift
+    func isAlienSorted(_ words: [String], _ order: String) -> Bool {
+        var dictionary: [Character: Int] = [:]
+        for i in 0..<order.count {
+            let char = order[order.index(order.startIndex, offsetBy: i)]
+            dictionary[char] = i
+        }
+        for i in 0..<words.count - 1 {
+            let wordA = words[i]
+            let wordB = words[i + 1]
+            var compaired = false
+            for w in 0..<min(wordA.count, wordB.count) {
+                let charA = wordA[wordA.index(wordA.startIndex, offsetBy: w)]
+                let charB = wordB[wordB.index(wordB.startIndex, offsetBy: w)]
+                let mapA = dictionary[charA] ?? -1
+                let mapB = dictionary[charB] ?? -1
+                if mapA > mapB {
+                    return false
+                } else if mapA < mapB {
+                    compaired = true
+                    break
+                }
+            }
+            if !compaired {
+                if wordA.count > wordB.count {
+                    return false
+                }
+            }
+        }
+        return true
+    }
+```
