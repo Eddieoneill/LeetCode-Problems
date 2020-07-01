@@ -5018,3 +5018,40 @@ func isBST(_ root: Node?) -> Bool {
         return true
     }
 ```
+```swift
+    func isAlienSorted(_ words: [String], _ order: String) -> Bool {
+        let orderArray = Array(order)
+        var orderDict = [Character: Int]()
+        
+        for i in 0..<order.count {
+            orderDict[orderArray[i]] = i
+        }
+        
+        for i in 1..<words.count {
+            if compare(orderDict, words[i-1], words[i]) > 0 { return false }
+        }
+        
+        return true
+    }
+    
+    func compare(_ orderDict: [Character: Int],
+                _ s1: String, 
+                _ s2: String) -> Int {
+        let s1Array = Array(s1)
+        let s2Array = Array(s2)
+        
+        var i = 0
+        var compare = 0
+        
+        while i < s1Array.count && i < s2Array.count && compare == 0 {
+            compare = orderDict[s1Array[i]]! - orderDict[s2Array[i]]!
+            i += 1
+        }
+        
+        if compare == 0 {
+            return s1.count - s2.count
+        } else { 
+            return compare 
+        }
+    }
+```
