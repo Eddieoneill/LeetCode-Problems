@@ -4883,3 +4883,24 @@ func isBST(_ root: Node?) -> Bool {
     return result
 }
 ```
+## 485. Max Consecutive Ones
+
+```swift
+    func findMaxConsecutiveOnes(_ nums: [Int]) -> Int {
+        var count = 0
+        var maximum = 0
+        
+        for num in nums {
+            if num == 0 {
+                maximum = max(maximum, count)
+                count = 0
+            } else {
+                count += 1
+            }
+        }
+        
+        maximum = max(maximum, count)
+        
+        return maximum
+    }
+```
