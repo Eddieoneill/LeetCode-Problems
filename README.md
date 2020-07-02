@@ -5199,3 +5199,25 @@ func isBST(_ root: Node?) -> Bool {
         return root
     }
 ```
+## 1422. Maximum Score After Splitting a String
+
+```swift
+    func maxScore(_ s: String) -> Int {
+        let s: [Int] = s.map({ String($0) == "0" ? 0 : 1 })
+        let c = s.count
+        var sRev = s
+        var result: Int = 0
+        var counter: Int = 0
+        
+        for i in 2...c {
+            sRev[c - i] += sRev[c - i + 1]
+        }
+        
+        for i in 0..<(c - 1) {
+            counter += s[i] == 0 ? 1 : 0
+            result = max(result, counter + sRev[i + 1])
+        }
+        
+        return result
+    }
+```
