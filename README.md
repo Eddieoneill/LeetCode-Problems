@@ -5098,3 +5098,36 @@ func isBST(_ root: Node?) -> Bool {
         return min(dist1, dist2)
     }
 ```
+## 733. Flood Fill
+
+```swift
+    func floodFill(_ image: [[Int]], _ sr: Int, _ sc: Int, _ newColor: Int) -> [[Int]] {
+        var oldColor = image[sr][sc]
+        if oldColor == newColor { return image }
+        
+        var image = image
+        var queue = [[sr, sc]]
+        var dirs = [[-1, 0], [1, 0], [0, 1], [0, -1]]
+        
+        
+        while !queue.isEmpty {
+            let curr = queue.removeFirst()
+            var cr = curr[0]
+            var cc = curr[1]
+            image[cr][cc] = newColor
+            
+            for arr in dirs {
+                var dr = arr[0]
+                var dc = arr[1]
+                let nr = cr + dr
+                let nc = cc + dc
+                
+                if nr < 0 || nr >= image.count || nc < 0 || nc >= image[0].count || image[nr][nc] != oldColor { continue }
+                
+                queue.append([nr, nc])
+            }
+        }
+        
+        return image
+    }
+```
