@@ -5221,3 +5221,27 @@ func isBST(_ root: Node?) -> Bool {
         return result
     }
 ```
+## 252. Meeting Rooms
+
+
+```swift
+    func canAttendMeetings(_ intervals: [[Int]]) -> Bool {
+        guard !intervals.isEmpty else { return true }
+        var sortedList = intervals.sorted { $0[0] < $1[0] }
+        let smallest = sortedList[0]
+        var start = smallest[0]
+        var end = smallest[1]
+        
+        for (i, meeting) in sortedList.enumerated() where i != 0 {
+            let currStart = meeting[0]
+            let currEnd = meeting[1]
+            if (currStart >= start && currStart < end) { return false }
+            if (currEnd > start && currEnd <= end) { return false }
+            
+            start = currStart
+            end = currEnd
+        }
+        
+        return true
+    }
+```
