@@ -5178,3 +5178,24 @@ func isBST(_ root: Node?) -> Bool {
         return false
     }
 ```
+## 538. Convert BST to Greater Tree
+
+```swift
+    func convertBST(_ root: TreeNode?) -> TreeNode? {
+        var sum = 0
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            dfs(root?.right)
+            sum += node.val
+            root?.val = sum
+            
+            
+            dfs(root?.left)
+        }
+        
+        dfs(root)
+        
+        return root
+    }
+```
