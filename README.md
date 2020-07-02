@@ -5131,3 +5131,24 @@ func isBST(_ root: Node?) -> Bool {
         return image
     }
 ```
+## 389. Find the Difference
+
+```swift
+    func findTheDifference(_ s: String, _ t: String) -> Character {
+        var have: [Character: Int] = [:]
+        
+        for char in t {
+            have[char, default: 0] += 1
+        }
+        
+        for char in s {
+            have[char, default: 0] -= 1
+        }
+        
+        for (key, val) in have where val == 1 {
+            return key
+        }
+        
+        return Character("")
+    }
+```
