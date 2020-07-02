@@ -5152,3 +5152,29 @@ func isBST(_ root: Node?) -> Bool {
         return Character("")
     }
 ```
+## 1013. Partition Array Into Three Parts With Equal Sum
+
+
+```swift
+    func canThreePartsEqualSum(_ A: [Int]) -> Bool {
+        let result = A.reduce(0, +)
+        guard result % 3 == 0 else { return false }
+        
+        let ave = result / 3
+        var count = 0
+        var sum = 0
+        
+        for n in A {
+            sum += n
+            if sum == ave {
+                count += 1
+                sum = 0
+                if count == 3 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+```
