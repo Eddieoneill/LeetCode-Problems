@@ -5203,19 +5203,18 @@ func isBST(_ root: Node?) -> Bool {
 
 ```swift
     func maxScore(_ s: String) -> Int {
-        let s: [Int] = s.map({ String($0) == "0" ? 0 : 1 })
-        let c = s.count
-        var sRev = s
-        var result: Int = 0
-        var counter: Int = 0
-        
-        for i in 2...c {
-            sRev[c - i] += sRev[c - i + 1]
-        }
-        
-        for i in 0..<(c - 1) {
-            counter += s[i] == 0 ? 1 : 0
-            result = max(result, counter + sRev[i + 1])
+        let chars = Array(s)
+        var result = 0
+        var left = 0
+        var right = chars.filter { $0 == "1" }.count
+
+        for i in 0..<chars.count - 1 {
+            if chars[i] == "0" {
+                left += 1
+            } else {
+                right -= 1
+            }
+            result = max(result, left + right)
         }
         
         return result
