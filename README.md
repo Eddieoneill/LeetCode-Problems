@@ -5350,3 +5350,14 @@ func isBST(_ root: Node?) -> Bool {
         return points
     }
 ```
+## 1071. Greatest Common Divisor of Strings
+
+```swift
+    func gcdOfStrings(_ str1: String, _ str2: String) -> String {        
+        if str1 == str2 { return str1 }
+        let maxStr = str1.count > str2.count ? str1 : str2
+        let minStr = str1.count > str2.count ? str2 : str1
+        if String(maxStr.prefix(minStr.count)) != minStr { return "" }
+        return gcdOfStrings(String(maxStr.suffix(maxStr.count-minStr.count)), minStr)
+    }
+```
