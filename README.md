@@ -5222,7 +5222,6 @@ func isBST(_ root: Node?) -> Bool {
 ```
 ## 252. Meeting Rooms
 
-
 ```swift
     func canAttendMeetings(_ intervals: [[Int]]) -> Bool {
         guard !intervals.isEmpty else { return true }
@@ -5242,5 +5241,75 @@ func isBST(_ root: Node?) -> Bool {
         }
         
         return true
+    }
+```
+## 937. Reorder Data in Log Files
+### not working
+```swift
+    func reorderLogFiles(_ logs: [String]) -> [String] {
+        var result = logs.sorted { (a, b) -> Bool in
+                     let aLog = isDigitLog(a)
+                     let bLog = isDigitLog(b)
+                     
+                     if aLog && bLog {
+                         return false
+                     } else if !aLog && !bLog {
+                         let aWord = makeWord(a)
+                         let bWord = makeWord(b)
+                         return aWord < bWord 
+                     } else if aLog {
+                         return false
+                     } else {
+                         return true
+                     }
+        }
+        
+        return result
+        
+    }
+    
+    func makeWord(_ str: String) -> String {
+        var words = str.split(separator: " ")
+        return String(words[1]) + String(words[0])
+    }
+    
+    func isDigitLog(_ log: String) -> Bool {
+        var seenSpace = false
+        for char in log {
+            if seenSpace && Int(String(char)) != nil {
+                return true
+            } else if String(char) == " " {
+                seenSpace = true
+            }
+        }
+        return false
+    }
+```
+### working
+```swift
+    func reorderLogFiles(_ logs: [String]) -> [String] { 
+        guard logs.count != 0 else {
+            return []
+        }
+        var digLogs: [String] = []
+        var letterCountLogs: [(identifier: String, value: String)] = []
+        for log in logs {
+            if log[log.index(before: log.endIndex)].isNumber {
+                digLogs.append(log)
+            } else {
+                let firstSpaceIndex = log.firstIndex(of: " ")!
+                let identifier = String(log[..<firstSpaceIndex])
+                let str = String(log[log.index(after: firstSpaceIndex )...])
+                letterCountLogs.append((identifier: identifier, value: str))
+            }
+        }
+        let letterLogs = letterCountLogs.sorted(by: {
+            if $0.value == $1.value {
+                return $0.identifier < $1.identifier
+            } else {
+                return $0.value < $1.value
+            }
+        }).map({ "\($0.identifier) \($0.value)"})
+        return letterLogs + digLogs
     }
 ```
