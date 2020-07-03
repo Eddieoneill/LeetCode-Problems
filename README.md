@@ -5397,3 +5397,16 @@ func isBST(_ root: Node?) -> Bool {
         return result
     }
 ```
+## 28. Implement strStr()
+
+```swift
+    func strStr(_ haystack: String, _ needle: String) -> Int {
+        if haystack.count == needle.count {
+            return haystack != needle ? -1 : 0
+        } else if let i = haystack.range(of: needle) {
+            return haystack.distance(from: haystack.startIndex, to: i.lowerBound)
+        } else {
+            return needle.isEmpty ? 0 : -1
+        }
+    }
+```
