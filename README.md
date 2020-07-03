@@ -5361,3 +5361,39 @@ func isBST(_ root: Node?) -> Bool {
         return gcdOfStrings(String(maxStr.suffix(maxStr.count-minStr.count)), minStr)
     }
 ```
+## 1228. Missing Number In Arithmetic Progression
+
+
+```swift
+    func missingNumber(_ arr: [Int]) -> Int {
+        var min = Int.max
+        var result = 0
+        
+        for (i, num) in arr.enumerated() where i != arr.count - 1 {
+            if arr[i + 1] == num { return num }
+            
+            var curr = abs(num - arr[i + 1])
+            if curr < min {
+                min = curr
+            }
+        }
+        
+        for (i, num) in arr.enumerated() where i != arr.count - 1 {
+            if arr[i + 1] < num {
+                let next = num - min    
+                if arr[i + 1] != next {
+                    result = next
+                    return next
+                }
+            } else {
+                let next = num + min    
+                if arr[i + 1] != next {
+                    result = next
+                    return result
+                }
+            }
+        }
+        
+        return result
+    }
+```
