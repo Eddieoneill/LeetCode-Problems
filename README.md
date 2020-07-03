@@ -5328,3 +5328,25 @@ func isBST(_ root: Node?) -> Bool {
        return columnNumber
     } 
 ```
+## 1176. Diet Plan Performance
+
+```swift
+    func dietPlanPerformance(_ calories: [Int], _ k: Int, _ lower: Int, _ upper: Int) -> Int {
+        var currentCalorieCount = 0
+        var points = 0
+        
+        for i in 0..<calories.count {
+            currentCalorieCount = currentCalorieCount + calories[i]
+            if i >= k - 1 {
+                if currentCalorieCount < lower {
+                    points = points - 1
+                }
+                if currentCalorieCount > upper {
+                    points = points + 1
+                }
+                currentCalorieCount = currentCalorieCount - calories[i - (k - 1)]
+            }
+        }
+        return points
+    }
+```
