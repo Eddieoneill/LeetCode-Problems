@@ -5313,3 +5313,18 @@ func isBST(_ root: Node?) -> Bool {
         return letterLogs + digLogs
     }
 ```
+## 171. Excel Sheet Column Number
+
+
+```swift
+    func titleToNumber(_ s: String) -> Int {
+       var columnNumber = 0
+       let offset = 64   
+
+       for letter in s.utf8 { 
+           columnNumber = columnNumber * 26 + Int(letter) - offset
+       }   
+
+       return columnNumber
+    } 
+```
