@@ -5488,3 +5488,38 @@ func isBST(_ root: Node?) -> Bool {
         return minimum
     }
 ```
+## 1427. Perform String Shifts
+
+```swift
+    func stringShift(_ s: String, _ shift: [[Int]]) -> String {
+        guard !shift.isEmpty else { return s }
+        
+        var totalShift = 0
+        for sh in shift {
+            if sh[0] == 0 {
+                totalShift -= sh[1]
+            } else {
+                totalShift += sh[1]
+            }
+        }
+        
+        if totalShift == 0 {
+            return s
+        }
+        
+        if abs(totalShift) >= s.count {
+            totalShift =  totalShift % s.count
+        }
+        if totalShift < 0 {
+            let stratingIndex = s.index(s.startIndex, offsetBy: abs(totalShift))
+            var prefix = s.prefix(upTo: stratingIndex)
+            var suffix = s.suffix(from: stratingIndex)
+            return String(suffix + prefix)
+        }
+        
+        let stratingIndex = s.index(s.startIndex, offsetBy: s.count - abs(totalShift))
+        var prefix = s.prefix(upTo: stratingIndex)
+        var suffix = s.suffix(from: stratingIndex)
+        return String(suffix + prefix)
+    }
+```
