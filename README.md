@@ -5459,3 +5459,32 @@ func isBST(_ root: Node?) -> Bool {
         return -1
     }
 ```
+530. Minimum Absolute Difference in BST
+
+```swift
+    func getMinimumDifference(_ root: TreeNode?) -> Int {
+        var minimum = Int.max
+        var arr: [Int] = []
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            dfs(root?.left)
+            arr.append(node.val)
+            dfs(root?.right)
+        }
+        
+        dfs(root)
+        
+        for i in 0..<arr.count where i != arr.count - 1 {
+            let curr = arr[i]
+            let next = arr[i + 1]
+            
+            if minimum > abs(curr - next) {
+                minimum = abs(curr - next)
+            }
+        }
+        
+        return minimum
+    }
+```
