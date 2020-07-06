@@ -5439,3 +5439,23 @@ func isBST(_ root: Node?) -> Bool {
         return false
     }
 ```
+## 387. First Unique Character in a String
+
+
+```swift
+    func firstUniqChar(_ s: String) -> Int {
+        var dict: [Character: Int] = [:]
+        
+        for char in s {
+            dict[char, default: 0] += 1
+        }
+        
+        for (i, char) in s.enumerated() {
+            if let val = dict[char], val == 1 {
+                return i
+            }
+        }
+        
+        return -1
+    }
+```
