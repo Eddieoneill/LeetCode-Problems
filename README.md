@@ -5410,3 +5410,32 @@ func isBST(_ root: Node?) -> Bool {
         }
     }
 ```
+## 520. Detect Capital
+
+```swift
+    func detectCapitalUse(_ word: String) -> Bool {
+        var upper = 0
+        
+        for char in word {
+            if String(char).uppercased() == String(char) { upper += 1 }
+        }
+        
+        if upper == word.count || upper == 0 || (upper == 1 && isUpper(word)) {
+            return true
+        } else {
+            return false
+        } 
+    }
+    
+    func isUpper(_ str: String) -> Bool {
+        for char in str {
+            if String(char).uppercased() == String(char) {
+                return true
+            } else {
+                return false
+            }
+        }
+        
+        return false
+    }
+```
