@@ -5523,3 +5523,35 @@ func isBST(_ root: Node?) -> Bool {
         return String(suffix + prefix)
     }
 ```
+## 21. Merge Two Sorted Lists
+
+```swift
+    func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var l1 = l1
+        var l2 = l2
+        let dummyNode = ListNode(0)
+        var current = dummyNode
+        dummyNode.next = current.next
+        
+        if l1 == nil && l2 == nil { return nil }
+        
+        while l1 != nil && l2 != nil {
+            if l1?.val ?? 0 < l2?.val ?? 0 {
+                current.next = l1
+                l1 = l1?.next
+            } else {
+                current.next = l2
+                l2 = l2?.next
+                
+            }
+            current = current.next!
+        }
+        
+        if l1 == nil {
+            current.next = l2
+        } else {
+            current.next = l1
+        }
+        return dummyNode.next
+    }
+```
