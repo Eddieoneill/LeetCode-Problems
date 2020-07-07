@@ -5606,3 +5606,25 @@ func isBST(_ root: Node?) -> Bool {
         }
     }
 ```
+## 256. Paint House
+
+```swift
+	func minCost(_ costs: [[Int]]) -> Int {
+        if costs.isEmpty { return 0 }
+        var lastR = costs[0][0]
+        var lastB = costs[0][1]
+        var lastG = costs[0][2]
+    
+        for i in 1..<costs.count{
+            let currR = min(lastB, lastG) + costs[i][0]
+            let currB = min(lastR, lastG) + costs[i][1]
+            let currG = min(lastB, lastR) + costs[i][2]
+            
+            lastR = currR
+            lastB = currB
+            lastG = currG
+        }
+        
+        return min(min(lastR, lastB),lastG)
+    }
+```
