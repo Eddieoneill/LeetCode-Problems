@@ -5569,3 +5569,40 @@ func isBST(_ root: Node?) -> Bool {
         return left && right
     }
 ```
+## 993. Cousins in Binary Tree
+
+```swift
+    func isCousins(_ root: TreeNode?, _ x: Int, _ y: Int) -> Bool {
+        var xParent: TreeNode? = nil
+        var xDepth = -1
+        var yParent: TreeNode? = nil
+        var yDepth = -1
+        
+        func dfs(_ root: TreeNode?, _ height: Int, _ parent: TreeNode?) {
+            guard let node = root else { return }
+            
+            if node.val == x {
+                xParent = parent
+                xDepth = height
+                return
+            }
+            
+            if node.val == y {
+                yParent = parent
+                yDepth = height
+                return
+            }
+            
+            dfs(root?.left, height + 1, root)
+            dfs(root?.right, height + 1, root)
+        }
+        
+        dfs(root, 0, nil)
+        
+        if let xP = xParent, let yP = yParent {
+            return xP.val != yP.val && xDepth == yDepth   
+        } else {
+            return false
+        }
+    }
+```
