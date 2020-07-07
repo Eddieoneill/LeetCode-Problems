@@ -5555,3 +5555,17 @@ func isBST(_ root: Node?) -> Bool {
         return dummyNode.next
     }
 ```
+## 100. Same Tree
+
+```swift
+    func isSameTree(_ p: TreeNode?, _ q: TreeNode?) -> Bool {
+        if p == nil && q == nil { return true }
+        if p == nil || q == nil { return false }
+        if p!.val != q!.val { return false }
+        
+        let left = isSameTree(p?.left, q?.left)
+        let right = isSameTree(p?.right, q?.right)
+        
+        return left && right
+    }
+```
