@@ -5628,3 +5628,30 @@ func isBST(_ root: Node?) -> Bool {
         return min(min(lastR, lastB),lastG)
     }
 ```
+## 447. Number of Boomerangs
+
+```swift
+    func dist(_ a: (Int, Int), _ b: (Int, Int)) -> Int {
+        let dx = a.0 - b.0
+        let dy = a.1 - b.1
+        return dx * dx + dy * dy 
+    }
+    
+    func numberOfBoomerangs(_ points: [[Int]]) -> Int {
+        let ps = points.map { ($0[0], $0[1]) } 
+        var ans = 0
+        for i in 0..<ps.count {
+            let curr = ps[i]
+            var dict = [Int: Int]()
+            for j in 0..<ps.count {
+                if i == j { continue }
+                let d: Int = dist(curr, ps[j])
+                dict[d] = 1 + (dict[d] ?? 0)
+            }
+            ans += dict.reduce(0) { res, t in 
+                return  res + t.1 * (t.1 - 1)
+            }
+        }
+        return ans 
+    }
+```
