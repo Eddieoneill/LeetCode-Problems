@@ -5655,3 +5655,27 @@ func isBST(_ root: Node?) -> Bool {
         return ans 
     }
 ```
+## 1271. Hexspeak
+
+
+```swift
+    func toHexspeak(_ num: String) -> String {
+        var hex = String(Int(num) ?? 0, radix: 16, uppercase: true).map { String($0) }
+        var set: Set<String> = ["A", "B", "C", "D", "E", "F", "I", "O"]
+    
+        for (i, char) in hex.enumerated() {
+            if char == "1" {
+                hex[i] = "I"     
+            } else if char == "0" {
+                hex[i] = "O"
+            }
+        }
+        
+        for char in hex {
+            if !set.contains(char) {
+                return "ERROR"
+            }
+        }
+        return hex.joined()
+    } 
+```
