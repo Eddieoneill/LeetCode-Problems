@@ -5740,3 +5740,28 @@ func isBST(_ root: Node?) -> Bool {
         return length
     }
 ```
+## 383. Ransom Note
+
+```swift
+    func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+        var dict: [String: Int] = [:]
+        
+        for char in magazine {
+            let str = String(char)
+            dict[str, default: 0] += 1
+        }
+        
+        for char in ransomNote {
+            let str = String(char)
+            
+            dict[str, default: 0] -= 1
+            
+            if dict[str, default: 0] < 0 {
+                return false
+            }
+            
+        }
+        
+        return true
+    }
+```
