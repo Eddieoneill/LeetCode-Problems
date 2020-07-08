@@ -5765,3 +5765,28 @@ func isBST(_ root: Node?) -> Bool {
         return true
     }
 ```
+## 860. Lemonade Change
+
+```swift
+    func lemonadeChange(_ bills: [Int]) -> Bool {
+        var five = 0
+        var ten = 0
+        
+        for bill in bills {
+            if bill == 5 {
+                five += 1
+            } else if bill == 10 {
+                five -= 1
+                ten += 1
+            } else if bill == 20 && ten > 0 {
+                ten -= 1
+                five -= 1
+            } else {
+                five -= 3
+            }
+            
+            if five < 0 { return false }
+        }
+        return true
+    }
+```
