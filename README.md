@@ -5679,3 +5679,32 @@ func isBST(_ root: Node?) -> Bool {
         return hex.joined()
     } 
 ```
+## 606. Construct String from Binary Tree
+
+```swift
+    func tree2str(_ t: TreeNode?) -> String {
+        var result: [String] = []
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            result.append("\(node.val)")
+
+            if node.left != nil || node.right != nil {
+                result.append("(")
+                dfs(root?.left)
+                result.append(")")
+            }
+
+            if node.right != nil {
+                result.append("(")
+                dfs(root?.right)
+                result.append(")")
+            }
+        }
+        
+        dfs(t)
+        
+        return result.joined()
+    }
+```
