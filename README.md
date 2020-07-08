@@ -5790,3 +5790,45 @@ func isBST(_ root: Node?) -> Bool {
         return true
     }
 ```
+## 704. Binary Search
+
+
+```swift
+    func search(_ nums: [Int], _ target: Int) -> Int {
+        var left = 0
+        var right = nums.count - 1
+
+        while left <= right {
+
+            let middle = ((right - left) / 2) + left
+
+            if nums[middle] < target {
+                left = middle + 1
+            } else if nums[middle] > target {
+                right = middle - 1
+            } else {
+                return middle
+            }
+        }
+
+        return -1
+    }
+    
+    func search(_ nums: [Int], _ target: Int) -> Int {
+        func bst(_ left: Int, _ right: Int) -> Int {
+            if left > right { return -1}
+            
+            let middle = ((right - left) / 2) + left
+            
+            if nums[middle] == target {
+                return middle
+            } else if nums[middle] < target {
+                return bst(middle + 1, right)
+            } else {
+                return bst(left, middle - 1)
+            }
+            
+        } 
+        return bst(0, nums.count - 1)
+    }
+```
