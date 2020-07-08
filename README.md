@@ -5708,3 +5708,35 @@ func isBST(_ root: Node?) -> Bool {
         return result.joined()
     }
 ```
+## 697. Degree of an Array
+
+```swift
+    func findShortestSubArray(_ nums: [Int]) -> Int {
+        var dict: [Int: [Int]] = [:]
+        var degree = 0
+        var length = Int.max
+        
+        for (i, num) in nums.enumerated() {
+            if dict[num] == nil {
+                dict[num] = [0, i, 0]
+            }
+            
+            dict[num, default: [0, 0, 0]][0] += 1
+            dict[num, default: [0, 0, 0]][2] = i
+                 
+            degree = max(degree, dict[num, default: [0, 0, 0]][0])
+        }
+        
+        for (_, val) in dict {
+            var count =  val[0]
+            var start = val[1]
+            var end = val[2]
+            
+            if count == degree {
+                length = min(length, end - start + 1)
+            }
+        }
+        
+        return length
+    }
+```
