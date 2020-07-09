@@ -5951,3 +5951,29 @@ func isBST(_ root: Node?) -> Bool {
         return sum
     }
 ```
+## 107. Binary Tree Level Order Traversal II
+
+```swift
+    func levelOrderBottom(_ root: TreeNode?) -> [[Int]] {
+        guard root != nil else { return [] }
+        var result: [[Int]] = []
+        
+        func dfs(_ root: TreeNode?, _ height: Int) {
+            guard let node = root else { return }
+            
+            dfs(root?.left, height + 1)
+            dfs(root?.right, height + 1)
+            
+            if height >= result.count { 
+                for _ in 0..<height - result.count + 1 {
+                    result.append([])
+                } 
+            }
+            result[height].append(node.val)    
+            
+        }
+        
+        dfs(root, 0)
+        return result.reversed()
+    }
+```
