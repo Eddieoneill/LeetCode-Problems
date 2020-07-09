@@ -5902,3 +5902,37 @@ func isBST(_ root: Node?) -> Bool {
         return sortedArr.reduce(0, +)
     }
 ```
+## 661. Image Smoother
+
+```swift
+    func imageSmoother(_ M: [[Int]]) -> [[Int]] {
+        var M = M
+        var newM = M
+        var m = M.count
+        var n = M[0].count
+        
+        if m == 0 && n == 0 {
+            return [[]]
+        }
+        
+        var calculators = [[0,1],[0,-1],[1,0],[-1,0],[-1,-1],[1,1],[-1,1],[1,-1]] 
+        
+        for i in 0 ..< m {
+            for j in 0 ..< n {
+                var sum = M[i][j]
+                var count = 1
+                for k in 0 ..< calculators.count {
+                    var x = i + calculators[k][0]
+                    var y = j + calculators[k][1]
+                    if x < 0 || x > m - 1 || y < 0 || y > n - 1 {
+                        continue
+                    }
+                    sum += M[x][y]
+                    count += 1
+                }
+                newM[i][j] = sum / count
+            }
+        }
+        return newM
+    }
+```
