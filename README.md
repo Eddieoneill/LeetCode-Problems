@@ -5936,3 +5936,18 @@ func isBST(_ root: Node?) -> Bool {
         return newM
     }
 ```
+## 268. Missing Number
+
+```swift
+    func missingNumber(_ nums: [Int]) -> Int {
+        guard nums.count > 0 else { return 0 }
+        
+        var sum = 0
+        
+        for i in 1...nums.count { sum += i }
+        
+        for num in nums { sum -= num }
+        
+        return sum
+    }
+```
