@@ -6031,3 +6031,14 @@ func isBST(_ root: Node?) -> Bool {
         return result
     }
 ```
+## 404. Sum of Left Leaves
+
+```swift
+    func sumOfLeftLeaves(_ root: TreeNode?, _ isLeft: Bool = false) -> Int {
+        guard let node = root else { return 0 }
+            
+        if root?.left == nil && root?.right == nil && isLeft { return node.val }
+            
+        return sumOfLeftLeaves(root?.left, true) + sumOfLeftLeaves(root?.right, false)
+    }
+```
