@@ -5858,3 +5858,47 @@ func isBST(_ root: Node?) -> Bool {
         return result
     }
 ```
+## 1005. Maximize Sum Of Array After K Negations
+
+
+```swift
+    func largestSumAfterKNegations(_ A: [Int], _ K: Int) -> Int {
+        var buckets = Array(repeating: 0, count: 201)
+        var sortedArr: [Int] = []
+        var i = 0
+        var k = K
+        
+        for num in A {
+            buckets[num + 100] += 1
+        }
+        
+        for (num, count) in buckets.enumerated() where count > 0 {
+            var count = count 
+            
+            while count > 0 {
+                sortedArr.append(num - 100)
+                count -= 1
+            }
+        }
+        
+        while sortedArr[i] < 0 && k > 0 {
+            sortedArr[i] = abs(sortedArr[i])
+            k -= 1
+            i += 1
+        }
+        
+        print(sortedArr, k)
+        if k > 0 && k % 2 != 0 {
+            var pre = sortedArr[0]
+            for (index, num) in sortedArr.enumerated() where index != 0 {
+                if num > pre {
+                    sortedArr[index - 1] = -pre
+                    break
+                }
+                pre = num
+            }
+        }
+        
+        return sortedArr.reduce(0, +)
+    }
+```
