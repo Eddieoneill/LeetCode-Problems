@@ -5832,3 +5832,29 @@ func isBST(_ root: Node?) -> Bool {
         return bst(0, nums.count - 1)
     }
 ```
+## 118. Pascal's Triangle
+
+```swift
+    func generate(_ numRows: Int) -> [[Int]] {
+        guard numRows > 0 else { return []}
+        guard numRows > 1 else { return [[1]] }
+        guard numRows > 2 else { return [[1], [1, 1]] }
+        
+        var result = [[1], [1, 1]]
+        
+        for row in 2..<numRows {
+            var nextRow: [Int] = [1]
+            var preRow = result[row - 1]
+            
+            for i in 0..<preRow.count - 1 {
+                let val = preRow[i] + preRow[i + 1]
+                nextRow.append(val)
+            }
+            
+            nextRow.append(1)
+            result.append(nextRow)
+        }
+        
+        return result
+    }
+```
