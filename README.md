@@ -6042,3 +6042,29 @@ func isBST(_ root: Node?) -> Bool {
         return sumOfLeftLeaves(root?.left, true) + sumOfLeftLeaves(root?.right, false)
     }
 ```
+## 997. Find the Town Judge
+
+```swift
+    func findJudge(_ N: Int, _ trust: [[Int]]) -> Int {
+        if N == 1 && trust.isEmpty { return 1 }
+        var dict: [Int: (Int, Int)] = [:]
+        var result = -1
+        
+        for val in trust {
+            let me = val[0]
+            let out = val[1]
+            
+            dict[me, default: (0, 0)].0 += 1
+            dict[out, default: (0, 0)].1 += 1
+        }
+        
+        for (key, val) in dict {
+            if val.0 == 0 && val.1 == N  - 1 {
+                result = key
+                break
+            }
+        }
+        
+        return result
+    }
+```
