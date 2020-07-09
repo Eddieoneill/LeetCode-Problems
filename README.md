@@ -5977,3 +5977,57 @@ func isBST(_ root: Node?) -> Bool {
         return result.reversed()
     }
 ```
+## 350. Intersection of Two Arrays II
+
+```swift
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var nums1 = nums1.sorted{ $0 < $1 }
+        var nums2 = nums2.sorted{ $0 < $1 }
+        var i = 0
+        var j = 0
+        var result: [Int] = []
+        
+        while i < nums1.count && j < nums2.count {
+            if nums1[i] == nums2[j] { 
+                result.append(nums1[i]) 
+                i += 1
+                j += 1
+            } else if nums1[i] > nums2[j] {
+                j += 1
+            } else {
+                i += 1
+            }
+        }
+        return result  
+    }
+```
+
+```swift
+    func intersect(_ nums1: [Int], _ nums2: [Int]) -> [Int] {
+        var dict: [Int : Int] = [:]
+        var sm: [Int] = []
+        var bg: [Int] = []
+        var result: [Int] = []
+        
+        if nums1.count > nums2.count {
+            bg = nums1
+            sm = nums2
+        } else {
+            bg = nums2
+            sm = nums1
+        }
+        
+        for num in bg {
+            dict[num, default: 0] += 1
+        }
+        
+        for num in sm {
+            if let val = dict[num], val > 0 {
+                result.append(num)
+                dict[num, default: 0] -= 1
+            }
+        }
+        
+        return result
+    }
+```
