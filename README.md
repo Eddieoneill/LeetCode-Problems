@@ -6138,3 +6138,26 @@ class Solution {
         return result
     }
 ```
+## 1056. Confusing Number
+
+```swift
+    func confusingNumber(_ N: Int) -> Bool {
+        var valid: [Int: Int] = [0: 0, 1: 1, 6: 9, 8: 8, 9: 6]
+        var num = N
+        var result = 0
+        
+        while num > 0 {
+            let digit = num % 10
+            
+            if let val = valid[digit] {
+                result *= 10
+                result += val
+                num /= 10
+            } else {
+                return false
+            }
+        }
+        
+        return result != N
+    }
+```
