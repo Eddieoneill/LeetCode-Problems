@@ -6068,3 +6068,45 @@ func isBST(_ root: Node?) -> Bool {
         return result
     }
 ```
+## 1175. Prime Arrangements
+
+```swift
+class Solution {
+    let modulos = 1_000_000_007
+    func numPrimeArrangements(_ n: Int) -> Int {
+        let primesCount = getPrime(n)
+        
+        return factorial(primesCount) * factorial(n - primesCount) % modulos
+    }
+    
+    func factorial(_ n: Int) -> Int {
+        if n < 1 {
+            return 1
+        }
+        var result: Int = 1
+        for i in 1...n {
+            result = (result * i) % modulos
+        }
+        return result
+    }
+    
+    func getPrime(_ n: Int) -> Int {
+        var primes: [Int] = [2]
+        var i: Int = 3
+        ext: while i <= n {
+            for x in primes {
+                if x * x > i {
+                    break
+                }
+                if i % x == 0 {
+                    i += 2
+                    continue ext
+                }
+            }
+            primes.append(i)
+            i += 2
+        }
+        return n < 2 ? 0 : primes.count
+    }
+}
+```
