@@ -6187,3 +6187,34 @@ class Solution {
         return result
     }
 ```
+## 202. Happy Number
+
+```swift
+class Solution {
+    var memo: [Int: Bool] = [:]
+    func isHappy(_ n: Int) -> Bool {
+        var seen: Set<Int> = []
+        func _isHappy(_ n: Int) -> Bool {
+            if n == 1 { return true }
+            if seen.contains(n) { return false }
+            if let val = memo[n] { return val }
+            
+            var num = n
+            var nextNum = 0
+            
+            seen.insert(n)
+            
+            while num > 0 {
+                let digit = num % 10
+                nextNum += digit * digit
+                num = num / 10
+            }
+            
+            memo[n] = _isHappy(nextNum)
+            return memo[n, default: false]
+        }
+        
+        return _isHappy(n)
+    }
+}
+```
