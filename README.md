@@ -6161,3 +6161,29 @@ class Solution {
         return result != N
     }
 ```
+## 506. Relative Ranks
+
+```swift
+    func findRelativeRanks(_ nums: [Int]) -> [String] {
+        var sortedNums = nums.sorted { $0 > $1 }
+        var dict: [Int: String] = [:]
+        var result = [String]()
+        
+        for (i, num) in sortedNums.enumerated() {
+            if i == 0 {
+                dict[num] = "Gold Medal"
+            } else if i == 1 {
+                dict[num] = "Silver Medal"
+            } else if i == 2 {
+                dict[num] = "Bronze Medal"
+            } else {
+                dict[num] = "\(i + 1)"
+            }
+        }
+        
+        for num in nums {
+            result.append(dict[num]!)
+        }
+        return result
+    }
+```
