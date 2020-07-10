@@ -6110,3 +6110,31 @@ class Solution {
     }
 }
 ```
+## 599. Minimum Index Sum of Two Lists
+
+```swift
+    func findRestaurant(_ list1: [String], _ list2: [String]) -> [String] {
+        var dict: [String: Int] = [:]
+        var mini = Int.max
+        var result: [String] = []
+        
+        for (i, str) in list1.enumerated() {
+            dict[str] = i
+        }
+        
+        for (i, str) in list2.enumerated() {
+            if let val = dict[str] {
+                if i + val == mini {
+                    result.append(list2[i])
+                }
+                
+                if i + val < mini {
+                    mini = i + val
+                    result = [list2[i]]
+                }
+            }
+        }
+        
+        return result
+    }
+```
