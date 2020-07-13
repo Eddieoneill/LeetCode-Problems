@@ -6243,3 +6243,26 @@ class Solution {
         return result
     }
 ```
+## 409. Longest Palindrome
+
+```swift
+    func longestPalindrome(_ s: String) -> Int {
+        var dict: [String: Int] = [:]
+        var count = 0
+        var hasOne = false
+        
+        for char in s {
+            dict[String(char), default: 0] += 1
+        }
+        
+        for (key, val) in dict {
+            count += (val / 2) * 2
+            if hasOne == false && val % 2 != 0 {
+                hasOne = true
+                count += 1
+            }
+        }
+        
+        return count
+    }
+```
