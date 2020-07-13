@@ -6275,3 +6275,14 @@ class Solution {
         return result.reduce(0, +)
     }
 ```
+## 796. Rotate String
+
+```swift
+    func rotateString(_ A: String, _ B: String) -> Bool {
+        if A.count != B.count { return false }
+        if A.isEmpty && B.isEmpty { return true }
+        var con = B + B
+        
+        return con.contains(A)
+    }
+```
