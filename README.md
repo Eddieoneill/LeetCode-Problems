@@ -6286,3 +6286,20 @@ class Solution {
         return con.contains(A)
     }
 ```
+## 746. Min Cost Climbing Stairs
+
+
+```swift
+    func minCostClimbingStairs(_ cost: [Int]) -> Int {
+        var path1 = cost[0]
+        var path2 = cost[1]
+        
+        for i in 2..<cost.count {
+            let curr = min(path1, path2) + cost[i]
+            path1 = path2
+            path2 = curr
+        }
+        
+        return min(path1, path2)
+    }
+```
