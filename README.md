@@ -6266,3 +6266,12 @@ class Solution {
         return count
     }
 ```
+## 453. Minimum Moves to Equal Array Elements
+
+```swift
+    func minMoves(_ nums: [Int]) -> Int {
+        let minNum = nums.min()!
+        var result = nums.map { $0 - minNum; }
+        return result.reduce(0, +)
+    }
+```
