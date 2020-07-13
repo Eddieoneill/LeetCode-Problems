@@ -6303,3 +6303,28 @@ class Solution {
         return min(path1, path2)
     }
 ```
+## 455. Assign Cookies
+
+```swift
+    func findContentChildren(_ g: [Int], _ s: [Int]) -> Int {
+        var g = g.sorted { $0 < $1 }
+        var s = s.sorted { $0 < $1 }
+        var j = 0
+        var count = 0
+        print(g, s)
+        for i in 0..<g.count where j < s.count {
+            let greed = g[i]
+            let size = s[j]
+            
+            while s[j] < greed { 
+                j += 1 
+                if j >= s.count { return count }
+            }
+            
+            count += 1
+            j += 1
+        }
+        
+        return count
+    }
+```
