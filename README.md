@@ -6218,3 +6218,28 @@ class Solution {
     }
 }
 ```
+## 257. Binary Tree Paths
+
+```swift
+    func binaryTreePaths(_ root: TreeNode?) -> [String] {
+        var result: [String] = []
+        
+        func dfs(_ root: TreeNode?, _ path: [String]) {
+            var path = path
+            guard let node = root else { return }
+            
+            path.append("\(node.val)")
+            
+            if root?.left == nil && root?.right == nil {
+                result.append(path.joined(separator: "->"))
+            }
+            
+            dfs(root?.left, path)
+            dfs(root?.right, path)
+        }
+        dfs(root, [])
+        print(result)
+        
+        return result
+    }
+```
