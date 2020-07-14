@@ -6468,3 +6468,33 @@ class Solution {
         return false
     }
 ```
+## 830. Positions of Large Groups
+
+```swift
+    func largeGroupPositions(_ S: String) -> [[Int]] {
+        var start = 0
+        var i = 1
+        var s = S.map { String($0) }
+        var result: [[Int]] = []
+        
+        while i < s.count{
+            if s[i - 1] == s[i] { 
+                i += 1
+                continue
+            }
+            
+            if i - start >= 3 {
+                result.append([start, i - 1])
+            }
+            
+            start = i
+            i += 1
+        }
+        
+        if i - start >= 3 {
+            result.append([start, i - 1])
+        }
+        
+        return result
+    }
+```
