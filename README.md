@@ -6346,3 +6346,25 @@ class Solution {
         return result
     }
 ```
+## 1507. Reformat Date
+
+```swift
+    func reformatDate(_ date: String) -> String {
+        var date = date.split(separator: " ")
+        var day: [String] = []
+        var month = ["Jan": "01", "Feb": "02", "Mar": "03", "Apr": "04", "May": "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"]
+        
+        for char in date[0] {
+            let str = String(char)
+            if let _ = Int(str) {
+                day.append(str)
+            }
+        }
+        
+        if day.count == 1 {
+            day = ["0", day[0]]
+        }
+        
+        return "\(date[2])-\(month[String(date[1]), default: "01"])-\(day.joined())"
+    }
+```
