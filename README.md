@@ -6368,3 +6368,19 @@ class Solution {
         return "\(date[2])-\(month[String(date[1]), default: "01"])-\(day.joined())"
     }
 ```
+## 598. Range Addition II
+
+
+```swift
+    func maxCount(_ m: Int, _ n: Int, _ ops: [[Int]]) -> Int {
+        var minRow = m
+        var minCol = n
+        
+        for arr in ops {
+            minRow = min(minRow, arr[0])
+            minCol = min(minCol, arr[1])
+        }
+        
+        return minRow * minCol
+    }
+```
