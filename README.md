@@ -6384,3 +6384,16 @@ class Solution {
         return minRow * minCol
     }
 ```
+## 492. Construct the Rectangle
+
+```swift
+    func constructRectangle(_ area: Int) -> [Int] {
+        let sqrt = Int(Float(area).squareRoot())
+        
+        for i in (1...sqrt).reversed() {
+            if area % i == 0 { return [area / i, i] }
+        }
+        
+        return []
+    }
+```
