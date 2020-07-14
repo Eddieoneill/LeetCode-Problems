@@ -6447,3 +6447,24 @@ class Solution {
         return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 
     }
 ```
+## 717. 1-bit and 2-bit Characters
+
+```swift
+    func isOneBitCharacter(_ bits: [Int]) -> Bool {
+        if bits.count == 1 { return true }
+        var i = 0
+        
+        while i < bits.count {
+            if bits[i] == 1 {
+                i += 2
+                continue
+            } else if i == bits.count - 1 {
+                return true
+            } else {
+                i += 1
+            }
+        }
+        
+        return false
+    }
+```
