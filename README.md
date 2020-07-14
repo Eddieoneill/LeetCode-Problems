@@ -6328,3 +6328,21 @@ class Solution {
         return count
     }
 ```
+## 1512. Number of Good Pairs
+
+```swift
+    func numIdenticalPairs(_ nums: [Int]) -> Int {
+        var buckets = Array(repeating: 0, count: 101)
+        var result = 0
+        
+        for num in nums {
+            buckets[num] += 1
+        }
+        
+        for (num, count) in buckets.enumerated() where count > 1 {
+            result += (count * (count - 1)) / 2
+        }
+        
+        return result
+    }
+```
