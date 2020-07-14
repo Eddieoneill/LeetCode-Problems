@@ -6397,3 +6397,53 @@ class Solution {
         return []
     }
 ```
+## 1360. Number of Days Between Two Dates
+
+```swift
+    func daysBetweenDates(_ date1: String, _ date2: String) -> Int {
+        let date1 = daysSince1970(date1)
+        let date2 = daysSince1970(date2)
+        return abs(date1 - date2)
+    }
+    
+    func daysSince1970(_ date: String) -> Int {
+        let date = date.split(separator: "-")
+        guard let year = Int(date[0]), let month = Int(date[1]), let day = Int(date[2]) else { return 0}
+        var countYears = 0
+        var countMonths = 0
+        
+        for index in 1970..<year {
+            if index % 4 == 0 {
+                countYears += 366
+            } else {
+                countYears += 365
+            }
+        }
+        
+        for index in 1..<month {
+            countMonths += daysInMonth(index, year: year)
+        }
+        
+        return countYears + countMonths + day
+    }
+    
+    func daysInMonth(_ month: Int, year: Int) -> Int {
+        switch month {
+            case 1, 3, 5, 7, 8, 10, 12:
+                return 31
+            case 4, 6, 9, 11:
+                return 30
+            case 2:
+                if isLeepYear(year) {
+                    return 29
+                }
+                return 28
+            default:
+                return 0
+        }
+    }
+    
+    func isLeepYear(_ year: Int) -> Bool {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0 
+    }
+```
