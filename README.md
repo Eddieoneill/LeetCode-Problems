@@ -6583,3 +6583,36 @@ class MyQueue {
     }
 }
 ```
+## 1042. Flower Planting With No Adjacent
+
+
+```swift
+    func gardenNoAdj(_ N: Int, _ paths: [[Int]]) -> [Int] {
+        if paths.count == 0 { return Array(repeating:1, count: N) }
+        var graph = [Int: Set<Int>]()
+        var result = Array(repeating: 0, count: N)
+        
+        for path in paths {
+            graph[path[0], default: []].insert(path[1])
+            graph[path[1], default: []].insert(path[0])
+        }
+        
+        for i in 0..<N {
+            var takenColor = Array(repeating: 0, count: 5)
+            var neighbors = Set<Int>()
+            
+            if graph[i+1] != nil { neighbors = graph[i+1 ,default: []] }
+            
+            for neighbor in neighbors {
+                takenColor[result[neighbor-1]] = 1
+            }
+            
+            for j in 1...4 {
+                if takenColor[j] == 0 { result[i] = j }
+            }
+            
+        }
+        
+        return result
+    }
+```
