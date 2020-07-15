@@ -6505,3 +6505,27 @@ class Solution {
         return !(rec1[2] <= rec2[0] || rec1[3] <= rec2[1] || rec1[0] >= rec2[2] || rec1[1] >= rec2[3])
     }
 ```
+## 235. Lowest Common Ancestor of a Binary Search Tree
+
+```swift
+    func lowestCommonAncestor(_ root: TreeNode?, _ p: TreeNode?, _ q: TreeNode?) -> TreeNode? {
+        var result: TreeNode? = nil
+        let small = min(p!.val, q!.val)
+        let big = max(p!.val, q!.val) 
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            guard result == nil else { return }
+            
+            if small <= node.val && big >= node.val { result = node; return }
+            
+            if small < node.val && big < node.val { dfs(root?.left)}
+            
+            if small >= node.val && big >= node.val { dfs(root?.right)}
+        }
+        
+        dfs(root)
+        
+        return result
+    }
+```
