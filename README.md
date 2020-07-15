@@ -6544,3 +6544,42 @@ class Solution {
         return count
     }
 ```
+## 232. Implement Queue using Stacks
+
+```swift
+class MyQueue {
+    var stack1: [Int]
+    var stack2: [Int]
+    
+    init() {
+        stack1 = []
+        stack2 = []
+    }
+    
+    func push(_ x: Int) {
+        stack1.append(x)
+    }
+    
+    func pop() -> Int {
+        if stack2.isEmpty {
+            while !stack1.isEmpty {
+                stack2.append(stack1.removeLast())
+            }
+        }
+        
+        return stack2.removeLast()
+    }
+    
+    func peek() -> Int {
+        if stack2.isEmpty {
+            return stack1[0]
+        } else {
+            return stack2[stack2.count - 1]
+        }
+    }
+    
+    func empty() -> Bool {
+        return stack1.isEmpty && stack2.isEmpty
+    }
+}
+```
