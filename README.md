@@ -6616,3 +6616,43 @@ class MyQueue {
         return result
     }
 ```
+## 1154. Day of the Year
+
+```swift
+    func dayOfYear(_ date: String) -> Int {
+        var day = 0
+        var arrDate: [String] = []
+        var word = ""
+        
+        for char in date {
+            if char == "-" {
+                arrDate.append(word)
+                word = ""
+            } else {
+                word += String(char)
+            }
+        }
+        
+        arrDate.append(word)
+        
+        let dateMonth = Int(arrDate[1]) ?? 1
+        let dateDay = Int(arrDate[2]) ?? 1
+        let dateYear = Int(arrDate[0]) ?? 1
+        let months = [31,28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        
+        for month in 1..<dateMonth {
+            
+            if month == 2 && isLeapYear(dateYear) {
+                day += months[month - 1] + 1
+            } else {
+                day += months[month - 1]
+            }
+        }
+        
+        return day + dateDay
+    }
+    
+    func isLeapYear(_ year: Int) -> Bool {
+        return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0
+    }
+```
