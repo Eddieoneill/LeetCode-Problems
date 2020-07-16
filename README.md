@@ -6692,3 +6692,48 @@ class MyQueue {
         return false
     }
 ```
+## 392. Is Subsequence
+
+```swift
+ class Solution {
+    var sourceMax = 0
+    var targetMax = 0
+    var s: [Character] = []
+    var t: [Character] = []
+    func isSubsequence(_ s: String, _ t: String) -> Bool {
+        return _isSubsequence(s, t)
+        if s.isEmpty { return true }
+        if t.isEmpty { return false }
+        
+        self.s = s.map { $0 }
+        self.t = t.map { $0 }
+        self.sourceMax = s.count
+        self.targetMax = t.count
+        return isS(l: 0, r: 0)
+    }
+    
+    func isS(l: Int, r: Int) -> Bool {
+        if l == sourceMax { return true } 
+        if r == targetMax { return false }
+        
+        var l = l
+        var r = r
+        if s[l] == t[r] { l += 1 }
+        r += 1
+        return isS(l: l, r: r)
+    }
+}
+
+    func _isSubsequence(_ s: String, _ t: String) -> Bool {
+        guard !s.isEmpty else { return true }
+        let s = s.map { $0 }
+        var i = 0
+        
+        for char in t {
+            if i == s.count { break }
+            if char == s[i] { i += 1 }
+        }
+
+        return i == s.count
+    }
+```
