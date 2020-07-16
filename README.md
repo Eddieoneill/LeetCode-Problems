@@ -6675,3 +6675,20 @@ class MyQueue {
         return true
     }
 ```
+## 392. Is Subsequence
+
+```swift
+    func isSubsequence(_ s: String, _ t: String) -> Bool {
+        guard !s.isEmpty else { return true }
+        let s = s.map { String($0) }
+        var i = 0
+        
+        for char in t {
+            let str = String(char)
+            if str == s[i] { i += 1 }
+            if i >= s.count { return true }
+        }
+        
+        return false
+    }
+```
