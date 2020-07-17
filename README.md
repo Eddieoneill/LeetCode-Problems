@@ -6836,3 +6836,32 @@ class MyQueue {
         return result
     }
 ```
+## 27. Remove Element
+
+```swift
+    func removeElement(_ nums: inout [Int], _ val: Int) -> Int {
+        guard !nums.isEmpty else { return 0 }
+        guard nums.count > 1 else { return nums[0] == val ? 0: 1 }
+        var i = 0
+        var j = nums.count - 1
+        
+        while i < j {
+            if nums[j] == val { j -= 1; continue }
+            if nums[i] == val {
+                let temp = nums[i]
+                nums[i] = nums[j]
+                nums[j] = temp
+                i += 1
+                j -= 1
+                continue
+            }
+            
+            i += 1
+        }
+        
+        if nums[i] == val {
+            return i
+        }
+        return i + 1
+    }
+```
