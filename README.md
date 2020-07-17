@@ -6783,3 +6783,33 @@ class MyQueue {
         return tilt
     }
 ```
+## 541. Reverse String II
+
+
+```swift
+    func reverseStr(_ s: String, _ k: Int) -> String {
+        var charArr = s.map { String($0) }
+        var i = 0
+        
+        while i < s.count {
+            reverse(&charArr, i, min(s.count - 1, i + k - 1))
+            i += 2 * k
+        }
+        
+        return charArr.joined()
+    }
+    
+    func reverse(_ arr: inout [String], _ left: Int, _ right: Int) {
+        var left = left
+        var right = right 
+        
+        while left < right {
+            let temp = arr[left]
+            arr[left] = arr[right]
+            arr[right] = temp
+            
+            left += 1
+            right -= 1
+        }
+    }
+```
