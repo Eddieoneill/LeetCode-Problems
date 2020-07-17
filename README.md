@@ -6813,3 +6813,26 @@ class MyQueue {
         }
     }
 ```
+## 1128. Number of Equivalent Domino Pairs
+
+```swift
+    func numEquivDominoPairs(_ dominoes: [[Int]]) -> Int {
+        var seen: [String: [Int]] = [:]
+        var result = 0
+        
+        for i in 0..<dominoes.count {
+            let a = dominoes[i][0]
+            let b = dominoes[i][1]
+            let key = "\(min(a, b))-\(max(a, b))"
+            seen[key, default: []].append(i)
+        }
+        
+        for (_ , arr) in seen {
+            if arr.count > 1 {
+                result += arr.count * (arr.count - 1) / 2
+            }
+        }
+        
+        return result
+    }
+```
