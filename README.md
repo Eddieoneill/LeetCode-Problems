@@ -6865,3 +6865,75 @@ class MyQueue {
         return i + 1
     }
 ```
+## 720. Longest Word in Dictionary
+
+
+```swift
+class Solution {
+    func longestWord(_ words: [String]) -> String {
+        let trie = Trie()
+        
+        for word in words {
+            trie.insert(word)
+        }
+        
+        return trie.longestWord()
+    }
+}
+
+class Trie {
+    let root: TrieNode
+    init() {
+        self.root = TrieNode()
+    }
+    
+    func insert(_ word: String) {
+        var curr = self.root
+        for char in word {
+            let index = char.asciiValue! - Character("a").asciiValue!
+            if curr.children[Int(index)] == nil {
+                curr.children[Int(index)] = TrieNode(String(char))
+            }
+            
+            curr = curr.children[Int(index)]!
+            
+        }
+        
+        curr.isEnd = true
+    }
+    
+    func longestWord() -> String {
+        var maxWord = ""
+        func dfs(_ node: TrieNode?, _ currWord: [String]) {
+            var currWord = currWord
+            guard let node = node else { return }
+            if node.key != "" && !node.isEnd { return }
+            
+            if currWord.count > maxWord.count { maxWord = currWord.joined() }
+            
+            for i in 0..<26 {
+                let child = node.children[i]
+                if child == nil { continue }
+                currWord.append(String(child!.key))
+                dfs(child, currWord)
+                currWord.removeLast()
+            }
+        } 
+        
+        dfs(self.root, [])
+        return maxWord
+    }
+}
+
+class TrieNode {
+    let key: String
+    var children: [TrieNode?]
+    var isEnd: Bool
+    
+    init(_ key: String = "") {
+        self.key = key
+        self.children = Array(repeating: nil, count: 26)
+        self.isEnd = false
+    }
+}
+```
