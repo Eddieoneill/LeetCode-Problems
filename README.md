@@ -6737,3 +6737,26 @@ class MyQueue {
         return i == s.count
     }
 ```
+## 543. Diameter of Binary Tree
+
+```swift
+    func diameterOfBinaryTree(_ root: TreeNode?) -> Int {
+        var maxVal = 0
+        
+        func dfs(_ root: TreeNode?) -> Int {
+            guard root != nil else { return 0 }
+            
+            let left = dfs(root?.left)
+            let right = dfs(root?.right)
+            
+            maxVal = max(left + right, maxVal)
+            return 1 + max(left, right)
+            
+            
+        }
+        
+        dfs(root)
+        
+        return maxVal
+    }
+```
