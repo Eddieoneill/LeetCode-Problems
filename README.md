@@ -6760,3 +6760,26 @@ class MyQueue {
         return maxVal
     }
 ```
+## 563. Binary Tree Tilt
+
+
+```swift
+    func findTilt(_ root: TreeNode?) -> Int {
+        var tilt = 0
+        
+        func dfs(_ root: TreeNode?) -> Int {
+            guard let node = root else { return 0 }
+            
+            let left = dfs(root?.left)
+            let right = dfs(root?.right)
+            
+            tilt += abs(left - right)
+            
+            return left + right + node.val
+        }
+        
+        dfs(root)
+        
+        return tilt
+    }
+```
