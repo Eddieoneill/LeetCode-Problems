@@ -7032,3 +7032,36 @@ class TrieNode {
         return result
     }
 ```
+## 401. Binary Watch
+
+```swift
+    func readBinaryWatch(_ num: Int) -> [String] {
+        var times: [String] = []
+        
+        func _readBinaryWatch(_ n: Int, _ hourIndex: Int, _ minIndex: Int, _ hours: Int,  _ min: Int) {
+            guard n > 0 else { 
+                if hours <= 11 && min <= 59  {
+                    var time = "\(hours):\(min)"
+                    if min < 10 {
+                        time = "\(hours):0\(min)"
+                    }
+                    times.append(time)
+                }
+                return 
+            }
+            
+            for i in hourIndex..<4 {
+                _readBinaryWatch(n - 1, i + 1, minIndex, hours | 1 << i, min)
+            }           
+            
+            for i in minIndex..<6 {
+                _readBinaryWatch(n - 1, 4, i + 1, hours, min | 1 << i)
+            }
+        }
+        
+        _readBinaryWatch(num, 0, 0, 0, 0)
+        
+        
+        return times
+    }
+```
