@@ -6961,3 +6961,22 @@ class TrieNode {
         return result
     }
 ```
+## 9. Palindrome Number
+
+
+```swift
+    func isPalindrome(_ x: Int) -> Bool {
+        guard x >= 0 else { return false }
+        guard x >= 10 else { return true } 
+        var result = 0
+        var n = x
+        
+        while n > 0 {
+            result *= 10
+            result += n % 10
+            n /= 10
+        }
+        
+        return result == x
+    }
+```
