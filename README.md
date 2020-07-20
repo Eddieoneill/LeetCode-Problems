@@ -7065,3 +7065,39 @@ class TrieNode {
         return times
     }
 ```
+## 628. Maximum Product of Three Numbers
+
+
+```swift
+    func maximumProduct(_ nums: [Int]) -> Int {
+        guard nums.count > 3 else { return nums[0] * nums[1] * nums[2] }
+        var maxN1 = Int.max
+        var maxN2 = Int.max
+        var maxP1 = Int.min
+        var maxP2 = Int.min
+        var maxP3 = Int.min
+        
+        
+        for num in nums {
+            if num < maxN1 {
+                maxN2 = maxN1
+                maxN1 = num
+            } else if num < maxN2 {
+                maxN2 = num
+            }
+            
+            if num > maxP1 {
+                maxP3 = maxP2
+                maxP2 = maxP1
+                maxP1 = num
+            } else if num > maxP2 {
+                maxP3 = maxP2
+                maxP2 = num
+            } else if num > maxP3 {
+                maxP3 = num
+            }
+        }
+        
+        return max(maxP1 * maxP2 * maxP3, maxN1 * maxN2 * maxP1)
+    }
+```
