@@ -6980,3 +6980,26 @@ class TrieNode {
         return result == x
     }
 ```
+## 1018. Binary Prefix Divisible By 5
+
+
+```swift
+    func prefixesDivBy5(_ A: [Int]) -> [Bool] {
+        var current: Int = 0 
+        var result: [Bool] = Array(repeating: false, count: A.count)
+
+        for i in 0..<A.count {
+            current <<= 1
+            print(A[i], current + A[i])
+            current += A[i]
+
+            if current % 5 == 0 {
+                result[i] = true
+            }
+            
+            current %= 5
+        }
+
+        return result
+    }
+```
