@@ -7003,3 +7003,32 @@ class TrieNode {
         return result
     }
 ```
+## 270. Closest Binary Search Tree Value
+
+```swift
+    func closestValue(_ root: TreeNode?, _ target: Double) -> Int {
+        let target = Int(round(target))
+        var diff = Int.max
+        var result = 0
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            let curr = abs(node.val - target)
+            
+            if curr < diff {
+                diff = curr
+                result = node.val
+            }
+            
+            if target < node.val {
+                dfs(root?.left)   
+            } else {
+                dfs(root?.right)   
+            }
+        }
+        
+        dfs(root)
+        
+        return result
+    }
+```
