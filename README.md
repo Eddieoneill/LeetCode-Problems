@@ -6937,3 +6937,27 @@ class TrieNode {
     }
 }
 ```
+## 119. Pascal's Triangle II
+
+```swift
+    func getRow(_ rowIndex: Int) -> [Int] {
+        guard rowIndex > 0 else { return [1] }
+        guard rowIndex > 1 else { return [1, 1] }
+        
+        var result = [1, 1]
+        
+        for row in 2...rowIndex {
+            var nextRow: [Int] = [1]
+            
+            for i in 0..<result.count - 1 {
+                let val = result[i] + result[i + 1]
+                nextRow.append(val)
+            }
+            
+            nextRow.append(1)
+            result = nextRow
+        }
+        
+        return result
+    }
+```
