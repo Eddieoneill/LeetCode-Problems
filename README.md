@@ -7164,3 +7164,25 @@ class TrieNode {
         return result.reversed().map { String($0) }.joined(separator: "")
     }
 ```
+## 70. Climbing Stairs
+
+```swift
+    func climbStairs(_ n: Int) -> Int {
+        guard n > 0 else { return 0 }
+        guard n > 1 else { return 1 }
+        guard n > 2 else { return 2 }
+        
+        var num1 = 1
+        var num2 = 2
+        var curr = 3
+        
+        while curr < n {
+            let temp = num1
+            num1 = num2
+            num2 = temp + num2
+            curr += 1
+        }
+        
+        return num1 + num2
+    }
+```
