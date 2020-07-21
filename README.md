@@ -7126,3 +7126,41 @@ class TrieNode {
         return max(result[result.count - 1] * result[result.count - 2] * result[result.count - 3], result[result.count - 1] * result[0] * result[1])
     }
 ```
+## 415. Add Strings
+
+```swift
+    func addStrings(_ num1: String, _ num2: String) -> String {
+        var result: [Int] = []
+        var num1 = num1.map { String($0) }
+        var num2 = num2.map { String($0) }
+        var i = num1.count - 1
+        var j = num2.count - 1
+        var carry = 0
+        
+        while i >= 0 || j >= 0 {
+            var digit1 = 0
+            var digit2 = 0
+            
+            if i >= 0, let val = Int(num1[i]) {
+                digit1 = val
+            }
+            
+            if j >= 0, let val = Int(num2[j]) {
+                digit2 = val
+            }
+            let sum = digit1 + digit2 + carry
+            result.append(sum % 10)
+            carry = sum / 10
+            
+            i -= 1
+            j -= 1
+        }
+        
+        if carry > 0 {
+            result.append(carry)
+        }
+        
+        
+        return result.reversed().map { String($0) }.joined(separator: "")
+    }
+```
