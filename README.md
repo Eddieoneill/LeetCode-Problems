@@ -7296,3 +7296,41 @@ class TrieNode {
         return i + 1
     }
 ```
+## 989. Add to Array-Form of Integer
+
+
+```swift
+    func addToArrayForm(_ A: [Int], _ K: Int) -> [Int] {
+        var k = K
+        var result: [Int] = []
+        var carry = 0
+        var i = A.count - 1
+        
+        while i >= 0 {
+            let val = k % 10
+            let sum = A[i] + val + carry
+            k /= 10
+            
+            result.append(sum % 10)
+            
+            carry = sum / 10
+            i -= 1
+        }
+        
+        while k > 0 {
+            let val = k % 10
+            let sum = val + carry
+            k /= 10
+            
+            result.append(sum % 10)
+            
+            carry = sum / 10
+        }
+        
+        if carry > 0 {
+            result.append(carry)
+        }
+        
+        return result.reversed()
+    }
+```
