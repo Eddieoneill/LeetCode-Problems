@@ -7186,3 +7186,31 @@ class TrieNode {
         return num1 + num2
     }
 ```
+## 437. Path Sum III
+
+```swift
+    func pathSum(_ root: TreeNode?, _ sum: Int) -> Int {
+        var count = 0
+        var dict: [Int: Int] = [:]
+        
+        func dfs(_ root: TreeNode?, _ currSum: Int) {
+            guard let node = root else { return }
+            var currSum = currSum
+            currSum += node.val
+            if currSum == sum { count += 1 }
+            
+            count += dict[currSum - sum] ?? 0
+            dict[currSum, default: 0] += 1
+            
+            
+            dfs(root?.left, currSum)
+            dfs(root?.right, currSum)
+            
+            dict[currSum, default: 0] -= 1
+        }
+        
+        dfs(root, 0)
+        
+        return count
+    }
+```
