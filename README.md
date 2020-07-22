@@ -7254,3 +7254,27 @@ class TrieNode {
         }
     }
 ```
+## 246. Strobogrammatic Number
+
+
+```swift
+    func isStrobogrammatic(_ num: String) -> Bool {
+        var dict = ["1": "1", "6": "9", "8": "8", "9": "6", "0": "0"]
+        var num = num.map { String($0) }
+        var i = 0
+        var j = num.count - 1
+        
+        while i <= j {
+            if let val1 = dict[num[j]] {
+                if val1 != num[i] { return false }
+            } else {
+                return false
+            }
+            
+            i += 1
+            j -= 1
+        }
+        
+        return true
+    }
+```
