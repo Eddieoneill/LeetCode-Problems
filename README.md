@@ -7214,3 +7214,18 @@ class TrieNode {
         return count
     }
 ```
+## 1. Two Sum
+
+
+```swift
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var seen: [Int: Int] = [:]
+        
+        for (i, num) in nums.enumerated() {
+            if let index = seen[target - num] { return [i, index] }
+            seen[num] = i
+        }
+        
+        return []
+    }
+```
