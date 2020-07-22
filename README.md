@@ -7229,3 +7229,28 @@ class TrieNode {
         return []
     }
 ```
+## 744. Find Smallest Letter Greater Than Target
+
+
+```swift
+    func nextGreatestLetter(_ letters: [Character], _ target: Character) -> Character {
+        var left = 0
+        var right = letters.count
+        
+        while left < right {
+            let mid = ((right - left) / 2) + left
+            
+            if letters[mid] > target {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        if left >= letters.count {
+            return letters[0]
+        } else {
+            return letters[left]
+        }
+    }
+```
