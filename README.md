@@ -7334,3 +7334,47 @@ class TrieNode {
         return result.reversed()
     }
 ```
+## 819. Most Common Word
+
+
+```swift
+    func mostCommonWord(_ paragraph: String, _ banned: [String]) -> String {
+        var dict: [String: Int] = [:]
+        var banned = Set(banned)
+        var words: [String] = []
+        var currWord: [String] = []
+        var result = ""
+        var count = 0
+        
+        for char in paragraph {
+            let str = String(char).lowercased()
+            
+            if str < "a" || str > "z" {
+                if !currWord.isEmpty {
+                    words.append(currWord.joined())   
+                }
+                currWord = []
+            } else {
+                currWord.append(str)
+            }
+        }
+        
+        if !currWord.isEmpty {
+            words.append(currWord.joined())   
+        }
+        
+        
+        for word in words where !banned.contains(word) {
+            dict[word, default: 0] += 1
+        }
+        
+        for (key, val) in dict {
+            if val > count {
+                result = key
+                count = val
+            }
+        }
+        
+        return result
+    }
+```
