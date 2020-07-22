@@ -7378,3 +7378,27 @@ class TrieNode {
         return result
     }
 ```
+## 925. Long Pressed Name
+
+
+```swift
+    func isLongPressedName(_ name: String, _ typed: String) -> Bool {
+        var name = name.map { String($0) }
+        var typed = typed.map { String($0) }
+        var i = 0
+        
+        if name[0] != typed[0] { return false }
+        
+        for j in 0..<typed.count {
+            if i >= name.count { i -= 1 }
+            
+            if typed[j] == name[i] {
+                i += 1
+            } else if typed[j] != name[i - 1] {
+                return false
+            }
+        }
+        
+        return i == name.count
+    }
+```
