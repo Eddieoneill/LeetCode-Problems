@@ -7402,3 +7402,67 @@ class TrieNode {
         return i == name.count
     }
 ```
+## 758. Bold Words in String
+
+```swift
+    func boldWords(_ words: [String], _ S: String) -> String {
+        var s = S.map { String($0) }
+        var marked = Array(repeating: false, count: S.count)
+        var start = false
+        var result = [String]()
+        
+        
+        for word in words {
+            mark(word, &marked, s)
+        }
+        
+        print(marked)
+        print(s)
+        
+        for (i, char) in s.enumerated() {
+            if marked[i] == true {
+                if !start {
+                    result.append("<b>\(char)")   
+                    start = true
+                } else if i == s.count - 1 || marked[i + 1] != true {
+                    result.append("\(char)</b>")
+                    start = false
+                } else {
+                    result.append(char)    
+                }
+            } else if start {
+                result.append("</b>\(char)")
+                start = false
+            } else {
+                result.append(char)    
+            }
+        }
+        
+        if start {
+            result.append("</b>")
+        }
+        
+        
+        
+        return result.joined()
+        
+        
+    }
+    
+    func mark(_ word: String, _ marked: inout [Bool], _ s: [String]) {
+        var str = [String]()
+        
+        for (i, char) in s.enumerated() {
+            if str.count < word.count { str.append(char) }
+            
+            if word == str.joined() {
+                for j in i - word.count + 1...i {
+                    marked[j] = true 
+                }
+                
+            } 
+            
+            if str.count >= word.count { str.removeFirst() }
+        }
+    }
+```
