@@ -7558,3 +7558,24 @@ class TrieNode {
         return maxCount
     }
 ```
+## 572. Subtree of Another Tree
+
+```swift
+    func isSubtree(_ s: TreeNode?, _ t: TreeNode?) -> Bool {
+        var strArr1: [String] = []
+        var strArr2: [String] = []
+        func convert(_ root: TreeNode?, _ result: inout [String]) {
+            guard let node = root else { result.append("*"); return }
+            
+            result.append("-\(String(node.val))")
+            
+            convert(root?.left, &result)
+            convert(root?.right, &result)
+        }
+        
+        convert(s, &strArr1)
+        convert(t, &strArr2)
+        
+        return strArr1.joined().contains(strArr2.joined())
+    }
+```
