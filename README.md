@@ -7684,3 +7684,31 @@ class MerkleNode {
         return result.joined()
     }
 ```
+## 844. Backspace String Compare
+
+
+```swift
+    func backspaceCompare(_ S: String, _ T: String) -> Bool {
+        return backspace(S) == backspace(T)
+    }
+    
+    func backspace(_ s: String) -> String {
+        var s = s.map { String($0) }
+        var i = s.count - 1
+        var result: [String] = []
+        var count = 0
+        
+        while i >= 0 {
+            if s[i] == "#" {
+                count += 1
+            } else if count > 0 {
+                count -= 1
+            } else { 
+                result.append(s[i])                   
+            }
+            i -= 1
+        }
+          
+          return result.reversed().joined()
+      } 
+```
