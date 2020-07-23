@@ -7579,3 +7579,40 @@ class TrieNode {
         return strArr1.joined().contains(strArr2.joined())
     }
 ```
+## 38. Count and Say
+
+
+```swift
+    func countAndSay(_ n: Int) -> String {
+        guard n > 1 else { return "1" }
+        
+        var result = ["1", "1"]
+        
+        for _ in 2..<n {
+            var count = 0
+            var char = ""
+            var nextResult: [String] = []
+            for currChar in result {
+                if char == "" { 
+                    char = currChar
+                    count = 1
+                    continue
+                }
+                
+                if currChar == char { 
+                    count += 1
+                    continue
+                }
+                
+                nextResult.append("\(count)")
+                nextResult.append(char)
+                count = 1
+                char = currChar
+            }
+            nextResult.append("\(count)")
+            nextResult.append(char)
+            result = nextResult
+        }
+        return result.joined()
+    }
+```
