@@ -7466,3 +7466,19 @@ class TrieNode {
         }
     }
 ```
+## 101. Symmetric Tree
+
+
+```swift
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        
+        func dfs(_ root1: TreeNode?, _ root2: TreeNode?) -> Bool {
+            if root1 == nil && root2 == nil { return true }
+            guard let node1 = root1, let node2 = root2 else { return false }
+            
+            return node1.val == node2.val && dfs(root1?.left, root2?.right) && dfs(root1?.right, root2?.left)
+        }
+        
+        return dfs(root?.left, root?.right)
+    }
+```
