@@ -7763,3 +7763,31 @@ class MyStack {
     }
 }
 ```
+## 345. Reverse Vowels of a String
+
+```swift
+    func reverseVowels(_ s: String) -> String {
+        var vowels: Set<String> = ["a", "e", "i", "o", "u"]
+        var s = s.map { String($0) }
+        var j = s.count - 1
+        var i = 0
+        
+        while i < j {
+            let str1 = s[i].lowercased()
+            let str2 = s[j].lowercased()
+            if vowels.contains(str1) && vowels.contains(str2) {
+                let temp = s[i]
+                s[i] = s[j]
+                s[j] = temp
+                j -= 1
+                i += 1
+            } else if vowels.contains(str1) {
+                j -= 1
+            } else {
+                i += 1
+            }
+        }
+        
+        return s.joined()
+    }
+```
