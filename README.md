@@ -7828,3 +7828,20 @@ class MinStack {
     }
 }
 ```
+## 724. Find Pivot Index
+
+
+```swift
+    func pivotIndex(_ nums: [Int]) -> Int {
+        var sum = nums.reduce(0, +)
+        var curr = 0
+        
+        for (i, num) in nums.enumerated() {
+            if curr == sum - num - curr { return i }
+            
+            curr += num
+        }
+        
+        return -1
+    }
+```
