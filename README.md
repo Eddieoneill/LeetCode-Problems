@@ -7534,3 +7534,27 @@ class TrieNode {
         return result.reversed().joined()
     }
 ```
+## 674. Longest Continuous Increasing Subsequence
+
+
+```swift
+    func findLengthOfLCIS(_ nums: [Int]) -> Int {
+        var maxCount = 0
+        var currCount = 0
+        var pre = Int.min
+        
+        for num in nums {
+            if num > pre {
+                currCount += 1
+            } else {
+                maxCount = max(maxCount, currCount)
+                currCount = 1
+            }
+            pre = num
+        }
+        
+        maxCount = max(maxCount, currCount)
+        
+        return maxCount
+    }
+```
