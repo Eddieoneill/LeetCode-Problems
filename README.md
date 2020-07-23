@@ -7728,3 +7728,38 @@ class MerkleNode {
         return maxVal
     }
 ```
+## 225. Implement Stack using Queues
+
+
+```swift
+class MyStack {
+    var queue1: [Int] = []
+    /** Initialize your data structure here. */
+    init() {}
+    
+    /** Push element x onto stack. */
+    func push(_ x: Int) {
+        queue1.append(x)
+        var count = queue1.count
+        while count > 1 {
+            queue1.append(queue1.removeFirst())
+            count -= 1
+        }
+    }
+    
+    /** Removes the element on top of the stack and returns that element. */
+    func pop() -> Int {
+        return queue1.removeFirst()
+    }
+    
+    /** Get the top element. */
+    func top() -> Int {
+        return queue1[0]
+    }
+    
+    /** Returns whether the stack is empty. */
+    func empty() -> Bool {
+        return queue1.isEmpty
+    }
+}
+```
