@@ -7482,3 +7482,29 @@ class TrieNode {
         return dfs(root?.left, root?.right)
     }
 ```
+## 594. Longest Harmonious Subsequence
+
+
+```swift
+    func findLHS(_ nums: [Int]) -> Int {
+        var maxVal = 0
+        var dict: [Int: Int] = [:]
+        
+        for num in nums {
+            dict[num, default: 0] += 1
+            
+            if let curr = dict[num] {
+                if let nei1 = dict[num + 1] {
+                    maxVal = max(maxVal, curr + nei1)       
+                }
+                
+                if let nei2 = dict[num - 1] {
+                    maxVal = max(maxVal, curr + nei2)
+                }
+                
+            }
+        }
+        
+        return maxVal
+    }
+```
