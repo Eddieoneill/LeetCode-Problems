@@ -7712,3 +7712,19 @@ class MerkleNode {
           return result.reversed().joined()
       } 
 ```
+## 53. Maximum Subarray
+
+
+```swift
+    func maxSubArray(_ n: [Int]) -> Int {
+        var maxVal = n[0]
+        var curr = n[0]
+        
+        for i in 1..<n.count {
+            curr = max(curr + n[i], n[i])
+            maxVal = max(curr, maxVal)
+        }
+    
+        return maxVal
+    }
+```
