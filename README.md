@@ -7579,6 +7579,73 @@ class TrieNode {
         return strArr1.joined().contains(strArr2.joined())
     }
 ```
+# MerkleTree Solution
+```swift
+class Solution {
+    func isSubtree(_ s: TreeNode?, _ t: TreeNode?) -> Bool {
+        var sMerkle: MerkleNode? = nil
+        var tMerkle: MerkleNode? = nil
+        
+        func converToMerkle(_ root: TreeNode?, _ merkle: MerkleNode?) -> MerkleNode? {
+            guard let node = root else { return nil }
+            var merkle = merkle
+            if merkle == nil { merkle = MerkleNode(node.val) }
+            
+            merkle?.left = converToMerkle(root?.left, merkle?.left)
+            merkle?.right = converToMerkle(root?.right, merkle?.right)
+            
+            if let left = merkle?.left {
+                merkle!.hashVal.combine(left.val)
+            }
+            
+            if let right = merkle?.right {
+                merkle!.hashVal.combine(right.val)
+            }
+            
+            return merkle
+        }
+        
+        func dfs(_ root1: MerkleNode?, _ root2: MerkleNode?) -> Bool {
+            if root1 == nil && root2 == nil { return true }
+            guard let node1 = root1, let node2 = root2 else { return false }
+            let hash1 = node1.hashVal.finalize()
+            let hash2 = node2.hashVal.finalize()
+            
+            if hash1 == hash2 { 
+                return isEqual(root1, root2) || dfs(root1?.left, root2) || dfs(root1?.right, root2)
+            }
+            
+            return dfs(root1?.left, root2) || dfs(root1?.right, root2)
+        }
+        
+        func isEqual(_ root1: MerkleNode?, _ root2: MerkleNode?) -> Bool {
+            if root1 == nil && root2 == nil { return true }
+            guard let node1 = root1, let node2 = root2 else { return false }
+            
+            return node1.val == node2.val && isEqual(root1?.left, root2?.left) && isEqual(root1?.right, root2?.right)
+        }
+        
+        sMerkle = converToMerkle(s, sMerkle)
+        tMerkle = converToMerkle(t, tMerkle)
+        
+        return dfs(sMerkle, tMerkle)
+    }
+}
+
+class MerkleNode {
+    var left: MerkleNode?
+    var right: MerkleNode?
+    var val: Int
+    var hashVal = Hasher()
+    
+    init(_ val: Int, _ left: MerkleNode? = nil, _ right: MerkleNode? = nil) {
+        self.val = val
+        self.left = left
+        self.right = right
+        hashVal.combine(val)
+    }
+}
+```
 ## 38. Count and Say
 
 
