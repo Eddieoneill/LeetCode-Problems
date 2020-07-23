@@ -7508,3 +7508,29 @@ class TrieNode {
         return maxVal
     }
 ```
+## 504. Base 7
+
+
+```swift
+    func convertToBase7(_ num: Int) -> String {
+        guard num != 0 else { return "0" }
+        var num = num
+        var result: [String] = []
+        var isNeg = false
+        
+        if num < 0 { isNeg = true; num = abs(num) }
+        
+        while num > 0 {
+            let digit = num % 7
+            result.append(String(digit))
+            
+            num /= 7
+        }
+        
+        if isNeg {
+            return "-\(result.reversed().joined())"
+        }
+        
+        return result.reversed().joined()
+    }
+```
