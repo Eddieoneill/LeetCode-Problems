@@ -7791,3 +7791,40 @@ class MyStack {
         return s.joined()
     }
 ```
+## 155. Min Stack
+
+
+```swift
+class MinStack {
+    var arr: [Int] = []
+    var mins: [Int] = []
+    /** initialize your data structure here. */
+    init() {}
+    
+    func push(_ x: Int) {
+        arr.append(x)
+        if mins.isEmpty {
+            mins.append(x)
+        } else if mins[mins.count - 1] >= x {
+            mins.append(x)
+        }
+    }
+    
+    func pop() {
+        let val = arr.removeLast()
+        if !mins.isEmpty {
+            if val == mins[mins.count - 1] {
+               mins.removeLast()
+            }   
+        }
+    }
+    
+    func top() -> Int {
+        return arr[arr.count - 1]
+    }
+    
+    func getMin() -> Int {
+        return mins[mins.count - 1]
+    }
+}
+```
