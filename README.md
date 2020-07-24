@@ -7993,3 +7993,36 @@ class NumArray {
         return true
     }
 ```
+## 482. License Key Formatting
+
+
+```swift
+    func licenseKeyFormatting(_ S: String, _ K: Int) -> String {
+        let S = S.split(separator: "-")
+        var s: [String] = []
+        var result: [String] = []
+        var curr: [String] = []
+        var count = 0
+        
+        for arr in S {
+            for str in arr {
+                s.append(String(str))
+            }
+        }
+        
+        count = s.count % K
+        
+        
+        for char in s {
+            if curr.count >= K || (count > 0 && curr.count == count && result.isEmpty) {
+                result.append("\(curr.joined())-")
+                curr = []
+            }
+            curr.append(char.uppercased())
+        }
+        
+        result.append(curr.joined())
+        
+        return result.joined()
+    }
+```
