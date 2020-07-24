@@ -8026,3 +8026,25 @@ class NumArray {
         return result.joined()
     }
 ```
+
+## 110. Balanced Binary Tree
+
+
+```swift
+    func isBalanced(_ root: TreeNode?) -> Bool {
+        func dfs(_ root: TreeNode?) -> Int {
+            guard root != nil else { return 0 }
+            
+            let leftHeight = dfs(root?.left)
+            let rightHeight = dfs(root?.right)
+            
+            if leftHeight == -1 || rightHeight == -1 || abs(leftHeight - rightHeight) > 1 {
+                return -1
+            }
+            
+            return max(leftHeight, rightHeight) + 1
+        }
+        
+        return dfs(root) != -1
+    }
+```
