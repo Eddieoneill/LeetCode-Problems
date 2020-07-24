@@ -8084,3 +8084,24 @@ class NumArray {
         return result
     }
 ```
+## 1470. Shuffle the Array
+
+
+```swift
+    func shuffle(_ nums: [Int], _ n: Int) -> [Int] {
+        var result = Array(repeating: 0, count: n * 2)
+        var i = 0
+        var j = n
+        var count = 0
+        
+        while j < nums.count && i < n {
+            result[count] = nums[i]
+            result[count + 1] = nums[j]
+            i += 1
+            j += 1
+            count += 2
+        }
+        
+        return result
+    }
+```
