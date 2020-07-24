@@ -7895,3 +7895,28 @@ class MinStack {
         return result.reversed().joined()
     }
 ```
+## 303. Range Sum Query - Immutable
+
+
+```swift
+class NumArray {
+    var prefixSum: [Int]
+
+    init(_ nums: [Int]) {
+        guard !nums.isEmpty else {
+            prefixSum = [Int]()
+            return
+        }
+
+        prefixSum = [Int](repeating: 0, count: nums.count + 1)
+        
+        for i in 0 ..< nums.count {
+            prefixSum[i + 1] = prefixSum[i] + nums[i]
+        }
+    }
+
+    func sumRange(_ i: Int, _ j: Int) -> Int {
+        return prefixSum[j + 1] - prefixSum[i]
+    }
+}
+```
