@@ -7928,3 +7928,30 @@ class NumArray {
         return n > 0 && n & (n - 1) == 0
     }
 ```
+## 1380. Lucky Numbers in a Matrix
+
+
+```swift
+    func luckyNumbers (_ matrix: [[Int]]) -> [Int] {
+        var minRow: [Int: Int] = [:]
+        var maxCol: [Int: Int] = [:]
+        var result: [Int] = []
+        
+        for row in 0..<matrix.count {
+            for col in 0..<matrix[0].count {
+                minRow[row] = min(minRow[row, default: Int.max], matrix[row][col])
+                maxCol[col] = max(maxCol[col, default: Int.min], matrix[row][col])
+            }
+        }
+        
+        for row in 0..<matrix.count {
+            for col in 0..<matrix[0].count {
+                if minRow[row, default: Int.max]  == maxCol[col, default: Int.min] {
+                    result.append(minRow[row, default: Int.max])
+                }
+            }
+        }
+        
+        return result
+    }
+```
