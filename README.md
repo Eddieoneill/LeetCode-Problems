@@ -8070,3 +8070,17 @@ class NumArray {
         return dfs(root1)
     }
 ```
+## 1480. Running Sum of 1d Array
+
+
+```swift
+    func runningSum(_ nums: [Int]) -> [Int] {
+        var result = nums
+        
+        for (i, num) in nums.enumerated() where i > 0 {
+            result[i] += result[i - 1]
+        }
+        
+        return result
+    }
+```
