@@ -8048,3 +8048,25 @@ class NumArray {
         return dfs(root) != -1
     }
 ```
+## 671. Second Minimum Node In a Binary Tree
+
+
+```swift
+    func findSecondMinimumValue(_ root1: TreeNode?) -> Int {
+        func dfs(_ root2: TreeNode?) -> Int {
+            guard let node = root2, (node.left != nil && node.right != nil) else { return -1 }
+            
+            var left = node.left!.val
+            var right = node.right!.val
+            
+            if left == root1!.val { left = dfs(root2?.left) }
+            if right == root1!.val { right = dfs(root2?.right) }
+            
+            if left != -1 && right != -1 { return min(left, right) }
+            if left == -1 { return right }
+            return left
+        }
+        
+        return dfs(root1)
+    }
+```
