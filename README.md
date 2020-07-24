@@ -7865,3 +7865,33 @@ class MinStack {
         return result.reversed().joined()
     }
 ```
+## 67. Add Binary
+
+
+```swift
+    func addBinary(_ a: String, _ b: String) -> String {
+        var a = a.map { String($0) }
+        var b = b.map { String($0) }
+        var i = a.count - 1
+        var j = b.count - 1
+        var carry = 0
+        var result: [String] = []
+        
+        while i >= 0 || j >= 0 {
+            let bit1 = i >= 0 ? Int(a[i])! : 0
+            let bit2 = j >= 0 ? Int(b[j])! : 0
+            let sum = bit1 + bit2 + carry
+            
+            result.append("\(sum % 2)")
+            carry = sum / 2
+            i -= 1
+            j -= 1
+        }
+        
+        if carry > 0 {
+            result.append("\(carry)")
+        }
+        
+        return result.reversed().joined()
+    }
+```
