@@ -7845,3 +7845,23 @@ class MinStack {
         return -1
     }
 ```
+## 405. Convert a Number to Hexadecimal
+
+
+```swift
+    func toHex(_ num: Int) -> String {
+        guard num != 0 else { return "0" }
+        var hexMap = "0123456789abcdef".map { String($0) }
+        var result: [String] = []
+        var num = num
+        if num < 0 { num += 4294967296 }
+        
+         while num > 0 {
+            let digit = hexMap[num % 16]
+            result.append(digit)
+            num /= 16
+        }
+        
+        return result.reversed().joined()
+    }
+```
