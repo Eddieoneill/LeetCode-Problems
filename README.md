@@ -8105,3 +8105,30 @@ class NumArray {
         return result
     }
 ```
+## 1469. Find All The Lonely Nodes
+
+
+
+```swift
+    func getLonelyNodes(_ root: TreeNode?) -> [Int] {
+        guard root != nil else { return [] }
+        var result: [Int] = []
+        
+        func dfs(_ root: TreeNode?, _ shouldAdd: Bool) {
+            if shouldAdd { result.append(root!.val) }
+
+            let hasToAdd = root?.left != nil && root?.right != nil
+
+            if root?.left != nil {
+                dfs(root?.left, !hasToAdd)
+            }
+            if root?.right != nil {
+                dfs(root?.right, !hasToAdd)
+            }
+        }
+        
+        dfs(root, false)
+        
+        return result
+    }
+```
