@@ -8287,3 +8287,29 @@ class MaxStack {
     }
 }
 ```
+## 734. Sentence Similarity
+
+
+```swift
+    func areSentencesSimilar(_ words1: [String], _ words2: [String], _ pairs: [[String]]) -> Bool {
+        guard words1.count == words2.count else { return false }
+        var dict: [String: Set<String>] = [:]
+        
+        for pair in pairs {
+            dict[pair[0], default: []].insert(pair[1])
+            dict[pair[1], default: []].insert(pair[0])
+        }
+        
+        for i in 0..<words2.count {
+            if words1[i] == words2[i] { continue }
+            
+            if let set1 = dict[words1[i]], let set2 = dict[words2[i]], (set1.contains(words2[i]) && set2.contains(words1[i])) {
+                continue
+            } else {
+                return false
+            }
+        }
+        
+        return true
+    }
+```
