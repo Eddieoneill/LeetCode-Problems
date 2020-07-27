@@ -8180,3 +8180,20 @@ class NumArray {
         return result.reversed()
     }
 ```
+## 326. Power of Three
+
+
+```swift
+    func isPowerOfThree(_ n: Int) -> Bool {
+        var n = n
+        var count = 0
+        
+        while n > 0 {
+            let digit = n % 3
+            count += digit
+            n /= 3
+        }
+        
+        return count == 1
+    }
+```
