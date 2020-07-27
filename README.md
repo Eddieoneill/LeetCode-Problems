@@ -8313,3 +8313,37 @@ class MaxStack {
         return true
     }
 ```
+## 299. Bulls and Cows
+
+
+```swift
+    func getHint(_ secret: String, _ guess: String) -> String {
+        var bulls = 0
+        var cows = 0
+        var secret = secret.map { String($0) }
+        var guess = guess.map { String($0) }
+        var correct: [String: Int] = [:]
+        var cowGuess: [String: Int] = [:]
+        
+        for char in secret {
+            correct[char, default: 0] += 1
+        }
+        
+        for i in 0..<secret.count {
+            if secret[i] == guess[i] {
+                if cowGuess[guess[i], default: 0] > 0 && correct[guess[i], default: 0] <= 0 {
+                    cows -= 1
+                    cowGuess[guess[i], default: 0] -= 1
+                }
+                bulls += 1
+                correct[guess[i], default: 0] -= 1
+            } else if correct[guess[i], default: 0] > 0 {
+                cows += 1
+                correct[guess[i], default: 0] -= 1
+                cowGuess[guess[i], default: 0] += 1
+            }
+        }
+        
+        return "\(bulls)A\(cows)B"
+    }
+```
