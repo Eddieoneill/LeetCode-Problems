@@ -8235,3 +8235,55 @@ class NumArray {
         return sum
     }
 ```
+## 326. Power of Three
+
+
+```swift
+class MaxStack {
+    var stack: [Int] = []
+    var maxStack: [Int] = []
+    
+    init() {}
+    
+    func push(_ x: Int) {
+        var maxVal = x
+        
+        if !maxStack.isEmpty, maxStack[maxStack.count - 1] > x {
+            maxVal = maxStack[maxStack.count - 1]
+        }
+        
+        maxStack.append(maxVal)
+        stack.append(x)
+    }
+    
+    func pop() -> Int {
+        maxStack.removeLast()
+        return stack.removeLast()
+    }
+    
+    func top() -> Int {
+        return stack[stack.count - 1]
+    }
+    
+    func peekMax() -> Int {
+        return maxStack[maxStack.count - 1]
+    }
+    
+    func popMax() -> Int {
+        let maxVal = maxStack[maxStack.count - 1]
+        var temp: [Int] = []
+        
+        while top() != maxVal {
+            temp.append(pop())
+        }
+        
+        pop()
+        
+        while !temp.isEmpty {
+            push(temp.removeLast())
+        }
+        
+        return maxVal
+    }
+}
+```
