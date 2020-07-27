@@ -8371,3 +8371,24 @@ class MaxStack {
         return [dup, missing]
     }
 ```
+## 35. Search Insert Position
+
+
+```swift
+    func searchInsert(_ nums: [Int], _ target: Int) -> Int {
+        var left = 0
+        var right = nums.count
+        
+        while left < right {
+            let mid = ((right - left) / 2) + left
+            
+            if nums[mid] >= target {
+                right = mid
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        return left 
+    }
+```
