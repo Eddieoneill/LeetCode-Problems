@@ -8156,3 +8156,27 @@ class NumArray {
         return -1
     }
 ```
+## 66. Plus One
+
+
+```swift
+    func plusOne(_ digits: [Int]) -> [Int] {
+        var carry = 1
+        var result: [Int] = []
+        var i = digits.count - 1
+        
+        
+        while i >= 0 {
+            let sum = digits[i] + carry
+            result.append(sum % 10)
+            carry = sum / 10
+            i -= 1
+        }
+        
+        if carry > 0 {
+            result.append(carry)
+        }
+        
+        return result.reversed()
+    }
+```
