@@ -8392,3 +8392,39 @@ class MaxStack {
         return left 
     }
 ```
+## 501. Find Mode in Binary Search Tree
+
+
+```swift
+    func findMode(_ root: TreeNode?) -> [Int] {
+        var maxCount = 0
+        var result: [Int] = []
+        var currVal = Int.min
+        var currCount = 0
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            dfs(root?.left)
+            if node.val != currVal {
+                currVal = node.val
+                currCount = 1
+            } else {
+                currCount += 1
+            }
+            
+            if maxCount == currCount {
+                result.append(node.val)
+            } else if maxCount < currCount {
+                result = [node.val]
+                maxCount = currCount
+            }
+            
+            dfs(root?.right)
+        }
+        
+        dfs(root)
+        
+        return result
+    }
+```
