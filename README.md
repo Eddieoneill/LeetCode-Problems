@@ -8213,3 +8213,25 @@ class NumArray {
         return count == 1
     }
 ```
+```swift
+    func isPowerOfThree(_ n: Int) -> Bool {
+        guard n > 0 else { return false }
+        let num = logs(Double(n), 3)
+        let p = pow(3, Int(round(num)))
+        return n == p
+    }
+    
+    func logs(_ x: Double, _ y: Double) -> Double {
+        return log(x)/log(y)
+    }
+    
+    func pow(_ with: Int, _ of: Int) -> Int {
+        var sum = 1
+        
+        for _ in 0..<of {
+            sum *= with
+        }
+        
+        return sum
+    }
+```
