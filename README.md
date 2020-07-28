@@ -8645,3 +8645,20 @@ class MaxStack {
         return i 
     }
 ```
+## 141. Linked List Cycle
+
+
+```swift
+    func hasCycle(_ head: ListNode?) -> Bool {
+        var f = head
+        var s = head
+        
+        while f?.next != nil {
+            f = f?.next?.next
+            s = s?.next
+            if f === s { return true }
+        }
+        
+        return false 
+    }
+```
