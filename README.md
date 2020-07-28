@@ -8664,7 +8664,7 @@ class MaxStack {
 ```
 ## 441. Arranging Coins
 
-
+# Binary Search Solution
 ```swift
     func arrangeCoins(_ n: Int) -> Int {
         var left = 1
@@ -8682,5 +8682,11 @@ class MaxStack {
         }
         
         return (left * (left + 1)) / 2 == n ? left : left - 1
+    }
+```
+# Math Solution
+```swift
+    func arrangeCoins(_ n: Int) -> Int {
+        return  Int((-1 + (1 + 8 * Double(n)).squareRoot()) / 2)
     }
 ```
