@@ -8471,3 +8471,27 @@ class MaxStack {
         }
     }
 ```
+## 367. Valid Perfect Square
+
+
+```swift
+    func isPerfectSquare(_ num: Int) -> Bool {
+        var left = 1
+        var right = Int(round(Double(num) / 2))
+        
+        while left <= right {
+            let mid = ((right - left) / 2) + left
+            let sqrt = mid * mid
+            
+            if sqrt == num {
+                return true
+            } else if sqrt > num {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        return false
+    }
+```
