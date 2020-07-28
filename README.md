@@ -8428,3 +8428,20 @@ class MaxStack {
         return result
     }
 ```
+## 198. House Robber
+
+
+```swift
+    func rob(_ nums: [Int]) -> Int {
+        var curr = 0
+        var pre = 0
+        
+        for num in nums {
+            let temp = curr
+            curr = max(curr, pre + num)
+            pre = temp
+        }
+        
+        return curr
+    }
+```
