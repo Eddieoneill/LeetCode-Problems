@@ -8571,3 +8571,18 @@ class MaxStack {
         return result.joined()
     }
 ```
+## 1033. Moving Stones Until Consecutive
+
+
+```swift
+    func numMovesStones(_ a: Int, _ b: Int, _ c: Int) -> [Int] {
+        let nums = [a, b, c].sorted { $0 < $1 }
+        var x = nums[0]
+        var y = nums[1]
+        var z = nums[2]
+        var maxVal = (y - x) + (z - y) - 2
+        var minVal = (y - x) > 2 && (z - y) > 2 ? 2 : (y - x) > 1 || (z - y) > 1 ? 1 : 0
+        
+        return [minVal, maxVal]
+    }
+```
