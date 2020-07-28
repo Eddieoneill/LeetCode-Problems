@@ -8527,3 +8527,32 @@ class MaxStack {
         return num == 1
     }
 ```
+## 643. Maximum Average Subarray I
+
+
+```swift
+    func findMaxAverage(_ nums: [Int], _ k: Int) -> Double {
+        guard !nums.isEmpty else { return 0 }
+        guard nums.count > 1 else { return Double(nums[0]) }
+        var maxAve: Double = Double(Int.min)
+        var curr: Double = 0
+        var j = 0
+        
+        for i in 0..<nums.count {
+            let num = Double(nums[i])
+            
+            if i - j < k {
+                curr += num
+            } else {
+                maxAve = max(curr / Double(k), maxAve)
+                curr -= Double(nums[j])
+                curr += num
+                j += 1
+            }
+        }
+        
+        maxAve = max(curr / Double(k), maxAve)
+        
+        return maxAve
+    }
+```
