@@ -8495,3 +8495,20 @@ class MaxStack {
         return false
     }
 ```
+## 342. Power of Four
+
+
+```swift
+    func isPowerOfFour(_ num: Int) -> Bool {
+        var count = 0
+        var num = num
+        
+        while num > 0 {
+            let digit = num % 4
+            count += digit
+            num /= 4
+        }
+        
+        return count == 1
+    }
+```
