@@ -8556,3 +8556,18 @@ class MaxStack {
         return maxAve
     }
 ```
+## 1528. Shuffle String
+
+
+```swift
+    func restoreString(_ s: String, _ indices: [Int]) -> String {
+        var result = Array(repeating: "", count: s.count)
+        var s = s.map { String($0) }
+        
+        for (index, i) in indices.enumerated() {
+            result[i] = s[index]
+        }
+        
+        return result.joined()
+    }
+```
