@@ -8603,3 +8603,45 @@ class MaxStack {
         return dfs(root, 0)
     }
 ```
+## 443. String Compression
+
+
+```swift
+    func compress(_ chars: inout [Character]) -> Int {
+        var i = 0
+        var count = 1
+        var j = 1
+        
+        while j < chars.count {
+            if chars[j] == chars[j - 1] {
+                count += 1
+                j += 1
+                continue
+            }
+            
+            chars[i] = chars[j - 1]
+            i += 1
+            if count > 1 {
+                var nums = "\(count)"
+                for num in nums {
+                    chars[i] = num
+                    i += 1   
+                }
+            }
+            count = 1
+            j += 1
+        }
+        
+        chars[i] = chars[j - 1]
+        i += 1
+        if count > 1 {  
+            var nums = "\(count)"
+            for num in nums {
+                chars[i] = num
+                i += 1   
+            }
+        }
+        
+        return i 
+    }
+```
