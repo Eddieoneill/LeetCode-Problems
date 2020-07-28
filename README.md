@@ -8445,3 +8445,29 @@ class MaxStack {
         return curr
     }
 ```
+## 747. Largest Number At Least Twice of Others
+
+
+```swift
+    func dominantIndex(_ nums: [Int]) -> Int {
+        var largest = 0
+        var index = 0
+        var second = 0
+        
+        for (i, num) in nums.enumerated() {
+            if num > largest {
+                second = largest
+                largest = num
+                index = i
+            } else if num > second {
+                second = num
+            }
+        }
+        
+        if largest >= second * 2 {
+            return index
+        } else {
+            return -1
+        }
+    }
+```
