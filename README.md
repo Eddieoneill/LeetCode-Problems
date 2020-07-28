@@ -8586,3 +8586,20 @@ class MaxStack {
         return [minVal, maxVal]
     }
 ```
+## 112. Path Sum
+
+
+```swift
+    func hasPathSum(_ root: TreeNode?, _ sum: Int) -> Bool {
+        func dfs(_ root: TreeNode?, _ currSum: Int) -> Bool {
+            guard let node = root else { return false }
+            var currSum = currSum + node.val
+            
+            if node.left == nil && node.right == nil { return currSum == sum }
+            
+            return dfs(node.left, currSum) || dfs(node.right, currSum)
+        }
+        
+        return dfs(root, 0)
+    }
+```
