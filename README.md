@@ -8690,3 +8690,18 @@ class MaxStack {
         return  Int((-1 + (1 + 8 * Double(n)).squareRoot()) / 2)
     }
 ```
+## 1486. XOR Operation in an Array
+
+
+```swift
+    func xorOperation(_ n: Int, _ start: Int) -> Int {
+        var sum = 0
+        var curr = 0
+        
+        for i in 0..<n {
+            sum = sum ^ (start + 2 * i)
+        }
+        
+        return sum
+    }
+```
