@@ -8724,3 +8724,27 @@ class MaxStack {
         return result
     }
 ```
+## 1213. Intersection of Three Sorted Arrays
+
+
+```swift
+    func arraysIntersection(_ arr1: [Int], _ arr2: [Int], _ arr3: [Int]) -> [Int] {
+        var buckets = Array(repeating: 0, count: 2001)
+        var result: [Int] = []
+        var i = 0
+        
+        while i < arr1.count {
+            buckets[arr1[i]] += 1
+            buckets[arr2[i]] += 1
+            buckets[arr3[i]] += 1
+            i += 1
+        }
+        
+        for (num, count) in buckets.enumerated() where count >= 3 {
+            result.append(num)
+        }
+        
+        
+        return result
+    }
+```
