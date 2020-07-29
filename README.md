@@ -8705,3 +8705,22 @@ class MaxStack {
         return sum
     }
 ```
+## 760. Find Anagram Mappings
+
+
+```swift
+    func anagramMappings(_ A: [Int], _ B: [Int]) -> [Int] {
+        var dict: [Int: Int] = [:]
+        var result: [Int] = []
+        
+        for (i, num) in B.enumerated() {
+            dict[num] = i
+        }
+        
+        for num in A {
+            result.append(dict[num, default: 0])
+        }
+        
+        return result
+    }
+```
