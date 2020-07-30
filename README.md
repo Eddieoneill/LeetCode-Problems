@@ -8809,3 +8809,24 @@ class MaxStack {
         return sum == N
     }
 ```
+## 970. Powerful Integers
+
+
+```swift
+    func powerfulIntegers(_ x: Int, _ y: Int, _ bound: Int) -> [Int] {
+        let maxI = x == 1 ? 1 : Int(log(Double(bound))/log(Double(x)))
+        let maxJ = y == 1 ? 1 : Int(log(Double(bound))/log(Double(y)))
+        var result: Set<Int> = []
+        
+        for i in 0...maxI {
+            for j in 0...maxJ {
+                let power = Int(pow(Double(x), Double(i)) + pow(Double(y), Double(j)))
+                
+                if power <= bound { result.insert(power) }
+            }
+        }
+        
+        return Array(result)
+    }
+```
+
