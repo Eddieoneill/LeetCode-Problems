@@ -8782,3 +8782,30 @@ class MaxStack {
         return maxDis
     }
 ```
+## 1134. Armstrong Number
+
+
+```swift
+    func isArmstrong(_ N: Int) -> Bool {
+        var numDigits = 0
+        var n = N
+        var sum = 0
+        
+        while n > 0 {
+            numDigits += 1
+            n /= 10
+        }
+        
+        n = N
+        
+        while n > 0 {
+            let digit = n % 10
+            n /= 10
+            sum += Int(pow(Double(digit), Double(numDigits)))
+            if sum > N {
+                return false
+            }
+        }
+        return sum == N
+    }
+```
