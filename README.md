@@ -8858,3 +8858,20 @@ class MaxStack {
         return true
     }
 ```
+## 1346. Check If N and Its Double Exist
+
+
+```swift
+    func checkIfExist(_ arr: [Int]) -> Bool {
+        var seen = Set(arr)
+        var zeros = 0
+        
+        for num in arr {
+            if zeros == 1 && num == 0 { return true }
+            if seen.contains(num * 2) && num != 0 { return true } 
+            if num == 0 { zeros += 1 }
+        }
+        
+        return false
+    }
+```
