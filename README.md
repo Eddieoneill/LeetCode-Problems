@@ -8829,4 +8829,32 @@ class MaxStack {
         return Array(result)
     }
 ```
+## 205. Isomorphic Strings
 
+
+```swift
+    func isIsomorphic(_ s: String, _ t: String) -> Bool {
+        var s = s.map { String($0) }
+        var t = t.map { String($0) }
+        var dict1: [String: String] = [:]
+        var dict2: [String: String] = [:]
+        
+        for (i, char) in s.enumerated() {
+            
+            if let val = dict1[t[i]], val != char {
+                return false
+            }
+            
+            if let val = dict2[char], val != t[i] {
+                return false
+            }
+            
+            dict1[t[i]] = char
+            dict2[char] = t[i]
+            
+            
+        }
+        
+        return true
+    }
+```
