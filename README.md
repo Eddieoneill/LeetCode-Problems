@@ -9007,3 +9007,25 @@ class MaxStack {
         return pre
     }
 ```
+## 20. Valid Parentheses
+
+
+```swift
+    func isValid(_ s: String) -> Bool {
+        guard s.count != 0 else { return true }
+        guard s.count > 1 else { return false }
+        
+        var dict:[Character: Character] = ["(": ")", "{": "}", "[": "]"]
+        var result: [Character] = []
+        
+        for char in s {
+            if let next = dict[char] {
+                result.append(next)
+            } else if result.popLast() != char {
+                return false
+            }
+        }
+        
+        return result.isEmpty
+    }
+```
