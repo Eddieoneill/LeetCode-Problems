@@ -8875,3 +8875,55 @@ class MaxStack {
         return false
     }
 ```
+## 160. Intersection of Two Linked Lists
+
+
+```swift
+    func getIntersectionNode(_ headA: ListNode?, _ headB: ListNode?) -> ListNode? {
+        var aCount = getCount(headA)
+        var bCount = getCount(headB)
+        var diff = abs(aCount - bCount)
+        var a = headA
+        var b = headB
+        
+        if aCount > bCount {
+            a = move(a, diff)
+        } else if bCount > aCount {
+            b = move(b, diff)
+        }
+        
+        while a != nil {
+            if a === b { return a }
+            
+            a = a?.next
+            b = b?.next
+        }
+        
+        return nil
+        
+    }
+    
+    func getCount(_ node: ListNode?) -> Int {
+        var count = 0
+        var curr: ListNode? = node
+        
+        while curr != nil {
+            count += 1
+            curr = curr?.next
+        }
+        
+        return count
+    }
+    
+    func move(_ node: ListNode?, _ count: Int) -> ListNode? {
+        var count = count
+        var node = node
+        
+        while count > 0 {
+            node = node?.next
+            count -= 1
+        }
+        
+        return node
+    }
+```
