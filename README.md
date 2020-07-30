@@ -8948,3 +8948,21 @@ class MaxStack {
         }
     }
 ```
+## 624. Maximum Distance in Arrays
+
+
+```swift
+    func maxDistance(_ arrays: [[Int]]) -> Int {
+        var minVal = arrays[0][0]
+        var maxVal = arrays[0][arrays[0].count - 1]
+        var result = 0
+
+        for (index, array) in arrays.enumerated() where index != 0 {
+            result = max(max(result, abs(maxVal - array[0])), max(result, abs(minVal - array[array.count - 1])))
+            minVal = min(minVal, array[0])
+            maxVal = max(maxVal, array[array.count - 1])
+        }
+
+        return result   
+    }
+```
