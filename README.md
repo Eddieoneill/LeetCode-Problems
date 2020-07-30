@@ -8748,3 +8748,27 @@ class MaxStack {
         return result
     }
 ```
+## 849. Maximize Distance to Closest Person
+
+
+```swift
+    func maxDistToClosest(_ seats: [Int]) -> Int {
+        var n = seats.count
+        var prev: Int = -1
+        var next: Int = 0
+        var result: Int = 0
+        
+        for i in 0..<n {
+            if (seats[i] == 1) {
+                prev = i
+            } else {
+                while (next < n && seats[next] == 0 || next < i) { next += 1 }
+                var left = prev == -1 ? n : i - prev
+                var right = next == n ? n : next - i
+                result = max(result, min(left, right))
+            }
+        }
+        
+        return result
+    }
+```
