@@ -8753,22 +8753,32 @@ class MaxStack {
 
 ```swift
     func maxDistToClosest(_ seats: [Int]) -> Int {
-        var n = seats.count
-        var prev: Int = -1
-        var next: Int = 0
-        var result: Int = 0
+        var start = 0
+        var end = 1
+        var maxDis = -1
         
-        for i in 0..<n {
-            if (seats[i] == 1) {
-                prev = i
-            } else {
-                while (next < n && seats[next] == 0 || next < i) { next += 1 }
-                var left = prev == -1 ? n : i - prev
-                var right = next == n ? n : next - i
-                result = max(result, min(left, right))
+        while end < seats.count {
+            if seats[end] != 1 { 
+                end += 1
+                continue 
             }
+            
+            if seats[start] != 1 { 
+                maxDis = max(maxDis, end)
+            } else {
+                maxDis = max(maxDis, (end - start) / 2)
+            }
+            
+            start = end
+            end += 1
         }
         
-        return result
+        if maxDis == -1 {
+            maxDis = seats.count - 1
+        } else if seats[end - 1] == 0 {
+            maxDis = max(maxDis, end - 1 - start)
+        }
+        
+        return maxDis
     }
 ```
