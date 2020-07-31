@@ -9046,3 +9046,23 @@ class MaxStack {
         return count
     }
 ```
+## 507. Perfect Number
+
+
+```swift
+    func checkPerfectNumber(_ num: Int) -> Bool {
+        guard num > 1 else { return false }
+        var sum = 0
+        
+        for i in 1...Int(Double(num).squareRoot()) {
+            if num % i != 0 { continue }
+            
+            sum += i
+            sum += num / i
+        }
+        
+        sum -= num
+        
+        return sum == num
+    }
+```
