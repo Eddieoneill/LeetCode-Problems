@@ -9166,3 +9166,26 @@ class MaxStack {
         return a == 0 ? b : getGCD(b % a, a)
     }
 ```
+## 914. X of a Kind in a Deck of Cards
+
+
+```swift
+    func hasGroupsSizeX(_ deck: [Int]) -> Bool {
+        var dict:[Int: Int] = [:]
+        var g = 0
+        
+        for num in deck {
+            dict[num, default: 0] += 1
+        }
+        
+        for count in dict.values {
+            g = getGCD(g, count)
+        }
+        
+        return g >= 2
+    }
+    
+    func getGCD(_ a: Int, _ b: Int) -> Int {
+        return a == 0 ? b : getGCD(b % a, a)
+    }
+```
