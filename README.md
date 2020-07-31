@@ -9109,3 +9109,37 @@ class MaxStack {
         return left
     }
 ```
+## 874. Walking Robot Simulation
+
+
+```swift
+    func robotSim(_ commands: [Int], _ obstacles: [[Int]]) -> Int {
+        var s = Set(obstacles)
+        let step = [(1, 0), (0, -1), (-1, 0), (0, 1)]
+        var dir = 3
+        
+        var currentX = 0
+        var currentY = 0
+        var dist = 0
+        for command in commands {
+            if command == -1 {
+                dir = (dir + 1) % 4
+            } else if command == -2 {
+                dir = (dir - 1 + 4) % 4
+            } else {
+                for i in 1...command {
+                    let tx = currentX + step[dir].0
+                    let ty = currentY + step[dir].1
+                    if s.contains([tx, ty]) { break }
+                    
+                    currentX = tx
+                    currentY = ty
+                    
+                    dist = max(dist, currentX * currentX + currentY * currentY)
+                }
+            }
+        }
+        
+        return dist
+    }
+```
