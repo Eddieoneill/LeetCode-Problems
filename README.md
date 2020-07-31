@@ -9205,3 +9205,24 @@ class MaxStack {
         return result
     }
 ```
+## 1464. Maximum Product of Two Elements in an Array
+
+
+```swift
+    func maxProduct(_ nums: [Int]) -> Int {
+        guard nums.count > 2 else { return (nums[0] - 1) * (nums[1] - 1) }
+        var n = max(nums[0], nums[1])
+        var m = min(nums[0], nums[1])
+        
+        for i in 2..<nums.count {
+            if nums[i] > n {
+                m = n
+                n = nums[i]
+            } else if nums[i] > m {
+                m = nums[i]
+            }
+        }
+        
+        return (n - 1) * (m - 1)
+    }
+```
