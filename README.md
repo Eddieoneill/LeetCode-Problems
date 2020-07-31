@@ -9066,3 +9066,24 @@ class MaxStack {
         return sum == num
     }
 ```
+## 14. Longest Common Prefix
+
+
+```swift
+    func longestCommonPrefix(_ strs: [String]) -> String {
+        guard !strs.isEmpty else { return "" }
+        var result = strs[0].map { String($0) }
+        
+        for (index, str) in strs.enumerated() where index > 0 {
+            var temp: [String] = []
+            for (i, char) in str.enumerated() where i < result.count {
+                let char = String(char)
+                if result[i] != char { break }
+                temp.append(char)
+            }
+            result = temp
+        }
+        
+        return result.joined()
+    }
+```
