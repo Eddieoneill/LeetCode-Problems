@@ -9226,3 +9226,35 @@ class MaxStack {
         return (n - 1) * (m - 1)
     }
 ```
+## 1180. Count Substrings with Only One Distinct Letter
+
+
+```swift
+    func countLetters(_ S: String) -> Int {
+        var count = 0
+        var n = 1
+        var pre = S.first!
+        var used = true
+        
+        for (i, char) in S.enumerated() where i > 0 {
+            if pre == char {
+                n += 1
+                used = false
+            } else {
+                count += (n * (n + 1)) / 2
+                used = true
+                n = 1
+            }
+            
+            pre = char
+        }
+        
+        if !used {
+            count += (n * (n + 1)) / 2
+        } else {
+            count += 1
+        }
+        
+        return count
+    }
+```
