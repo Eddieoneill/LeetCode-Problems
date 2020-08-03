@@ -9258,3 +9258,23 @@ class MaxStack {
         return count
     }
 ```
+## 203. Remove Linked List Elements
+
+
+```swift
+    func removeElements(_ head: ListNode?, _ val: Int) -> ListNode? {
+        var dummy: ListNode? = ListNode()
+        dummy?.next = head
+        var curr = dummy
+        
+        while curr?.next != nil {
+            if curr!.next!.val == val {
+                curr?.next = curr?.next?.next
+            } else {
+                curr = curr?.next
+            }
+        }
+        
+        return dummy?.next
+    }
+```
