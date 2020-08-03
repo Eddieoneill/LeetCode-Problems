@@ -9437,3 +9437,21 @@ class StringIterator {
         return true
     }
 ```
+## 290. Word Pattern
+
+
+```swift
+    func wordPattern(_ pattern: String, _ str: String) -> Bool {
+        var m: [Character:Substring] = [:]
+        let pat = Array(pattern)
+        let str = str.split(separator: " ")
+        if pat.count != str.count { return false }
+        
+        for i in 0...str.count-1 {
+            if m[pat[i]] == nil && !m.values.contains(str[i]) { m[pat[i]] = str[i] }
+            if m[pat[i]] != str[i] { return false }
+        }
+        
+        return true
+    }
+```
