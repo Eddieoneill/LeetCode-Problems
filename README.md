@@ -9310,3 +9310,58 @@ class MaxStack {
         return root != nil ? dfs(root, 1) : 0
     }
 ```
+## 840. Magic Squares In Grid
+
+
+```swift
+class StringIterator {
+    var str: [Character]
+    var i = 0
+    var currChar: Character = " "
+    var currCount = 0
+    var currIndex = 0
+    
+    init(_ compressedString: String) {
+        str = compressedString.map { $0 }
+        getNextChar()
+        getNextCount()
+    }
+    
+    func next() -> Character {
+        if currCount <= 0 {
+            getNextChar()
+            getNextCount()
+        }
+        
+        currCount -= 1
+        return currChar
+    }
+    
+    func hasNext() -> Bool {
+        return currIndex < str.count || currCount > 0
+    }
+    
+    func getNextChar() {
+        if currIndex >= str.count {
+            currChar = " "
+        } else {
+            currChar = str[currIndex]
+            currIndex += 1
+        }
+    }
+    
+    func getNextCount() {
+        currCount = 0
+        
+        while currIndex < str.count {
+            if let count = Int(String(str[currIndex])) {
+                currCount *= 10
+                currCount += count
+                currIndex += 1
+            } else {
+                break
+            }
+        }
+    }
+}
+```
