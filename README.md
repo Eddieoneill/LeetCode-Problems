@@ -9365,3 +9365,23 @@ class StringIterator {
     }
 }
 ```
+## 422. Valid Word Square
+
+```swift
+    func validWordSquare(_ words: [String]) -> Bool {
+        var words = words.map { $0.map { String($0) } }
+        for i in 0..<words.count {
+            for j in 0..<words[i].count {
+                if j >= words.count {
+                    return false
+                } else if words[j].count <= i {
+                    return false
+                } else if words[i][j] != words[j][i] {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+```
