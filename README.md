@@ -9385,3 +9385,55 @@ class StringIterator {
         return true
     }
 ```
+## 840. Magic Squares In Grid
+
+
+```swift
+    func numMagicSquaresInside(_ grid: [[Int]]) -> Int {
+        var count = 0
+        var x = grid.count
+        var y = grid[0].count
+        if x < 3 || y < 3 {
+            return 0
+        }
+        for i in 0 ..< x - 2 {
+            for j in 0 ..< y - 2 {
+                if grid[i + 1][j + 1] == 5 && judge(grid, i, j) {
+                    count += 1
+                }
+            }
+        }
+        return count
+    }
+    
+    func judge(_ grid: [[Int]], _ i: Int, _ j: Int) -> Bool {
+        if grid[i][j] == 5 { return false }
+        
+        for x in i ..< i + 3 {
+            for y in j ..< j + 3 {
+                if grid[x][y] > 9 {
+                    return false
+                }
+            }
+        }
+        
+        for x in i ..< i + 3 {
+            if grid[x][j] + grid[x][j + 1] + grid[x][j + 2] != 15 { 
+                return false
+            }
+        }
+        
+        for y in j ..< j + 3 {
+            if grid[i][y] + grid[i + 1][y] + grid[i + 2][y] != 15 { 
+                return false
+            }
+        }
+        if grid[i][j] + grid[i + 1][j + 1] + grid[i + 2][j + 2] != 15 { 
+            return false
+        }
+        if grid[i + 2][j] + grid[i + 1][j + 1] + grid[i][j + 2] != 15 {
+            return false
+        }
+        return true
+    }
+```
