@@ -9455,3 +9455,32 @@ class StringIterator {
         return true
     }
 ```
+## 949 Laargest Time for Given Digits
+
+```swift
+    func largestTimeFromDigits(_ A: [Int]) -> String {
+        var time = ""
+        
+        for i in 0..<A.count {
+            for j in 0..<A.count {
+                if i == j { continue }
+                for k in 0..<A.count {
+                    if i == k || j == k { continue }
+                    for l in 0..<A.count {
+                        if i == l || j == l || k == l { continue }
+                        let hours = "\(A[i])\(A[j])"
+                        let mins = "\(A[k])\(A[l])"
+                        
+                        if hours >= "24" || mins >= "60" { continue }
+                        
+                        let currTime = hours + ":" + mins
+                        
+                        if time == "" || time < currTime { time = currTime }
+                    }
+                }
+            }
+        }
+        
+        return time
+    }
+```
