@@ -9278,3 +9278,20 @@ class MaxStack {
         return dummy?.next
     }
 ```
+## 219. Contains Duplicate II
+
+
+```swift
+    func containsNearbyDuplicate(_ nums: [Int], _ k: Int) -> Bool {
+        var seen: Set<Int> = []
+        
+        for i in 0..<nums.count {
+            if i - k > 0 { seen.remove(nums[i - k - 1]) }
+            if seen.contains(nums[i]) { return true }
+            
+            seen.insert(nums[i])
+        }
+        
+        return false
+    }
+```
