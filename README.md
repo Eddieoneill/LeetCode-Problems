@@ -9501,3 +9501,25 @@ class StringIterator {
         return result
     }
 ```
+## 687. Longest Univalue Path
+
+
+```swift
+    func longestUnivaluePath(_ root: TreeNode?) -> Int {
+        var maxVal = 0
+        
+        func dfs(_ root: TreeNode?, _ val: Int = 0) -> Int {
+            guard let node = root else { return 0 }
+            
+            let left = dfs(node.left, node.val)
+            let right = dfs(node.right, node.val)
+            maxVal = max(maxVal, left + right)
+            
+            return node.val == val ? max(left, right) + 1 : 0
+        }
+        
+        dfs(root)
+        
+        return maxVal
+    }
+```
