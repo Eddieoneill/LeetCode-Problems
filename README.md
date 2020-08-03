@@ -9295,3 +9295,18 @@ class MaxStack {
         return false
     }
 ```
+## 111. Minimum Depth of Binary Tree
+
+
+```swift
+    func minDepth(_ root: TreeNode?) -> Int {
+        func dfs(_ root: TreeNode?, _ height: Int) -> Int {
+            guard let node = root else { return Int.max }
+            if node.left == nil && node.right == nil { return height }
+            
+            return min(dfs(node.left, height + 1), dfs(node.right, height + 1))
+        }
+        
+        return root != nil ? dfs(root, 1) : 0
+    }
+```
