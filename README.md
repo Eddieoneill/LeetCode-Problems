@@ -9310,7 +9310,7 @@ class MaxStack {
         return root != nil ? dfs(root, 1) : 0
     }
 ```
-## 840. Magic Squares In Grid
+## 604. Design Compressed String Iterator
 
 
 ```swift
