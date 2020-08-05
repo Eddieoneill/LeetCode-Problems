@@ -9831,17 +9831,17 @@ class TwoSum {
     func findUnsortedSubarray(_ nums: [Int]) -> Int {
         guard nums.count > 1 else { return 0 }
         let n = nums.count - 1
-        var maxVal = nums[n]
-        var minVal = nums[0]
-        var start = -1
-        var end = -2
+        var mn = nums[n]
+        var mx = nums[0]
+        var start = Int.min + 1
+        var end = Int.min
         
         for i in 1...n {
-          maxVal = max(maxVal, nums[i])
-          minVal = min(minVal, nums[n - i])
+          mx = max(mx, nums[i])
+          mn = min(mn, nums[n - i])
             
-          if maxVal > nums[i] { end = i }
-          if minVal < nums[n - i] { start = n - i }
+          if mx > nums[i] { end = i }
+          if mn < nums[n - i] { start = n - i }
         }
 
         return end - start + 1
