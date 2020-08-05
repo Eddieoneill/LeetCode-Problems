@@ -9540,3 +9540,34 @@ class StringIterator {
         return count
     }
 ```
+## 125. Valid Palindrome
+
+
+```swift
+    func isPalindrome(_ s: String) -> Bool {
+        var s = s.map { String($0) }
+        var valid = Set("1234567890abcdefghijklmnopqrstuvwxyz".map { String($0) })
+        var left = 0
+        var right = s.count - 1
+        
+        while left < right {
+            let leftChar = s[left].lowercased()
+            let rightChar = s[right].lowercased()
+            
+            if !valid.contains(leftChar) {
+                left += 1
+                continue
+            } else if !valid.contains(rightChar) {
+                right -= 1
+                continue
+            } else if leftChar != rightChar {
+                return false
+            }
+            
+            left += 1
+            right -= 1
+        }
+        
+        return true
+    }
+```
