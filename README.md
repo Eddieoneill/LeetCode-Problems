@@ -9664,3 +9664,31 @@ class StringIterator {
         return i
     }
 ```
+## 170. Two Sum III - Data structure design
+
+
+```swift
+class TwoSum {
+    var dict: [Int: Int] = [:]
+    
+    init() {}
+    
+    func add(_ number: Int) {
+        dict[number, default: 0] += 1
+    }
+    
+    func find(_ value: Int) -> Bool {
+        for (num, count) in dict {
+            if let res = dict[value - num] {
+                if num == value - num {
+                    if count > 1 { return true }
+                } else {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+}
+```
