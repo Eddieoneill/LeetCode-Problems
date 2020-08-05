@@ -9618,3 +9618,27 @@ class StringIterator {
         }
     }
 ```
+## 69. Sqrt(x)
+
+```swift
+    func mySqrt(_ x: Int) -> Int {
+        guard x > 1 else { return x }
+        var left = 2
+        var right = (x / 2)
+        
+        while left <= right {
+            let mid = ((right - left) / 2) + left
+            var r = mid * mid
+            
+            if r == x {
+                return mid
+            } else if r > x {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        return right
+    }
+```
