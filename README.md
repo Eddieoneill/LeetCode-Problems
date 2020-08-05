@@ -9751,3 +9751,26 @@ class TwoSum {
         return false
     }
 ```
+## 532. K-diff Pairs in an Array
+
+
+```swift
+    func findPairs(_ nums: [Int], _ k: Int) -> Int {
+        guard k >= 0 else { return 0 }
+        var seen: Set<Int> = []
+        var pairs: Set<[Int]> = []
+        
+        for num in nums {
+            if (seen.contains(num + k) && !pairs.contains([min(num, num + k), max(num, num + k)])) {
+                pairs.insert([min(num, num + k), max(num, num + k)])
+            }
+            if (seen.contains(num - k) && !pairs.contains([min(num, num - k), max(num, num - k)])) {
+                pairs.insert([min(num, num - k), max(num, num - k)])
+            }
+            
+            seen.insert(num)
+        }
+        
+        return pairs.count
+    }
+```
