@@ -9593,3 +9593,28 @@ class StringIterator {
         return !mountain
     }
 ```
+## 189. Rotate Array
+
+
+```swift
+    func rotate(_ nums: inout [Int], _ k: Int) {
+        let k = k % nums.count
+        reverse(&nums, 0, nums.count - 1)
+        reverse(&nums, 0, k - 1)
+        reverse(&nums, k, nums.count - 1)
+    }
+    
+    func reverse(_ nums: inout [Int], _ left: Int, _ right: Int) {
+        var left = left
+        var right = right
+        
+        while left < right {
+            let temp = nums[left]
+            nums[left] = nums[right]
+            nums[right] = temp
+            
+            left += 1
+            right -= 1
+        }
+    }
+```
