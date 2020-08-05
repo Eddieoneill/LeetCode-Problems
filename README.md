@@ -9523,4 +9523,20 @@ class StringIterator {
         return maxVal
     }
 ```
+## 434. Number of Segments in a String
 
+
+```swift
+    func countSegments(_ s: String) -> Int {
+        var s = Array(s)
+        var count = 0
+        
+        for (i, char) in s.enumerated() {
+            if (i == 0 || s[i - 1] == " ") && s[i] != " " {
+                count += 1
+            }
+        }
+        
+        return count
+    }
+```
