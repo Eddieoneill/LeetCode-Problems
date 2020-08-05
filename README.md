@@ -9774,3 +9774,28 @@ class TwoSum {
         return pairs.count
     }
 ```
+## 204. Count Primes
+
+
+```swift
+    func countPrimes(_ n: Int) -> Int {
+        guard n > 1 else { return 0 }
+        var sieve = Array(repeating: true, count: n)
+        var count = 0
+        sieve[0] = false
+        sieve[1] = false
+        
+        for i in 2..<n where sieve[i] {
+            if sieve[i] == true {
+                var multiple = 2
+                count += 1
+                while i * multiple < n {
+                    sieve[i * multiple] = false
+                    multiple += 1
+                }
+            }
+        }
+        
+        return count
+    }
+```
