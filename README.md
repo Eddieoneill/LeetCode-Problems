@@ -9713,3 +9713,18 @@ class TwoSum {
         return result
     }
 ```
+## 58. Length of Last Word
+
+
+```swift
+    func lengthOfLastWord(_ s: String) -> Int {
+        var count = 0
+        
+        for char in s.reversed() {
+            if count > 0 && char == " " { return count }
+            if char != " " { count += 1 }
+        }
+        
+        return count
+    }
+```
