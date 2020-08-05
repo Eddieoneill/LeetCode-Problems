@@ -9692,3 +9692,24 @@ class TwoSum {
     }
 }
 ```
+## 475. Heaters
+
+
+```swift
+    func findRadius(_ houses: [Int], _ heaters: [Int]) -> Int {
+        var heaters = heaters.sorted()
+        var houses = houses.sorted()
+        var result = 0
+        var i = 0
+        
+        for house in houses {
+            while i < heaters.count - 1 && abs(house - heaters[i]) >= abs(heaters[i + 1] - house) {
+                i += 1
+            }
+            
+            result = max(result, abs(heaters[i] - house))
+        }
+        
+        return result
+    }
+```
