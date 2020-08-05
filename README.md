@@ -9799,3 +9799,28 @@ class TwoSum {
         return count
     }
 ```
+## 605. Can Place Flowers
+
+
+```swift
+    func canPlaceFlowers(_ flowerbed: [Int], _ n: Int) -> Bool {
+        let count = flowerbed.count
+        var preZero = flowerbed[0] == 0
+        var canPlant = 0
+        
+        for i in 0..<count {
+            if flowerbed[i] == 0 {
+                if preZero && (i == count - 1 || flowerbed[i + 1] == 0) {
+                    canPlant += 1
+                    preZero = false
+                } else {
+                    preZero = true
+                }
+            } else {
+                preZero = false
+            }
+        }
+        
+        return n <= canPlant
+    }
+```
