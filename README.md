@@ -9571,3 +9571,25 @@ class StringIterator {
         return true
     }
 ```
+## 941. Valid Mountain Array
+
+
+```swift
+    func validMountainArray(_ A: [Int]) -> Bool {
+        guard A.count >= 3 else { return false }
+        guard A[0] < A[1] && A[A.count - 2] > A[A.count - 1] else { return false }
+        var mountain = true
+        
+        for (i, num) in A.enumerated() where i > 0 {
+            if mountain && num > A[i - 1] { continue }
+            
+            if mountain && num < A[i - 1] {
+                mountain = false
+            } else if num == A[i - 1] || num > A[i - 1] { 
+                return false
+            }
+        }
+        
+        return !mountain
+    }
+```
