@@ -9642,3 +9642,25 @@ class StringIterator {
         return right
     }
 ```
+## 157. Read N Characters Given Read4
+
+
+```swift
+    func read(_ buf: inout [Character], _ n: Int) -> Int {
+        var i = 0
+        
+        while true {
+            var arr = Array(repeating: Character(" "), count: 4)
+            let charCount = read4(&arr)
+            if charCount == 0 { break }
+            
+            for (count, char) in arr.enumerated() where count < charCount{
+                if i >= n { break }
+                buf[i] = char
+                i += 1
+            }
+        }
+        
+        return i
+    }
+```
