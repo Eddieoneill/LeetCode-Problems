@@ -10137,3 +10137,22 @@ class TwoSum {
         return nums
     }
 ```
+## 1512. Number of Good Pairs
+
+
+```swift
+    func numIdenticalPairs(_ nums: [Int]) -> Int {
+        var dict: [Int: Int] = [:]
+        var result = 0
+        
+        for num in nums {
+            dict[num, default: 0] += 1
+        }
+        
+        for (key, count) in dict where count > 1 {
+            result += (count * (count - 1)) / 2
+        }
+        
+        return result
+    }
+```
