@@ -10233,3 +10233,25 @@ class TwoSum {
         return b
     }
 ```
+## 1507. Reformat Date
+
+
+```swift
+    func reformatDate(_ date: String) -> String {
+        var date = date.split(separator: " ").map { String($0) }
+        var months = ["Jan" : "01", "Feb": "02", "Mar": "03", "Apr": "04", "May" : "05", "Jun": "06", "Jul": "07", "Aug": "08", "Sep": "09", "Oct": "10", "Nov": "11", "Dec": "12"]
+        var d: [String] = []
+        var m = months[date[1], default: ""]
+        let y = date[2]
+        
+        for char in date[0] {
+            if let _ = Int(String(char)) {
+                d.append(String(char))
+            }
+        }
+        
+        if d.count < 2 { return "\(y)-\(m)-0\(d.joined())" }
+        
+        return "\(y)-\(m)-\(d.joined())"
+    }
+```
