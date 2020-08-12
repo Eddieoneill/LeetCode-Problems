@@ -10334,3 +10334,21 @@ class TwoSum {
         return count
     }
 ```
+## 1539. Kth Missing Positive Number
+
+
+```swift
+    func findKthPositive(_ arr: [Int], _ k: Int) -> Int {
+        var seen = Set(arr)
+        var missing = 0
+        
+        for num in 1...2000 where !seen.contains(num) {
+            missing += 1
+            if missing == k {
+                return num
+            }
+        }
+        
+        return missing
+    }
+```
