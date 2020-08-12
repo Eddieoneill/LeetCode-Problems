@@ -9913,3 +9913,19 @@ class TwoSum {
         return power
     }
 ```
+## 1450. Number of Students Doing Homework at a Given Time
+
+
+```swift
+    func busyStudent(_ startTime: [Int], _ endTime: [Int], _ queryTime: Int) -> Int {
+        var result = 0
+        
+        for i in 0..<startTime.count {
+            if startTime[i] <= queryTime && endTime[i] >= queryTime {
+                result += 1
+            }
+        }
+        
+        return result
+    }
+```
