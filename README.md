@@ -9969,3 +9969,33 @@ class TwoSum {
         return total
     }
 ```
+## 1455. Check If a Word Occurs As a Prefix of Any Word in a Sentence
+
+
+```swift
+    func isPrefixOfWord(_ sentence: String, _ searchWord: String) -> Int {
+        var words = sentence.map { String($0) }
+        var searchWord = searchWord.map { String($0) }
+        var j = 0
+        var i = 0
+        var count = 1
+        
+        while i < words.count {
+            if words[i] == searchWord[j] {
+                j += 1
+                i += 1
+                if j >= searchWord.count { return count }
+            } else if words[i] == " " {
+                count += 1
+                j = 0
+                i += 1
+            } else {
+                while i < words.count, words[i] != " " {
+                    i += 1
+                }
+            }
+        }
+        
+        return -1
+    }
+```
