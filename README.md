@@ -9929,3 +9929,43 @@ class TwoSum {
         return result
     }
 ```
+## 1086. High Five
+
+
+```swift
+    func highFive(_ items: [[Int]]) -> [[Int]] {
+        var idToAllScores: [Int: [Int]] = [:]
+        var result: [[Int]] = []
+        
+        for item in items {
+            let id = item[0]
+            let score = item[1]
+            
+            if let currentArray = idToAllScores[id] {
+                idToAllScores[id] = currentArray + [score]
+            } else {
+                idToAllScores[id] = [score]
+            }
+        }
+        
+        for (id, scores) in idToAllScores {
+            result.append([id, getAverageOfTopFiveScores(scores)])
+        }
+        
+        return result.sorted { $0[0] < $1[0] }
+    }
+    
+    func getAverageOfTopFiveScores(_ allScores: [Int]) -> Int {
+        var newScores = allScores
+        var total = 0
+        newScores.sort { $0 > $1 }
+        let indexAmount = min(5, newScores.count)
+        for index in 0..<indexAmount {
+            total += newScores[index]
+        }
+        
+        total = total / indexAmount
+        
+        return total
+    }
+```
