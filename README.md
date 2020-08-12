@@ -9889,3 +9889,27 @@ class TwoSum {
         return true
     }
 ```
+## 1446. Consecutive Characters
+
+
+```swift
+    func maxPower(_ s: String) -> Int {
+        var power = 1
+        var currPower = 1
+        var curr: Character = " "
+        
+        for char in s {
+            if char == curr {
+                currPower += 1
+            } else {
+                curr = char
+                power = max(power, currPower)
+                currPower = 1
+            }
+        }
+        
+        power = max(power, currPower)
+        
+        return power
+    }
+```
