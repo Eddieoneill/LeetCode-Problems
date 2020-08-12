@@ -10097,3 +10097,29 @@ class TwoSum {
         return nums
     }
 ```
+## 1474. Delete N Nodes After M Nodes of a Linked List
+
+
+```swift
+    func deleteNodes(_ head: ListNode?, _ m: Int, _ n: Int) -> ListNode? {
+        var curr = head
+        var m1 = m
+        var n1 = n
+        
+        while curr != nil {
+            if m1 > 1 {
+                curr = curr?.next
+                m1 -= 1
+            } else if n1 > 0 {
+                curr?.next = curr?.next?.next
+                n1 -= 1
+            } else {
+                curr = curr?.next
+                m1 = m
+                n1 = n
+            }
+        }
+        
+        return head
+    }
+```
