@@ -10156,3 +10156,18 @@ class TwoSum {
         return result
     }
 ```
+## 1502. Can Make Arithmetic Progression From Sequence
+
+
+```swift
+    func canMakeArithmeticProgression(_ arr: [Int]) -> Bool {
+        var arr = arr.sorted()
+        var diff = arr[0] - arr[1]
+        
+        for i in 1..<arr.count - 1 {
+            if arr[i] - arr[i + 1] != diff { return false }
+        }
+        
+        return true
+    }
+```
