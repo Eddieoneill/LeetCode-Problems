@@ -10192,3 +10192,25 @@ class TwoSum {
         return result;
     }
 ```
+## 1491. Average Salary Excluding the Minimum and Maximum Salary
+
+
+```swift
+    func average(_ salary: [Int]) -> Double {
+        var minVal = Int.max
+        var maxVal = Int.min
+        var sum = 0
+        
+        for num in salary {
+            sum += num
+            
+            maxVal = max(maxVal, num)
+            minVal = min(minVal, num)
+        }
+        
+        sum -= maxVal
+        sum -= minVal
+        
+        return Double(sum) / Double(salary.count - 2)
+    }
+```
