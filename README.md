@@ -10214,3 +10214,22 @@ class TwoSum {
         return Double(sum) / Double(salary.count - 2)
     }
 ```
+## 1518. Water Bottles
+
+
+```swift
+    func numWaterBottles(_ numBottles: Int, _ numExchange: Int) -> Int {
+        var b = 0
+        var empty = 0
+        var numBottles = numBottles
+        
+        while numBottles >= 1 {
+            b +=  numBottles
+            empty += numBottles
+            numBottles = empty / numExchange
+            empty %= numExchange
+        }
+        
+        return b
+    }
+```
