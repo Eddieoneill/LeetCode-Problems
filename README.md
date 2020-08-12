@@ -10020,3 +10020,25 @@ class TwoSum {
         return (n - 1) * (m - 1)
     }
 ```
+## 1460. Make Two Arrays Equal by Reversing Sub-arrays
+
+
+```swift
+    func canBeEqual(_ target: [Int], _ arr: [Int]) -> Bool {
+        var buckets1 = Array(repeating: 0, count: 1001)
+        var buckets2 = Array(repeating: 0, count: 1001)
+        
+        for i in 0..<arr.count {
+            buckets1[target[i]] += 1
+            buckets2[arr[i]] += 1
+        }
+        
+        for i in 0..<buckets1.count {
+            if buckets1[i] != buckets2[i] {
+                return false
+            }
+        }
+        
+        return true
+    }
+```
