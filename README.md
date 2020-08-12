@@ -10289,3 +10289,29 @@ class TwoSum {
         return low % 2 == 0 && high % 2 == 0 ? (high - low) / 2 : (high - low) / 2 + 1
     }
 ```
+## 1544. Make The String Great
+
+
+```swift
+    func makeGood(_ s: String) -> String {
+        var result: [String] = []
+        var s = s.map { String($0) }
+        
+        for char in s {
+            if result.isEmpty {
+                result.append(char)
+                continue
+            }
+            
+            let top = result[result.count - 1]
+            if top != char && top.lowercased() == char.lowercased() {
+                result.removeLast()
+                continue
+            }
+            
+            result.append(char)
+        }
+        
+        return result.joined()
+    }
+```
