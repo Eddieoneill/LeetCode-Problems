@@ -9869,3 +9869,23 @@ class TwoSum {
         }
     }  
 ```
+## 665. Non-decreasing Array
+
+
+```swift
+    func checkPossibility(_ nums: [Int]) -> Bool {
+        var count = 0
+        var prev = nums[0]
+        
+        for index in 1..<nums.count {
+            if prev > nums[index] {
+                count += 1
+                if count > 1 { return false }
+                if index != 1 && nums[index - 2] > nums[index] { continue }
+            }
+            prev = nums[index]
+        }
+        
+        return true
+    }
+```
