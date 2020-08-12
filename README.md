@@ -10255,3 +10255,29 @@ class TwoSum {
         return "\(y)-\(m)-\(d.joined())"
     }
 ```
+## 1496. Path Crossing
+
+
+```swift
+    func isPathCrossing(_ path: String) -> Bool {
+        var seen: Set<String> = ["0-0"]
+        var curr = [0, 0]
+        
+        for dir in path {
+            if dir == "N" {
+                curr[0] -= 1
+            } else if dir == "S" {
+                curr[0] += 1
+            } else if dir == "W" {
+                curr[1] -= 1
+            } else {
+                curr[1] += 1
+            }
+            
+            if seen.contains("\(curr[0])-\(curr[1])") { return true }
+            seen.insert("\(curr[0])-\(curr[1])")
+        }
+        
+        return false
+    }
+```
