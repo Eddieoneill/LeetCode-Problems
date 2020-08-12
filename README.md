@@ -10042,3 +10042,27 @@ class TwoSum {
         return true
     }
 ```
+## 1469. Find All The Lonely Nodes
+
+
+```swift
+    func getLonelyNodes(_ root: TreeNode?) -> [Int] {
+        var result: [Int] = []
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            if node.left != nil && node.right == nil {
+                result.append(node.left!.val)
+            } else if node.right != nil && node.left == nil {
+                result.append(node.right!.val)
+            }
+            
+            dfs(node.left)
+            dfs(node.right)
+        }
+        
+        dfs(root)
+        return result
+    }
+```
