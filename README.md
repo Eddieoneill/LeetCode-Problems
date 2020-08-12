@@ -10066,3 +10066,34 @@ class TwoSum {
         return result
     }
 ```
+## 1470. Shuffle the Array
+
+
+```swift
+    func shuffle(_ nums: [Int], _ n: Int) -> [Int] {
+        var i = n - 1
+        var j = nums.count - 1
+        var nums = nums
+        
+        while j >= n {
+            nums[j] <<= 10
+            nums[j] |= nums[i]
+            i -= 1
+            j -= 1
+        }
+
+        i = 0
+        j = n
+        
+        while j < nums.count {
+            let num1 = nums[j] & 1023
+            let num2 = nums[j] >> 10
+            nums[i] = num1
+            nums[i + 1] = num2
+            i += 2    
+            j += 1
+        }
+
+        return nums
+    }
+```
