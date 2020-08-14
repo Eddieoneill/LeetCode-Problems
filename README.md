@@ -10391,3 +10391,20 @@ class TwoSum {
         return placeNumber(0, nums.count - 1)
     }
 ```
+## 168. Excel Sheet Column Title
+
+
+```swift
+    func convertToTitle(_ n: Int) -> String {
+        var num = n
+        var res: [String] = []
+
+        while num != 0 {
+            let uni = (num - 1) % 26
+            num = (num - 1) / 26
+            let cha = String(Character(UnicodeScalar(uni + 65)!))
+            res.append(cha)
+        }
+        return res.reversed().joined()
+    }
+```
