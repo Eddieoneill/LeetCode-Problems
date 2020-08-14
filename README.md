@@ -10370,3 +10370,24 @@ class TwoSum {
         return result
     }
 ```
+## 108. Convert Sorted Array to Binary Search Tree
+
+
+```swift
+    func sortedArrayToBST(_ nums: [Int]) -> TreeNode? {
+        if nums.isEmpty { return nil }
+        
+        func placeNumber(_ low: Int, _ high: Int) -> TreeNode? {
+            guard low <= high else { return nil }
+            let mid = (high + low) / 2
+            let node = TreeNode(nums[mid])
+            
+            node.left = placeNumber(low, mid - 1)
+            node.right = placeNumber(mid + 1, high)
+            
+            return node
+        }
+        
+        return placeNumber(0, nums.count - 1)
+    }
+```
