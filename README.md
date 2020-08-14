@@ -10352,3 +10352,21 @@ class TwoSum {
         return missing
     }
 ```
+## 1389. Create Target Array in the Given Order
+
+
+```swift
+    func createTargetArray(_ nums: [Int], _ index: [Int]) -> [Int] {
+        var result: [Int] = []
+        
+        for i in 0..<nums.count {
+            if result.isEmpty || i == index[i] {
+                result.append(nums[i])
+            } else {
+                result.insert(nums[i], at: index[i])
+            }
+        }
+        
+        return result
+    }
+```
