@@ -10408,3 +10408,29 @@ class TwoSum {
         return res.reversed().joined()
     }
 ```
+## 1502. Can Make Arithmetic Progression From Sequence
+
+
+```swift
+    func canMakeArithmeticProgression(_ arr: [Int]) -> Bool {
+        guard arr.count > 2 else { return true }
+        
+        var seen: Set<Int> = []
+        var maxVal = Int.min
+        var minVal = Int.max
+        
+        for num in arr {
+            maxVal = max(num, maxVal)
+            minVal = min(num, minVal)
+            seen.insert(num)
+        }
+        
+        let d = (maxVal - minVal) / (arr.count - 1)
+        
+        for i in 1...arr.count where !seen.contains(minVal + (i - 1) * d) {
+            return false
+        }
+        
+        return true
+    }
+```
