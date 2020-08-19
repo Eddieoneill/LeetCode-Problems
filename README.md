@@ -10473,3 +10473,19 @@ class TwoSum {
                 nums[index!] <= nums[index! + 2])
     }
 ```
+## 1550. Three Consecutive Odds
+
+
+```swift
+    func threeConsecutiveOdds(_ arr: [Int]) -> Bool {
+        guard arr.count > 2 else { return false }
+        
+        for i in 0..<arr.count - 2 {
+            if arr[i] % 2 == 1 && arr[i + 1] % 2 == 1 && arr[i + 2] % 2 == 1 {
+                return true
+            }
+        }
+        
+        return false
+    }
+```
