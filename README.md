@@ -10533,3 +10533,19 @@ class TwoSum {
         return result
     }
 ```
+## 1085. Sum of Digits in the Minimum Number
+
+
+```swift
+    func sumOfDigits(_ A: [Int]) -> Int {
+        var num = A.min() ?? 0
+        var sum = 0
+        
+        while num > 0 {
+            sum += num % 10
+            num /= 10
+        }
+        
+        return sum % 2 == 0 ? 1 : 0
+    }
+```
