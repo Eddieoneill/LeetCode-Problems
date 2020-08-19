@@ -10557,3 +10557,22 @@ class TwoSum {
         return N % 2 == 0
     }
 ```
+## 276. Paint Fence
+
+
+```swift
+    func numWays(_ n: Int, _ k: Int) -> Int {
+        guard n > 0 else { return 0 }
+        guard n > 1 else { return k }
+        
+        var diffCount = k * (k - 1)
+        var colorCount = k
+        
+        for i in 2..<n {
+            let temp = diffCount
+            diffCount = (diffCount + colorCount) * (k - 1)
+            colorCount = temp
+        }
+        return diffCount + colorCount
+    }
+```
