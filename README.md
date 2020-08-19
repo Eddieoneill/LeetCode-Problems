@@ -10507,3 +10507,29 @@ class TwoSum {
         return sum
     }
 ```
+## 728. Self Dividing Numbers
+
+
+```swift
+    func selfDividingNumbers(_ left: Int, _ right: Int) -> [Int] {
+        var result: [Int] = []
+        
+        for num in left...right {
+            var n = num
+            
+            while n > 0 {
+                let digit = n % 10
+                
+                if digit != 0, num % digit == 0 { 
+                    n /= 10
+                } else {
+                    break
+                }
+            }
+            
+            if n == 0 { result.append(num) }
+        }
+        
+        return result
+    }
+```
