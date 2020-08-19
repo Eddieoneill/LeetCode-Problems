@@ -10549,3 +10549,11 @@ class TwoSum {
         return sum % 2 == 0 ? 1 : 0
     }
 ```
+## 1025. Divisor Game
+
+
+```swift
+    func divisorGame(_ N: Int) -> Bool {
+        return N % 2 == 0
+    }
+```
