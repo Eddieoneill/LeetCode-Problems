@@ -10434,4 +10434,21 @@ class TwoSum {
         return true
     }
 ```
+## 1475. Final Prices With a Special Discount in a Shop
 
+
+```swift
+    func finalPrices(_ prices: [Int]) -> [Int] {
+        var result = prices
+        var stack: [Int] = []
+        
+        for (i, price) in prices.enumerated() {
+            while !stack.isEmpty, prices[stack[stack.count - 1]] >= price {
+                result[stack.removeLast()] -= price
+            }
+            stack.append(i)
+        }
+        
+        return result
+    }
+```
