@@ -10489,3 +10489,21 @@ class TwoSum {
         return false
     }
 ```
+## 339. Nested List Weight Sum
+
+
+```swift
+    func depthSum(_ nestedList: [NestedInteger], _ depth: Int = 1) -> Int {
+        var sum = 0
+        
+        for list in nestedList {
+            if list.isInteger() {
+                sum += (list.getInteger() * depth)
+            } else {
+                sum += depthSum(list.getList(), depth + 1)
+            }
+        }
+        
+        return sum
+    }
+```
