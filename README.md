@@ -10576,3 +10576,136 @@ class TwoSum {
         return diffCount + colorCount
     }
 ```
+## 706. Design HashMap
+
+
+```swift
+class MyHashMap {
+    var elements: [LinkedList?]
+    var loadFactor = 0.75
+    var count = 0
+    
+    init() {
+        self.elements = Array(repeating: nil, count: 10)
+    }
+    
+    func put(_ key: Int, _ value: Int) {
+        let index = hash(key)
+        if elements[index] == nil {
+            elements[index] = LinkedList()
+        }
+        elements[index]!.insert(key, value)
+        count += 1
+        
+        if shouldReHash() { rehash() }
+    }
+    
+    func get(_ key: Int) -> Int {
+        let index = hash(key)
+        return elements[index] != nil ? elements[index]!.get(key) : -1
+    }
+    
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    func remove(_ key: Int) {
+        let index = hash(key)
+        guard let list = elements[index] else { return }
+        if list.remove(key) { count -= 1 }
+        
+    }
+    
+    func hash(_ key: Int) -> Int {
+        return key % elements.count
+    }
+    
+    func shouldReHash() -> Bool {
+        return Double(count) / Double(elements.count) >= loadFactor
+    }
+    
+    func rehash() {
+        let old = elements
+        elements = Array(repeating: nil, count: old.count * 2)
+        count = 0
+        for list in old {
+            var head = list?.head
+            
+            while head != nil {
+                put(head!.key, head!.val)
+                head = head?.next
+            }
+            
+        }   
+    }
+}
+
+class LinkedList {
+    var head: Node?
+    
+    init() {
+        self.head = nil
+    }
+    
+    func get(_ key: Int) -> Int {
+        var curr = head
+        
+        while curr != nil {
+            if curr!.key == key {
+                return curr!.val
+            }
+            curr = curr?.next
+        }
+        
+        return -1
+    }
+    
+    func insert(_ key: Int, _ val: Int) {
+        if get(key) != -1 { 
+            var curr = head
+            
+            while curr != nil {
+                if curr!.key == key {
+                    curr?.val = val
+                    return
+                }
+                curr = curr?.next
+            }
+        } else {
+            let node = Node(key, val)
+            node.next = head
+            head = node
+        }
+    }
+    
+    func remove(_ key: Int) -> Bool {
+        if head == nil { return false }
+        if head!.key == key {
+            head = head?.next
+            return true
+        }
+        let dummy: Node? = Node(0,0)
+        dummy?.next = head
+        var curr = dummy
+        
+        while curr?.next != nil {
+            if curr?.next!.key == key {
+                curr?.next = curr?.next?.next
+                return true
+            }
+            
+            curr = curr?.next
+        }
+        
+        return false
+    }   
+}
+
+class Node {
+    var key: Int
+    var val: Int
+    var next: Node? = nil
+    
+    init(_ key: Int, _ val: Int) {
+        self.key = key
+        self.val = val
+    }
+}
+```
