@@ -10968,3 +10968,27 @@ extension AVLTree {
         return true
     }
 ```
+## 1556. Thousand Separator
+
+
+```swift
+    func thousandSeparator(_ n: Int) -> String {
+        guard n > 0 else { return "0" }
+        var count = 0
+        var n = n
+        var result: [String] = []
+        
+        while n > 0 {
+            let digit = n % 10
+            n /= 10
+            if count == 3 {
+                result.append(".")
+                count = 0
+            }
+            result.append("\(digit)")
+            count += 1
+        }
+        
+        return result.reversed().joined()
+    }
+```
