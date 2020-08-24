@@ -10942,3 +10942,29 @@ extension AVLTree {
     }
 } 
 ```
+## 551. Student Attendance Record I
+
+
+```swift
+    func checkRecord(_ s: String) -> Bool {
+        var aCount = 0
+        var lCount = 0
+        
+        for (i, char) in s.enumerated() {
+            if char == "L" {
+                lCount += 1
+                if lCount > 2 { return false  }
+                continue
+            }
+            
+            if char == "A" { 
+                aCount += 1
+                if aCount > 1 { return false }
+            }
+            
+            lCount = 0
+        }
+        
+        return true
+    }
+```
