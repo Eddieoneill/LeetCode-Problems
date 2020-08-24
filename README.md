@@ -10709,3 +10709,236 @@ class Node {
     }
 }
 ```
+# AVLTree Solution
+```swift
+class MyHashMap {
+    var elements: [AVLTree?]
+    var loadFactor = 0.75
+    var count = 0
+    
+    init() {
+        self.elements = Array(repeating: nil, count: 10)
+    }
+    
+    func put(_ key: Int, _ value: Int) {
+        let index = hash(key)
+        if elements[index] == nil {
+            elements[index] = AVLTree()
+        }
+        elements[index]!.insert(key, value)
+        count += 1
+        
+        if shouldReHash() { rehash() }
+    }
+    
+    func get(_ key: Int) -> Int {
+        let index = hash(key)
+        guard let tree = elements[index] else { return -1 }
+        guard let result = tree.get(key) else { return -1 }
+        return result.val
+    }
+    
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    func remove(_ key: Int) {
+        let index = hash(key)
+        guard var tree = elements[index] else { return }
+        if tree.remove(key) { count -= 1 }
+    }
+    
+    func hash(_ key: Int) -> Int {
+        return key % elements.count
+    }
+    
+    func shouldReHash() -> Bool {
+        return Double(count) / Double(elements.count) >= loadFactor
+    }
+    
+    func rehash() {
+        let old = elements
+        elements = Array(repeating: nil, count: old.count * 2)
+        count = 0
+        for tree in old where tree != nil {
+            let nodes = tree!.getNodes()
+            
+            for node in nodes {
+                put(node.key, node.val)
+            }
+        }   
+    }
+}
+
+class AVLNode {
+    var key: Int
+    var val: Int
+    var left: AVLNode?
+    var right: AVLNode?
+    var height = 0
+    
+    var balanceFactor: Int {
+        return leftHeight - rightHeight
+    }
+    
+    var leftHeight: Int {
+        return left?.height ?? -1
+    }
+    
+    var rightHeight: Int {
+        return right?.height ?? -1
+    }
+    
+    var min: AVLNode {
+        return left?.min ?? self
+    }
+    
+    init(_ key: Int, _ val: Int) {
+        self.key = key
+        self.val = val
+    }
+}
+
+class AVLTree {
+    var root: AVLNode? = nil
+}
+
+extension AVLTree {
+    func leftRotate(_ node: AVLNode) -> AVLNode {
+        let pivot = node.right!
+        node.right = pivot.left
+        pivot.left = node
+        
+        node.height = max(node.leftHeight, node.rightHeight) + 1
+        pivot.height = max(pivot.leftHeight, pivot.rightHeight) + 1
+        
+        return pivot
+    }
+    
+    func rightRotate(_ node: AVLNode) -> AVLNode {
+        let pivot = node.left!
+        node.left = pivot.right
+        pivot.right = node
+        
+        node.height = max(node.leftHeight, node.rightHeight) + 1
+        pivot.height = max(pivot.leftHeight, pivot.rightHeight) + 1
+        
+        return pivot
+    }
+    
+    func leftRightRotate(_ node: AVLNode) -> AVLNode {
+        guard let left = node.left else { return node }
+        node.left = leftRotate(left)
+        return rightRotate(node)
+    }
+    
+    func rightLeftRotate(_ node: AVLNode) -> AVLNode {
+        guard let right = node.right else { return node }
+        node.right = rightRotate(right)
+        return leftRotate(node)
+    }
+    
+    func balance(_ node: AVLNode) -> AVLNode {
+        switch node.balanceFactor {
+        case 2:
+            if let left = node.left, left.balanceFactor == -1 {
+                return leftRightRotate(node)
+            } else {
+                return rightRotate(node)
+            }
+        case -2:
+            if let right = node.right, right.balanceFactor == 1 {
+                return rightLeftRotate(node)
+            } else {
+                return leftRotate(node)
+            }
+        default:
+            return node
+        }
+    }
+    
+    func insert(_ key: Int, _ val: Int) {
+        if let node = get(key) {
+            node.val = val
+        } else {
+            root = _insert(from: root, key, val)   
+        }
+    }
+    
+    func _insert(from node: AVLNode?, _ key: Int, _ val: Int) -> AVLNode? {
+        guard let node = node else { return AVLNode(key, val) }
+        
+        if key < node.key {
+            node.left = _insert(from: node.left, key, val)
+        } else {
+            node.right = _insert(from: node.right, key, val)
+        }
+        
+        let balancedNode = balance(node)
+        balancedNode.height = max(balancedNode.leftHeight, balancedNode.rightHeight) + 1
+        return balancedNode
+    }
+    
+    func remove(_ key: Int) -> Bool {
+        guard get(key) != nil else { return false }
+        root = _remove(from: root, key)
+        return true
+    }
+    
+    func _remove(from node: AVLNode?, _ key: Int) -> AVLNode? {
+        guard let node = node else { return nil }
+        
+        if key == node.key {
+            if node.left == nil && node.right == nil { 
+                return nil 
+            } else if node.left == nil {
+                return node.right
+            } else if node.right == nil {
+                return node.left
+            } else {
+                let rightMin = node.right!.min
+                node.key = rightMin.key
+                node.val = rightMin.val
+                node.right = _remove(from: node.right, node.key)
+            }
+        } else if key < node.key {
+            node.left = _remove(from: node.left, key)
+        } else {
+            node.right = _remove(from: node.right, key)
+        }
+        
+        let balancedNode = balance(node)
+        balancedNode.height = max(balancedNode.leftHeight, balancedNode.rightHeight) + 1
+        return balancedNode
+    }
+    
+    func get(_ key: Int) -> AVLNode? {
+        var curr = root
+        
+        while let node = curr {
+            if key == node.key {
+                return node
+            } else if key < node.key {
+                curr = node.left
+            } else {
+                curr = node.right
+            }
+        }
+        
+        return nil
+    }
+    
+    func getNodes() -> [AVLNode] {
+        var result: [AVLNode] = []
+        
+        dfs(root, &result)
+        
+        return result
+    }
+    
+    func dfs(_ root: AVLNode?, _ result: inout [AVLNode]) {
+        guard let node = root else { return }
+        
+        dfs(node.left, &result)
+        result.append(node)
+        dfs(node.right, &result)
+    }
+} 
+```
