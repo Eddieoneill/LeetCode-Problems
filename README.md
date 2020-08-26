@@ -11176,3 +11176,22 @@ class MyHashSet {
 }
 
 ```
+## 1010. Pairs of Songs With Total Durations Divisible by 60
+
+
+```swift
+    func numPairsDivisibleBy60(_ times: [Int]) -> Int {
+        var dict: [Int: Int] = [:]
+        var count = 0
+        
+        for time in times {
+            var mod = time % 60
+            let diff = 60 - mod
+            if let val = dict[diff] { count += val }
+            mod = mod != 0 ? mod : 60
+            dict[mod, default: 0] += 1
+        }
+        
+        return count
+    }
+```
