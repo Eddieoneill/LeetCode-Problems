@@ -11037,7 +11037,7 @@ class MyHashMap {
         
         while !elements[index].isEmpty {
             if elements[index][0] == key { break }
-            index = power * power
+            index += power * power
             index %= elements.count
             power += 1
         }
@@ -11056,7 +11056,7 @@ class MyHashMap {
             if elements[index][0] == key { 
                 return elements[index][1]
             }
-            index = power * power
+            index += power * power
             index %= elements.count
             power += 1
         }
@@ -11074,7 +11074,7 @@ class MyHashMap {
                 count -= 1
                 return 
             }
-            index = power * power
+            index += power * power
             index %= elements.count
             power += 1
         }
