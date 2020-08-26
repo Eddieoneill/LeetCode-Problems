@@ -11004,3 +11004,19 @@ extension AVLTree {
         return (b[1] - a[1]) * (c[0] - a[0]) != (b[0] - a[0]) * (c[1] - a[1])
     }
 ```
+## 172. Factorial Trailing Zeroes
+
+
+```swift
+    func trailingZeroes(_ n: Int) -> Int {
+        var n = n
+        var count = 0
+        
+        while n >= 5 { 
+            count += n / 5
+            n /= 5
+        }
+        
+        return count
+    }
+```
