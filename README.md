@@ -10992,3 +10992,15 @@ extension AVLTree {
         return result.reversed().joined()
     }
 ```
+## 1037. Valid Boomerang
+
+
+```swift
+    func isBoomerang(_ points: [[Int]]) -> Bool {
+        let a = points[0]
+        let b = points[1]
+        let c = points[2]
+        
+        return (b[1] - a[1]) * (c[0] - a[0]) != (b[0] - a[0]) * (c[1] - a[1])
+    }
+```
