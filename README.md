@@ -11098,3 +11098,81 @@ class MyHashMap {
     }
 }
 ```
+## 705. Design HashSet
+
+
+```swift
+
+class MyHashSet {
+    var elements: [Int?] = Array(repeating: nil, count: 10)
+    let loadFactor = 0.49
+    var count = 0
+    
+    init() {}
+    
+    func add(_ key: Int) {
+        var index = hash(key)
+        var power = 0
+        
+        while elements[index] != nil {
+            if elements[index] == key { return }
+            index += power * power
+            index %= elements.count
+            power += 1
+        }
+        
+        count += 1 
+        elements[index] = key
+        
+        if shouldRehash() { rehash() }
+    }
+    
+    func remove(_ key: Int) {
+        var index = hash(key)
+        var power = 0
+        
+        while elements[index] != nil {
+            if elements[index] == key { 
+                elements[index] = -1
+                count -= 1
+                return 
+            }
+            index += power * power
+            index %= elements.count
+            power += 1
+        }
+    }
+    
+    func contains(_ key: Int) -> Bool {
+        var index = hash(key)
+        var power = 0
+        
+        while elements[index] != nil {
+            if elements[index] == key { return true }
+            index += power * power
+            index %= elements.count
+            power += 1
+        }
+        
+        return false
+    }
+    
+    func hash(_ key: Int) -> Int {
+        return key % elements.count
+    }
+    
+    func shouldRehash() -> Bool {
+        return Double(count) / Double(elements.count) >= loadFactor
+    }
+    
+    func rehash() {
+        var old = elements
+        elements = Array(repeating: nil, count: old.count * 2)
+        
+        for element in old where element != nil && element != -1 {
+            add(element!)
+        }
+    }
+}
+
+```
