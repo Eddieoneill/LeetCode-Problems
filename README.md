@@ -11239,3 +11239,35 @@ class MyHashSet {
         return result
     }
 ```
+## 145. Binary Tree Postorder Traversal
+
+
+```swift
+    func postorderTraversal(_ root: TreeNode?) -> [Int] {
+        var curr = root
+        var stack: [TreeNode?] = []
+        var result: [Int] = []
+        
+        while curr != nil || !stack.isEmpty {
+            while curr != nil {
+                stack.append(curr)
+                curr = curr?.left
+            }
+            
+            var temp = stack[stack.count - 1]?.right
+            if temp != nil {
+                curr = temp
+                continue
+            }
+            
+            while !stack.isEmpty && stack[stack.count - 1]?.right === temp {
+                temp = stack.removeLast()
+                if let node = temp {
+                    result.append(node.val)   
+                }
+            }
+        }
+        
+        return result
+    }
+```
