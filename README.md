@@ -11214,4 +11214,28 @@ class MyHashSet {
         
         return result
     }
-``
+```
+## 94. Binary Tree Inorder Traversal
+
+
+```swift
+    func inorderTraversal(_ root: TreeNode?) -> [Int] {
+        var stack: [TreeNode?] = []
+        var result: [Int] = []
+        var curr = root
+        
+        while curr != nil || !stack.isEmpty {
+            while curr != nil {
+                stack.append(curr)
+                curr = curr?.left
+            }
+            
+            guard let node = stack.removeLast() else { continue }
+            
+            result.append(node.val)
+            curr = node.right
+        }
+        
+        return result
+    }
+```
