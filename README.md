@@ -11195,3 +11195,23 @@ class MyHashSet {
         return count
     }
 ```
+## 144. Binary Tree Preorder Traversal
+
+
+```swift
+    func preorderTraversal(_ root: TreeNode?) -> [Int] {
+        var stack: [TreeNode?] = [root]
+        var result:[Int] = []
+        
+        while !stack.isEmpty {
+            guard let node = stack.removeLast() else { continue }
+            
+            result.append(node.val)
+            
+            stack.append(node.right)
+            stack.append(node.left)
+        }
+        
+        return result
+    }
+``
