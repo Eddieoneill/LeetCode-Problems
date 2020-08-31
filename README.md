@@ -11367,3 +11367,17 @@ class MyHashSet {
         return maxDis
     }
 ```
+## 1426. Counting Elements
+
+```swift
+    func countElements(_ arr: [Int]) -> Int {
+        let set = Set(arr)
+        var count = 0
+        
+        for num in arr {
+            if set.contains(num + 1) { count += 1 }
+        }
+        
+        return count
+    }
+```
