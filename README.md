@@ -11271,3 +11271,25 @@ class MyHashSet {
         return result
     }
 ```
+## 783. Minimum Distance Between BST Nodes
+
+
+```swift
+    func minDiffInBST(_ root: TreeNode?) -> Int {
+        var diff = Int.max
+        var pre: Int? = nil
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            dfs(node.left)
+            if pre != nil {  diff = min(diff, node.val - pre!) }
+            pre = node.val
+            dfs(node.right)
+        }
+        
+        dfs(root)
+        
+        return diff
+    }
+```
