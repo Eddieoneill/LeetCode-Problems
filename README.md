@@ -11404,3 +11404,63 @@ class MyHashSet {
         return t1 + t2 + t3
     }
 ```
+## 1265. Print Immutable Linked List in Reverse
+
+
+```swift
+/**
+ * Definition for ImmutableListNode.
+ * public class ImmutableListNode {
+ *     public func printValue() {}
+ *     public func getNext() -> ImmutableListNode? {}
+ * }
+ */
+
+class Solution {
+    func printLinkedListInReverse(_ head: ImmutableListNode?) {
+        let count = listCount(head)
+        var stack: [ImmutableListNode?] = []
+        var offset = Int(count.squareRoot())
+        var curr = head
+        
+        while curr != nil {
+            stack.append(curr)
+            for _ in 0..<offset {
+                curr = curr?.getNext()
+            }
+        }
+        
+        while !stack.isEmpty {
+            printReverse(stack.removeLast(), offset)
+        }
+    }
+    
+    func printReverse(_ node: ImmutableListNode?, _ offset: Int) {
+        var stack: [ImmutableListNode?] = []
+        var offset = offset
+        var curr = node
+        
+        while curr != nil && offset > 0 {
+            stack.append(curr)
+            curr = curr?.getNext()
+            offset -= 1
+        }
+        
+        while !stack.isEmpty {
+            stack.removeLast()?.printValue()
+        }
+    }
+    
+    func listCount(_ node: ImmutableListNode?) -> Double {
+        var count: Double = 0
+        var curr = node
+        
+        while curr != nil {
+            count += 1
+            curr = curr?.getNext()
+        }
+        
+        return count
+    }
+}
+```
