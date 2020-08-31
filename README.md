@@ -11464,3 +11464,19 @@ class Solution {
     }
 }
 ```
+## 1287. Element Appearing More Than 25% In Sorted Array
+
+
+```swift
+    func findSpecialInteger(_ arr: [Int]) -> Int {
+        var percentage = Int(Double(arr.count) * 0.25)
+        var pre = -1
+        
+        for i in 0..<arr.count - percentage where arr[i] != pre {
+            if arr[i] == arr[i + percentage] { return arr[i] }
+            pre = arr[i]
+        }
+        
+        return 0
+    }
+```
