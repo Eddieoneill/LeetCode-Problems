@@ -11315,3 +11315,26 @@ class MyHashSet {
         return count
     }
 ```
+## 674. Longest Continuous Increasing Subsequence
+
+
+```swift
+    func findLengthOfLCIS(_ nums: [Int]) -> Int {
+        guard !nums.isEmpty else { return 0 }
+        var maxCount = 0
+        var curr = 1
+        
+        for i in 1..<nums.count {
+            if nums[i - 1] < nums[i] {
+                curr += 1
+            } else {
+                maxCount = max(maxCount, curr)
+                curr = 1
+            }
+        }
+        
+        maxCount = max(maxCount, curr)
+        
+        return maxCount
+    }
+```
