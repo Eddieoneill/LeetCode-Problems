@@ -11381,3 +11381,26 @@ class MyHashSet {
         return count
     }
 ```
+## 1137. N-th Tribonacci Number
+
+
+```swift
+    func tribonacci(_ n: Int) -> Int {
+        guard n != 0 else { return 0 }
+        guard n > 2 else { return 1 }
+        
+        var t1 = 0
+        var t2 = 1
+        var t3 = 1
+        
+        for _ in 3..<n {
+            let temp = t3
+            t3 = t1 + t2 + t3
+            t1 = t2
+            t2 = temp
+        }
+        
+        
+        return t1 + t2 + t3
+    }
+```
