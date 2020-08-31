@@ -11338,3 +11338,32 @@ class MyHashSet {
         return maxCount
     }
 ```
+## 849. Maximize Distance to Closest Person
+
+
+```swift
+    func maxDistToClosest(_ seats: [Int]) -> Int {
+        var start = 0
+        var maxDis = -1
+        
+        for end in 1..<seats.count {
+            if seats[end] != 1 { continue }
+            
+            if seats[start] != 1 { 
+                maxDis = end
+            } else {
+                maxDis = max(maxDis, (end - start) / 2)
+            }
+            
+            start = end
+        }
+        
+        if maxDis == -1 {
+            maxDis = seats.count - 1
+        } else if seats[seats.count - 1] == 0 {
+            maxDis = max(maxDis, seats.count - 1 - start)
+        }
+        
+        return maxDis
+    }
+```
