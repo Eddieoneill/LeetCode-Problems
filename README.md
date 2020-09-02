@@ -11480,3 +11480,27 @@ class Solution {
         return 0
     }
 ```
+## 1317. Convert Integer to the Sum of Two No-Zero Integers
+
+
+```swift
+    func getNoZeroIntegers(_ n: Int) -> [Int] {
+        for i in 1...n / 2 {
+            let curr = n - i
+            if hasZero(curr) && hasZero(i) { return [i, curr] }
+        }
+        
+        return []
+    }
+    
+    func hasZero(_ n: Int) -> Bool {
+        var n = n
+        
+        while n != 0 {
+            if n % 10 == 0 { return false }
+            n /= 10
+        }
+        
+        return true
+    }
+```
