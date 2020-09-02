@@ -11555,3 +11555,33 @@ class Solution {
         return [dup, missing]
     }
 ```
+## 661. Image Smoother
+
+
+```swift
+    func imageSmoother(_ M: [[Int]]) -> [[Int]] {
+        var result: [[Int]] = Array(repeating: Array(repeating: 0, count: M[0].count), count: M.count)
+        
+        for row in 0..<M.count {
+            for col in 0..<M[0].count {
+                var dirs = [[0,1],[0,-1],[1,0],[-1,0],[-1,-1],[1,1],[-1,1],[1,-1]]
+                var sum = M[row][col]
+                var count = 1
+                
+                for dir in dirs {
+                    let r = row + dir[0]
+                    let c = col + dir[1]
+                    
+                    if r >= 0 && c >= 0 && r < M.count && c < M[0].count{
+                        sum += M[r][c]
+                        count += 1
+                    }
+                }
+                
+                result[row][col] = sum / count
+            }
+        }
+        
+        return result
+    }
+```
