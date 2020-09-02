@@ -11585,3 +11585,31 @@ class Solution {
         return result
     }
 ```
+## 830. Positions of Large Groups
+
+
+```swift
+    func largeGroupPositions(_ S: String) -> [[Int]] {
+        var result: [[Int]] = []
+        var pre = ""
+        var count = 0
+        var start = 0
+        
+        for (i, char) in S.enumerated() {
+            let curr = String(char)
+            
+            if pre == curr {
+                count += 1
+            } else {
+                if count > 2 { result.append([start, i - 1]) }
+                count = 1
+                pre = curr
+                start = i
+            }
+        }
+        
+        if count > 2 { result.append([start, S.count - 1]) }
+        
+        return result
+    }
+```
