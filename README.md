@@ -11613,3 +11613,17 @@ class Solution {
         return result
     }
 ```
+## 1413. Minimum Value to Get Positive Step by Step Sum
+
+
+```swift
+        var minVal = 0
+        var sum = 0
+        for num in nums {
+            sum += num
+            minVal = min(sum, minVal)
+        }
+        
+        return minVal < 0 ? abs(minVal) + 1 : 1
+    }
+```
