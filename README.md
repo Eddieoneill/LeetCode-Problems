@@ -11529,3 +11529,29 @@ class Solution {
         return maxCount
     }
 ```
+## 645. Set Mismatch
+
+
+```swift
+    func findErrorNums(_ nums: [Int]) -> [Int] {
+        var nums = nums
+        var missing = 0
+        var dup = 0
+        
+        for num in nums {
+            if nums[abs(num) - 1] < 1 {
+                dup = abs(num)
+            } else {
+                nums[abs(num) - 1] *= -1   
+            }
+        }
+        
+        for i in 0..<nums.count {
+            if nums[i] > 0 {
+                missing = i + 1
+            }
+        }
+        
+        return [dup, missing]
+    }
+```
