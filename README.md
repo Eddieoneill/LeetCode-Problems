@@ -11627,3 +11627,38 @@ class Solution {
         return minVal < 0 ? abs(minVal) + 1 : 1
     }
 ```
+## 1029. Two City Scheduling
+
+
+```swift
+    func twoCitySchedCost(_ costs: [[Int]]) -> Int {
+        var costs = costs.sorted() { $0[0] - $0[1] < $1[0] - $1[1] }
+        var buckets: [[[Int]]] = Array(repeating: [], count: 2001)
+        var result = 0
+        var count = costs.count / 2
+        
+        for cost in costs {
+            let diff = cost[0] - cost[1]
+            if diff < 0 {
+                buckets[1000 + diff].append([cost[0], cost[1]]) 
+            } else {
+                buckets[diff + 1000].append([cost[0], cost[1]]) 
+            }
+        }
+        
+        for (diff, cost) in buckets.enumerated() where !cost.isEmpty {
+            var cost = cost
+            
+            while !cost.isEmpty {
+                if count > 0 {
+                    result += cost.removeLast()[0]
+                } else {
+                    result += cost.removeLast()[1]
+                }
+                count -= 1
+            }
+        }
+        
+        return result
+    }
+```
