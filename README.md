@@ -11504,3 +11504,28 @@ class Solution {
         return true
     }
 ```
+## 594. Longest Harmonious Subsequence
+
+
+```swift
+    func findLHS(_ nums: [Int]) -> Int {
+        var maxCount = 0
+        var dict: [Int: Int] = [:]
+        
+        for num in nums {
+            dict[num, default: 0] += 1
+        }
+        
+        for (num, count) in dict {
+            var length = count
+            
+            length = max(count + dict[num - 1, default: 0], count + dict[num + 1, default: 0])
+            
+            if count != length {
+                maxCount = max(maxCount, length)   
+            }
+        }
+        
+        return maxCount
+    }
+```
