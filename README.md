@@ -11760,3 +11760,42 @@ class Solution {
         return f2
     }
 ```
+## 268. Missing Number
+
+
+```swift
+    func missingNumber(_ nums: [Int]) -> Int {
+        var sum = nums.reduce(0, +)
+        var expectedSum = nums.c ount * (nums.count + 1) / 2
+        
+        return  expectedSum - sum
+    }
+    
+    func missingNumber(_ nums: [Int]) -> Int {
+        var missing = 0
+        
+        for num in nums {
+            missing ^= num
+        }
+        
+        for i in 0...nums.count {
+            missing ^= i
+        }
+        
+        return missing
+    }
+    
+        func missingNumber(_ nums: [Int]) -> Int {
+        var nums = nums
+        
+        for num in nums where num < nums.count {
+            nums[num] = -1
+        }
+        
+        for i in 0..<nums.count {
+            if nums[i] != -1 { return i }
+        }
+        
+        return nums.count
+    }
+```
