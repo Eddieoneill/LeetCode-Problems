@@ -11799,3 +11799,25 @@ class Solution {
         return nums.count
     }
 ```
+## 482. License Key Formatting
+
+
+```swift
+    func licenseKeyFormatting(_ S: String, _ K: Int) -> String {
+        var s = S.map { String($0) }
+        var result: [String] = []
+        var size = 0
+        
+        for char in s.reversed() where char != "-" {
+            if size == K {
+                size = 0
+                result.append("-")
+            }
+            
+            result.append(char.uppercased())
+            size += 1
+        }
+        
+        return result.reversed().joined()
+    }
+```
