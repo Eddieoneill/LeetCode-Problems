@@ -11684,3 +11684,28 @@ class Solution {
         return s.joined()
     }
 ```
+## 1572. Matrix Diagonal Sum
+
+
+```swift
+    func diagonalSum(_ mat: [[Int]]) -> Int {
+        var left = 0
+        var right = mat.count - 1
+        var row = 0
+        var sum = 0
+        
+        while left < mat.count && right >= 0 {
+            if left == right {
+               sum += mat[row][left]
+            } else {
+                sum += mat[row][left]
+                sum += mat[row][right]
+            }
+            row += 1
+            left += 1
+            right -= 1
+        }
+        
+        return sum
+    }
+```
