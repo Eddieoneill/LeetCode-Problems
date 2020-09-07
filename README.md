@@ -11662,3 +11662,25 @@ class Solution {
         return result
     }
 ```
+## 1576. Replace All ?'s to Avoid Consecutive Repeating Characters
+
+
+```swift
+    func modifyString(_ s: String) -> String {
+        guard s.count > 0 else { return s == "?" ? "a" : s }
+        var s = s.map { String($0) }
+        var chars = ["a", "b", "c"]
+        
+        for i in 0..<s.count {
+            if s[i] == "?" {
+                for char in chars {
+                    if (i == 0 || s[i - 1] != char) && (i == s.count - 1 || s[i + 1] != char) {
+                        s[i] = char   
+                    }
+                }
+            }
+        }
+        
+        return s.joined()
+    }
+```
