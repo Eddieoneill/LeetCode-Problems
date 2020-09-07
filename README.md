@@ -11709,3 +11709,54 @@ class Solution {
         return sum
     }
 ```
+## 509. Fibonacci Number
+
+
+```swift
+    var memo: [Int: Int] = [:]
+    
+    func fib(_ N: Int) -> Int {
+        guard N > 0 else { return 0 }
+        guard N > 1 else { return 1 }
+        
+        if let val = memo[N] {
+            return val
+        } else {
+            memo[N] = fib(N - 1) + fib(N - 2)
+        }
+        
+        return memo[N, default: 0]
+    }
+
+    func fib(_ N: Int) -> Int {
+        guard N > 0 else { return 0 }
+        guard N > 1 else { return 1 }
+        
+        var dp = Array(repeating: 0, count: N + 1)
+        
+        dp[0] = 0
+        dp[1] = 1
+        
+        for i in 2...N {
+            dp[i] = dp[i - 1] + dp[i - 2]
+        }
+        
+        return dp[N]
+    }
+
+    func fib(_ N: Int) -> Int {
+        guard N > 0 else { return 0 }
+        guard N > 1 else { return 1 }
+        
+        var f1 = 0
+        var f2 = 1
+        
+        for _ in 2...N {
+            let temp = f2
+            f2 = f1 + f2
+            f1 = temp
+        }
+        
+        return f2
+    }
+```
