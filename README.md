@@ -11836,3 +11836,32 @@ class Solution {
         return t1
     }
 ```
+```swift
+    func mergeTrees(_ t1: TreeNode?, _ t2: TreeNode?) -> TreeNode? {
+        guard t1 != nil else { return t2 }
+        var stack = [(t1, t2)]
+        
+        while !stack.isEmpty {
+            let tuple = stack.removeLast()
+            var node1 = tuple.0
+            var node2 = tuple.1
+            if node1 == nil || node2 == nil { continue }
+            
+            node1!.val += node2!.val
+            
+            if node1?.left == nil {
+                node1?.left = node2?.left
+            } else {
+                stack.append((node1?.left, node2?.left))
+            }
+            
+            if node1?.right == nil {
+                node1?.right = node2?.right
+            } else {
+                stack.append((node1?.right, node2?.right))
+            }
+        }
+        
+        return t1
+    }
+```
