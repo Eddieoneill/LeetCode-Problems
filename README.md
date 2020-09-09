@@ -11865,3 +11865,30 @@ class Solution {
         return t1
     }
 ```
+## 690. Employee Importance
+
+
+```swift
+    func getImportance(_ employees: [Employee], _ id: Int) -> Int {
+        var sum = 0
+        var dict: [Int: Employee] = [:]
+        var queue: [Employee] = []
+        
+        for employee in employees {
+            dict[employee.id] = employee
+        }
+        
+        queue.append(dict[id]!)
+        
+        while !queue.isEmpty {
+            let employee = queue.removeLast()
+            for subordinate in employee.subordinates {
+                queue.append(dict[subordinate]!)
+            }
+            
+            sum += employee.importance
+        }
+        
+        return sum
+    }
+```
