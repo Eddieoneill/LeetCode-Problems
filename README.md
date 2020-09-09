@@ -12002,3 +12002,36 @@ class Solution {
         return sum
     }
 ```
+## 700. Search in a Binary Search Tree
+
+
+```swift
+
+    func searchBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+        guard let node = root else { return nil }
+        
+        if node.val == val { 
+            return node
+        } else if node.val < val {
+            return searchBST(node.right, val)
+        } else {
+            return searchBST(node.left, val)
+        }
+    }
+
+    func searchBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+        var curr = root
+        
+        while curr != nil {
+            if curr!.val == val { 
+                return curr
+            } else if curr!.val < val {
+                curr = curr?.right
+            } else {
+                curr = curr?.left
+            }
+        }
+        
+        return nil
+    }
+```
