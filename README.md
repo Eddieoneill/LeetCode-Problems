@@ -11977,3 +11977,28 @@ class Solution {
         return sum
     }
 ```
+## 807. Max Increase to Keep City Skyline
+
+
+```swift
+    func maxIncreaseKeepingSkyline(_ grid: [[Int]]) -> Int {
+        var maxRow = Array(repeating: 0, count: grid.count)
+        var maxCol = Array(repeating: 0, count: grid[0].count)
+        var sum = 0
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                maxRow[row] = max(maxRow[row], grid[row][col])
+                maxCol[col] = max(maxCol[col], grid[row][col])
+            }
+        }
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                sum += min(maxRow[row], maxCol[col]) - grid[row][col]
+            }
+        }
+        
+        return sum
+    }
+```
