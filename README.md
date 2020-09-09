@@ -11821,3 +11821,22 @@ class Solution {
         return result.reversed().joined()
     }
 ```
+## 617. Merge Two Binary Trees
+
+
+```swift
+    func mergeTrees(_ t1: TreeNode?, _ t2: TreeNode?) -> TreeNode? {
+        guard t1 != nil || t2 != nil else { return nil }
+        guard t2 != nil else { return t1 }
+        guard t1 != nil else { return t2 }
+        
+        var node: TreeNode? = nil
+        let sum = t1!.val + t2!.val
+        
+        node = TreeNode(sum)
+        node?.left = mergeTrees(t1?.left, t2?.left)
+        node?.right = mergeTrees(t1?.right, t2?.right)
+        
+        return node
+    }
+```
