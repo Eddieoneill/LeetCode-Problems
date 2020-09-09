@@ -11936,3 +11936,17 @@ class Solution {
         return result
     }
 ```
+## 1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree
+
+
+```python
+    def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
+        def dfs(node1: TreeNode, node2: TreeNode) -> TreeNode:
+            if (not node1): return None
+            
+            if (node1 == target): return node2
+            
+            return dfs(node1.left, node2.left) or dfs(node1.right, node2.right)
+            
+        return dfs(original, cloned)
+```
