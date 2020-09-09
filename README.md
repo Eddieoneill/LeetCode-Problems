@@ -11826,17 +11826,13 @@ class Solution {
 
 ```swift
     func mergeTrees(_ t1: TreeNode?, _ t2: TreeNode?) -> TreeNode? {
-        guard t1 != nil || t2 != nil else { return nil }
         guard t2 != nil else { return t1 }
         guard t1 != nil else { return t2 }
         
-        var node: TreeNode? = nil
-        let sum = t1!.val + t2!.val
+        t1!.val += t2!.val
+        t1?.left = mergeTrees(t1?.left, t2?.left)
+        t1?.right = mergeTrees(t1?.right, t2?.right)
         
-        node = TreeNode(sum)
-        node?.left = mergeTrees(t1?.left, t2?.left)
-        node?.right = mergeTrees(t1?.right, t2?.right)
-        
-        return node
+        return t1
     }
 ```
