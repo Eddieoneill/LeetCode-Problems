@@ -11892,3 +11892,28 @@ class Solution {
         return sum
     }
 ```
+## 1556. Thousand Separator
+
+
+```swift
+    func thousandSeparator(_ n: Int) -> String {
+        guard n >= 1000 else { return "\(n)" }
+        var result: [String] = []
+        var n = n
+        var count = 0
+        
+        while n > 0 {
+            count += 1
+            let digit = n % 10
+            n /= 10
+            
+            if count == 4 { 
+                result.append(".")
+                count = 1
+            }
+            result.append("\(digit)")
+        }
+        
+        return result.reversed().joined()
+    }
+```
