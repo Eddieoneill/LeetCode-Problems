@@ -11917,3 +11917,22 @@ class Solution {
         return result.reversed().joined()
     }
 ```
+## 1282. Group the People Given the Group Size They Belong To
+
+
+```swift
+    func groupThePeople(_ groupSizes: [Int]) -> [[Int]] {
+        var dict: [Int: [Int]] = [:]
+        var result: [[Int]] = []
+        
+        for (i, size) in groupSizes.enumerated() {
+            dict[size, default: []].append(i)
+            if let group = dict[size], group.count == size {
+                result.append(group)
+                dict[size] = []
+            }
+        }
+        
+        return result
+    }
+```
