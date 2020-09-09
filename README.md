@@ -11950,3 +11950,30 @@ class Solution {
             
         return dfs(original, cloned)
 ```
+## 1302. Deepest Leaves Sum
+
+
+```swift 
+    func deepestLeavesSum(_ root: TreeNode?) -> Int {
+        var sum = 0
+        var maxHeight = 1
+        
+        func dfs(_ root: TreeNode?, _ height: Int) {
+            guard let node = root else { return }
+            
+            if height > maxHeight { 
+                maxHeight = height
+                sum = 0
+            }
+            
+            if height == maxHeight { sum += node.val }
+            
+            dfs(node.left, height + 1)
+            dfs(node.right, height + 1)
+        }
+        
+        dfs(root, 1)
+        
+        return sum
+    }
+```
