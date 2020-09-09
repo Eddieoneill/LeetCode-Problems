@@ -12035,3 +12035,23 @@ class Solution {
         return nil
     }
 ```
+## 1490. Clone N-ary Tree
+
+
+```swift
+    func cloneTree(_ root: Node?) -> Node? {
+        guard let node = root else { return nil }
+        
+        func dfs(_ node: Node) -> Node {
+            let newNode = Node(node.val)
+            
+            for child in node.children {
+                newNode.children.append(dfs(child))
+            }
+        
+            return newNode
+        }
+        
+        return dfs(node)
+    }
+```
