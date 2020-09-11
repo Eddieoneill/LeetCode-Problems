@@ -12124,3 +12124,39 @@ class Solution {
         return sum
     }
 ```
+## 1395. Count Number of Teams
+
+
+```swift
+    func numTeams(_ rating: [Int]) -> Int {
+        if rating.count <= 2 { return 0 }
+        
+        var res = 0
+        
+        for i in 1..<rating.count-1 {
+            var leftLarger = 0
+            var leftSmaller = 0
+            var rightLarger = 0
+            var rightSmaller = 0
+            
+            for j in 0..<i {
+                if rating[j] < rating[i] {
+                    leftSmaller += 1
+                } else {
+                    leftLarger += 1
+                }
+            }
+            for j in i+1..<rating.count {
+                if rating[j] < rating[i] {
+                    rightSmaller += 1
+                } else {
+                    rightLarger += 1
+                }
+            }
+            
+            res += (leftLarger * rightSmaller) + (leftSmaller * rightLarger)
+        }
+        
+        return res
+    }
+```
