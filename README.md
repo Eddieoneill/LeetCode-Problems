@@ -12055,3 +12055,51 @@ class Solution {
         return dfs(node)
     }
 ```
+## 160. Intersection of Two Linked Lists
+
+
+```swift
+    func getIntersectionNode(_ headA: ListNode?, _ headB: ListNode?) -> ListNode? {
+        var count1 = 0
+        var count2 = 0
+        var node1 = headA
+        var node2 = headB
+        var bigger = true
+        var diff = 0
+        
+        while node1 != nil || node2 != nil {
+            if node1 != nil {
+                count1 += 1
+                node1 = node1?.next
+            }
+            
+            if node2 != nil {
+                count2 += 1
+                node2 = node2?.next
+            }
+        }
+        
+        node1 = headA
+        node2 = headB
+        diff = abs(count1 - count2)
+        bigger = count1 > count2
+        
+        while node1 != nil || node2 != nil {
+            while diff > 0 {
+                if bigger {
+                    node1 = node1?.next
+                } else {
+                    node2 = node2?.next
+                }
+                diff -= 1
+            }
+            
+            if node1 === node2 { return node1 }
+            
+            node1 = node1?.next
+            node2 = node2?.next
+        }
+        
+        return nil
+    }
+```
