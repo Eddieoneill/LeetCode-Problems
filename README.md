@@ -12103,3 +12103,24 @@ class Solution {
         return nil
     }
 ```
+## 1315. Sum of Nodes with Even-Valued Grandparent
+
+
+```swift
+    func sumEvenGrandparent(_ root: TreeNode?) -> Int {
+        var sum = 0
+        
+        func dfs(_ root: TreeNode?, _ parent: TreeNode?, _ gParent: TreeNode?) {
+            guard let node = root else { return }
+            
+            if let gp = gParent, gp.val % 2 == 0 { sum += node.val }
+            
+            dfs(node.left, node, parent)
+            dfs(node.right, node, parent)
+        }
+        
+        dfs(root, nil, nil)
+        
+        return sum
+    }
+```
