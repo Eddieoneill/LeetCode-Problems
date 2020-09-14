@@ -12300,3 +12300,25 @@ class Codec {
     }
 }
 ```
+## 1506. Find Root of N-Ary Tree
+
+
+```swift
+    func findRoot(_ tree: [Node]) -> Node? {
+        var rootVal = 0
+        
+        for node in tree {
+            rootVal += node.val
+            
+            for child in node.children {
+                rootVal -= child.val
+            }  
+        }
+        
+        for node in tree {
+            if node.val == rootVal { return node }
+        }
+        
+        return nil
+    }
+```
