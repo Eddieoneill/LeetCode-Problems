@@ -12255,3 +12255,48 @@ class Solution {
         return stack.isEmpty ? nil : stack[0]
     }
 ```
+## 535. Encode and Decode TinyURL
+
+
+```swift
+class Codec {
+    var urls: [String: String] = [:]
+    var codeCount = 6
+    
+    func encode(_ longUrl: String) -> String {
+        var code = generateCode(codeCount)
+        var count = 0
+        
+        while urls[code] != nil {
+            if count > 10 {
+                codeCount += 1
+                count = 0
+            }
+            code = generateCode(codeCount)
+            count += 1
+        }
+        
+        urls[code] = longUrl
+        
+        return "http://tinyurl.com/\(code)"
+    }
+    
+    func generateCode(_ length: Int) -> String {
+        var ran = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        var result: [String] = []
+        
+        for _ in 0..<length {
+            result.append(String(ran.randomElement()!))
+        }
+        
+        return result.joined()
+    }
+    
+    // Decodes a shortened URL to its original URL.
+    func decode(_ shortUrl: String) -> String {
+        let code = shortUrl.split(separator: "/")
+        
+        return urls[String(code[code.count - 1]), default: ""]
+    }
+}
+```
