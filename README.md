@@ -12160,3 +12160,56 @@ class Solution {
         return res
     }
 ```
+## 1385. Find the Distance Value Between Two Arrays
+
+
+```swift
+    func findTheDistanceValue(_ arr1: [Int], _ arr2: [Int], _ d: Int) -> Int {
+        var arr1 = bucketSort(arr1)
+        var arr2 = bucketSort(arr2)
+        var count = 0
+        var i = 0
+        var j = 0
+        
+        while i < arr1.count && j < arr2.count {
+            let diff = abs(arr1[i] - arr2[j])
+            
+            if diff > d {
+                if arr1[i] > arr2[j] {
+                    j += 1
+                } else {
+                    i += 1
+                    count += 1
+                }
+            } else {
+                i += 1
+            }
+        }
+        
+        count += arr1.count - i
+        
+        return count
+    }
+    
+    func bucketSort(_ arr: [Int]) -> [Int] {
+        var bucket = Array(repeating: 0, count: 2001)
+        var result = arr
+        var i = 0
+        
+        for num in arr {
+            bucket[num + 1000] += 1
+        }
+        
+        for (num, count) in bucket.enumerated() where count > 0 {
+            var count = count
+            
+            while count > 0 {
+                result[i] = num
+                i += 1
+                count -= 1
+            }
+        }
+        
+        return result
+    }
+```
