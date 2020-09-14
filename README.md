@@ -12218,19 +12218,15 @@ class Solution {
 
 ```swift
     func bstToGst(_ root: TreeNode?) -> TreeNode? {
-        var sum = 0
-        
-        func dfs(_ root: TreeNode?) {
-            guard let node = root else { return }
+        func dfs(_ root: TreeNode?, _ sum: Int) -> Int {
+            guard let node = root else { return sum }
             
-            dfs(node.right)
-            let temp = node.val
-            node.val += sum
-            sum += temp
-            dfs(node.left)
+            node.val += dfs(node.right, sum)
+            
+            return dfs(node.left, node.val)
         }
         
-        dfs(root)
+        dfs(root, 0)
         
         return root
     }
