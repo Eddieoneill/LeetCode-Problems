@@ -12213,3 +12213,25 @@ class Solution {
         return result
     }
 ```
+## 1038. Binary Search Tree to Greater Sum Tree
+
+
+```swift
+    func bstToGst(_ root: TreeNode?) -> TreeNode? {
+        var sum = 0
+        
+        func dfs(_ root: TreeNode?) {
+            guard let node = root else { return }
+            
+            dfs(node.right)
+            let temp = node.val
+            node.val += sum
+            sum += temp
+            dfs(node.left)
+        }
+        
+        dfs(root)
+        
+        return root
+    }
+```
