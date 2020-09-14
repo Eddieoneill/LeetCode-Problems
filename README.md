@@ -12231,3 +12231,27 @@ class Solution {
         return root
     }
 ```
+## 654. Maximum Binary Tree
+
+
+```swift
+    func constructMaximumBinaryTree(_ nums: [Int]) -> TreeNode? {
+        var stack: [TreeNode] = []
+        
+        for i in 0..<nums.count {
+            let node = TreeNode(nums[i])
+            
+            while !stack.isEmpty && stack[stack.count - 1].val < node.val {
+                node.left = stack.removeLast()
+            }
+            
+            if !stack.isEmpty && stack[stack.count - 1].val > node.val {
+                stack[stack.count - 1].right = node
+            }
+            
+            stack.append(node)
+        }
+        
+        return stack.isEmpty ? nil : stack[0]
+    }
+```
