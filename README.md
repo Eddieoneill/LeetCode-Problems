@@ -12322,3 +12322,26 @@ class Codec {
         return nil
     }
 ```
+## 66. Plus One
+
+```swift
+    func plusOne(_ digits: [Int]) -> [Int] {
+        var curr = 0
+        var carry = 1
+        var digits = digits
+        
+        for i in (0..<digits.count).reversed() where carry > 0 {
+            digits[i] += carry
+            carry -= 1
+            
+            if digits[i] > 9 { 
+                carry += 1
+                digits[i] %= 10
+            }
+        }
+        
+        if carry > 0 { digits.insert(carry, at: 0) }
+        
+        return digits
+    }
+```
