@@ -12345,3 +12345,34 @@ class Codec {
         return digits
     }
 ```
+## 128. Longest Consecutive Sequence
+
+
+```swift
+    func longestConsecutive(_ nums: [Int]) -> Int {
+        var map: [Int: Int] = [:]
+        var result = 0
+        
+        for num in nums {
+            map[num] = 0
+        }
+        
+        for num in nums {
+            if let val = map[num], val > 0 {
+                result = max(val, result)
+            } else {
+                map[num] = dp(num, map)
+                result = max(map[num, default: 0], result)
+            }
+        }
+        
+        return result
+    }
+    
+    func dp(_ num: Int, _ map: [Int: Int]) -> Int {
+        guard let val = map[num] else { return 0 }
+        guard val == 0 else { return val }
+        
+        return 1 + dp(num + 1, map)
+    }
+```
