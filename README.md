@@ -12376,3 +12376,95 @@ class Codec {
         return 1 + dp(num + 1, map)
     }
 ```
+## 200. Number of Islands
+
+
+```swift
+class Solution {
+    func numIslands(_ grid: [[Character]]) -> Int {
+        guard !grid.isEmpty else { return 0 }
+        var count = 0
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == "1" {
+                    count += 1
+                }
+            }
+        }
+        
+        let unionFind = UnionFind(count, grid.count * grid[0].count)
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == "1" {
+                    for dir in [[1, 0], [0, 1]] {
+                        let dRow = dir[0]
+                        let dCol = dir[1]
+                        let newRow = row + dRow
+                        let newCol = col + dCol
+                        
+                        if newRow < 0 || newRow >= grid.count ||
+                        newCol < 0 || newCol >= grid[0].count ||
+                        grid[newRow][newCol] != "1" { continue }
+                        
+                        unionFind.union(row * grid[0].count + col, newRow * grid[0].count + newCol)
+                    }
+                }
+            }
+        }
+        
+        return unionFind.numComponents
+    }
+}
+
+class UnionFind {
+    var numComponents = 0
+    var sizes: [Int]
+    var parents: [Int]
+    
+    init(_ count: Int, _ n: Int) {
+        numComponents = count
+        sizes = Array(repeating: 1, count: n)
+        parents = Array(repeating: 1, count: n)
+        
+        for i in 0..<n {
+            parents[i] = i
+        }
+    }
+    
+    func union(_ a: Int, _ b: Int) {
+        let parentA = find(a)
+        let parentB = find(b)
+        
+        if parentA == parentB { return }
+        
+        if sizes[parentA] < sizes[parentB] {
+            parents[parentA] = parentB
+            sizes[parentB] += sizes[parentA]
+        } else {
+            parents[parentB] = parentA
+            sizes[parentA] += sizes[parentB]
+        }
+        
+        numComponents -= 1
+    }
+    
+    func find(_ a: Int) -> Int {
+        var root = a
+        var a = a
+        
+        while root != parents[root] {
+            root = parents[root]
+        }
+        
+        while a != root {
+            let next = parents[a]
+            parents[a] = root
+            a = next
+        }
+        
+        return root
+    }
+}
+```
