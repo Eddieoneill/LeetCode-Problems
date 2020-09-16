@@ -12468,3 +12468,85 @@ class UnionFind {
     }
 }
 ```
+## 128. Longest Consecutive Sequence
+
+
+```swift
+class Solution {
+    func longestConsecutive(_ nums: [Int]) -> Int {
+        guard  !nums.isEmpty else { return 0 }
+        let unionFind = UnionFind(nums)
+        
+        for num in nums {
+            unionFind.union(num, num + 1)
+        }
+        
+        return unionFind.maxComponentSize
+    }
+}
+
+class UnionFind {
+    var sizes: [Int]
+    var parents: [Int]
+    var numOfComponents: Int
+    var maxComponentSize: Int
+    var map: [Int: Int] = [:]
+    
+    init(_ nums: [Int]) {
+        var i = 0
+        
+        for num in nums {
+            if map[num] == nil {
+                map[num] = i
+                i += 1
+            }
+        }
+        
+        sizes = Array(repeating: 1, count: nums.count)
+        parents = Array(repeating: 1, count: nums.count)
+        numOfComponents = nums.count
+        maxComponentSize = 1
+        
+        for i in 0..<nums.count {
+            parents[i] = i
+        }
+    }
+    
+    func union(_ a: Int, _ b: Int) {
+        guard map[a] != nil && map[b] != nil else { return }
+        let parentA = find(a)
+        let parentB = find(b)
+        
+        if parentA == parentB { return }
+        
+        if sizes[parentA] < sizes[parentB] {
+            sizes[parentB] += sizes[parentA]
+            parents[parentA] = parentB
+            maxComponentSize = max(maxComponentSize, sizes[parentB])
+        } else {
+            sizes[parentA] += sizes[parentB]
+            parents[parentB] = parentA
+            maxComponentSize = max(maxComponentSize, sizes[parentA])
+        }
+        
+        numOfComponents -= 1
+    }
+    
+    func find(_ a: Int) -> Int {
+        guard var p = map[a] else { return -1 }
+        var root = p
+        
+        while root != parents[root] {
+            root = parents[root]
+        }
+        
+        while root != p {
+            let next = parents[p]
+            parents[p] = root
+            p = next
+        }
+        
+        return root
+    }
+}
+```
