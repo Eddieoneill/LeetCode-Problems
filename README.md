@@ -12591,3 +12591,61 @@ func wallsAndGates(_ rooms: inout [[Int]]) {
         }
     }
 ```
+## 784. Letter Case Permutation
+
+
+```swift
+    func letterCasePermutation(_ S: String) -> [String] {
+        var result: [String] = []
+        var curr: [String] = []
+        var s = S.map { $0 }
+        
+        func _letterCasePermutation(_ i: Int) {
+            if i == s.count { 
+                result.append(curr.joined())
+                return
+            }
+            
+            if s[i].isNumber {
+                curr.append(String(s[i]))
+                _letterCasePermutation(i + 1)
+                curr.removeLast()
+            } else {
+                curr.append(String(s[i].lowercased()))
+                _letterCasePermutation(i + 1)
+                curr.removeLast()
+                
+                curr.append(String(s[i].uppercased()))
+                _letterCasePermutation(i + 1)
+                curr.removeLast()
+            }
+        }
+        
+        _letterCasePermutation(0)
+        
+        return result
+    }
+```
+```swift
+    func letterCasePermutation(_ S: String) -> [String] {
+        var result: [[String]] = [[]]
+        let S = S.map { String($0) }
+        
+        for char in S {
+            if Int(char) == nil {
+                let n = result.count
+                
+                for i in 0..<n {
+                    result.append(result[i])
+                    result[i].append(char.lowercased())
+                    result[i + n].append(char.uppercased())
+                }
+            } else {
+                for i in 0..<result.count {
+                    result[i].append(char)
+                }
+            }
+        }
+        return result.map { $0.joined() }
+    }
+```
