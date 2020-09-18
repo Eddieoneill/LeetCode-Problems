@@ -12649,3 +12649,35 @@ func wallsAndGates(_ rooms: inout [[Int]]) {
         return result.map { $0.joined() }
     }
 ```
+## 22. Generate Parentheses
+
+
+```swift
+    func generateParenthesis(_ n: Int) -> [String] {
+        var result: [String] = []
+        var curr: [String] = []
+        
+        func _generateParenthesis(_ i: Int, _ balance: Int) {
+            if balance > n || balance < 0 { return }
+            
+            if i == 2 * n {
+                if balance == 0 {
+                    result.append(curr.joined())
+                }
+                return
+            }
+            
+            curr.append("(")
+            _generateParenthesis(i + 1, balance + 1)
+            curr.removeLast()
+            
+            curr.append(")")
+            _generateParenthesis(i + 1, balance - 1)
+            curr.removeLast()
+        }
+        
+        _generateParenthesis(0, 0)
+        
+        return result
+    }
+```
