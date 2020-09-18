@@ -12707,3 +12707,39 @@ func wallsAndGates(_ rooms: inout [[Int]]) {
         return maxCount
     }
 ```
+## 127. Word Ladder
+
+
+```swift
+    func ladderLength(_ beginWord: String, _ endWord: String, _ wordList: [String]) -> Int {
+        var words = Set(wordList)
+        var queue: [(String, Int)] = [(beginWord, 1)]
+        var visited: Set<String> = [beginWord]
+        words.insert(beginWord)
+        
+        while !queue.isEmpty {
+            let val = queue.removeFirst()
+            let word = val.0
+            let dist = val.1
+            
+            if word == endWord {
+                return dist
+            }
+            
+            for i in 0..<word.count {
+                let vertex = word.map { String($0) }
+                for letter in "abcdefghijklmnopqrstuvwxyz" {
+                    let neighbor = vertex[..<i].joined() + String(letter) + vertex[(i + 1)...].joined()
+                    if !words.contains(neighbor) || 
+                    word == neighbor || 
+                    visited.contains(neighbor) { continue }
+                    
+                    visited.insert(neighbor)
+                    queue.append((neighbor, dist + 1))
+                }
+            }
+        }
+        
+        return 0
+    }
+```
