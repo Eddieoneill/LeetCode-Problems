@@ -12550,3 +12550,44 @@ class UnionFind {
     }
 }
 ```
+## 286. Walls and Gates
+
+
+```swift
+func wallsAndGates(_ rooms: inout [[Int]]) {
+        var queue: [(Int, Int, Int)] = []
+        let dirs = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+        let empty = 2147483647
+        
+        for row in 0..<rooms.count {
+            for col in 0..<rooms[0].count {
+                if rooms[row][col] == 0 { 
+                    queue.append((row, col, 0))
+                }
+            }
+        }
+        
+        
+        while !queue.isEmpty {
+            let tuple = queue.removeFirst()
+            let row = tuple.0
+            let col = tuple.1
+            let dist = tuple.2
+            
+            if rooms[row][col] == empty {
+                rooms[row][col] = dist   
+            }
+            
+            for dir in dirs {
+                let newRow = dir[0] + row
+                let newCol = dir[1] + col
+                
+                if newRow < 0 || newRow >= rooms.count ||
+                newCol < 0 || newCol >= rooms[0].count ||
+                rooms[newRow][newCol] != empty { continue }
+                
+                queue.append((newRow, newCol, dist + 1))
+            }
+        }
+    }
+```
