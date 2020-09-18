@@ -12681,3 +12681,29 @@ func wallsAndGates(_ rooms: inout [[Int]]) {
         return result
     }
 ```
+## 3. Longest Substring Without Repeating Characters
+
+
+
+```swift
+    func lengthOfLongestSubstring(_ s: String) -> Int {
+        var s = s.map { String($0) }
+        var seen: Set<String> = []
+        var maxCount = 0
+        var i = 0
+        var j = 0
+        
+        while j < s.count {
+            while seen.contains(s[j]) {
+                seen.remove(s[i])
+                i += 1
+            }
+            
+            seen.insert(s[j])
+            j += 1
+            maxCount = max(maxCount, j - i)
+        }
+        
+        return maxCount
+    }
+```
