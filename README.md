@@ -13086,3 +13086,221 @@ class Heap {
     }
 }
 ```
+
+
+```swift
+class Solution {
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+        let heap = Heap(<)
+        var freq: [Int: Int] = [:]
+        var result: [Int] = []
+        
+        for num in nums {
+            freq[num, default: 0] += 1
+        }
+        
+        for (key, val) in freq {
+            if heap.size() < k {
+                heap.insert([key, val])
+            } else if let top = heap.peek(), val > top[1] {
+                heap.remove()
+                heap.insert([key, val])
+            }
+        }
+        
+        for element in heap.elements {
+            result.append(element[0])
+        }
+        
+        return result
+    }
+}
+
+class Heap {
+    var elements: [[Int]] = []
+    var sortBy: (Int, Int) -> Bool
+    
+    init(_ sortBy: @escaping (Int, Int) -> Bool) {
+        self.sortBy = sortBy
+    }
+    
+    func insert(_ val: [Int]) {
+        elements.append(val)
+        siftUp()
+    }
+    
+    func remove() -> [Int]? {
+        if elements.isEmpty { return nil }
+        
+        elements.swapAt(0, elements.count - 1)
+        
+        let val = elements.removeLast()
+        
+        siftDown()
+        
+        return val
+    }
+    
+    func siftUp() {
+        var child = elements.count - 1
+        var parent = parentIndex(child)
+        
+        while child > 0 && sortBy(elements[child][1], elements[parent][1]) {
+            elements.swapAt(child, parent)
+            child =  parent
+            parent = parentIndex(child)
+        }
+    }
+    
+    func siftDown() {
+        var parent = 0
+        
+        while true {
+            let left = leftChildIndex(parent)
+            let right = rightChildIndex(parent)
+            var candidate = parent
+            
+            if left < elements.count && sortBy(elements[left][1], elements[candidate][1]) { candidate = left }
+            
+            if right < elements.count && sortBy(elements[right][1], elements[candidate][1]) { candidate = right }
+            
+            if candidate == parent { return }
+            
+            elements.swapAt(candidate, parent)
+            parent = candidate
+        }
+    }
+    
+    func leftChildIndex(_ index: Int) -> Int {
+        return 2 * index + 1
+    }
+    
+    func rightChildIndex(_ index: Int) -> Int {
+        return 2 * index + 2
+    }
+    
+    func parentIndex(_ index: Int) -> Int {
+        return (index - 1) / 2
+    }
+    
+    func peek() -> [Int]? {
+        if elements.isEmpty { return nil }
+        
+        return elements[0]
+    }
+    
+    func size() -> Int {
+        return elements.count
+    }
+}
+```
+## 347. Top K Frequent Elements
+
+
+```swift
+class Solution {
+    func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+        let heap = Heap(<)
+        var freq: [Int: Int] = [:]
+        var result: [Int] = []
+        
+        for num in nums {
+            freq[num, default: 0] += 1
+        }
+        
+        for (key, val) in freq {
+            if heap.size() < k {
+                heap.insert([key, val])
+            } else if let top = heap.peek(), val > top[1] {
+                heap.remove()
+                heap.insert([key, val])
+            }
+        }
+        
+        for element in heap.elements {
+            result.append(element[0])
+        }
+        
+        return result
+    }
+}
+
+class Heap {
+    var elements: [[Int]] = []
+    var sortBy: (Int, Int) -> Bool
+    
+    init(_ sortBy: @escaping (Int, Int) -> Bool) {
+        self.sortBy = sortBy
+    }
+    
+    func insert(_ val: [Int]) {
+        elements.append(val)
+        siftUp()
+    }
+    
+    func remove() -> [Int]? {
+        if elements.isEmpty { return nil }
+        
+        elements.swapAt(0, elements.count - 1)
+        
+        let val = elements.removeLast()
+        
+        siftDown()
+        
+        return val
+    }
+    
+    func siftUp() {
+        var child = elements.count - 1
+        var parent = parentIndex(child)
+        
+        while child > 0 && sortBy(elements[child][1], elements[parent][1]) {
+            elements.swapAt(child, parent)
+            child =  parent
+            parent = parentIndex(child)
+        }
+    }
+    
+    func siftDown() {
+        var parent = 0
+        
+        while true {
+            let left = leftChildIndex(parent)
+            let right = rightChildIndex(parent)
+            var candidate = parent
+            
+            if left < elements.count && sortBy(elements[left][1], elements[candidate][1]) { candidate = left }
+            
+            if right < elements.count && sortBy(elements[right][1], elements[candidate][1]) { candidate = right }
+            
+            if candidate == parent { return }
+            
+            elements.swapAt(candidate, parent)
+            parent = candidate
+        }
+    }
+    
+    func leftChildIndex(_ index: Int) -> Int {
+        return 2 * index + 1
+    }
+    
+    func rightChildIndex(_ index: Int) -> Int {
+        return 2 * index + 2
+    }
+    
+    func parentIndex(_ index: Int) -> Int {
+        return (index - 1) / 2
+    }
+    
+    func peek() -> [Int]? {
+        if elements.isEmpty { return nil }
+        
+        return elements[0]
+    }
+    
+    func size() -> Int {
+        return elements.count
+    }
+}
+
+```
