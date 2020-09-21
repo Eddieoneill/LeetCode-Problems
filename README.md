@@ -12775,3 +12775,103 @@ func wallsAndGates(_ rooms: inout [[Int]]) {
         return i 
     }
 ```
+## 146. LRU Cache
+
+
+```swift
+
+class LRUCache {
+    let list = DoublyLinkedList()
+    let capacity: Int
+    var map: [Int: Node] = [:]
+    
+    init(_ capacity: Int) {
+        self.capacity = capacity
+    }
+    
+    func get(_ key: Int) -> Int {
+        if let node = map[key] {
+            list.moveToHead(node)
+            return node.val
+        } else {
+            return -1
+        }
+    }
+    
+    func put(_ key: Int, _ value: Int) {
+        if let node = map[key] {
+            list.moveToHead(node)
+            node.val = value
+            return
+        }
+        
+        if list.count == capacity {
+            let tail = list.removeTail()
+            map[tail.key] = nil
+        }
+        
+        let node = list.insert(key, value)
+        map[key] = node
+    }
+}
+
+class DoublyLinkedList {
+    let dummyHead: Node? = Node(Int.max, Int.max)
+    let dummyTail: Node? = Node(Int.min, Int.min)
+    var count = 0
+    
+    init() {
+        dummyHead?.next = dummyTail
+        dummyTail?.pre = dummyHead
+    }
+    
+    func insert(_ key: Int, _ val: Int) -> Node {
+        let head = Node(key, val)
+        return insert(head)
+    }
+    
+    func insert(_ head: Node) -> Node {
+        let next = dummyHead?.next
+        dummyHead?.next = head
+        
+        head.pre = dummyHead
+        head.next = next
+        
+        next?.pre = head
+        
+        count += 1
+        
+        return head
+    }
+    
+    func remove(_ node: Node) -> Node {
+        let pre = node.pre
+        let next = node.next
+        pre?.next = next
+        next?.pre = pre
+        count -= 1
+        return node
+    }
+    
+    func removeTail() -> Node {
+        return remove(dummyTail!.pre!)
+    }
+    
+    func moveToHead(_ node: Node) {
+        remove(node)
+        insert(node)
+    }
+}
+
+class Node {
+    let key: Int
+    var val: Int
+    var pre: Node? = nil
+    var next: Node? = nil
+    
+    init(_ key: Int, _ val: Int) {
+        self.key = key
+        self.val = val
+    }
+}
+```
