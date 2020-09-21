@@ -12987,3 +12987,102 @@ class Heap {
     }
 }
 ```
+## 215. Kth Largest Element in an Array
+
+
+```swift
+class Solution {
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        let heap = Heap(<)
+        
+        for num in nums {
+            if heap.size() < k { 
+                heap.insert(num)
+            } else if let top = heap.peek(), num > top {
+                heap.remove()
+                heap.insert(num)
+            }
+        }
+        
+        return heap.peek() ?? 0
+    }
+}
+
+class Heap {
+    var elements: [Int] = []
+    var sortBy: (Int, Int) -> Bool
+    
+    init(_ sortBy: @escaping (Int, Int) -> Bool) {
+        self.sortBy = sortBy
+    }
+    
+    func insert(_ val: Int) {
+        elements.append(val)
+        siftUp()
+    }
+    
+    func remove() -> Int? {
+        if elements.isEmpty { return nil }
+        
+        elements.swapAt(0, elements.count - 1)
+        
+        let val = elements.removeLast()
+        
+        siftDown()
+        
+        return val
+    }
+    
+    func siftUp() {
+        var child = elements.count - 1
+        var parent = parentIndex(child)
+        
+        while child > 0 && sortBy(elements[child], elements[parent]) {
+            elements.swapAt(child, parent)
+            child =  parent
+            parent = parentIndex(child)
+        }
+    }
+    
+    func siftDown() {
+        var parent = 0
+        
+        while true {
+            let left = leftChildIndex(parent)
+            let right = rightChildIndex(parent)
+            var candidate = parent
+            
+            if left < elements.count && sortBy(elements[left], elements[candidate]) { candidate = left }
+            
+            if right < elements.count && sortBy(elements[right], elements[candidate]) { candidate = right }
+            
+            if candidate == parent { return }
+            
+            elements.swapAt(candidate, parent)
+            parent = candidate
+        }
+    }
+    
+    func leftChildIndex(_ index: Int) -> Int {
+        return 2 * index + 1
+    }
+    
+    func rightChildIndex(_ index: Int) -> Int {
+        return 2 * index + 2
+    }
+    
+    func parentIndex(_ index: Int) -> Int {
+        return (index - 1) / 2
+    }
+    
+    func peek() -> Int? {
+        if elements.isEmpty { return nil }
+        
+        return elements[0]
+    }
+    
+    func size() -> Int {
+        return elements.count
+    }
+}
+```
