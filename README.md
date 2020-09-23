@@ -13429,3 +13429,28 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return pow(3, round(power)) == Double(n)
     }
 ```
+## 1008. Construct Binary Search Tree from Preorder Traversal
+
+
+```swift
+    func bstFromPreorder(_ preorder: [Int]) -> TreeNode? {
+        func dfs(_ arr: [Int], _ left: Int, _ right: Int) -> TreeNode? {
+            if left > right { return nil }
+            if left == right { return TreeNode(arr[left], nil, nil) }
+            var root = TreeNode(arr[left], nil, nil)
+            var index = left
+            
+            for i in left...right {
+                if arr[i] > arr[left] {
+                    index = i
+                    break
+                }
+            }
+            if index == left { index = right + 1 }
+            root.left = dfs(arr, left + 1, index - 1)
+            root.right = dfs(arr, index, right)
+            return root
+        }
+        return dfs(preorder, 0, preorder.count - 1)
+    }
+```
