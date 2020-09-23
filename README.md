@@ -13418,4 +13418,14 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return i
     }
 
-```.
+```
+## 326. Power of Three
+
+
+```swift
+    func isPowerOfThree(_ n: Int) -> Bool {
+        if n == 0 { return false }
+        let power = log(Double(n))/log(3.0)
+        return pow(3, round(power)) == Double(n)
+    }
+```
