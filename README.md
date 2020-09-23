@@ -13355,3 +13355,67 @@ class Heap {
         return i
     }
 ```
+## 347. Top K Frequent Elements
+
+
+```swift
+func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
+        var dict: [Int: Int] = [:]
+        var counts: [[Int]] = []
+        
+        for num in nums {
+            dict[num, default: 0] += 1
+        }
+        
+        for (num, count) in dict {
+            counts.append([num, count])
+        }
+        
+        let index = quickSelect(&counts, k)
+        let kLargest = counts[index...]
+        
+        return kLargest.map { $0[0] }
+    }
+    
+    func quickSelect(_ nums: inout [[Int]], _ k: Int) -> Int {
+        var left = 0
+        var right = nums.count - 1
+        let target = nums.count - k
+        
+        while left <= right {
+            let randomIndex = Int.random(in: left...right)
+            
+            nums.swapAt(right, randomIndex)
+            
+            let partitionIndex = partition(&nums, left, right)
+            if partitionIndex == target {
+                return partitionIndex
+            } else if partitionIndex < target {
+                left = partitionIndex + 1
+            } else {
+                right = partitionIndex - 1
+            }
+
+        }
+        
+        return 0
+    }
+    
+    func partition(_ nums: inout [[Int]], _ left: Int, _ right: Int) -> Int {
+        let pivot = nums[right][1]
+        var i = left - 1
+        var j = left
+        
+        while j <= right {
+            if nums[j][1] <= pivot {
+                i += 1
+                nums.swapAt(i, j)
+            }
+            
+            j += 1
+        }
+        
+        return i
+    }
+
+```.
