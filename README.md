@@ -13304,3 +13304,54 @@ class Heap {
 }
 
 ```
+## 215. Kth Largest Element in an Array
+
+
+```swift
+    func findKthLargest(_ nums: [Int], _ k: Int) -> Int {
+        return quickSelect(nums, k)
+    }
+    
+    func quickSelect(_ nums: [Int], _ k: Int) -> Int {
+        var left = 0
+        var right = nums.count - 1
+        let target = nums.count - k
+        var nums = nums
+        
+        while left <= right {
+            let randomIndex = Int.random(in: left...right)
+            
+            nums.swapAt(right, randomIndex)
+            
+            let partitionIndex = partition(&nums, left, right)
+            
+            if partitionIndex == target {
+                return nums[target]
+            } else if partitionIndex < target {
+                left = partitionIndex + 1
+            } else {
+                right = partitionIndex - 1
+            }
+
+        }
+        
+        return 0
+    }
+    
+    func partition(_ nums: inout [Int], _ left: Int, _ right: Int) -> Int {
+        let pivot = nums[right]
+        var i = left - 1
+        var j = left
+        
+        while j <= right {
+            if nums[j] <= pivot {
+                i += 1
+                nums.swapAt(i, j)
+            }
+            
+            j += 1
+        }
+        
+        return i
+    }
+```
