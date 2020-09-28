@@ -13454,3 +13454,19 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return dfs(preorder, 0, preorder.count - 1)
     }
 ```
+## 1346. Check If N and Its Double Exist
+
+
+```swift
+    func checkIfExist(_ arr: [Int]) -> Bool {
+        var set: Set<Int> = []
+        
+        for num in arr {
+            if set.contains(num * 2) || (num % 2 == 0 && set.contains(num / 2)) { return true }
+            
+            set.insert(num)
+        }
+        
+        return false
+    }
+```
