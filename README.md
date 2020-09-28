@@ -13650,3 +13650,36 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result
     }
 ```
+## 107. Binary Tree Level Order Traversal II
+
+
+```swift
+    func levelOrderBottom(_ root: TreeNode?) -> [[Int]] {
+        guard let node = root else { return [] }
+        var result: [[Int]] = []
+        var queue = [node]
+        var level: [Int] = []
+        var count = 1
+        
+        while !queue.isEmpty {
+            let curr = queue.removeFirst()
+            level.append(curr.val)
+            
+            if curr.left != nil {
+                queue.append(curr.left!)
+            }
+            
+            if curr.right != nil {
+                queue.append(curr.right!)
+            }
+            
+            if level.count == count {
+                result.append(level)
+                level = []
+                count = queue.count
+            }
+        }
+        
+        return result.reversed()
+    }
+```
