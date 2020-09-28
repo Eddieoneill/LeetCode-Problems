@@ -13683,3 +13683,30 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result.reversed()
     }
 ```
+## 1150. Check If a Number Is Majority Element in a Sorted Array
+
+
+```swift
+    func isMajorityElement(_ nums: [Int], _ target: Int) -> Bool {
+        var left = 0
+        var right = nums.count - 1
+        
+        while left <= right {
+            let mid = ((right - left) / 2) + left
+            
+            if nums[mid] == target {
+                if mid > 0 && nums[mid - 1] == target {
+                    right = mid
+                } else {
+                    return mid * 2 < nums.count && nums[mid * 2] == nums[mid]
+                }
+            } else if nums[mid] > target {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+        
+        return false
+    }
+```
