@@ -13624,3 +13624,29 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         }
     }
 ```
+## 763. Partition Labels
+
+
+```swift
+    func partitionLabels(_ S: String) -> [Int] {
+        var s = S.map { String($0) }
+        var dict: [String: Int] = [:]
+        var result: [Int] = []
+        var currMax = 0
+        var i = 0
+        
+        for i in 0..<s.count {
+            dict[s[i]] = i
+        }
+        
+        for j in 0..<s.count {
+            currMax = max(dict[s[j], default: 0], currMax)
+            if currMax == j {
+                result.append(j - i + 1)
+                i = j + 1
+            }
+        }
+        
+        return result
+    }
+```
