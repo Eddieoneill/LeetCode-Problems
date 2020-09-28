@@ -13492,3 +13492,42 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result
     }
 ```
+## 1329. Sort the Matrix Diagonally
+
+
+```swift
+    func diagonalSort(_ mat: [[Int]]) -> [[Int]] {
+        var dict: [Int: [Int]] = [:]
+        var result: [[Int]] = Array(repeating: [], count: mat.count)
+        
+        for row in 0..<mat.count {
+            for col in 0..<mat[0].count {
+                let diagID = row - col
+                dict[diagID, default: Array(repeating: 0, count: 101)][mat[row][col]] += 1
+            }
+        }
+        
+        for (key, buckets) in dict {
+            var sortedArr: [Int] = []
+            for num in (0..<buckets.count).reversed() {
+                var count = buckets[num]
+                
+                while count > 0 {
+                    sortedArr.append(num)
+                    count -= 1
+                }
+            }
+            dict[key] = sortedArr
+        }
+        
+        for row in 0..<mat.count {
+            for col in 0..<mat[0].count {
+                let diagID = row - col
+                let last = dict[diagID, default: [0]].removeLast()
+                result[row].append(last)
+            }
+        }
+        
+        return result
+    }
+```
