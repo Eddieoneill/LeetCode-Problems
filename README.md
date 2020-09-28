@@ -13593,3 +13593,19 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result
     }
 ```
+## 701. Insert into a Binary Search Tree
+
+
+```swift
+    func insertIntoBST(_ root: TreeNode?, _ val: Int) -> TreeNode? {
+        guard let node = root else { return TreeNode(val) }
+        
+        if node.val > val {
+            node.left = insertIntoBST(node.left, val)
+        } else {
+            node.right = insertIntoBST(node.right, val)
+        }
+        
+        return node
+    }
+```
