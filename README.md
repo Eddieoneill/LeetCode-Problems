@@ -13531,3 +13531,38 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result
     }
 ```
+## 1427. Perform String Shifts
+
+
+```swift
+    func stringShift(_ s: String, _ shift: [[Int]]) -> String {
+        var s = s.map { String($0) }
+        var shiftCount = 0
+        
+        for arr in shift {
+            let shift = arr[0]
+            let count = arr[1]
+            
+            
+            if shift == 1 {
+                shiftCount += count
+            } else {
+                shiftCount -= count
+            }
+        }
+        
+        for _ in 0..<abs(shiftCount) % s.count {
+            shiftCount < 0 ? shiftLeft(&s) : shiftRight(&s)
+        }
+        
+        return s.joined()
+    }
+    
+    func shiftRight(_ arr: inout [String]) {
+        arr.insert(arr.removeLast(), at: 0)
+    }
+    
+    func shiftLeft(_ arr: inout [String]) {
+        arr.append(arr.removeFirst())
+    }
+```
