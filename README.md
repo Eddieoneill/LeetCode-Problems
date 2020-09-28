@@ -13470,3 +13470,25 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return false
     }
 ```
+## 1266. Minimum Time Visiting All Points
+
+
+```swift
+    func minTimeToVisitAllPoints(_ points: [[Int]]) -> Int {
+        var result = 0
+        var x1 = points[0][0]
+        var x2 = points[0][1]
+        
+        for i in 1..<points.count {
+            let y1 = points[i][0]
+            let y2 = points[i][1]
+            
+            result += max(abs(x1 - y1), abs(x2 - y2))
+            
+            x1 = y1
+            x2 = y2
+        }
+        
+        return result
+    }
+```
