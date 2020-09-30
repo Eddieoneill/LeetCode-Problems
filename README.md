@@ -13710,3 +13710,36 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return false
     }
 ```
+## 1370. Increasing Decreasing String
+
+
+```swift
+    func sortString(_ s: String) -> String {
+        var dict: [Character: Int] = [:]
+        var result: [String] = []
+        var alphabet = "abcdefghijklmnopqrstuvwxyz"
+        
+        
+        for str in s {
+            dict[str, default: 0] += 1
+        }
+        
+        while result.count < s.count {
+            for char in alphabet {
+                if let val = dict[char], val > 0 {
+                    dict[char] = val - 1
+                    result.append(String(char))
+                }
+            }
+            
+            for char in alphabet.reversed() {
+                if let val = dict[char], val > 0 {
+                    dict[char] = val - 1
+                    result.append(String(char))
+                }
+            }
+        }
+        
+        return result.joined()
+    }
+```
