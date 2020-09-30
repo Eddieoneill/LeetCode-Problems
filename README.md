@@ -13780,3 +13780,32 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result
     }
 ```
+## 922. Sort Array By Parity II
+
+
+
+```swift
+    func sortArrayByParityII(_ A: [Int]) -> [Int] {
+        var a = A
+        var i = 0
+        var j = 1
+        
+        while i < a.count && j < a.count {
+            while i < a.count && a[i] % 2 == 0 {
+                i += 2
+            }
+            
+            if i >= a.count { break }
+            
+            while j < a.count && a[j] % 2 != 0 {
+                j += 2
+            }
+            
+            if j >= a.count { break }
+            
+            a.swapAt(i, j)
+        }
+        
+        return a
+    }
+```
