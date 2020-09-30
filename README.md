@@ -13743,3 +13743,40 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return result.joined()
     }
 ```
+## 1305. All Elements in Two Binary Search Trees
+
+
+```swift
+    func getAllElements(_ root1: TreeNode?, _ root2: TreeNode?) -> [Int] {
+        var result: [Int] = []
+        var stack1: [TreeNode] = []
+        var stack2: [TreeNode] = []
+        var curr1 = root1
+        var curr2 = root2
+        
+        while curr1 != nil || curr2 != nil || !stack1.isEmpty || !stack2.isEmpty {
+            while let node = curr1 {
+                stack1.append(node)
+                curr1 = curr1?.left
+            }
+            
+            while let node = curr2 {
+                stack2.append(node)
+                curr2 = curr2?.left
+            }
+            
+            if stack2.isEmpty ||
+            !stack1.isEmpty && stack1[stack1.count - 1].val <= stack2[stack2.count - 1].val {
+                curr1 = stack1.removeLast()
+                result.append(curr1!.val)
+                curr1 = curr1?.right
+            } else {
+                curr2 = stack2.removeLast()
+                result.append(curr2!.val)
+                curr2 = curr2?.right
+            }
+        }
+        
+        return result
+    }
+```
