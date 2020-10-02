@@ -13828,3 +13828,32 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return product - sum
     }
 ```
+## 1079. Letter Tile Possibilities
+
+
+```swift
+    func numTilePossibilities(_ tiles: String) -> Int {
+        var count = Array(repeating: 0, count: 26)
+        
+        for tile in tiles {
+            count[Int(tile.asciiValue! - Character("A").asciiValue!)] += 1
+        }
+
+        func dfs(_ count: inout [Int]) -> Int {
+            var sum = 0
+            
+            for i in 0..<26 {
+                if count[i] == 0 { continue }
+                
+                sum += 1
+                count[i] -= 1
+                sum += dfs(&count)
+                count[i] += 1
+            }
+            
+            return sum
+        }
+        
+        return dfs(&count)
+    }
+```
