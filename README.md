@@ -13809,3 +13809,22 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return a
     }
 ```
+## 1281. Subtract the Product and Sum of Digits of an Integer
+
+
+```swift
+    func subtractProductAndSum(_ n: Int) -> Int {
+        var product = 1
+        var sum = 0
+        var n = n
+        
+        while n > 0 {
+            let digit = n % 10
+            product *= digit
+            sum += digit
+            n /= 10
+        }
+        
+        return product - sum
+    }
+```
