@@ -13857,3 +13857,34 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return dfs(&count)
     }
 ```
+## 544. Output Contest Matches
+
+
+```swift
+    func findContestMatch(_ n: Int) -> String {
+        var curr: [String] = []
+        
+        func findContestMatch(_ curr: [String]) -> String {
+            var i = 0
+            var j = curr.count - 1
+            var result: [String] = []
+            
+            if i == j { return curr[i] }
+            
+            while i < j {
+                result.append("(\(curr[i]),\(curr[j]))")
+                
+                i += 1
+                j -= 1
+            }
+            
+            return findContestMatch(result)
+        }
+        
+        for num in 1...n {
+            curr.append("\(num)")
+        }
+        
+        return findContestMatch(curr)
+    }
+```
