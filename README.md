@@ -13965,3 +13965,44 @@ class UnionFind {
 
 
 ```
+## 310. Minimum Height Trees
+
+
+```swift
+    func findMinHeightTrees(_ n: Int, _ edges: [[Int]]) -> [Int] {
+        if n == 1 {
+            return [0]
+        }
+        
+        var graph: [Set<Int>] = Array(repeating: [], count: n)
+        var leaves: [Int] = []
+        var count = n
+        
+        for edge in edges {
+            graph[edge[0]].insert(edge[1])
+            graph[edge[1]].insert(edge[0])
+        }
+        
+        for i in 0..<n {
+            if graph[i].count == 1 {
+                leaves.append(i)
+            }
+        }
+        
+        while count > 2 {
+            count -= leaves.count
+            var newLeaves = [Int]()
+            for leaf in leaves {
+                let node = graph[leaf].first!
+                graph[node].remove(leaf)
+                if graph[node].count == 1 {
+                    newLeaves.append(node)
+                }
+            }
+            leaves = newLeaves
+        }
+        
+        return leaves
+    }
+
+```
