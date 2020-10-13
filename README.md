@@ -13888,3 +13888,80 @@ func topKFrequent(_ nums: [Int], _ k: Int) -> [Int] {
         return findContestMatch(curr)
     }
 ```
+## 261. Graph Valid Tree
+
+
+```swift
+class Solution {
+    func validTree(_ n: Int, _ edges: [[Int]]) -> Bool {
+        let unionFind = UnionFind(n)
+        
+        for edge in edges {
+            let u = edge[0]
+            let v = edge[1]
+            
+            if unionFind.connected(u, v) { return false }
+            unionFind.union(u, v)
+        }
+        
+        return unionFind.numOfComponents == 1
+    }
+}
+
+class UnionFind {
+    var numOfComponents: Int
+    var sizes: [Int]
+    var parents: [Int]
+    
+    init(_ n: Int) {
+        numOfComponents = n
+        sizes = Array(repeating: 1, count: n)
+        parents = Array(repeating: 1, count: n)
+        for i in 0..<n {
+            parents[i] = i
+        }
+    }
+    
+    func find(_ v: Int) -> Int {
+        var root = v 
+        var v = v
+        
+        while root != parents[root] {
+            root = parents[root]
+        }
+        
+        while v != root {
+            let next = parents[v]
+            parents[v] = root
+            v = next
+        }
+        
+        return root
+    }
+    
+    func union(_ u: Int, _ v: Int) {
+        let parentU = find(u)
+        let parentV = find(v)
+        
+        if parentU == parentV { return }
+        
+        if sizes[parentU] < sizes[parentV] {
+            sizes[parentV] += sizes[parentU]
+            parents[parentU] = parentV
+        } else {
+            sizes[parentU] += sizes[parentV]
+            parents[parentV] = parentU
+        }
+        
+        numOfComponents -= 1
+    }
+    
+    func connected(_ u: Int, _ v: Int) -> Bool {
+        return find(u) == find(v)
+    }
+}
+
+
+
+
+```
