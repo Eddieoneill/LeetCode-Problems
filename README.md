@@ -14078,3 +14078,26 @@ class UnionFind {
     }
 }
 ```
+## 213. House Robber II
+
+
+```swift
+    func rob(_ nums: [Int]) -> Int {
+        guard nums.count > 1 else { return nums[0] }
+        
+        return max(getMax(1, nums.count, nums), getMax(0, nums.count - 1, nums))
+    }
+    
+    func getMax(_ start: Int, _ end: Int, _ nums: [Int]) -> Int {
+        var curr = 0
+        var pre = 0
+        
+        for i in start..<end {
+            let temp = curr
+            curr = max(curr, pre + nums[i])
+            pre = temp
+        }
+        
+        return curr
+    }
+```
