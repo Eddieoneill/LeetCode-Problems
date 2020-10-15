@@ -14129,3 +14129,35 @@ class UnionFind {
         return clonedNode
     }
 ```
+## 993. Cousins in Binary Tree
+
+```swift
+    func isCousins(_ root: TreeNode?, _ x: Int, _ y: Int) -> Bool {
+        guard let r = root else { return false }
+        var queue = [[r, r]]
+
+        while !queue.isEmpty {
+            var size = queue.count
+            var xParent = -1
+            var yParent = -1
+            
+            for _ in 0..<size {
+                let curr = queue.removeFirst()
+                let node = curr[0]
+                let parent = curr[1]
+                
+                if node.val == x { xParent = parent.val }
+                if node.val == y { yParent = parent.val }
+                
+                if xParent != -1 && yParent != -1 && xParent != yParent { return true }
+                
+                if let left = node.left { queue.append([left, node]) }
+                if let right = node.right { queue.append([right, node]) }
+            }
+            
+            if xParent != -1 || yParent != -1 { return false }
+        }
+        
+        return false
+    }
+```
