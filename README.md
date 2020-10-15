@@ -14161,3 +14161,53 @@ class UnionFind {
         return false
     }
 ```
+## 101. Symmetric Tree
+
+
+```swift
+    func isSymmetric(_ root: TreeNode?) -> Bool {
+        guard let r = root else { return true }
+        var queue = [r]
+        
+        while !queue.isEmpty {
+            let size = queue.count
+            var arr: [Int] = []
+            
+            for _ in 0..<size {
+                let node = queue.removeFirst()
+                
+                if let left = node.left {
+                    arr.append(left.val)
+                    queue.append(left)
+                } else {
+                    arr.append(Int.min)
+                }
+                
+                if let right = node.right {
+                    arr.append(right.val)
+                    queue.append(right)
+                } else {
+                    arr.append(Int.min)
+                }
+            }
+            
+            if !isPalandrome(arr) { return false }
+        }
+        
+        return true
+    }
+    
+    func isPalandrome(_ arr: [Int]) -> Bool {
+        var l = 0
+        var r = arr.count - 1
+        
+        while l < r {
+            if arr[l] != arr[r] { return false }
+            
+            l += 1
+            r -= 1
+        }
+        
+        return true
+    }
+```
