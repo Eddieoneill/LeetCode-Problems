@@ -14101,3 +14101,31 @@ class UnionFind {
         return curr
     }
 ```
+## 133. Clone Graph
+
+
+```swift
+    func cloneGraph(_ node: Node?) -> Node? {
+        guard node != nil else { return node }
+        
+        var nodeMap: [Int: Node?] = [:]
+        
+        dfs(node, &nodeMap)
+        
+        return nodeMap[node!.val] ?? nil
+    }
+    
+    func dfs(_ node: Node?, _ nodeMap: inout [Int: Node?]) -> Node? {
+        guard let curr = node else { return node }
+        guard nodeMap[curr.val] == nil else { return nodeMap[curr.val] ?? nil }
+        
+        var clonedNode = Node(curr.val)
+        nodeMap[curr.val] = clonedNode
+        
+        for neighbor in curr.neighbors {
+            clonedNode.neighbors.append(dfs(neighbor, &nodeMap))
+        }
+        
+        return clonedNode
+    }
+```
