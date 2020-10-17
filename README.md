@@ -14211,3 +14211,51 @@ class UnionFind {
         return true
     }
 ```
+## 74. Search a 2D Matrix
+
+
+```swift
+    func searchMatrix(_ matrix: [[Int]], _ target: Int) -> Bool {
+        guard !matrix.isEmpty else { return false }
+        
+        var left = 0
+        var right = matrix.count - 1
+        
+        while left <= right {
+            let mid = (left + right) / 2
+            let last = matrix[mid].count - 1
+            
+            guard !matrix[mid].isEmpty else { return false }
+            
+            if (matrix[mid][last] > target && matrix[mid][0] < target) ||
+            matrix[mid][last] == target ||
+            matrix[mid][0] == target {
+                return binarySearch(matrix[mid], target)
+            } else if matrix[mid][last] > target {
+                right = mid - 1
+            } else {
+                left = mid + 1
+            }
+        }
+            
+        return false
+    }
+    
+    func binarySearch(_ arr: [Int], _ target: Int) -> Bool {
+        var left = 0
+        var right = arr.count - 1
+        
+        while left <= right {
+            let mid = (left + right) / 2
+            
+            if arr[mid] == target {
+                return true
+            } else if arr[mid] > target {
+                right = mid - 1
+            } else if arr[mid] < target {
+                left = mid + 1
+            } 
+        }
+        return false
+    }
+```
