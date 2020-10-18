@@ -14259,3 +14259,43 @@ class UnionFind {
         return false
     }
 ```
+## 188. Best Time to Buy and Sell Stock IV
+
+
+```swift
+    func maxProfit(_ k: Int, _ prices: [Int]) -> Int {
+        guard !prices.isEmpty && k > 0 else { return 0 }
+        
+        if k >= (prices.count / 2 + 1) {
+            var result = 0
+            var pre = prices[0]
+
+            for (i, curr) in prices.enumerated() where i > 0 {
+                if curr > pre { result += curr - pre }
+                pre = curr
+            }
+
+            return result
+        }
+        
+        var dp = Array(repeating: Array(repeating:0, count: k + 1), count: prices.count + 1)
+        
+        var trade: Int = 1
+        var day: Int = 1
+        
+        while trade <= k {
+            day = 1
+            var maxEarn: Int = -prices[0]
+            
+            while day <= prices.count {
+                dp[day][trade] = max(dp[day-1][trade], prices[day-1] + maxEarn)
+                maxEarn = max(maxEarn, dp[day-1][trade-1] - prices[day-1])
+                day += 1
+            }
+            
+            trade += 1
+        }
+        
+        return dp[prices.count][k]
+    }
+```
