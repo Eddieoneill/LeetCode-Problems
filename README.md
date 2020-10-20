@@ -14299,3 +14299,25 @@ class UnionFind {
         return dp[prices.count][k]
     }
 ```
+## 1614. Maximum Nesting Depth of the Parentheses
+
+
+```swift
+class Solution {
+    func maxDepth(_ s: String) -> Int {
+        var dCount = 0
+        var maxVal = 0
+        
+        for char in s {
+            if char == "(" {
+                dCount += 1
+                maxVal = max(dCount, maxVal)
+            } else if char == ")" {
+                dCount -= 1
+            }
+        }
+        
+        return maxVal
+    }
+}
+```
