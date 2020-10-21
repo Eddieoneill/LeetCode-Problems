@@ -14325,19 +14325,19 @@ class Solution {
 
 ```swift
     func invertTree(_ root: TreeNode?) -> TreeNode? {
-        var queue = [root]
+        var stack = [root]
         
-        while !queue.isEmpty {
-            let size = queue.count
+        while !stack.isEmpty {
+            let size = stack.count
             
-            guard let node = queue.removeFirst() else { continue }
+            guard let node = stack.removeLast() else { continue }
             
             let temp = node.left
             node.left = node.right
             node.right = temp
             
-            queue.append(node.left)
-            queue.append(node.right)
+            stack.append(node.right)
+            stack.append(node.left)
         }
         
         return root
