@@ -14321,3 +14321,25 @@ class Solution {
     }
 }
 ```
+## 226. Invert Binary Tree
+
+```swift
+    func invertTree(_ root: TreeNode?) -> TreeNode? {
+        var queue = [root]
+        
+        while !queue.isEmpty {
+            let size = queue.count
+            
+            guard let node = queue.removeFirst() else { continue }
+            
+            let temp = node.left
+            node.left = node.right
+            node.right = temp
+            
+            queue.append(node.left)
+            queue.append(node.right)
+        }
+        
+        return root
+    }
+```
