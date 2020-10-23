@@ -14343,3 +14343,40 @@ class Solution {
         return root
     }
 ```
+## 456. 132 Pattern
+
+
+```swift
+    func find132pattern(_ nums: [Int]) -> Bool {
+         guard nums.count > 2 else { return false }
+
+        var mins = Array(repeating: nums[0], count: nums.count)
+        var stack:[Int] = []
+        var i = 1
+        
+        while i < nums.count {
+            mins[i] = min(mins[i - 1], nums[i])
+            i += 1
+        }
+        
+        i -= 1
+        
+        while i > 0 {
+            let minVal = mins[i]
+            let curr = nums[i]
+            
+            if curr > minVal {
+                while !stack.isEmpty && stack[stack.count - 1] <= minVal {
+                    stack.removeLast()
+                }
+                
+                if !stack.isEmpty && stack[stack.count - 1] < curr { return true }
+            }
+            
+            stack.append(curr)
+            i -= 1
+        }
+
+        return false
+    }
+```
