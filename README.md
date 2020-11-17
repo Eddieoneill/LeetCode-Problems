@@ -14380,3 +14380,19 @@ class Solution {
         return false
     }
 ```
+## 171. Excel Sheet Column Number
+
+```swift
+    func titleToNumber(_ s: String) -> Int {
+        var dict: [Character: Int] = ["A": 1, "M": 13, "X": 24, "F": 6, "V": 22, "D": 4, "S": 19, "U": 21, "Q": 17, "N": 14, "T": 20, "E": 5, "R": 18, "P": 16, "C": 3, "W": 23, "O": 15, "J": 10, "G": 7, "B": 2, "I": 9, "H": 8, "L": 12, "Z": 26, "Y": 25, "K": 11]
+        var result = 0
+        var power = Int(NSDecimalNumber(decimal: pow(26, s.count - 1)))
+        for char in s {
+            var curr = dict[char, default: 0]
+            result += curr * power
+            power /= 26
+        }
+        
+        return result
+    }
+```
