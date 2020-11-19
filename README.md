@@ -14416,3 +14416,47 @@ class Solution {
         return result.joined()
     }
 ```
+## 1428. Leftmost Column with at Least a One
+
+```swift
+func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
+		let matrix = binaryMatrix.dimensions()
+        let maxRow = matrix[0] 
+        var col = matrix[1] - 1
+        var result = -1
+        var count = 1
+        
+        func bs(_ left: Int, _ right: Int, _ row: Int) -> Int {
+            guard binaryMatrix.get(row, right) == 1 else { return -1 }
+            var left = left
+            var right = right
+            
+            while left <= right {
+                let mid = ((right - left) / 2) + left
+                let midVal = binaryMatrix.get(row, mid)
+                
+                if midVal == 1 {
+                    right = mid - 1
+                } else {
+                    left = mid + 1
+                }
+                count += 1
+            }
+            return right + 1
+        }
+        
+        
+        for row in 0..<maxRow {
+            let leftMostOne = bs(0, col, row)
+            
+            if leftMostOne > -1 && result > -1 {
+                result = min(leftMostOne, result)
+                col = min(leftMostOne, result)
+            } else {
+                result = max(leftMostOne, result)
+            }
+        }
+        
+        return result
+    }
+```
