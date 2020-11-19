@@ -14396,3 +14396,23 @@ class Solution {
         return result
     }
 ```
+## 1249. Minimum Remove to Make Valid Parentheses
+
+```swift
+    func minRemoveToMakeValid(_ s: String) -> String {
+        var stack: [Int] = []
+        var result: [String] = Array(repeating: "", count: s.count)
+        
+        for (i, char) in s.enumerated() where char != ")" || (char == ")" && !stack.isEmpty) {
+            if char == ")" { result[stack.removeLast()] = "(" }
+            if char == "(" { 
+                stack.append(i)
+                continue
+            }
+            
+            result[i] = String(char)
+        }
+        
+        return result.joined()
+    }
+```
