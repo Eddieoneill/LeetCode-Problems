@@ -14480,3 +14480,30 @@ func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
         return result
     }
 ```
+## 560. Subarray Sum Equals K
+
+
+```swift
+    func subarraySum(_ nums: [Int], _ k: Int) -> Int {
+        var dict: [Int: Int] = [:]
+        dict[0] = 1
+        
+        var sum = 0
+        var result = 0
+        
+        for i in 0..<nums.count {
+            sum += nums[i]
+            if let val = dict[sum-k] {
+                result += val
+            }
+            
+            if let val = dict[sum] {
+                dict[sum] = val + 1
+            } else {
+                dict[sum] = 1
+            }
+        }
+        
+        return result
+    }
+```
