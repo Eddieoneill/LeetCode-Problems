@@ -14460,3 +14460,23 @@ func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
         return result
     }
 ```
+## 238. Product of Array Except Self
+
+
+```swift
+    func productExceptSelf(_ nums: [Int]) -> [Int] {
+        var result: [Int] = Array(repeating: 1, count: nums.count)
+        var product = nums[nums.count - 1]
+        
+        for i in 1..<nums.count {
+            result[i] = nums[i - 1] * result[i - 1]
+        }
+        
+        for i in stride(from: nums.count - 2, through: 0, by: -1) {
+            result[i] *= product
+            product *= nums[i]
+        }
+        
+        return result
+    }
+```
