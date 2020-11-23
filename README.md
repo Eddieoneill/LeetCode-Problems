@@ -14507,3 +14507,34 @@ func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
         return result
     }
 ```
+## 199. Binary Tree Right Side View
+
+
+```swift
+    func rightSideView(_ root: TreeNode?) -> [Int] {
+        guard let root = root else { return [] }
+        var result: [Int] = []
+        var queue: [TreeNode] = []
+        queue.append(root)
+        
+        while !queue.isEmpty {
+            var count = queue.count
+            
+            while count > 1 {
+                let node = queue.removeFirst()
+                
+                if let left = node.left { queue.append(left) }
+                if let right = node.right { queue.append(right) }
+                
+                count -= 1
+            }
+            
+            let node = queue.removeFirst()
+            result.append(node.val)    
+            if let left = node.left { queue.append(left) }
+            if let right = node.right { queue.append(right) }
+        }
+        
+        return result
+    }
+```
