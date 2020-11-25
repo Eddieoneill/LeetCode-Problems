@@ -14538,3 +14538,20 @@ func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
         return result
     }
 ```
+## 1. Two Sum
+
+
+```swift
+    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+        var seen: [Int: Int] = [:]
+        
+        for (i, num) in nums.enumerated() {
+            let curr = target - num
+            
+            if let j = seen[curr] { return [j, i] }
+            seen[num] = i
+        }
+        
+        return []
+    }
+```
