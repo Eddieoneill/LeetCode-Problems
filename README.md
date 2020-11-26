@@ -14514,8 +14514,7 @@ func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
     func rightSideView(_ root: TreeNode?) -> [Int] {
         guard let root = root else { return [] }
         var result: [Int] = []
-        var queue: [TreeNode] = []
-        queue.append(root)
+        var queue = [root]
         
         while !queue.isEmpty {
             var count = queue.count
