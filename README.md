@@ -14554,3 +14554,33 @@ func leftMostColumnWithOne(_ binaryMatrix: BinaryMatrix) -> Int {
         return []
     }
 ```
+## 1570. Dot Product of Two Sparse Vectors
+
+
+```swift
+class SparseVector {
+    var v1: [Int: Int] = [:]
+    
+    init(_ nums: [Int]) {
+        for i in 0..<nums.count where nums[i] > 0 {
+            v1[i] = nums[i]
+        }
+    }
+
+    // Return the dotProduct of two sparse vectors
+    func dotProduct(_ vec: SparseVector) -> Int {
+        var recever = v1.count >= vec.v1.count ? v1 : vec.v1
+        var driver = v1.count < vec.v1.count ? v1 : vec.v1
+        var product = 0
+        
+        for (i, val1) in driver {
+            
+            if let val2 = recever[i] {
+                product += val1 * val2
+            }
+        }
+        
+        return product
+    }
+}
+```
