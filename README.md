@@ -14584,3 +14584,84 @@ class SparseVector {
     }
 }
 ```
+## 211. Design Add and Search Words Data Structure
+
+
+```swift
+class WordDictionary {
+
+    var trie: Trie
+    
+    init() {
+        trie = Trie()
+    }
+    
+    func addWord(_ word: String) {
+        trie.insert(word)
+    }
+    
+    func search(_ word: String) -> Bool {
+        return trie.contains(word)
+    }
+}
+
+class Trie {
+    let root: TrieNode
+    
+    init() {
+        self.root = TrieNode()
+    }
+    
+    func insert(_ word: String) {
+        var curr = self.root
+        
+        for char in word {
+            let index = char.asciiValue! - Character("a").asciiValue!
+            if curr.children[Int(index)] == nil {
+                curr.children[Int(index)] = TrieNode(String(char))
+            }
+            
+            curr = curr.children[Int(index)]!
+            
+        }
+        
+        curr.isEnd = true
+    }
+    
+    func contains(_ word: String) -> Bool {
+        var chars = word.map { $0 }
+        func dfs(_ node: TrieNode?, _ curr: Int) -> Bool {
+            guard let node = node else { return false }
+            if node.isEnd && curr == chars.count { return true }
+            if curr >= chars.count { return false }
+            
+            if chars[curr] == "." {
+                for i in 0..<26 {
+                    let child = node.children[i]
+                    if child == nil { continue }
+                    if dfs(child, curr + 1) == true { return true }
+                }
+            } else {
+                let index = chars[curr].asciiValue! - Character("a").asciiValue!
+                let child = node.children[Int(index)]
+                return dfs(child, curr + 1)
+            }
+            
+            return false
+        } 
+        return dfs(self.root, 0) 
+    }
+}
+
+class TrieNode {
+    let key: String
+    var children: [TrieNode?]
+    var isEnd: Bool
+    
+    init(_ key: String = "") {
+        self.key = key
+        self.children = Array(repeating: nil, count: 26)
+        self.isEnd = false
+    }
+}
+```
