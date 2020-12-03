@@ -14665,3 +14665,53 @@ class TrieNode {
     }
 }
 ```
+## 721. Accounts Merge
+
+
+```swift
+  func accountsMerge(_ accounts: [[String]]) -> [[String]] {
+        var graph: [String: (String, Set<String>)] = [:]
+        var result: [[String]] = []
+        var seen: Set<String> = []
+        
+        for account in accounts {
+            let name = account[0]
+            
+            for i in 1..<account.count {
+                let email = account[i]
+                for j in 1..<account.count {
+                    graph[email, default: (name, [email])].1.insert(account[j])
+                }
+            }
+        }
+        
+        func dfs(_ email: String, _ curr: inout [String], _ seen: inout Set<String>) {
+            guard !seen.contains(email) else { return }
+            curr.append(email)
+            seen.insert(email)
+            
+            if let account = graph[email] {
+                for next in account.1 {
+                    dfs(next, &curr, &seen)
+                }
+            }
+        }
+        
+        for (key, info) in graph {
+            let name = info.0
+            let emails = info.1
+            var curr: [String] = []
+            
+            for email in emails where !seen.contains(email) {
+                dfs(email, &curr, &seen)
+            }
+            
+            if curr.isEmpty { continue }
+            curr = curr.sorted { $0 < $1 }
+            curr.insert(name, at: 0)
+            result.append(curr)
+        }
+        
+        return result
+    }
+```
