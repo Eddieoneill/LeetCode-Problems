@@ -14715,3 +14715,37 @@ class TrieNode {
         return result
     }
 ```
+## 426. Convert Binary Search Tree to Sorted Doubly Linked List
+
+
+```swift
+    func treeToDoublyList(_ root: Node?) -> Node? {
+        guard let root = root else { return nil }
+        var last: Node? = nil
+        var first: Node? = nil
+        
+        func dfs(_ curr: Node?) {
+            guard let curr = curr else { return }
+            
+            dfs(curr.left)
+            
+            if last != nil {
+                last?.right = curr
+                curr.left = last
+            } else {
+                first = curr
+            }
+            
+            last = curr
+            
+            dfs(curr.right)
+            
+        }
+        
+        dfs(root)
+        last?.right = first
+        first?.left = last
+        
+        return first
+    }
+```
