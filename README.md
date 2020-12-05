@@ -14749,3 +14749,45 @@ class TrieNode {
         return first
     }
 ```
+## 438. Find All Anagrams in a String
+
+
+```swift
+    func findAnagrams(_ s: String, _ p: String) -> [Int] {
+        var sDict: [Character: Int] = [:]
+        var pDict: [Character: Int] = [:]
+        var result: [Int] = []
+        let s = s.map { $0 }
+        var i = 0
+        var sCount = 0
+        var pCount = 0
+        
+        func checkIfSEqualP() {
+            if sCount == pCount {
+                if sDict == pDict { result.append(i) }
+                if let count = sDict[s[i]], count > 1 { 
+                    sDict[s[i]] = count - 1
+                } else {
+                    sDict[s[i]] = nil
+                }
+                sCount -= 1
+                i += 1
+            }
+        }
+        
+        for char in p {
+            pDict[char, default: 0] += 1
+            pCount += 1
+        }
+        
+        for char in s {
+            checkIfSEqualP()
+            sCount += 1
+            sDict[char, default: 0] += 1
+        }
+        
+        checkIfSEqualP()
+        
+        return result
+    }
+```
