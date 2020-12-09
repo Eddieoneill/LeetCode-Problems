@@ -14791,3 +14791,32 @@ class TrieNode {
         return result
     }
 ```
+## 636. Exclusive Time of Functions
+
+
+```swift
+    func exclusiveTime(_ n: Int, _ logs: [String]) -> [Int] {
+        var result: [Int] = Array(repeating: 0, count: n)
+        var stack: [Int] = []
+        var prev = 0
+        
+        for log in logs {
+            let log = log.split(separator: ":")
+            let id = Int(log[0])!
+            let key = log[1]
+            let time = Int(log[2])!
+            
+            if key == "start" {
+                if !stack.isEmpty { result[stack[stack.count - 1]] += time - prev }
+                stack.append(id)
+                prev = time
+            } else {
+                result[stack[stack.count - 1]] += time - prev + 1
+                stack.removeLast()
+                prev = time + 1
+            }
+        }
+        
+        return result
+    }
+```
