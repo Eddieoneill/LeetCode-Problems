@@ -14820,3 +14820,25 @@ class TrieNode {
         return result
     }
 ```
+## 523. Continuous Subarray Sum
+
+
+```swift
+    func checkSubarraySum(_ nums: [Int], _ k: Int) -> Bool {
+        guard nums.count > 1 else { return false }
+        var sum = 0
+        var dict: [Int: Int] = [0: -1]
+        
+        for i in 0..<nums.count {
+            sum += nums[i]
+            if k != 0 { sum = sum % k }
+            if let index = dict[sum] {
+                if i - index > 1 { return true }
+            } else {
+                dict[sum] = i
+            }
+        }
+        
+        return false
+    }
+```
