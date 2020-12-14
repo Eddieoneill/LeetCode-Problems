@@ -14842,3 +14842,40 @@ class TrieNode {
         return false
     }
 ```
+## 987. Vertical Order Traversal of a Binary Tree
+
+
+```swift
+    func verticalTraversal(_ root: TreeNode?) -> [[Int]] {
+        var dict: [Int: [(Int, Int)]] = [:]
+        var maxCount = 0
+        var minCount = 0
+        var result: [[Int]]
+        
+        func dfs(_ node: TreeNode?, _ count: Int, _ x: Int) {
+            guard let node = node else { return }
+            
+            minCount = min(minCount, count)
+            maxCount = max(maxCount, count)
+            dict[count, default: []].append((node.val, x))
+            
+            dfs(node.left, count - 1, x - 1)
+            dfs(node.right, count + 1, x - 1)
+        }
+        dfs(root, 0, 0)
+        result = Array(repeating: [], count: maxCount + abs(minCount) + 1)
+        
+        for (i, val) in dict { 
+            var output: [Int] = []
+            var val = val.sorted {
+                if $0.1 == $1.1 { return $0.0 < $1.0 }
+                
+                return $0.1 > $1.1
+            }
+            val.forEach { output.append($0.0) }
+            result[i + abs(minCount)] = output
+        }
+        
+        return result
+    }
+```
