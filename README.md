@@ -14907,3 +14907,34 @@ class TrieNode {
         }
     }
 ```
+## 528. Random Pick with Weight
+
+
+```swift
+class Solution {
+    var indecies: [Int]
+
+    init(_ w: [Int]) {
+        self.indecies = w
+        
+        for i in 1..<w.count {
+            self.indecies[i] += self.indecies[i - 1]
+        }
+        print(indecies)
+    }
+    
+    func pickIndex() -> Int {
+
+        let target = Int.random(in: 1...indecies[indecies.count - 1])
+        var left = 0
+        var right = indecies.count - 1
+        
+        while left < right {
+            let mid = ((right - left) / 2) + left
+            indecies[mid] < target ? (left = mid + 1) : ( right = mid)
+        }
+
+        return left
+    }
+}
+```
