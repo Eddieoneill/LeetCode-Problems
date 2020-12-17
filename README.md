@@ -14879,3 +14879,31 @@ class TrieNode {
         return result
     }
 ```
+## 50. Pow(x, n)
+
+
+```swift
+    func myPow(_ x: Double, _ n: Int) -> Double {
+        var n = n
+        var x = x
+        
+        if n < 0 {
+            x = 1 / x
+            n = -n
+        }
+        
+        return fastPow(x, n)
+    }
+    
+    func fastPow(_ x: Double, _ n: Int) -> Double {
+        guard n != 0 else { return 1 }
+        
+        let half = fastPow(x, n / 2)
+        
+        if n % 2 == 0 {
+            return half * half
+        } else {
+            return half * half * x
+        }
+    }
+```
