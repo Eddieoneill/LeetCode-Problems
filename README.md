@@ -14938,3 +14938,31 @@ class Solution {
     }
 }
 ```
+## 986. Interval List Intersections
+
+
+```swift
+    func intervalIntersection(_ A: [[Int]], _ B: [[Int]]) -> [[Int]] {
+        guard A.count > 0 && B.count > 0 else { return [] }
+        var i = 0
+        var j = 0
+        var result: [[Int]] = []
+        
+        while i < A.count && j < B.count {
+            let start = max(A[i][0], B[j][0])
+            let end = min(A[i][1], B[j][1])
+            
+            if start <= end {
+                result.append([start, end])
+            }
+            
+            if A[i][1] <= B[j][1] {
+                i += 1
+            } else {
+                j += 1
+            }
+        }
+        
+        return result
+    }
+```
