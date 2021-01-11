@@ -14982,3 +14982,30 @@ class Solution {
         return count
     }
 ```
+## 1641. Count Sorted Vowel Strings
+
+
+```swift
+    func countVowelStrings(_ n: Int) -> Int {
+        var memo: [[Int?]] = Array(repeating: Array(repeating: nil, count: 5), count: n + 1)
+        
+        func _countVowelStrings(_ n: Int, _ last: Int) -> Int {
+            guard n > 0 else { return 1 }
+            
+            if last != -1 { if let val = memo[n][last] { return val } }
+            
+            var count = 0
+            
+            for i in 0..<5 {
+                if last == -1 || last <= i {
+                    count += _countVowelStrings(n - 1, i)
+                }
+            }
+            
+            if last != -1 { memo[n][last] = count }
+            return count
+        }
+        
+        return _countVowelStrings(n, -1)
+    }
+```
