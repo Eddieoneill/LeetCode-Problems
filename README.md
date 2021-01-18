@@ -15009,3 +15009,35 @@ class Solution {
         return _countVowelStrings(n, -1)
     }
 ```
+## 1415. The k-th Lexicographical String of All Happy Strings of Length n
+
+
+```swift
+    func getHappyString(_ n: Int, _ k: Int) -> String {
+        var result = ["a", "b", "c"]
+        
+        if n == 1 {
+            if result.count < k { return "" }
+        
+            return result[k - 1]
+        }
+        
+        for i in 2...n {
+            var nextResult: [String] = []
+            
+            for j in 0..<result.count {
+                if nextResult.count >= k { break }
+                let str = result[j]
+                
+                for char in ["a", "b", "c"]  where String(str.last!) != char {
+                    nextResult.append("\(str)\(char)")
+                }
+            }
+            result = nextResult
+        }
+        
+        if result.count < k { return "" }
+        
+        return result[k - 1]
+    }
+```
