@@ -15041,3 +15041,29 @@ class Solution {
         return result[k - 1]
     }
 ```
+## 46. Permutations
+
+
+
+```swift
+    func permute(_ nums: [Int]) -> [[Int]] {
+        var nums = nums
+        var result: [[Int]] = []
+        
+        func _permute(_ i: Int) {
+            if i >= nums.count {
+                result.append(nums)
+                return
+            }
+            
+            for j in i..<nums.count {
+                nums.swapAt(i, j)
+                _permute(i + 1)
+                nums.swapAt(i, j)
+            }
+        }
+        
+        _permute(0)
+        return result
+    }
+```
