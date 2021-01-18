@@ -15067,3 +15067,44 @@ class Solution {
         return result
     }
 ```
+## 1219. Path with Maximum Gold
+
+
+```swift
+    func getMaximumGold(_ grid: [[Int]]) -> Int {
+        var grid = grid
+        var maxVal = 0
+        let m = grid.count
+        let n = grid[0].count
+        
+        func _getMaximumGold(_ row: Int, _ col: Int) -> Int {
+            if row < 0 || row >= grid.count ||
+            col < 0 || col >= grid[0].count ||
+            grid[row][col] == 0 { return 0 }
+            
+            let sum = grid[row][col]
+            var maxPath = 0
+            grid[row][col] = 0
+            
+            for dirs in [[1, 0], [0, 1], [-1, 0], [0, -1]] {
+                let nextRow = row + dirs[0]
+                let nextCol = col + dirs[1]
+                
+                maxPath = max(maxPath, _getMaximumGold(nextRow, nextCol))
+            }
+            
+            grid[row][col] = sum
+            return sum + maxPath
+        }
+        
+        for row in 0..<m {
+            for col in 0..<n {
+                if grid[row][col] != 0 {
+                    maxVal = max(maxVal, _getMaximumGold(row, col))
+                }
+            }
+        }
+        
+        return maxVal
+    }
+```
