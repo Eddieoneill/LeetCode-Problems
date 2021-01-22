@@ -15108,3 +15108,23 @@ class Solution {
         return maxVal
     }
 ```
+## 1232. Check If It Is a Straight Line
+
+
+```swift
+    func checkStraightLine(_ coordinates: [[Int]]) -> Bool {
+        guard coordinates.count > 2 else { return true }
+        
+        for i in 1 ..<coordinates.count - 1 {
+            let x1 = coordinates[i - 1][0]
+            let y1 = coordinates[i - 1][1]
+            let x2 = coordinates[i][0]
+            let y2 = coordinates[i][1]
+            let x3 = coordinates[i + 1][0]
+            let y3 = coordinates[i + 1][1]
+            if (y2 - y1) * (x3 - x2) != (y3 - y2) * (x2 - x1) { return false }
+        }
+        
+        return true
+    }
+```
