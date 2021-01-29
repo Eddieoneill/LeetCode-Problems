@@ -15126,3 +15126,52 @@ class Solution {
         return true
     }
 ```
+## 1740. Find Distance in a Binary Tree
+
+
+```swift
+class Solution {
+    func findDistance(_ root: TreeNode?, _ p: Int, _ q: Int) -> Int {
+        var dict: [Int: TreeNode] = [:]
+        var pNode: TreeNode? = nil
+        
+        func dfs(_ node: TreeNode?, _ parent: TreeNode?) {
+            guard let node = node else { return }
+            
+            if let parent = parent { dict[node.val] = parent }
+            if node.val == p { pNode = node }
+            
+            dfs(node.left, node)
+            dfs(node.right, node)
+        }
+        
+        dfs(root, nil)
+        return bfs(pNode!, q, dict)
+    }
+    
+    func bfs(_ start: TreeNode, _ end: Int, _ dict: [Int: TreeNode]) -> Int {
+        var queue = [start]
+        var visited: Set<Int> = []
+        var level = 0
+        
+        while !queue.isEmpty {
+            let size = queue.count
+            
+            for i in 0..<size {
+                let node = queue.removeFirst()
+                
+                if visited.contains(node.val) { continue }
+                if node.val == end { return level }
+                if let parent = dict[node.val] { queue.append(parent) }
+                if let left = node.left { queue.append(left) }
+                if let right = node.right { queue.append(right) }
+                
+                visited.insert(node.val)
+            }
+            level += 1
+        }
+        
+        return level
+    }
+}
+```
