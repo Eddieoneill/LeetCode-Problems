@@ -15175,3 +15175,33 @@ class Solution {
     }
 }
 ```
+## 1465. Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts
+
+
+```swift
+class Solution {
+    func maxArea(_ h: Int, _ w: Int, _ horizontalCuts: [Int], _ verticalCuts: [Int]) -> Int {
+        let mod = 1000000007 // fucking swift didn't let me use pow easily 
+        
+        var maxHGap = getGap(horizontalCuts.sorted(), h)
+        var maxVGap = getGap(verticalCuts.sorted(), w)
+        
+        return maxHGap * maxVGap % mod
+    }
+    
+    func getGap(_ arr: [Int], _ last: Int) -> Int {
+        var pre = 0
+        var maxGap = 0
+        
+        for num in arr {
+            let gap = num - pre
+            maxGap = max(maxGap, gap)
+            pre = num
+        }
+        
+        maxGap = max(maxGap, last - arr[arr.count - 1])
+        
+        return maxGap
+    }
+}
+```
