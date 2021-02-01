@@ -49,7 +49,6 @@ class Solution {
         node.next?.next = node
         node.next = nil
 
-        print(head ?? Node(0))
         return head
     }
 }
