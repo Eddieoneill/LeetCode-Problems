@@ -15204,3 +15204,74 @@ class Solution {
     }
 }
 ```
+## 1031. Maximum Sum of Two Non-Overlapping Subarrays
+
+
+```swift
+class Solution { 
+    func maxSumTwoNoOverlap(_ A: [Int], _ L: Int, _ M: Int) -> Int {
+        var leftM = getLeft(A, M)
+        var rightM = getRight(A, M)
+        
+        return getSum(A, leftM, rightM, L)
+    }
+    
+    func getLeft(_ A: [Int], _ M: Int) -> [Int] {
+        var left = Array(repeating: 0, count: A.count)
+        var maxVal = 0
+        var currSum = 0
+        var i = 0
+        
+        for j in 0..<A.count {
+            currSum += A[j]
+            
+            if j - i + 1 == M {
+                maxVal = max(maxVal, currSum)
+                left[j] = maxVal
+                currSum -= A[i]
+                i += 1
+            }
+        }
+        
+        return left
+    }
+    
+    func getRight(_ A: [Int], _ M: Int) -> [Int] {
+        var right = Array(repeating: 0, count: A.count)
+        var maxVal = 0
+        var currSum = 0
+        var i = A.count - 1
+        
+        for j in (0..<A.count).reversed() {
+            currSum += A[j]
+            
+            if i - j + 1 == M {
+                maxVal = max(maxVal, currSum)
+                right[j] = maxVal
+                currSum -= A[i]
+                i -= 1
+            }
+        }
+        
+        return right
+    }
+    
+    func getSum(_ A:[Int], _ left: [Int], _ right: [Int], _ L: Int) -> Int {
+        var maxVal = 0
+        var currSum = 0
+        var i = 0
+        
+        for j in 0..<A.count {
+            currSum += A[j]
+            
+            if j - i + 1 == L { // sorry dude
+                maxVal = max(maxVal, max(i - 1 >= 0 ? currSum + left[i - 1] : 0, j + 1 < A.count ? currSum + right[j + 1] : 0))
+                currSum -= A[i]
+                i += 1
+            }
+        }
+        
+        return maxVal
+    }
+}
+```
