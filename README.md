@@ -15275,3 +15275,88 @@ class Solution {
     }
 }
 ```
+## Rotting Oranges
+
+```swift
+class Solution {
+    func orangesRotting(_ grid: [[Int]]) -> Int {
+        let rottens = findRottenOrange(grid)
+        var grid = grid
+        var result = Int.max
+        
+        if rottens.count <= 0 { result = 0 }
+        
+        func bfs() -> Int {
+            var queue: [[Int]] = []
+            let dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+            var sum = 0
+            
+            for rotten in rottens {
+                let row = rotten[0]
+                let col = rotten[1]
+                
+                queue.append([row, col])
+            }
+            
+            while !queue.isEmpty {
+                
+                let size = queue.count
+                
+                for _ in 0..<size {
+                    let curr = queue.removeFirst()
+                    let row = curr[0]
+                    let col = curr[1]
+                    grid[row][col] = 2
+                    for dir in dirs {
+                        let newRow = row + dir[0]
+                        let newCol = col + dir[1]
+                        
+                        if newRow < 0 || newRow >= grid.count || 
+                        newCol < 0 || newCol >= grid[0].count || 
+                        grid[newRow][newCol] == 0 || grid[newRow][newCol] == 2 {
+                            continue
+                        }
+                        grid[newRow][newCol] = 2
+                        queue.append([newRow, newCol])
+                    }
+                }
+                if !queue.isEmpty { sum += 1 }
+            }
+            
+            return sum
+        }
+        
+        result = bfs()
+        
+        if remainingFreshOrange(grid) { return -1 }
+        return result
+    }
+    
+    func findRottenOrange(_ grid: [[Int]]) -> [[Int]] {
+        var result: [[Int]] = []
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == 2 {
+                    result.append([row, col])
+                }
+            }
+        }
+        
+        return result
+    }
+    
+    func remainingFreshOrange(_ grid: [[Int]]) -> Bool {
+
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == 1 {
+                    return true
+                }
+            }
+        }
+        
+        return false
+    }
+}
+```
