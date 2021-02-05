@@ -15459,3 +15459,30 @@ class Solution {
     }
 }
 ```
+## Sort Array By Parity II
+
+```swift
+class Solution {
+    func sortArrayByParityII(_ A: [Int]) -> [Int] {
+        var A = A
+        var i = 0
+        var j = 1
+        
+        while j < A.count && i < A.count {
+            while A[j] % 2 != 0 {
+                j += 2
+                if j >= A.count { return A }
+            }
+            
+            while A[i] % 2 == 0 {
+                i += 2
+                if i >= A.count { return A }
+            }
+            
+            A.swapAt(i, j)
+        }
+        
+        return A
+    }
+}
+```
