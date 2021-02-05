@@ -15360,3 +15360,60 @@ class Solution {
     }
 }
 ```
+## Unique Paths III
+
+```swift
+class Solution {
+    func uniquePathsIII(_ grid: [[Int]]) -> Int {
+        var start: [Int] = []
+        var end: [Int] = []
+        var count = 0
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                let curr = grid[row][col]
+                
+                if curr == 1 { 
+                    start = [row, col]
+                } else if curr == 2 {
+                    end = [row, col]
+                } else if curr == 0 {
+                    count += 1
+                }
+            }
+        }
+        
+        func dfs(_ grid: [[Int]], _ row: Int, _ col: Int, _ seenCount: Int) -> Int {
+            guard grid[row][col] != 2 else {
+                if seenCount >= count { return 1 }
+                return 0
+            }
+            var grid = grid
+            var sum = 0
+            let dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+            
+            grid[row][col] = -1
+            
+            for dir in dirs {
+                let newRow = row - dir[0]
+                let newCol = col - dir[1]
+                
+                if newRow < 0 || newRow >= grid.count ||
+                newCol < 0 || newCol >= grid[0].count {
+                    continue
+                }
+                
+                if grid[newRow][newCol] == -1 || grid[newRow][newCol] == 1 {
+                    continue
+                }
+                
+                sum += dfs(grid, newRow, newCol, seenCount + 1)
+            }
+            
+            return sum
+        }
+        
+        return dfs(grid, start[0], start[1], -1)
+    }
+}
+```
