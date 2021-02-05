@@ -15417,3 +15417,45 @@ class Solution {
     }
 }
 ```
+## Max Increase to Keep City Skyline
+
+```swift
+class Solution {
+    func maxIncreaseKeepingSkyline(_ grid: [[Int]]) -> Int {
+        let maxRow = getMaxRow(grid)
+        let maxCol = getMaxCol(grid)
+        var sum = 0
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                let minMax = min(maxRow[row], maxCol[col])
+                sum += minMax - grid[row][col]
+            }
+        }
+        
+        return sum
+    }
+    
+    func getMaxRow(_ grid: [[Int]]) -> [Int] {
+        var maxRow = Array(repeating: 0, count: grid.count)
+        
+        for row in 0..<grid.count {
+            maxRow[row] = grid[row].max() ?? 0
+        }
+        
+        return maxRow
+    }
+    
+    func getMaxCol(_ grid: [[Int]]) -> [Int] {
+        var maxCol = Array(repeating: 0, count: grid[0].count)
+        
+        for col in 0..<grid[0].count {
+            for row in 0..<grid.count {
+                maxCol[col] = max(maxCol[col], grid[row][col])
+            }
+        }
+        
+        return maxCol
+    }
+}
+```
