@@ -4,7 +4,9 @@
 ```swift
 class Solution {
     func middleNode(_ head: ListNode?) -> ListNode? {
-        if head?.next == nil { return head }
+        if head?.next == nil { 
+	  return head
+	}
         
         var fastNode = head
         var slowNode = head
