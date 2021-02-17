@@ -15512,3 +15512,30 @@ class Solution {
     }
 }
 ```
+## 797. All Paths From Source to Target
+
+
+```swift
+    func allPathsSourceTarget(_ graph: [[Int]]) -> [[Int]] {
+        var result: [[Int]] = []
+        
+        func dfs(_ vertex: Int, _ path: [Int]) {
+            guard vertex != graph.count - 1 else {
+                result.append(path)
+                return
+            }
+            
+            var path = path
+            
+            for neighbor in graph[vertex] {
+                path.append(neighbor)
+                dfs(neighbor, path)
+                path.removeLast()
+            }
+        }
+        
+        dfs(0, [0])
+        
+        return result
+    }
+```
