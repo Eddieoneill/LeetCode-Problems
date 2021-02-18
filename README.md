@@ -15539,3 +15539,27 @@ class Solution {
         return result
     }
 ```
+## 1153. String Transforms Into Another String
+
+
+```swift
+    func canConvert(_ str1: String, _ str2: String) -> Bool {
+        if str1.count != str2.count{ return false }
+        if str1 == str2{ return true }
+        
+        var str1 = Array(str1)
+        var str2 = Array(str2)
+        var map: [Character:Character] = [:]
+        
+        for i in 0..<str1.count{
+            let s1 = str1[i]
+            let s2 = str2[i]
+            
+            if let mapVal = map[s1], mapVal != s2{ return false }
+            
+            map[s1] = s2
+        }
+        
+        return Set(str2).count < 26
+    }
+```
