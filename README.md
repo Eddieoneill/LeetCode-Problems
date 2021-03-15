@@ -15563,3 +15563,39 @@ class Solution {
         return Set(str2).count < 26
     }
 ```
+## 15. 3Sum
+
+
+```swift
+class Solution {
+    func threeSum(_ nums: [Int]) -> [[Int]] {
+        guard nums.count > 2 else { return [] }
+
+        let sortedNums = nums.sorted()
+        var result: Set<[Int]> = []
+
+        for currIndex in 0..<sortedNums.count - 2 {
+            var left = currIndex + 1
+            var right = sortedNums.count - 1
+
+            while left < right {
+                let currNum = sortedNums[currIndex]
+                let sum = sortedNums[left] + sortedNums[right] + currNum
+
+                if sum == 0 {
+                    result.insert([sortedNums[left], sortedNums[right],  currNum])
+                    left += 1
+                    right -= 1
+
+                 } else if sum < 0 {
+                    left += 1
+
+                 } else {
+                    right -= 1
+                }
+            }   
+        }   
+        return Array(result)
+    }
+}
+```
