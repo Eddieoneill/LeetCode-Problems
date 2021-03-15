@@ -15599,3 +15599,34 @@ class Solution {
     }
 }
 ```
+## 39. Combination Sum
+
+
+```swift
+    func combinationSum(_ candidates: [Int], _ target: Int) -> [[Int]] {
+        var result: [[Int]] = []
+        
+        func topDown(_ i: Int, _ candidates: [Int], _ combo: [Int], _ target: Int) {
+            let num = candidates[i]
+            let nextTarget = target - num
+            if nextTarget < 0 { return }
+            var nextCombo = combo
+            nextCombo.append(num)
+            
+            if nextTarget == 0 {
+                result.append(nextCombo)
+                return
+            }
+
+
+            for j in i..<candidates.count {
+                topDown(j, candidates, nextCombo, nextTarget)
+            }
+        }
+        
+        for i in 0..<candidates.count {
+            topDown(i, candidates, [], target)
+        }
+        return result
+    }
+```
