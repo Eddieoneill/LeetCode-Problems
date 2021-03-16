@@ -21,7 +21,6 @@ class Solution {
 ## 206. Reverse Linked List
 
 ```swift
-
 //  iterative solution
 class Solution {
     func reverseList(_ head: ListNode?) -> ListNode? {
