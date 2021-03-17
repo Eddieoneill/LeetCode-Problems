@@ -17,7 +17,6 @@ class Solution {
     }
 }
 ```
-
 ## 206. Reverse Linked List
 
 ```swift
