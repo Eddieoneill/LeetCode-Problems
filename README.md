@@ -1,7 +1,6 @@
 # LeetCode-Problems
 
 
-
 ## 876. Middle of the Linked List
 ```swift
 class Solution {
@@ -15628,6 +15627,19 @@ class Solution {
         for i in 0..<candidates.count {
             topDown(i, candidates, [], target)
         }
+        return result
+    }
+```
+## 268. Missing Number 
+
+```swift
+    func missingNumber(_ nums: [Int]) -> Int {
+        var result = 0
+        
+        for (i, num) in nums.enumerated() {
+            result += -num + (i + 1)
+        }
+        
         return result
     }
 ```
