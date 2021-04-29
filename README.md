@@ -15653,3 +15653,30 @@ class Solution {
         return max(maxDepth(node.left), maxDepth(node.right)) + 1
     }
 ```
+## 572. Subtree of Another Tree
+
+```swift
+    func isSubtree(_ s: TreeNode?, _ t: TreeNode?) -> Bool {
+        if s == nil && t == nil { return true }
+        guard let s = s else { return false }
+        guard let t = t else { return false }
+        
+        if s.val == t.val && _isSubtree(s, t) {
+            return true
+        } else {
+            return isSubtree(s.left, t) || isSubtree(s.right, t)
+        }
+    }
+    
+    func _isSubtree(_ s2: TreeNode?, _ t2: TreeNode?) -> Bool {
+        if s2 == nil && t2 == nil { return true }
+        guard let s2 = s2 else { return false }
+        guard let t2 = t2 else { return false }
+        
+        if s2.val == t2.val {
+            return _isSubtree(s2.left, t2.left) && _isSubtree(s2.right, t2.right)
+        }
+        
+        return false
+    }
+```
