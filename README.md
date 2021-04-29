@@ -15643,3 +15643,13 @@ class Solution {
         return result
     }
 ```
+## 104. Maximum Depth of Binary Tree
+
+
+```swift
+    func maxDepth(_ root: TreeNode?) -> Int {
+        guard let node = root else { return 0 }
+        
+        return max(maxDepth(node.left), maxDepth(node.right)) + 1
+    }
+```
