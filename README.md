@@ -15765,3 +15765,44 @@ class Solution {
         return curr == (0, 0)
     }
 ```
+## 937. Reorder Data in Log Files
+
+
+```swift
+    func reorderLogFiles(_ logs: [String]) -> [String] { 
+        var letterLogs: [(String, String)] = []
+        var digitLogs: [[String]] = []
+        var result: [String] = []
+        
+        for log in logs {
+            var strs = log.split(separator: " ").map { String($0) }
+            
+            if Double(strs[1]) != nil {
+                digitLogs.append(strs)
+            } else {
+                let key = strs[0]
+                strs.removeFirst()
+                let str = strs.joined(separator: " ")
+                letterLogs.append((str, key))
+            }
+        }
+        
+        letterLogs = letterLogs.sorted { 
+            if $0.0 == $1.0 {
+                return $0.1 < $1.1
+            } else {
+                return $0.0 < $1.0
+            }
+        }
+        
+        for log in letterLogs {
+            result.append("\(log.1) \(log.0)")
+        }
+        
+        for log in digitLogs {
+            result.append(log.joined(separator: " "))
+        }
+        
+        return result
+    }
+```
