@@ -15680,3 +15680,22 @@ class Solution {
         return false
     }
 ```
+## 448. Find All Numbers Disappeared in an Array
+
+
+```swift
+    func findDisappearedNumbers(_ nums: [Int]) -> [Int] {
+        var nums = nums
+        var result: [Int] = []
+        
+        for num in nums {
+            nums[num - 1] = 0
+        }
+        
+        for i in 0..<nums.count where nums[i] != 0 {
+            result.append(i + 1)
+        }
+        
+        return result
+    }
+```
