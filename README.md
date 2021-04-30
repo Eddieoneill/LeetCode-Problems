@@ -15834,3 +15834,27 @@ class Solution {
         return curr == (0, 0) || dir[i] != (0, 1)
     }
 ```
+## 221. Maximal Square
+
+
+```swift
+    func maximalSquare(_ matrix: [[Character]]) -> Int {
+        let rows = matrix.count
+        let cols = matrix[0].count
+        var dp = Array(repeating: Array(repeating: 0, count: cols + 1),
+                       count: rows + 1)
+        var maxSquare = 0
+        
+        for row in 1...rows {
+            for col in 1...cols {
+                if matrix[row - 1][col - 1] == "1" {
+                    dp[row][col] = min(min(dp[row][col - 1], dp[row - 1][col]),
+                                       dp[row - 1][col - 1]) + 1
+                    maxSquare = max(maxSquare, dp[row][col])
+                }
+            }
+        }
+        
+        return maxSquare * maxSquare
+    }
+```
