@@ -15806,3 +15806,31 @@ class Solution {
         return result
     }
 ```
+## 1041. Robot Bounded In Circle
+
+
+```swift
+    func isRobotBounded(_ instructions: String) -> Bool {
+        var dir = [(0, 1), (1, 0), (0, -1), (-1, 0)]
+        var curr = (0, 0)
+        var i = 0
+        
+        for char in instructions {
+            if char == "L" {
+                i -= 1
+            } else if char == "R" {
+                i += 1
+            } else {
+                curr.0 += dir[i].0
+                curr.1 += dir[i].1
+            }
+            if i == -1 {
+                i = 3
+            } else if i == 4 {
+                i = 0
+            }
+        }
+            
+        return curr == (0, 0) || dir[i] != (0, 1)
+    }
+```
