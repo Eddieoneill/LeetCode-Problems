@@ -16110,3 +16110,40 @@ class Heap {
         return false
     }
 ```
+## 200. Number of Islands
+
+
+```swift
+class Solution {
+    func numIslands(_ grid: [[Character]]) -> Int {
+        var grid = grid
+        var result = 0
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count where grid[row][col] == "1" {
+                dfs(&grid, row, col)
+                result += 1
+            }
+        }
+        
+        return result
+    }
+    
+    func dfs(_ grid: inout [[Character]], _ currRow: Int, _ currCol: Int) {
+        let dirs = [[0, 1], [0, -1], [1, 0], [-1, 0]]
+        grid[currRow][currCol] = "0"
+        for dir in dirs {
+            let newRow = currRow + dir[0]
+            let newCol = currCol + dir[1]
+            
+            if newRow < 0 || newRow >= grid.count ||
+            newCol < 0 || newCol >= grid[0].count ||
+            grid[newRow][newCol] == "0" {
+                continue
+            }
+            
+            dfs(&grid, newRow, newCol)
+        }
+    } 
+}
+```
