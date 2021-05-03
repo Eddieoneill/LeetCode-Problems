@@ -16017,3 +16017,37 @@ class Heap {
 
 
 ```
+## 21. Merge Two Sorted Lists
+
+
+```swift
+    func mergeTwoLists(_ l1: ListNode?, _ l2: ListNode?) -> ListNode? {
+        var l1 = l1
+        var l2 = l2
+        var dummyNode: ListNode? = ListNode(0)
+        var curr = dummyNode
+        
+        while l1 != nil || l2 != nil {
+            guard let val1 = l1 else { break }
+            guard let val2 = l2 else { break }
+            
+            if val1.val < val2.val {
+                curr?.next = l1
+                l1 = l1?.next
+            } else {
+                curr?.next = l2
+                l2 = l2?.next
+            }
+            
+            curr = curr?.next
+        }
+        
+        if l1 != nil {
+            curr?.next = l1
+        } else {
+            curr?.next = l2
+        }
+        
+        return dummyNode?.next
+    }
+```
