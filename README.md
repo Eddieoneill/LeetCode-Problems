@@ -16051,3 +16051,38 @@ class Heap {
         return dummyNode?.next
     }
 ```
+## 547. Number of Provinces
+
+
+```swift
+    func findCircleNum(_ isConnected: [[Int]]) -> Int {
+        var cityMap: [Int: [Int]] = [:]
+        var notConnected = 0
+        var visited: Set<Int> = []
+        var result = 0
+        
+        func dfs(_ row: Int) {
+            guard let cities = cityMap[row] else { return }
+            visited.insert(row)
+            for city in cities where !visited.contains(city) {
+                dfs(city)
+            }
+        }
+        
+        for row in 0..<isConnected.count {
+            for col in 0..<isConnected[0].count where row != col {
+                if isConnected[row][col] == 1 {
+                    cityMap[row, default: []].append(col)   
+                }
+            }
+            if cityMap[row] == nil { notConnected += 1 }
+        }
+        
+        for (curr, _) in cityMap where !visited.contains(curr) {
+            dfs(curr)
+            result += 1
+        }
+        
+        return result + notConnected
+    }
+```
