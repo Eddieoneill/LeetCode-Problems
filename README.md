@@ -16086,3 +16086,27 @@ class Heap {
         return result + notConnected
     }
 ```
+## 572. Subtree of Another Tree
+
+
+```swift
+    func isSubtree(_ s1: TreeNode?, _ t1: TreeNode?) -> Bool {
+        guard let t1 = t1 else { return s1 == nil }
+        guard let s1 = s1 else { return false }
+        
+        if t1.val == s1.val && _isSubtree(s1, t1) == true { return true }
+        
+        return isSubtree(s1.left, t1) || isSubtree(s1.right, t1)
+    }
+    
+    func _isSubtree(_ s2: TreeNode?, _ t2: TreeNode?) -> Bool {
+        guard let s2 = s2 else { return t2 == nil }
+        guard let t2 = t2 else { return false }
+
+        if s2.val == t2.val {
+            return _isSubtree(s2.left, t2.left) && _isSubtree(s2.right, t2.right)
+        }
+        
+        return false
+    }
+```
