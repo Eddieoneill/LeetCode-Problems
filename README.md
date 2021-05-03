@@ -15858,3 +15858,26 @@ class Solution {
         return maxSquare * maxSquare
     }
 ```
+## 1710. Maximum Units on a Truck
+
+
+```swift
+    func maximumUnits(_ boxTypes: [[Int]], _ truckSize: Int) -> Int {
+        let sortedBox = boxTypes.sorted { $0[1] > $1[1] }
+        var size = truckSize
+        var result = 0
+        
+        for box in sortedBox {
+            let count = box[0]
+            if count <= size {
+                result += box[1] * count
+                size -= count
+            } else {
+                result += box[1] * size
+                break
+            }
+        }
+        
+        return result
+    }
+```
