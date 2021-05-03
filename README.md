@@ -15881,3 +15881,35 @@ class Solution {
         return result
     }
 ```
+## 937. Reorder Data in Log Files
+
+
+```swift
+    func trap(_ height: [Int]) -> Int {
+        guard height.count > 2 else { return 0 }
+        var left = 0
+        var right = height.count - 1
+        var leftMax = height[left]
+        var rightMax = height[right]
+        var result = 0
+        
+        
+        while left < right {
+            if height[left] < height[right] {
+                if height[left] < leftMax {
+                    result += leftMax - height[left]   
+                }
+                leftMax = max(leftMax, height[left])
+                left += 1
+            } else {
+                if height[right] < rightMax {
+                    result += rightMax - height[right]   
+                }
+                rightMax = max(rightMax, height[right])
+                right -= 1
+            }
+        }
+        
+        return result
+    }
+```
