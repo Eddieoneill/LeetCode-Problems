@@ -16287,3 +16287,56 @@ class UnionFind {
     }
 }
 ```
+## 1152. Analyze User Website Visit Pattern
+
+
+```swift
+class Solution {
+    struct WebData {
+        let timestamp: Int
+        let website: String
+        
+        init(_ timestamp: Int, _ website: String) {
+            self.timestamp = timestamp
+            self.website = website
+        }
+    }
+    
+    
+    func mostVisitedPattern(_ username: [String], _ timestamp: [Int], _ website: [String]) -> [String] {
+        var map: [String: [WebData]] = [:]
+        for i in 0..<username.count {
+            map[username[i], default: []].append(WebData(timestamp[i], website[i]))
+        }
+        
+        var countMap: [String: Int] = [:]
+        var result = ""
+        
+        for entry in map {
+            var sequenceSet: Set<String> = []
+            let list = entry.value.sorted { $0.timestamp < $1.timestamp }
+            let listCount = list.count
+
+            for i in 0..<listCount {
+                for j in i+1..<listCount {
+                    for k in j+1..<listCount {
+                        let currString = list[i].website + " " + list[j].website + " " + list[k].website
+
+                        if !sequenceSet.contains(currString) {
+                            sequenceSet.insert(currString)
+                            countMap[currString, default: 0] += 1
+                        }
+                        
+                        if result.isEmpty || countMap[result] ?? 0 < countMap[currString] ?? 0 || countMap[result] == countMap[currString] && currString < result {
+                            result = currString
+                        }
+                    }
+                }
+            }
+        }
+        
+        let resultComponents = result.components(separatedBy: " ")
+        return resultComponents
+    }
+}
+```
