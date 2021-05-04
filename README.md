@@ -16340,3 +16340,28 @@ class Solution {
     }
 }
 ```
+## 1629. Slowest Key
+
+
+```swift
+    func slowestKey(_ releaseTimes: [Int], _ keysPressed: String) -> Character {
+        var longestTime = 0
+        var longestKey: Character = " "
+        
+        for (i, key) in keysPressed.enumerated() {
+            if i == 0 {
+                longestKey = key
+                longestTime = releaseTimes[i]
+            } else {
+                let newKeyTime = releaseTimes[i] - releaseTimes[i - 1]
+                if newKeyTime > longestTime ||
+                (newKeyTime == longestTime && key > longestKey) {
+                    longestKey = key
+                    longestTime = newKeyTime
+                }
+            }
+        }
+        
+        return longestKey
+    }
+```
