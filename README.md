@@ -16147,3 +16147,71 @@ class Solution {
     } 
 }
 ```
+## 994. Rotting Oranges
+
+
+```swift
+class Solution {
+    func orangesRotting(_ grid: [[Int]]) -> Int {
+        let dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+        var grid = grid
+        var queue: [[Int]] = findRottenOranges(grid)
+        var time = 0
+        
+        func getNextRottenOranges(_ size: Int) {
+            for _ in 0..<size {
+                let curr = queue.removeFirst()
+                let row = curr[0]
+                let col = curr[1]
+                
+                for dir in dirs {
+                    let newRow = row + dir[0]
+                    let newCol = col + dir[1]
+                    
+                    if newRow < 0 || newRow >= grid.count ||
+                    newCol < 0 || newCol >= grid[0].count ||
+                    grid[newRow][newCol] != 1 { continue }
+                    
+                    grid[newRow][newCol] = 2
+                    queue.append([newRow, newCol])
+                }
+            }
+        }
+        
+        getNextRottenOranges(queue.count)
+        
+        while !queue.isEmpty {
+            getNextRottenOranges(queue.count)
+            time += 1
+        }
+        
+        return isAllRotten(grid) ? time : -1
+    }
+    
+    func findRottenOranges(_ grid: [[Int]]) -> [[Int]] {
+        var rottenOranges: [[Int]] = []
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == 2 {
+                    rottenOranges.append([row, col])
+                }
+            }
+        }
+        
+        return rottenOranges
+    }
+    
+    func isAllRotten(_ grid: [[Int]]) -> Bool {
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == 1 {
+                    return false
+                }
+            }
+        }
+        
+        return true
+    }
+}
+```
