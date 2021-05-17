@@ -16366,3 +16366,28 @@ class Solution {
         return longestKey
     }
 ```
+## 1041. Robot Bounded In Circle
+
+
+```swift
+    func isRobotBounded(_ instructions: String) -> Bool {
+        let dirs = [[0, 1], [1, 0], [0, -1], [-1, 0]]
+        var i = 0
+        var curr = [0, 0]
+        
+        for instruction in instructions {
+            if instruction == "G" {
+                curr[0] += dirs[i][0]
+                curr[1] += dirs[i][1]
+            } else if instruction == "L" {
+                i -= 1
+                if i < 0 { i = 3 }
+            } else {
+                i += 1
+                if i > 3 { i = 0 }
+            }
+        }
+        
+        return i != 0 || curr == [0, 0]
+    }
+```
