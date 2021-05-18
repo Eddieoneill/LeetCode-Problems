@@ -16391,3 +16391,121 @@ class Solution {
         return i != 0 || curr == [0, 0]
     }
 ```
+## 23. Merge k Sorted Lists
+
+
+```swift
+class Solution {
+    func mergeKLists(_ lists: [ListNode?]) -> ListNode? {
+        var heap = Heap(<)
+        var dummyNode = ListNode(0)
+        var curr: ListNode? = dummyNode
+        
+        for list in lists {
+            heap.insert(list)
+        }
+        
+        while !heap.isEmpty() {
+            let node = heap.remove()
+            
+            curr?.next = node
+            curr = curr?.next
+            
+            guard let next = node?.next else { continue }
+            heap.insert(next)
+        }
+        
+        return dummyNode.next
+    }
+}
+
+class Heap {
+    var elements: [ListNode?] = []
+    var sortBy: (Int, Int) -> Bool
+    
+    init(_ sortBy: @escaping (Int, Int) -> Bool) {
+        self.sortBy = sortBy
+    }
+    
+    func insert(_ val: ListNode?) {
+        guard let val = val else { return }
+        elements.append(val)
+        siftUp()
+    }
+    
+    func remove() -> ListNode? {
+        if elements.isEmpty { return nil }
+        
+        elements.swapAt(0, elements.count - 1)
+        
+        let val = elements.removeLast()
+        
+        siftDown()
+        
+        return val
+    }
+    
+    func siftUp() {
+        var child = elements.count - 1
+        var parent = parentIndex(child)
+        
+        while child > 0 &&
+        sortBy(elements[child]!.val, elements[parent]!.val) {
+            elements.swapAt(child, parent)
+            child =  parent
+            parent = parentIndex(child)
+        }
+    }
+    
+    func siftDown() {
+        var parent = 0
+        
+        while true {
+            let left = leftChildIndex(parent)
+            let right = rightChildIndex(parent)
+            var candidate = parent
+            
+            if left < elements.count &&
+            sortBy(elements[left]!.val, elements[candidate]!.val) { 
+                candidate = left
+            }
+            
+            if right < elements.count &&
+            sortBy(elements[right]!.val, elements[candidate]!.val) { 
+                candidate = right
+            }
+            
+            if candidate == parent { return }
+            
+            elements.swapAt(candidate, parent)
+            parent = candidate
+        }
+    }
+    
+    func leftChildIndex(_ index: Int) -> Int {
+        return 2 * index + 1
+    }
+    
+    func rightChildIndex(_ index: Int) -> Int {
+        return 2 * index + 2
+    }
+    
+    func parentIndex(_ index: Int) -> Int {
+        return (index - 1) / 2
+    }
+    
+    func peek() -> ListNode? {
+        if elements.isEmpty { return nil }
+        
+        return elements[0]
+    }
+    
+    func size() -> Int {
+        return elements.count
+    }
+    
+    func isEmpty() -> Bool {
+        return elements.isEmpty
+    }
+}
+```
