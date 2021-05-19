@@ -16509,3 +16509,32 @@ class Heap {
     }
 }
 ```
+## 1335. Minimum Difficulty of a Job Schedule
+
+
+```swift
+    func minDifficulty(_ jobDifficulty: [Int], _ d: Int) -> Int {
+        let n = jobDifficulty.count
+        guard n >= d else { return -1 }
+        var memo: [[Int?]] = Array(repeating: Array(repeating: nil, count: d + 1), count: n)
+        
+        func _minDifficulty(_ i: Int, _ d: Int) -> Int {
+            if i == n && d == 0 { return 0 }
+            if i == n || d == 0 { return 3000000 }
+            var minVal = 3000000
+            var dificulty = 0
+            if memo[i][d] != nil { return memo[i][d]! }
+            
+            
+            for j in i..<n - d + 1 {
+                dificulty = max(dificulty, jobDifficulty[j])
+                minVal = min(minVal, _minDifficulty(j + 1, d - 1) + dificulty)
+            }
+            
+            memo[i][d] = minVal
+            return minVal
+        }
+        
+        return _minDifficulty(0, d)
+    }
+```
