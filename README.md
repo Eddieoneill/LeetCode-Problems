@@ -16636,3 +16636,37 @@ class Node {
     }
 }
 ```
+## 139. Word Break
+
+
+```swift
+class Solution {
+    func wordBreak(_ s: String, _ wordDict: [String]) -> Bool {
+        let s = s.map { String($0) }
+        let wordSet = Set(wordDict)
+        var memo: [Int: Bool] = [:]
+        
+        func _wordBreak(_ start: Int) -> Bool {
+            guard start < s.count else { return true }
+            
+            if let result = memo[start] {
+                return result
+            }
+            
+            for i in start..<s.count {
+                let str = s[start...i].joined()
+                
+                if wordSet.contains(str) && _wordBreak(i + 1) {
+                    memo[start] = true
+                    return true
+                }
+            }
+            
+            memo[start] = false
+            return false
+        }
+        
+        return _wordBreak(0)
+    }
+}
+```
