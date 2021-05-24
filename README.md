@@ -16670,3 +16670,56 @@ class Solution {
     }
 }
 ```
+## 472. Concatenated Words
+
+
+```swift
+class Solution {
+    func findAllConcatenatedWordsInADict(_ words: [String]) -> [String] {
+        guard words.count > 1 else { return [] }
+        var wordSet: Set<String> = []
+        var minWord = Int.max
+        var result: [String] = []
+        
+        for word in words where word != "" {
+            minWord = min(minWord, word.count)
+            wordSet.insert(word)
+        }
+        
+        for word in words where word.count >= minWord * 2 {
+            wordSet.remove(word)
+            if wordBreak(word, wordSet) { result.append(word) }
+            wordSet.insert(word)
+        }
+        
+        return result
+    }
+    
+    func wordBreak(_ s: String, _ wordSet: Set<String>) -> Bool {
+        let s = s.map { String($0) }
+        var memo: [Int: Bool] = [:]
+        
+        func _wordBreak(_ start: Int) -> Bool {
+            guard start < s.count else { return true }
+            
+            if let result = memo[start] {
+                return result
+            }
+            
+            for i in start..<s.count {
+                let str = s[start...i].joined()
+                
+                if wordSet.contains(str) && _wordBreak(i + 1) {
+                    memo[start] = true
+                    return true
+                }
+            }
+            
+            memo[start] = false
+            return false
+        }
+        
+        return _wordBreak(0)
+    }
+}
+```
