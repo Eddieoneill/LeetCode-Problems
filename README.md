@@ -16723,3 +16723,40 @@ class Solution {
     }
 }
 ```
+## 200. Number of Islands
+
+
+```swift
+    func numIslands(_ grid: [[Character]]) -> Int {
+        var grid = grid
+        var landCount = 0
+        
+        func dfs(_ row: Int, _ col: Int) {
+            let dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]]
+            
+            grid[row][col] = "0"
+            
+            for dir in dirs {
+                let newRow = row + dir[0]
+                let newCol = col + dir[1]
+                
+                if newRow < 0 || newRow >= grid.count ||
+                newCol < 0 || newCol >= grid[0].count ||
+                grid[newRow][newCol] == "0" { continue }
+                
+                dfs(newRow, newCol)
+            }
+        }
+        
+        for row in 0..<grid.count {
+            for col in 0..<grid[0].count {
+                if grid[row][col] == "1" {
+                    landCount += 1
+                    dfs(row, col)
+                }
+            }
+        }
+        
+        return landCount
+    }
+```
