@@ -16830,3 +16830,22 @@ class UnionFind {
     }
 }
 ```
+## 1010. Pairs of Songs With Total Durations Divisible by 60
+
+
+```swift
+    func numPairsDivisibleBy60(_ times: [Int]) -> Int {
+        guard times.count > 0 else { return 0 }
+        var dict: [Int: Int] = [:]
+        var count = 0
+        
+        for time in times {
+            var mod = time % 60
+            count += dict[60 - mod, default: 0]
+            mod = mod != 0 ? mod : 60
+            dict[mod, default: 0] += 1
+        }
+        
+        return count
+    }
+```
