@@ -16760,3 +16760,73 @@ class Solution {
         return landCount
     }
 ```
+## 547. Number of Provinces
+
+
+```swift
+class Solution {
+    func findCircleNum(_ isConnected: [[Int]]) -> Int {
+        var unionFind = UnionFind(isConnected.count, isConnected.count)
+        
+        for (i, component) in isConnected.enumerated() {
+            for (j, connected) in component.enumerated() where i != j {
+                if connected == 1 {
+                    unionFind.union(i, j)
+                }
+            }
+        }
+        
+        return unionFind.numComponents
+    }
+}
+
+class UnionFind {
+    var numComponents = 0
+    var sizes: [Int]
+    var parents: [Int]
+    
+    init(_ count: Int, _ n: Int) {
+        numComponents = count
+        sizes = Array(repeating: 1, count: n)
+        parents = Array(repeating: 1, count: n)
+        
+        for i in 0..<n {
+            parents[i] = i
+        }
+    }
+    
+    func union(_ a: Int, _ b: Int) {
+        let parentA = find(a)
+        let parentB = find(b)
+        
+        if parentA == parentB { return }
+        
+        if sizes[parentA] < sizes[parentB] {
+            parents[parentA] = parentB
+            sizes[parentB] += sizes[parentA]
+        } else {
+            parents[parentB] = parentA
+            sizes[parentA] += sizes[parentB]
+        }
+        
+        numComponents -= 1
+    }
+    
+    func find(_ a: Int) -> Int {
+        var root = a
+        var a = a
+        
+        while root != parents[root] {
+            root = parents[root]
+        }
+        
+        while a != root {
+            let next = parents[a]
+            parents[a] = root
+            a = next
+        }
+        
+        return root
+    }
+}
+```
